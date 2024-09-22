@@ -1,0 +1,38 @@
+project:
+  type: website
+  execute-dir: project
+  output-dir: docs
+
+execute:
+  freeze: true
+  engine: knitr
+  port: 8877
+  cache: true
+
+website:
+  title: "Hubert Baechli: ICMB portfolio"
+  back-to-top-navigation: true
+  page-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: About
+  sidebar:
+    collapse-level: 1
+    contents:
+      - index.qmd
+      - hw1/index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-link: true
+    code-copy: true
+    code-tools: true
+    code-fold: true
+    code-overflow: wrap
+    page-layout: full
+    css: styles.css
+
+editor: visual
