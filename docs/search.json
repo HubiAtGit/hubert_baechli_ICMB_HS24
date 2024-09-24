@@ -11,18 +11,15 @@
     ]
   },
   {
-    "objectID": "hubert_baechli_ICMB24/index.html",
-    "href": "hubert_baechli_ICMB24/index.html",
-    "title": "hubert_baechli_ICMB24",
+    "objectID": "hw1/index.html",
+    "href": "hw1/index.html",
+    "title": "Assignment 1: Hello World",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\ngasdzewag\n\n\n\n\n\n\n\n Back to top"
+    "text": "Hello World that’s my first plot:\n\n\nCode\nhubi &lt;- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "About",
+      "Assignment 1: Hello World"
+    ]
   },
   {
     "objectID": "hubert_baechli_ICMB24/about.html",
@@ -32,14 +29,28 @@
     "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "hw1/index.html",
-    "href": "hw1/index.html",
-    "title": "Assignment 1: Hello World",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Hello World that’s my first plot:\n\n\nCode\nhubi &lt;- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top",
+    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\ngasdzewag\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hubert_baechli_ICMB24/index.html",
+    "href": "hubert_baechli_ICMB24/index.html",
+    "title": "hubert_baechli_ICMB24",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hw2/index.html",
+    "href": "hw2/index.html",
+    "title": "Assignment 2: Hello World",
+    "section": "",
+    "text": "Hello World that’s my first plot: test\n\n\nCode\nhubi &lt;- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "About",
-      "Assignment 1: Hello World"
+      "Assignment 2: Hello World"
     ]
   }
 ]
