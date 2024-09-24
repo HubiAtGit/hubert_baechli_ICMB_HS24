@@ -3,7 +3,7 @@ title: "Assignment 1: Hello World"
 author: "Hubert Baechli"
 ---
 
-Hello World that's my first plot:
+Hello World that's my first plot: test
 
 ```{r}
 hubi <- rnorm(10000, mean = 46, sd = 1)
