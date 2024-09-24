@@ -1,0 +1,11 @@
+---
+title: "Assignment 2: Hello World"
+author: "Hubert Baechli"
+---
+
+Hello World that's my first plot: test
+
+```{r}
+hubi <- rnorm(10000, mean = 46, sd = 1)
+hist(hubi)
+```
