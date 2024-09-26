@@ -15,7 +15,7 @@ HalveMoney <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
     df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"] <- df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"]+1
     df[(df$ID == rdf[1] | df$ID == rdf[2]),"M"] <- sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),"M"])/2
     if (NROW(df[df$nE < iE,"ID"]) < 2) {
-      hist(df$M, main=paste("After",iE,"halvings"), xlab="Money", col="steelblue", xlim=c(0,Money_mean+4*Money_sd),, ylim=c(0,Money_mean/4))
+      hist(df$M, main=paste("After",iE,"halvings"), xlab="Money", col="steelblue", xlim=c(0,Money_mean+4*Money_sd), ylim=c(0,Money_mean/4))
       iE <- iE+1
       }
   }
