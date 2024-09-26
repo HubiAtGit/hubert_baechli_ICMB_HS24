@@ -1,11 +1,5 @@
----
-title: "Assignment 2: Halve Money"
-author: "Hubert Baechli"
----
+n <- 20
 
-my first attempt at an agent model with the information from the lesson
-
-```{r}
 HalveMoney <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
   df <- data.frame(ID=seq(1,nAgent),nE=0,M=rnorm(nAgent, mean = Money_mean, sd = Money_sd))
   iE <- 1
@@ -21,12 +15,7 @@ HalveMoney <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
   }
   return(df)
 }
-```
 
-
-```{r}
 df <- HalveMoney(1000,15)
 hist(df$M, xlab="Money", col="steelblue", xlim=c(0,1000+4*250),, ylim=c(0,1000/4))
-
-```
 
