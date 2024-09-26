@@ -23,10 +23,8 @@ HalveMoney <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 }
 ```
 
-
 ```{r}
 df <- HalveMoney(1000,15)
 hist(df$M, xlab="Money", col="steelblue", xlim=c(0,1000+4*250),, ylim=c(0,1000/4))
 
 ```
-
