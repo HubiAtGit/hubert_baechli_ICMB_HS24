@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
 <span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
 <span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
@@ -857,7 +857,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
 <span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
 <span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
 <span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
 <span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>

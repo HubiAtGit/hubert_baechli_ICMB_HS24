@@ -58,7 +58,7 @@ SplitHalve2 <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
                    Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),
                    MT=0,Me=0)
   df$Me <- df$Ms
-  iE <- 0
+  iE <- 1
   while (iE <= maxExchange) {
     df$MT <- df$Me
     rdf <- sample(df$ID, size=2)
