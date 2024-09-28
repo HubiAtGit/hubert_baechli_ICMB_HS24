@@ -55,7 +55,7 @@ After looking at the code on <https://github.com/norvig/pytudes/blob/main/ipynb/
 
 ## First of all,
 
-the restriction that everyone finds an exchange partner at the same time will be lifted. In addition, the number and order of changes will also be removed.
+the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.
 
 ```{r}
 SplitHalve2 <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
