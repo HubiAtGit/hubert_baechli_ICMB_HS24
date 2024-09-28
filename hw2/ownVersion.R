@@ -83,3 +83,15 @@ plot(df$ID,df$nE,main="Number of Changes",
      xlab="ID",ylab="Number of Changes",
      col=rgb(1,0,0,0.2))
 
+
+plot(df$nE,df$Me,main="Correlation?",
+     xlab="Number of Changes",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
+
+plot(df$Ms,df$Me,main="Correlation?",
+     xlab="Money at the Beginning",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
+
+plot(df$ID,df$Me,main="Correlation?",
+     xlab="ID",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
