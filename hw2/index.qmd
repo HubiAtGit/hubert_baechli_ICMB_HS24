@@ -206,6 +206,55 @@ legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 ```
 
+On closer inspection, however, this does not help to understand the problem.
+
+## Back to a more restrictive Simulation
+
+That's why I'm going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence...
+
+```{r}
+SplitRandomR <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
+  df <- data.frame(ID=seq(1,nAgent),
+                   nE=0,
+                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),
+                   MT=0,Me=0)
+  df$Me <- df$Ms
+  iE <- 1
+  while (iE <= maxExchange) {
+    df$MT <- df$Me
+    rdf <- sample(df[df$nE < iE,"ID"], size=2)
+    rds <- sample(0:100, size=1)/100
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"] <-
+      df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"]+1
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"Me"] <-
+      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),"MT"])*c(rds,1-rds)
+    if (NROW(df[df$nE < iE,"ID"]) < 2) {
+      iE <- iE+1
+    }
+  }
+  return(df)
+}
+```
+
+Time does not seem to have any effect either
+
+```{r}
+df <- SplitRandomR(1000,30)
+
+summary(df)
+hist(df$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
+hist(df$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+
+plot(df$ID,df$nE,main="Number of Changes",
+     xlab="ID",ylab="Number of Changes",
+     col=rgb(1,0,0,0.2))
+```
+
 **But still why???**
 
-I think I need a simulation where I can save the money history\*\*
+I think I need a simulation where I can save the money history

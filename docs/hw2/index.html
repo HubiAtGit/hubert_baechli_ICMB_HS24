@@ -176,6 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#but-why" id="toc-but-why" class="nav-link" data-scroll-target="#but-why">But why??????????</a>
   <ul class="collapse">
 <li><a href="#idea-from-a-proverb" id="toc-idea-from-a-proverb" class="nav-link" data-scroll-target="#idea-from-a-proverb">Idea from a proverb</a></li>
+  <li><a href="#back-to-a-more-restrictive-simulation" id="toc-back-to-a-more-restrictive-simulation" class="nav-link" data-scroll-target="#back-to-a-more-restrictive-simulation">Back to a more restrictive Simulation</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -266,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>After looking at the code on <a href="https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container" class="uri">https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container</a> there are some differences between my idea and the paper! These will now be adapted step by step.</p>
 <section id="first-of-all" class="level2"><h2 class="anchored" data-anchor-id="first-of-all">First of all,</h2>
-<p>the restriction that everyone finds an exchange partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</p>
+<p>the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitHalve2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
@@ -492,8 +493,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>On closer inspection, however, this does not help to understand the problem.</p>
+</section><section id="back-to-a-more-restrictive-simulation" class="level2"><h2 class="anchored" data-anchor-id="back-to-a-more-restrictive-simulation">Back to a more restrictive Simulation</h2>
+<p>That’s why I’m going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence…</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitRandomR</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
+<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
+<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
+<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
+<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
+<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span>    <span class="va">rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span>
+<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
+<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
+<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">rds</span>,<span class="fl">1</span><span class="op">-</span><span class="va">rds</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NROW</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Time does not seem to have any effect either</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>       ID               nE           Ms               MT        
+ Min.   :   1.0   Min.   :30   Min.   : 140.0   Min.   :   0.0  
+ 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 791.3   1st Qu.: 317.1  
+ Median : 500.5   Median :30   Median : 996.9   Median : 671.4  
+ Mean   : 500.5   Mean   :30   Mean   : 998.8   Mean   : 998.8  
+ 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1197.3   3rd Qu.:1376.1  
+ Max.   :1000.0   Max.   :30   Max.   :2109.9   Max.   :5644.8  
+       Me        
+ Min.   :   0.0  
+ 1st Qu.: 318.0  
+ Median : 671.9  
+ Mean   : 998.8  
+ 3rd Qu.:1376.1  
+ Max.   :5644.8  </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
+<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
+<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">nE</span>,main<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
+<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
+<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>But still why???</strong></p>
-<p>I think I need a simulation where I can save the money history**</p>
+<p>I think I need a simulation where I can save the money history</p>
 
 
 <!-- -->
@@ -976,217 +1048,266 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Assignment 2: Economic Simulation"</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># My first attempt</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>at an agent model with the information from the lesson</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>SplitHalve <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>], <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">NROW</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>      iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a>After looking at the code on <span class="ot">&lt;https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container&gt;</span> there are some differences between my idea and the paper! These will now be adapted step by step.</span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## First of all,</span></span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a>the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a>SplitHalve2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
-<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## The next step</span></span>
-<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a>is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper</span>
-<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a>SplitRandom <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
-<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### I am very surprised!</span></span>
-<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>here are the results for the random-split</span>
-<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random"</span>,</span>
-<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># But why??????????</span></span>
-<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</span>
-<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>nE,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Number of Changes"</span>,</span>
-<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number of Changes"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>Ms,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Money at the Beginning"</span>,</span>
-<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money at the Beginning"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the ID"</span>,</span>
-<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Idea from a proverb</span></span>
-<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>can it be that it is harder to get money back once you have lost all the money *“money goes to money”*?</span>
-<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>as a first attempt, the random function is limited between 30% and 70%</span>
-<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>SplitRandom2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">70</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
-<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>the distribution seems to remain the same as the results here show,</span>
-<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random (30%-70%)"</span>,</span>
-<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>**But still why???**</span>
-<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a>I think I need a simulation where I can save the money history<span class="sc">\*\*</span></span>
+<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Assignment 2: Economic Simulation"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># My first attempt</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>at an agent model with the information from the lesson</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>SplitHalve <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>], <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">NROW</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>      iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>After looking at the code on <span class="ot">&lt;https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container&gt;</span> there are some differences between my idea and the paper! These will now be adapted step by step.</span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## First of all,</span></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a>SplitHalve2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
+<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
+<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
+<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
+<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
+<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
+<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-99"><a href="#cb28-99" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-100"><a href="#cb28-100" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
+<span id="cb28-101"><a href="#cb28-101" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
+<span id="cb28-102"><a href="#cb28-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-103"><a href="#cb28-103" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-104"><a href="#cb28-104" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-105"><a href="#cb28-105" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-106"><a href="#cb28-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-107"><a href="#cb28-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-108"><a href="#cb28-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## The next step</span></span>
+<span id="cb28-109"><a href="#cb28-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-110"><a href="#cb28-110" aria-hidden="true" tabindex="-1"></a>is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper</span>
+<span id="cb28-111"><a href="#cb28-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-114"><a href="#cb28-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-115"><a href="#cb28-115" aria-hidden="true" tabindex="-1"></a>SplitRandom <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
+<span id="cb28-116"><a href="#cb28-116" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
+<span id="cb28-117"><a href="#cb28-117" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb28-118"><a href="#cb28-118" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
+<span id="cb28-119"><a href="#cb28-119" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
+<span id="cb28-120"><a href="#cb28-120" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
+<span id="cb28-121"><a href="#cb28-121" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-122"><a href="#cb28-122" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
+<span id="cb28-123"><a href="#cb28-123" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
+<span id="cb28-124"><a href="#cb28-124" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb28-125"><a href="#cb28-125" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb28-126"><a href="#cb28-126" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-127"><a href="#cb28-127" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-128"><a href="#cb28-128" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-129"><a href="#cb28-129" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
+<span id="cb28-130"><a href="#cb28-130" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-131"><a href="#cb28-131" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-132"><a href="#cb28-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb28-133"><a href="#cb28-133" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-134"><a href="#cb28-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-135"><a href="#cb28-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-136"><a href="#cb28-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-137"><a href="#cb28-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### I am very surprised!</span></span>
+<span id="cb28-138"><a href="#cb28-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-139"><a href="#cb28-139" aria-hidden="true" tabindex="-1"></a>here are the results for the random-split</span>
+<span id="cb28-140"><a href="#cb28-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-143"><a href="#cb28-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-144"><a href="#cb28-144" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
+<span id="cb28-145"><a href="#cb28-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-146"><a href="#cb28-146" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb28-147"><a href="#cb28-147" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random"</span>,</span>
+<span id="cb28-148"><a href="#cb28-148" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-149"><a href="#cb28-149" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb28-150"><a href="#cb28-150" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-151"><a href="#cb28-151" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-152"><a href="#cb28-152" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
+<span id="cb28-153"><a href="#cb28-153" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
+<span id="cb28-154"><a href="#cb28-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-155"><a href="#cb28-155" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-156"><a href="#cb28-156" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-157"><a href="#cb28-157" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-158"><a href="#cb28-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-159"><a href="#cb28-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-160"><a href="#cb28-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># But why??????????</span></span>
+<span id="cb28-161"><a href="#cb28-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-162"><a href="#cb28-162" aria-hidden="true" tabindex="-1"></a>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</span>
+<span id="cb28-163"><a href="#cb28-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-166"><a href="#cb28-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-167"><a href="#cb28-167" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>nE,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Number of Changes"</span>,</span>
+<span id="cb28-168"><a href="#cb28-168" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number of Changes"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
+<span id="cb28-169"><a href="#cb28-169" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-170"><a href="#cb28-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-171"><a href="#cb28-171" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>Ms,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Money at the Beginning"</span>,</span>
+<span id="cb28-172"><a href="#cb28-172" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money at the Beginning"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
+<span id="cb28-173"><a href="#cb28-173" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-174"><a href="#cb28-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-175"><a href="#cb28-175" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the ID"</span>,</span>
+<span id="cb28-176"><a href="#cb28-176" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
+<span id="cb28-177"><a href="#cb28-177" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-178"><a href="#cb28-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-179"><a href="#cb28-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-180"><a href="#cb28-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Idea from a proverb</span></span>
+<span id="cb28-181"><a href="#cb28-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-182"><a href="#cb28-182" aria-hidden="true" tabindex="-1"></a>can it be that it is harder to get money back once you have lost all the money *“money goes to money”*?</span>
+<span id="cb28-183"><a href="#cb28-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-184"><a href="#cb28-184" aria-hidden="true" tabindex="-1"></a>as a first attempt, the random function is limited between 30% and 70%</span>
+<span id="cb28-185"><a href="#cb28-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-188"><a href="#cb28-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-189"><a href="#cb28-189" aria-hidden="true" tabindex="-1"></a>SplitRandom2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
+<span id="cb28-190"><a href="#cb28-190" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
+<span id="cb28-191"><a href="#cb28-191" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb28-192"><a href="#cb28-192" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
+<span id="cb28-193"><a href="#cb28-193" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
+<span id="cb28-194"><a href="#cb28-194" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
+<span id="cb28-195"><a href="#cb28-195" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-196"><a href="#cb28-196" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
+<span id="cb28-197"><a href="#cb28-197" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
+<span id="cb28-198"><a href="#cb28-198" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb28-199"><a href="#cb28-199" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">70</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb28-200"><a href="#cb28-200" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-201"><a href="#cb28-201" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-202"><a href="#cb28-202" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-203"><a href="#cb28-203" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
+<span id="cb28-204"><a href="#cb28-204" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-205"><a href="#cb28-205" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-206"><a href="#cb28-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb28-207"><a href="#cb28-207" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-208"><a href="#cb28-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-209"><a href="#cb28-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-210"><a href="#cb28-210" aria-hidden="true" tabindex="-1"></a>the distribution seems to remain the same as the results here show,</span>
+<span id="cb28-211"><a href="#cb28-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-214"><a href="#cb28-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-215"><a href="#cb28-215" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
+<span id="cb28-216"><a href="#cb28-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-217"><a href="#cb28-217" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb28-218"><a href="#cb28-218" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random (30%-70%)"</span>,</span>
+<span id="cb28-219"><a href="#cb28-219" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-220"><a href="#cb28-220" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb28-221"><a href="#cb28-221" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-222"><a href="#cb28-222" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-223"><a href="#cb28-223" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
+<span id="cb28-224"><a href="#cb28-224" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
+<span id="cb28-225"><a href="#cb28-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-226"><a href="#cb28-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-227"><a href="#cb28-227" aria-hidden="true" tabindex="-1"></a>On closer inspection, however, this does not help to understand the problem.</span>
+<span id="cb28-228"><a href="#cb28-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-229"><a href="#cb28-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## Back to a more restrictive Simulation</span></span>
+<span id="cb28-230"><a href="#cb28-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-231"><a href="#cb28-231" aria-hidden="true" tabindex="-1"></a>That's why I'm going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence...</span>
+<span id="cb28-232"><a href="#cb28-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-235"><a href="#cb28-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-236"><a href="#cb28-236" aria-hidden="true" tabindex="-1"></a>SplitRandomR <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
+<span id="cb28-237"><a href="#cb28-237" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
+<span id="cb28-238"><a href="#cb28-238" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb28-239"><a href="#cb28-239" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
+<span id="cb28-240"><a href="#cb28-240" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
+<span id="cb28-241"><a href="#cb28-241" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
+<span id="cb28-242"><a href="#cb28-242" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-243"><a href="#cb28-243" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
+<span id="cb28-244"><a href="#cb28-244" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
+<span id="cb28-245"><a href="#cb28-245" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>], <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb28-246"><a href="#cb28-246" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb28-247"><a href="#cb28-247" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-248"><a href="#cb28-248" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-249"><a href="#cb28-249" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb28-250"><a href="#cb28-250" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
+<span id="cb28-251"><a href="#cb28-251" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">NROW</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb28-252"><a href="#cb28-252" aria-hidden="true" tabindex="-1"></a>      iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-253"><a href="#cb28-253" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb28-254"><a href="#cb28-254" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-255"><a href="#cb28-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb28-256"><a href="#cb28-256" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-257"><a href="#cb28-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-258"><a href="#cb28-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-259"><a href="#cb28-259" aria-hidden="true" tabindex="-1"></a>Time does not seem to have any effect either</span>
+<span id="cb28-260"><a href="#cb28-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-263"><a href="#cb28-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-264"><a href="#cb28-264" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
+<span id="cb28-265"><a href="#cb28-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-266"><a href="#cb28-266" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb28-267"><a href="#cb28-267" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
+<span id="cb28-268"><a href="#cb28-268" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-269"><a href="#cb28-269" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb28-270"><a href="#cb28-270" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb28-271"><a href="#cb28-271" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-272"><a href="#cb28-272" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
+<span id="cb28-273"><a href="#cb28-273" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
+<span id="cb28-274"><a href="#cb28-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-275"><a href="#cb28-275" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-276"><a href="#cb28-276" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
+<span id="cb28-277"><a href="#cb28-277" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb28-278"><a href="#cb28-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-279"><a href="#cb28-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-280"><a href="#cb28-280" aria-hidden="true" tabindex="-1"></a>**But still why???**</span>
+<span id="cb28-281"><a href="#cb28-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-282"><a href="#cb28-282" aria-hidden="true" tabindex="-1"></a>I think I need a simulation where I can save the money history</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
