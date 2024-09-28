@@ -53,7 +53,7 @@ plot(df$ID,df$nE,main="Number of Changes",
 
 After looking at the code on <https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container> there are some differences between my idea and the paper! These will now be adapted step by step.
 
-## First of all, 
+## First of all,
 
 the restriction that everyone finds an exchange partner at the same time will be lifted. In addition, the number and order of changes will also be removed.
 
@@ -97,7 +97,7 @@ plot(df$ID,df$nE,main="Number of Changes",
      col=rgb(1,0,0,0.2))
 ```
 
-## The next step 
+## The next step
 
 is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper
 
@@ -124,7 +124,7 @@ SplitRandom <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 
 ```
 
-## **I am very surprised!** 
+## **I am very surprised!**
 
 here are the results for the random-split
 
@@ -145,7 +145,7 @@ plot(df$ID,df$nE,main="Number of Changes",
      col=rgb(1,0,0,0.2))
 ```
 
-# **But why??????????** 
+# **But why??????????**
 
 there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)
 
@@ -206,7 +206,7 @@ legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 ```
 
-# **But still why???** 
+# **But still why???**
 
 ## **I think I need a simulation where I can save the money history**
 
