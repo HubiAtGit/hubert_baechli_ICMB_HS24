@@ -257,4 +257,34 @@ plot(df$ID,df$nE,main="Number of Changes",
 
 **But still why???**
 
-I think I need a simulation where I can save the money history
+I think I need a simulation where I can save the money history!
+
+## After the first change for all Agents
+
+```{r}
+df <- SplitRandomR(1000,1)
+
+hist(df$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
+hist(df$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+
+```
+
+## After the second change for all Agents
+
+```{r}
+df <- SplitRandomR(1000,2)
+
+hist(df$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
+hist(df$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+
+```
