@@ -32,7 +32,7 @@ SplitHalve <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 Presentation of the results
 
 ```{r}
-df <- SplitHalve(1000,15)
+df <- SplitHalve(1000,30)
 
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
@@ -77,7 +77,7 @@ SplitHalve2 <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 Presentation of the results
 
 ```{r}
-df <- SplitHalve2(1000,7500)
+df <- SplitHalve2(1000,15000)
 
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
@@ -121,7 +121,7 @@ SplitRandom <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 **I am very surprised!** here are the results for the random-split
 
 ```{r}
-df <- SplitRandom(1000,7500)
+df <- SplitRandom(1000,15000)
 
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-random",

@@ -207,17 +207,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Presentation of the results</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">30</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms             MT             Me      
- Min.   :   1.0   Min.   :15   Min.   : 165   Min.   :1001   Min.   :1001  
- 1st Qu.: 250.8   1st Qu.:15   1st Qu.: 790   1st Qu.:1006   1st Qu.:1006  
- Median : 500.5   Median :15   Median :1014   Median :1007   Median :1007  
- Mean   : 500.5   Mean   :15   Mean   :1007   Mean   :1007   Mean   :1007  
- 3rd Qu.: 750.2   3rd Qu.:15   3rd Qu.:1197   3rd Qu.:1008   3rd Qu.:1008  
- Max.   :1000.0   Max.   :15   Max.   :2046   Max.   :1013   Max.   :1013  </code></pre>
+<pre><code>       ID               nE           Ms               MT             Me      
+ Min.   :   1.0   Min.   :30   Min.   : -35.7   Min.   :1011   Min.   :1011  
+ 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 807.4   1st Qu.:1011   1st Qu.:1011  
+ Median : 500.5   Median :30   Median :1017.2   Median :1011   Median :1011  
+ Mean   : 500.5   Mean   :30   Mean   :1011.1   Mean   :1011   Mean   :1011  
+ 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1216.8   3rd Qu.:1011   3rd Qu.:1011  
+ Max.   :1000.0   Max.   :30   Max.   :2005.2   Max.   :1011   Max.   :1011  </code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-halve"</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
@@ -267,24 +267,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Presentation of the results</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve2</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">7500</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve2</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms                MT        
- Min.   :   1.0   Min.   : 4   Min.   : -30.55   Min.   : 979.8  
- 1st Qu.: 250.8   1st Qu.:12   1st Qu.: 813.34   1st Qu.:1008.0  
- Median : 500.5   Median :15   Median :1018.55   Median :1011.4  
- Mean   : 500.5   Mean   :15   Mean   :1011.52   Mean   :1011.5  
- 3rd Qu.: 750.2   3rd Qu.:17   3rd Qu.:1215.90   3rd Qu.:1015.1  
- Max.   :1000.0   Max.   :29   Max.   :1965.63   Max.   :1068.7  
-       Me        
- Min.   : 979.8  
- 1st Qu.:1008.0  
- Median :1011.4  
- Mean   :1011.5  
- 3rd Qu.:1015.1  
- Max.   :1068.7  </code></pre>
+<pre><code>       ID               nE              Ms                MT      
+ Min.   :   1.0   Min.   :15.00   Min.   : -30.55   Min.   :1011  
+ 1st Qu.: 250.8   1st Qu.:26.75   1st Qu.: 813.34   1st Qu.:1011  
+ Median : 500.5   Median :30.00   Median :1018.55   Median :1012  
+ Mean   : 500.5   Mean   :30.00   Mean   :1011.52   Mean   :1012  
+ 3rd Qu.: 750.2   3rd Qu.:34.00   3rd Qu.:1215.90   3rd Qu.:1012  
+ Max.   :1000.0   Max.   :44.00   Max.   :1965.63   Max.   :1015  
+       Me      
+ Min.   :1011  
+ 1st Qu.:1011  
+ Median :1012  
+ Mean   :1012  
+ 3rd Qu.:1012  
+ Max.   :1015  </code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-halve"</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
@@ -334,24 +334,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>I am very surprised!</strong> here are the results for the random-split</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandom</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">7500</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandom</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>       ID               nE           Ms                MT        
- Min.   :   1.0   Min.   : 4   Min.   : -54.73   Min.   :   0.0  
- 1st Qu.: 250.8   1st Qu.:12   1st Qu.: 789.51   1st Qu.: 258.2  
- Median : 500.5   Median :15   Median :1000.84   Median : 693.6  
- Mean   : 500.5   Mean   :15   Mean   : 998.07   Mean   : 998.1  
- 3rd Qu.: 750.2   3rd Qu.:18   3rd Qu.:1206.97   3rd Qu.:1329.6  
- Max.   :1000.0   Max.   :31   Max.   :1944.15   Max.   :7532.5  
+ Min.   :   1.0   Min.   :13   Min.   : -54.73   Min.   :   0.0  
+ 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.51   1st Qu.: 254.5  
+ Median : 500.5   Median :30   Median :1000.84   Median : 628.2  
+ Mean   : 500.5   Mean   :30   Mean   : 998.07   Mean   : 998.1  
+ 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1206.97   3rd Qu.:1364.8  
+ Max.   :1000.0   Max.   :48   Max.   :1944.15   Max.   :6632.3  
        Me        
  Min.   :   0.0  
- 1st Qu.: 258.2  
- Median : 692.1  
+ 1st Qu.: 253.7  
+ Median : 628.2  
  Mean   : 998.1  
- 3rd Qu.:1330.8  
- Max.   :7532.5  </code></pre>
+ 3rd Qu.:1364.8  
+ Max.   :6632.3  </code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random"</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
@@ -893,7 +893,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
 <span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve</span>(<span class="dv">1000</span>,<span class="dv">15</span>)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
@@ -938,7 +938,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
 <span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve2</span>(<span class="dv">1000</span>,<span class="dv">7500</span>)</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
 <span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
 <span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
@@ -982,7 +982,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>**I am very surprised!** here are the results for the random-split</span>
 <span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom</span>(<span class="dv">1000</span>,<span class="dv">7500</span>)</span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
 <span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
 <span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random"</span>,</span>
