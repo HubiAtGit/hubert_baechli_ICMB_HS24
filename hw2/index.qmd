@@ -124,7 +124,7 @@ SplitRandom <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 df <- SplitRandom(1000,7500)
 
 summary(df)
-hist(df$Ms, xlab="Money",main="Histogram for split-halve",
+hist(df$Ms, xlab="Money",main="Histogram for split-random",
      col=rgb(0,0,1,0.2),
      xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
 hist(df$Me, col=rgb(0,1,0,0.2),
