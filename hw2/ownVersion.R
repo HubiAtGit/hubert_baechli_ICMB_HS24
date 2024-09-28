@@ -48,10 +48,10 @@ summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
      col=rgb(0,0,1,0.2),
      xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
-hist(df$Me, col=rgb(1,0,0,0.2),
+hist(df$Me, col=rgb(0,1,0,0.2),
      add=TRUE)
 legend('topright', c('Money befor', 'Money after'),
-       fill=c(rgb(0,0,1,0.5), rgb(1,0,0,0.2)))
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 
 hist(df$nE, xlab="Money",main="Number of Exchanges",
      col=rgb(0,0,1,0.2),
