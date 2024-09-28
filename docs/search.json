@@ -98,11 +98,30 @@
     ]
   },
   {
+<<<<<<< HEAD
     "objectID": "hw2/index.html#simple-timehistory",
     "href": "hw2/index.html#simple-timehistory",
     "title": "Assignment 2: Economic Simulation",
     "section": "Simple Timehistory",
     "text": "Simple Timehistory\nAfter the first change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,1)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nAfter the second change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,2)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))",
+=======
+    "objectID": "hw2/index.html#after-the-first-change-for-all-agents",
+    "href": "hw2/index.html#after-the-first-change-for-all-agents",
+    "title": "Assignment 2: Economic Simulation",
+    "section": "After the first change for all Agents",
+    "text": "After the first change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,1)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))",
+    "crumbs": [
+      "About",
+      "Assignment 2: Economic Simulation"
+    ]
+  },
+  {
+    "objectID": "hw2/index.html#after-the-second-change-for-all-agents",
+    "href": "hw2/index.html#after-the-second-change-for-all-agents",
+    "title": "Assignment 2: Economic Simulation",
+    "section": "After the second change for all Agents",
+    "text": "After the second change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,2)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))",
+>>>>>>> 2d190a4abd497e5144c8a60c14caa9f137910e4a
     "crumbs": [
       "About",
       "Assignment 2: Economic Simulation"

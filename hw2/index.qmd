@@ -259,9 +259,13 @@ plot(df$ID,df$nE,main="Number of Changes",
 
 I think I need a simulation where I can save the money history!
 
+<<<<<<< HEAD
 ## Simple Timehistory
 
 ### After the first change for all Agents
+=======
+## After the first change for all Agents
+>>>>>>> 2d190a4abd497e5144c8a60c14caa9f137910e4a
 
 ```{r}
 df <- SplitRandomR(1000,1)
@@ -276,7 +280,11 @@ legend('topright', c('Money befor', 'Money after'),
 
 ```
 
+<<<<<<< HEAD
 ### After the second change for all Agents
+=======
+## After the second change for all Agents
+>>>>>>> 2d190a4abd497e5144c8a60c14caa9f137910e4a
 
 ```{r}
 df <- SplitRandomR(1000,2)
