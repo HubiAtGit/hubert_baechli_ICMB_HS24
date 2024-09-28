@@ -164,17 +164,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#my-first-attempt" id="toc-my-first-attempt" class="nav-link active" data-scroll-target="#my-first-attempt">My first attempt</a>
   <ul class="collapse">
 <li><a href="#first-of-all" id="toc-first-of-all" class="nav-link" data-scroll-target="#first-of-all">First of all,</a></li>
-  <li><a href="#the-next-step" id="toc-the-next-step" class="nav-link" data-scroll-target="#the-next-step">The next step</a></li>
-  <li><a href="#i-am-very-surprised" id="toc-i-am-very-surprised" class="nav-link" data-scroll-target="#i-am-very-surprised"><strong>I am very surprised!</strong></a></li>
+  <li>
+<a href="#the-next-step" id="toc-the-next-step" class="nav-link" data-scroll-target="#the-next-step">The next step</a>
+  <ul class="collapse">
+<li><a href="#i-am-very-surprised" id="toc-i-am-very-surprised" class="nav-link" data-scroll-target="#i-am-very-surprised">I am very surprised!</a></li>
   </ul>
 </li>
-  <li><a href="#but-why" id="toc-but-why" class="nav-link" data-scroll-target="#but-why"><strong>But why??????????</strong></a></li>
-  <li><a href="#idea-from-a-proverb" id="toc-idea-from-a-proverb" class="nav-link" data-scroll-target="#idea-from-a-proverb">Idea from a proverb</a></li>
+  </ul>
+</li>
   <li>
-<a href="#but-still-why" id="toc-but-still-why" class="nav-link" data-scroll-target="#but-still-why"><strong>But still why???</strong></a>
+<a href="#but-why" id="toc-but-why" class="nav-link" data-scroll-target="#but-why">But why??????????</a>
   <ul class="collapse">
-<li><a href="#i-think-i-need-a-simulation-where-i-can-save-the-money-history" id="toc-i-think-i-need-a-simulation-where-i-can-save-the-money-history" class="nav-link" data-scroll-target="#i-think-i-need-a-simulation-where-i-can-save-the-money-history"><strong>I think I need a simulation where I can save the money history</strong></a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+<li><a href="#idea-from-a-proverb" id="toc-idea-from-a-proverb" class="nav-link" data-scroll-target="#idea-from-a-proverb">Idea from a proverb</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -355,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="i-am-very-surprised" class="level2"><h2 class="anchored" data-anchor-id="i-am-very-surprised"><strong>I am very surprised!</strong></h2>
+<section id="i-am-very-surprised" class="level3"><h3 class="anchored" data-anchor-id="i-am-very-surprised">I am very surprised!</h3>
 <p>here are the results for the random-split</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandom</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
@@ -400,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section></section><section id="but-why" class="level1"><h1><strong>But why??????????</strong></h1>
+</section></section></section><section id="but-why" class="level1"><h1>But why??????????</h1>
 <p>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span>,<span class="va">df</span><span class="op">$</span><span class="va">Me</span>,main<span class="op">=</span><span class="st">"Correlation to the Number of Changes"</span>,</span>
@@ -431,9 +432,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="idea-from-a-proverb" class="level1"><h1>Idea from a proverb</h1>
+<section id="idea-from-a-proverb" class="level2"><h2 class="anchored" data-anchor-id="idea-from-a-proverb">Idea from a proverb</h2>
 <p>can it be that it is harder to get money back once you have lost all the money <em>“money goes to money”</em>?</p>
-<p>as a first attempt, the randum function is limited between 30% and 70%</p>
+<p>as a first attempt, the random function is limited between 30% and 70%</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitRandom2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
@@ -491,9 +492,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="but-still-why" class="level1"><h1><strong>But still why???</strong></h1>
-<section id="i-think-i-need-a-simulation-where-i-can-save-the-money-history" class="level2"><h2 class="anchored" data-anchor-id="i-think-i-need-a-simulation-where-i-can-save-the-money-history"><strong>I think I need a simulation where I can save the money history</strong></h2>
-</section><section id="section" class="level2"><h2 class="anchored" data-anchor-id="section"></h2>
+<p><strong>But still why???</strong></p>
+<p>I think I need a simulation where I can save the money history**</p>
 
 
 <!-- -->
@@ -1102,7 +1102,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## **I am very surprised!**</span></span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### I am very surprised!</span></span>
 <span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>here are the results for the random-split</span>
 <span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a></span>
@@ -1123,7 +1123,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
 <span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># **But why??????????**</span></span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># But why??????????</span></span>
 <span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</span>
 <span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a></span>
@@ -1141,11 +1141,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
 <span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="fu"># Idea from a proverb</span></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Idea from a proverb</span></span>
 <span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>can it be that it is harder to get money back once you have lost all the money *“money goes to money”*?</span>
 <span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>as a first attempt, the randum function is limited between 30% and 70%</span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>as a first attempt, the random function is limited between 30% and 70%</span>
 <span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>SplitRandom2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
@@ -1184,11 +1184,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
 <span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a><span class="fu"># **But still why???**</span></span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>**But still why???**</span>
 <span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## **I think I need a simulation where I can save the money history**</span></span>
-<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a>I think I need a simulation where I can save the money history<span class="sc">\*\*</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

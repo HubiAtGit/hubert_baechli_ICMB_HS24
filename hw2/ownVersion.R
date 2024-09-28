@@ -84,6 +84,7 @@ plot(df$ID,df$nE,main="Number of Changes",
      col=rgb(1,0,0,0.2))
 
 
+<<<<<<< HEAD
 plot(df$nE,df$Me,main="Correlation to the Number of Changes",
      xlab="Number of Changes",ylab="Money at the End",
      col=rgb(1,0,0,0.2))
@@ -128,3 +129,16 @@ legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 
 
+=======
+plot(df$nE,df$Me,main="Correlation?",
+     xlab="Number of Changes",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
+
+plot(df$Ms,df$Me,main="Correlation?",
+     xlab="Money at the Beginning",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
+
+plot(df$ID,df$Me,main="Correlation?",
+     xlab="ID",ylab="Money at the End",
+     col=rgb(1,0,0,0.2))
+>>>>>>> be86c75b75f21718c91c65aff3cf02d31c29d0a8
