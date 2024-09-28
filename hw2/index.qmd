@@ -92,3 +92,47 @@ plot(df$ID,df$nE,main="Number of Changes",
      xlab="ID",ylab="Number of Changes",
      col=rgb(1,0,0,0.2))
 ```
+
+The next step is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper
+
+```{r}
+SplitRandom <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
+  df <- data.frame(ID=seq(1,nAgent),
+                   nE=0,
+                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),
+                   MT=0,Me=0)
+  df$Me <- df$Ms
+  iE <- 1
+  while (iE <= maxExchange) {
+    df$MT <- df$Me
+    rdf <- sample(df$ID, size=2)
+    rds <- sample(0:100, size=1)/100
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"] <-
+      df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"]+1
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"Me"] <-
+      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),"MT"])*c(rds,1-rds)
+    iE <- iE+1
+  }
+  return(df)
+}
+
+```
+
+**I am very surprised!** here are the results for the random-split
+
+```{r}
+df <- SplitRandom(1000,7500)
+
+summary(df)
+hist(df$Ms, xlab="Money",main="Histogram for split-halve",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))
+hist(df$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+
+plot(df$ID,df$nE,main="Number of Changes",
+     xlab="ID",ylab="Number of Changes",
+     col=rgb(1,0,0,0.2))
+```

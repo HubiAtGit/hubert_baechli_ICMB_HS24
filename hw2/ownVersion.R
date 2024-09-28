@@ -45,6 +45,31 @@ SplitHalve2 <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 
 df <- SplitHalve2(1000,7500)
 
+SplitRandom <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
+  df <- data.frame(ID=seq(1,nAgent),
+                   nE=0,
+                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),
+                   MT=0,Me=0)
+  df$Me <- df$Ms
+  iE <- 1
+  while (iE <= maxExchange) {
+    df$MT <- df$Me
+    rdf <- sample(df$ID, size=2)
+    rds <- sample(0:100, size=1)/100
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"] <-
+      df[(df$ID == rdf[1] | df$ID == rdf[2]),"nE"]+1
+    df[(df$ID == rdf[1] | df$ID == rdf[2]),"Me"] <-
+      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),"MT"])*c(rds,1-rds)
+    iE <- iE+1
+  }
+  return(df)
+}
+
+sample ( 0:100 , 1 )/100
+30*c(0.2,0.8)
+
+df <- SplitRandom(1000,7500)
+
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
      col=rgb(0,0,1,0.2),
@@ -57,3 +82,4 @@ legend('topright', c('Money befor', 'Money after'),
 plot(df$ID,df$nE,main="Number of Changes",
      xlab="ID",ylab="Number of Changes",
      col=rgb(1,0,0,0.2))
+
