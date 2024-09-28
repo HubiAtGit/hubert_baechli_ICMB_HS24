@@ -32,7 +32,8 @@ SplitHalve <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 Presentation of the results
 
 ```{r}
-df <- SplitHalve(1000,10)
+df <- SplitHalve(1000,15)
+
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
      col=rgb(0,0,1,0.2),
@@ -41,9 +42,10 @@ hist(df$Me, col=rgb(0,1,0,0.2),
      add=TRUE)
 legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
-hist(df$nE, xlab="Money",main="Number of Exchanges",
-     col=rgb(0,0,1,0.2),
-     xlim=c(0,max(df$nE))*1.1)
+
+plot(df$ID,df$nE,main="Number of Changes",
+     xlab="ID",ylab="Number of Changes",
+     col=rgb(1,0,0,0.2))
 
 ```
 
@@ -75,7 +77,8 @@ SplitHalve2 <- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {
 Presentation of the results
 
 ```{r}
-df <- SplitHalve2(1000,10000)
+df <- SplitHalve2(1000,7500)
+
 summary(df)
 hist(df$Ms, xlab="Money",main="Histogram for split-halve",
      col=rgb(0,0,1,0.2),
@@ -85,7 +88,7 @@ hist(df$Me, col=rgb(0,1,0,0.2),
 legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 
-hist(df$nE, xlab="Money",main="Number of Exchanges",
-     col=rgb(0,0,1,0.2),
-     xlim=c(0,max(df$nE))*1.1)
+plot(df$ID,df$nE,main="Number of Changes",
+     xlab="ID",ylab="Number of Changes",
+     col=rgb(1,0,0,0.2))
 ```
