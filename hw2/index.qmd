@@ -259,13 +259,9 @@ plot(df$ID,df$nE,main="Number of Changes",
 
 I think I need a simulation where I can save the money history!
 
-<<<<<<< HEAD
 ## Simple Timehistory
 
 ### After the first change for all Agents
-=======
-## After the first change for all Agents
->>>>>>> 2d190a4abd497e5144c8a60c14caa9f137910e4a
 
 ```{r}
 df <- SplitRandomR(1000,1)
@@ -280,11 +276,7 @@ legend('topright', c('Money befor', 'Money after'),
 
 ```
 
-<<<<<<< HEAD
 ### After the second change for all Agents
-=======
-## After the second change for all Agents
->>>>>>> 2d190a4abd497e5144c8a60c14caa9f137910e4a
 
 ```{r}
 df <- SplitRandomR(1000,2)
@@ -298,3 +290,105 @@ legend('topright', c('Money befor', 'Money after'),
        fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
 
 ```
+
+# Eureka!
+
+**Sleeping on it always helps!**
+
+I think the easiest way to understand the mechanism is to have all agents start with the same amount of money. I will do this here quick and durty with my restrictive simulation and a starting distribution with a mean of 1000 and a standard deviation of 0.
+
+## First Exchange
+
+In the first run in this simplified scenario, all agents have the same chance of being above or below 1000.
+
+```{r}
+df1_even <- SplitRandomR(1000,1,1000,0)
+
+hist(df1_even$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)))
+hist(df1_even$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+```
+
+In other words, the average value of Money is still 1000. Also the Median. So there should be about 50% agents with more than 1000
+
+```{r}
+df1_summary <- data.frame("Mean"=mean(df1_even$Me),
+                          "Median"=median(df1_even$Me),
+                          "nAover1000"=nrow(df1_even[df1_even$Me>1000,])) 
+                          # number of Agents with more than 1000
+df1_summary
+```
+
+## Second Exchange
+
+But what happens now with the second swap!
+
+to get above 1000 or to stay there you "need" two conditions:
+
+1.  you have to meet someone who already has over 1000 (p\~0.5)
+
+2.  you must also emerge from the meeting as the winner (p\~0.5)
+
+The chance of staying or getting above 1000 is only around 25%.
+
+***I know this isn't formally correct, but it should explain the mechanism!***
+
+**The real value should be under 50%**
+
+```{r}
+df2_even <- SplitRandomR(1000,2,1000,0)
+
+hist(df2_even$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)))
+hist(df2_even$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+```
+
+after the second round, the mean value is still 1000, but the median is now lower!
+
+```{r}
+df2_summary <- data.frame("Mean"=mean(df2_even$Me),
+                          "Median"=median(df2_even$Me),
+                          "nAover1000"=nrow(df2_even[df2_even$Me>1000,])) 
+                          # number of Agents with more than 1000
+df2_summary
+```
+
+in other words, meeting someone who has over 1000 is now even smaller for the next round.
+
+## Third Exchange
+
+```{r}
+df3_even <- SplitRandomR(1000,3,1000,0)
+
+hist(df3_even$Ms, xlab="Money",main="Histogram for split-random Restricted",
+     col=rgb(0,0,1,0.2),
+     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)))
+hist(df3_even$Me, col=rgb(0,1,0,0.2),
+     add=TRUE)
+legend('topright', c('Money befor', 'Money after'),
+       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))
+```
+
+As assumed, the median is again smaller, as is the number of agents with more than 1000
+
+```{r}
+df3_summary <- data.frame("Mean"=mean(df3_even$Me),
+                          "Median"=median(df3_even$Me),
+                          "nAover1000"=nrow(df3_even[df3_even$Me>1000,])) 
+                          # number of Agents with more than 1000
+df3_summary
+```
+
+from here on it seems clear that it tends towards the distribution with further steps
+
+## Conclusion
+
+I must have made something like a conjunction error here. the conditional probability for winning of 50% is only given if everyone has the same amount of money. otherwise the chance of winning is always smaller, which means that there are more and more poor and only a few rich agents in this game.
