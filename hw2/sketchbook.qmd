@@ -491,7 +491,7 @@ plot(prob_after3,
 df15_even <- SplitRandomR(1000,15,1000,0)
 
 prob_after15 <- win_stab_prob(df15_even$Me)
-prob_after15 <- prob_after3[order(prob_after15$Money, decreasing = FALSE), ]
+prob_after15 <- prob_after15[order(prob_after15$Money, decreasing = FALSE), ]
 popMean <- mean(prob_after15[, 2])
 plot(prob_after15,
      lwd = 5,
