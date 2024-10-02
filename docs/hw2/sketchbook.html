@@ -799,6 +799,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">prob_after1</span> <span class="op">&lt;-</span> <span class="fu">win_stab_prob</span><span class="op">(</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span></span>
 <span><span class="va">prob_after1</span> <span class="op">&lt;-</span> <span class="va">prob_after1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">prob_after1</span><span class="op">$</span><span class="va">Money</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">popMean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">prob_after1</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">Money_Med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">prob_after1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">prob_after1</span>,</span>
 <span>     lwd <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Populationmean"</span>, <span class="va">popMean</span><span class="op">)</span>,</span>
@@ -807,6 +808,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>     ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">popMean</span>,</span>
+<span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">Money_Med</span>,</span>
 <span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -820,6 +823,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">prob_after2</span> <span class="op">&lt;-</span> <span class="fu">win_stab_prob</span><span class="op">(</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span></span>
 <span><span class="va">prob_after2</span> <span class="op">&lt;-</span> <span class="va">prob_after2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">prob_after2</span><span class="op">$</span><span class="va">Money</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">popMean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">prob_after2</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">Money_Med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">prob_after2</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">prob_after2</span>,</span>
 <span>     lwd <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Populationmean"</span>, <span class="va">popMean</span><span class="op">)</span>,</span>
@@ -828,6 +832,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>     ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">popMean</span>,</span>
+<span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">Money_Med</span>,</span>
 <span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -841,6 +847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">prob_after3</span> <span class="op">&lt;-</span> <span class="fu">win_stab_prob</span><span class="op">(</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span></span>
 <span><span class="va">prob_after3</span> <span class="op">&lt;-</span> <span class="va">prob_after3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">prob_after3</span><span class="op">$</span><span class="va">Money</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">popMean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">prob_after3</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">Money_Med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">prob_after3</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">prob_after3</span>,</span>
 <span>     lwd <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Populationmean"</span>, <span class="va">popMean</span><span class="op">)</span>,</span>
@@ -849,6 +856,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>     ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">popMean</span>,</span>
+<span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">Money_Med</span>,</span>
 <span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -864,6 +873,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">prob_after15</span> <span class="op">&lt;-</span> <span class="fu">win_stab_prob</span><span class="op">(</span><span class="va">df15_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span></span>
 <span><span class="va">prob_after15</span> <span class="op">&lt;-</span> <span class="va">prob_after15</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">prob_after15</span><span class="op">$</span><span class="va">Money</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">popMean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">prob_after15</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">Money_Med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">prob_after15</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">prob_after15</span>,</span>
 <span>     lwd <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Populationmean"</span>, <span class="va">popMean</span><span class="op">)</span>,</span>
@@ -872,6 +882,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>     ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,</span>
 <span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">popMean</span>,</span>
+<span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">Money_Med</span>,</span>
 <span>            col <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -1804,69 +1816,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb45-484"><a href="#cb45-484" aria-hidden="true" tabindex="-1"></a>prob_after1 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df1_even<span class="sc">$</span>Me)</span>
 <span id="cb45-485"><a href="#cb45-485" aria-hidden="true" tabindex="-1"></a>prob_after1 <span class="ot">&lt;-</span> prob_after1[<span class="fu">order</span>(prob_after1<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
 <span id="cb45-486"><a href="#cb45-486" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after1[, <span class="dv">2</span>])</span>
-<span id="cb45-487"><a href="#cb45-487" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after1,</span>
-<span id="cb45-488"><a href="#cb45-488" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
-<span id="cb45-489"><a href="#cb45-489" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
-<span id="cb45-490"><a href="#cb45-490" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
-<span id="cb45-491"><a href="#cb45-491" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
-<span id="cb45-492"><a href="#cb45-492" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb45-493"><a href="#cb45-493" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
-<span id="cb45-494"><a href="#cb45-494" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
-<span id="cb45-495"><a href="#cb45-495" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb45-496"><a href="#cb45-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb45-497"><a href="#cb45-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-498"><a href="#cb45-498" aria-hidden="true" tabindex="-1"></a>after the second round</span>
-<span id="cb45-499"><a href="#cb45-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-502"><a href="#cb45-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb45-503"><a href="#cb45-503" aria-hidden="true" tabindex="-1"></a>prob_after2 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df2_even<span class="sc">$</span>Me)</span>
-<span id="cb45-504"><a href="#cb45-504" aria-hidden="true" tabindex="-1"></a>prob_after2 <span class="ot">&lt;-</span> prob_after2[<span class="fu">order</span>(prob_after2<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
-<span id="cb45-505"><a href="#cb45-505" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after2[, <span class="dv">2</span>])</span>
-<span id="cb45-506"><a href="#cb45-506" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after2,</span>
-<span id="cb45-507"><a href="#cb45-507" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
-<span id="cb45-508"><a href="#cb45-508" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
-<span id="cb45-509"><a href="#cb45-509" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
-<span id="cb45-510"><a href="#cb45-510" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
-<span id="cb45-511"><a href="#cb45-511" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb45-512"><a href="#cb45-512" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
-<span id="cb45-513"><a href="#cb45-513" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
-<span id="cb45-514"><a href="#cb45-514" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb45-515"><a href="#cb45-515" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb45-516"><a href="#cb45-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-517"><a href="#cb45-517" aria-hidden="true" tabindex="-1"></a>... third</span>
-<span id="cb45-518"><a href="#cb45-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-521"><a href="#cb45-521" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb45-522"><a href="#cb45-522" aria-hidden="true" tabindex="-1"></a>prob_after3 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df3_even<span class="sc">$</span>Me)</span>
-<span id="cb45-523"><a href="#cb45-523" aria-hidden="true" tabindex="-1"></a>prob_after3 <span class="ot">&lt;-</span> prob_after3[<span class="fu">order</span>(prob_after3<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
-<span id="cb45-524"><a href="#cb45-524" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after3[, <span class="dv">2</span>])</span>
-<span id="cb45-525"><a href="#cb45-525" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after3,</span>
-<span id="cb45-526"><a href="#cb45-526" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
-<span id="cb45-527"><a href="#cb45-527" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
-<span id="cb45-528"><a href="#cb45-528" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
-<span id="cb45-529"><a href="#cb45-529" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
-<span id="cb45-530"><a href="#cb45-530" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb45-531"><a href="#cb45-531" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
-<span id="cb45-532"><a href="#cb45-532" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
-<span id="cb45-533"><a href="#cb45-533" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb45-534"><a href="#cb45-534" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb45-535"><a href="#cb45-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-536"><a href="#cb45-536" aria-hidden="true" tabindex="-1"></a>...15th</span>
-<span id="cb45-537"><a href="#cb45-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-540"><a href="#cb45-540" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb45-541"><a href="#cb45-541" aria-hidden="true" tabindex="-1"></a>df15_even <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">15</span>,<span class="dv">1000</span>,<span class="dv">0</span>)</span>
-<span id="cb45-542"><a href="#cb45-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-543"><a href="#cb45-543" aria-hidden="true" tabindex="-1"></a>prob_after15 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df15_even<span class="sc">$</span>Me)</span>
-<span id="cb45-544"><a href="#cb45-544" aria-hidden="true" tabindex="-1"></a>prob_after15 <span class="ot">&lt;-</span> prob_after15[<span class="fu">order</span>(prob_after15<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
-<span id="cb45-545"><a href="#cb45-545" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after15[, <span class="dv">2</span>])</span>
-<span id="cb45-546"><a href="#cb45-546" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after15,</span>
-<span id="cb45-547"><a href="#cb45-547" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
-<span id="cb45-548"><a href="#cb45-548" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
-<span id="cb45-549"><a href="#cb45-549" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
-<span id="cb45-550"><a href="#cb45-550" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
-<span id="cb45-551"><a href="#cb45-551" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb45-552"><a href="#cb45-552" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
-<span id="cb45-553"><a href="#cb45-553" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
-<span id="cb45-554"><a href="#cb45-554" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb45-555"><a href="#cb45-555" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-487"><a href="#cb45-487" aria-hidden="true" tabindex="-1"></a>Money_Med <span class="ot">&lt;-</span> <span class="fu">median</span>(prob_after1[, <span class="dv">1</span>])</span>
+<span id="cb45-488"><a href="#cb45-488" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after1,</span>
+<span id="cb45-489"><a href="#cb45-489" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
+<span id="cb45-490"><a href="#cb45-490" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
+<span id="cb45-491"><a href="#cb45-491" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
+<span id="cb45-492"><a href="#cb45-492" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
+<span id="cb45-493"><a href="#cb45-493" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb45-494"><a href="#cb45-494" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb45-495"><a href="#cb45-495" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
+<span id="cb45-496"><a href="#cb45-496" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-497"><a href="#cb45-497" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">v=</span>Money_Med,</span>
+<span id="cb45-498"><a href="#cb45-498" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-499"><a href="#cb45-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-500"><a href="#cb45-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-501"><a href="#cb45-501" aria-hidden="true" tabindex="-1"></a>after the second round</span>
+<span id="cb45-502"><a href="#cb45-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-505"><a href="#cb45-505" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-506"><a href="#cb45-506" aria-hidden="true" tabindex="-1"></a>prob_after2 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df2_even<span class="sc">$</span>Me)</span>
+<span id="cb45-507"><a href="#cb45-507" aria-hidden="true" tabindex="-1"></a>prob_after2 <span class="ot">&lt;-</span> prob_after2[<span class="fu">order</span>(prob_after2<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
+<span id="cb45-508"><a href="#cb45-508" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after2[, <span class="dv">2</span>])</span>
+<span id="cb45-509"><a href="#cb45-509" aria-hidden="true" tabindex="-1"></a>Money_Med <span class="ot">&lt;-</span> <span class="fu">median</span>(prob_after2[, <span class="dv">1</span>])</span>
+<span id="cb45-510"><a href="#cb45-510" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after2,</span>
+<span id="cb45-511"><a href="#cb45-511" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
+<span id="cb45-512"><a href="#cb45-512" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
+<span id="cb45-513"><a href="#cb45-513" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
+<span id="cb45-514"><a href="#cb45-514" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
+<span id="cb45-515"><a href="#cb45-515" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb45-516"><a href="#cb45-516" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb45-517"><a href="#cb45-517" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
+<span id="cb45-518"><a href="#cb45-518" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-519"><a href="#cb45-519" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">v=</span>Money_Med,</span>
+<span id="cb45-520"><a href="#cb45-520" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-521"><a href="#cb45-521" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-522"><a href="#cb45-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-523"><a href="#cb45-523" aria-hidden="true" tabindex="-1"></a>... third</span>
+<span id="cb45-524"><a href="#cb45-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-527"><a href="#cb45-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-528"><a href="#cb45-528" aria-hidden="true" tabindex="-1"></a>prob_after3 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df3_even<span class="sc">$</span>Me)</span>
+<span id="cb45-529"><a href="#cb45-529" aria-hidden="true" tabindex="-1"></a>prob_after3 <span class="ot">&lt;-</span> prob_after3[<span class="fu">order</span>(prob_after3<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
+<span id="cb45-530"><a href="#cb45-530" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after3[, <span class="dv">2</span>])</span>
+<span id="cb45-531"><a href="#cb45-531" aria-hidden="true" tabindex="-1"></a>Money_Med <span class="ot">&lt;-</span> <span class="fu">median</span>(prob_after3[, <span class="dv">1</span>])</span>
+<span id="cb45-532"><a href="#cb45-532" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after3,</span>
+<span id="cb45-533"><a href="#cb45-533" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
+<span id="cb45-534"><a href="#cb45-534" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
+<span id="cb45-535"><a href="#cb45-535" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
+<span id="cb45-536"><a href="#cb45-536" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
+<span id="cb45-537"><a href="#cb45-537" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb45-538"><a href="#cb45-538" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb45-539"><a href="#cb45-539" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
+<span id="cb45-540"><a href="#cb45-540" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-541"><a href="#cb45-541" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">v=</span>Money_Med,</span>
+<span id="cb45-542"><a href="#cb45-542" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-543"><a href="#cb45-543" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb45-544"><a href="#cb45-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-545"><a href="#cb45-545" aria-hidden="true" tabindex="-1"></a>...15th</span>
+<span id="cb45-546"><a href="#cb45-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-549"><a href="#cb45-549" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb45-550"><a href="#cb45-550" aria-hidden="true" tabindex="-1"></a>df15_even <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">15</span>,<span class="dv">1000</span>,<span class="dv">0</span>)</span>
+<span id="cb45-551"><a href="#cb45-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-552"><a href="#cb45-552" aria-hidden="true" tabindex="-1"></a>prob_after15 <span class="ot">&lt;-</span> <span class="fu">win_stab_prob</span>(df15_even<span class="sc">$</span>Me)</span>
+<span id="cb45-553"><a href="#cb45-553" aria-hidden="true" tabindex="-1"></a>prob_after15 <span class="ot">&lt;-</span> prob_after15[<span class="fu">order</span>(prob_after15<span class="sc">$</span>Money, <span class="at">decreasing =</span> <span class="cn">FALSE</span>), ]</span>
+<span id="cb45-554"><a href="#cb45-554" aria-hidden="true" tabindex="-1"></a>popMean <span class="ot">&lt;-</span> <span class="fu">mean</span>(prob_after15[, <span class="dv">2</span>])</span>
+<span id="cb45-555"><a href="#cb45-555" aria-hidden="true" tabindex="-1"></a>Money_Med <span class="ot">&lt;-</span> <span class="fu">median</span>(prob_after15[, <span class="dv">1</span>])</span>
+<span id="cb45-556"><a href="#cb45-556" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob_after15,</span>
+<span id="cb45-557"><a href="#cb45-557" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
+<span id="cb45-558"><a href="#cb45-558" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="fu">c</span>(<span class="st">"Populationmean"</span>, popMean),</span>
+<span id="cb45-559"><a href="#cb45-559" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money"</span>,</span>
+<span id="cb45-560"><a href="#cb45-560" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Probability"</span>,</span>
+<span id="cb45-561"><a href="#cb45-561" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb45-562"><a href="#cb45-562" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb45-563"><a href="#cb45-563" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">h=</span>popMean,</span>
+<span id="cb45-564"><a href="#cb45-564" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-565"><a href="#cb45-565" aria-hidden="true" tabindex="-1"></a>     <span class="fu">abline</span>(<span class="at">v=</span>Money_Med,</span>
+<span id="cb45-566"><a href="#cb45-566" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb45-567"><a href="#cb45-567" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

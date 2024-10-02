@@ -440,6 +440,7 @@ after that first round it depends from the Money of the Agent.
 prob_after1 <- win_stab_prob(df1_even$Me)
 prob_after1 <- prob_after1[order(prob_after1$Money, decreasing = FALSE), ]
 popMean <- mean(prob_after1[, 2])
+Money_Med <- median(prob_after1[, 1])
 plot(prob_after1,
      lwd = 5,
      main=c("Populationmean", popMean),
@@ -449,6 +450,8 @@ plot(prob_after1,
      col=rgb(0,0,1,0.1))
      abline(h=popMean,
             col =rgb(1,0,0,1))
+     abline(v=Money_Med,
+            col =rgb(1,0,0,1))
 ```
 
 after the second round
@@ -457,6 +460,7 @@ after the second round
 prob_after2 <- win_stab_prob(df2_even$Me)
 prob_after2 <- prob_after2[order(prob_after2$Money, decreasing = FALSE), ]
 popMean <- mean(prob_after2[, 2])
+Money_Med <- median(prob_after2[, 1])
 plot(prob_after2,
      lwd = 5,
      main=c("Populationmean", popMean),
@@ -466,6 +470,8 @@ plot(prob_after2,
      col=rgb(0,0,1,0.1))
      abline(h=popMean,
             col =rgb(1,0,0,1))
+     abline(v=Money_Med,
+            col =rgb(1,0,0,1))
 ```
 
 ... third
@@ -474,6 +480,7 @@ plot(prob_after2,
 prob_after3 <- win_stab_prob(df3_even$Me)
 prob_after3 <- prob_after3[order(prob_after3$Money, decreasing = FALSE), ]
 popMean <- mean(prob_after3[, 2])
+Money_Med <- median(prob_after3[, 1])
 plot(prob_after3,
      lwd = 5,
      main=c("Populationmean", popMean),
@@ -482,6 +489,8 @@ plot(prob_after3,
      ylim=c(0,1),
      col=rgb(0,0,1,0.1))
      abline(h=popMean,
+            col =rgb(1,0,0,1))
+     abline(v=Money_Med,
             col =rgb(1,0,0,1))
 ```
 
@@ -493,6 +502,7 @@ df15_even <- SplitRandomR(1000,15,1000,0)
 prob_after15 <- win_stab_prob(df15_even$Me)
 prob_after15 <- prob_after15[order(prob_after15$Money, decreasing = FALSE), ]
 popMean <- mean(prob_after15[, 2])
+Money_Med <- median(prob_after15[, 1])
 plot(prob_after15,
      lwd = 5,
      main=c("Populationmean", popMean),
@@ -501,5 +511,7 @@ plot(prob_after15,
      ylim=c(0,1),
      col=rgb(0,0,1,0.1))
      abline(h=popMean,
+            col =rgb(1,0,0,1))
+     abline(v=Money_Med,
             col =rgb(1,0,0,1))
 ```
