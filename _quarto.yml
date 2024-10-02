@@ -13,16 +13,22 @@ website:
   title: "Hubert Baechli: ICMB portfolio"
   back-to-top-navigation: true
   page-navigation: true
+
   navbar:
     left:
       - href: index.qmd
         text: About
   sidebar:
+    style: "docked"
+    search: true
     collapse-level: 1
     contents:
       - index.qmd
       - hw1/index.qmd
-      - hw2/index.qmd
+      - section:
+        href: hw2/index.qmd
+        contents:
+        - hw2/sketchbook.qmd
 
 format:
   html:

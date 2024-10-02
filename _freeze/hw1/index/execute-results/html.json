@@ -1,8 +1,8 @@
 {
-  "hash": "3ad8d5272a6254714c39c0f25b8c7baa",
+  "hash": "1ebfa359fd77b89fbfae8cd7002f15c4",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Assignment 1: Hello World\"\nauthor: \"Hubert Baechli\"\n---\n\n\n\n\nHello World that's my first plot:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhubi <- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
+    "markdown": "---\ntitle: \"Hello World\"\nauthor: \"Hubert Baechli\"\n---\n\n\n\nHello World that's my first plot: test\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhubi <- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

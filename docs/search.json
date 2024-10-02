@@ -4,36 +4,22 @@
     "href": "index.html",
     "title": "hubert_baechli_ICMB_HS24",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n\n\n\n Back to top",
     "crumbs": [
       "About",
       "hubert_baechli_ICMB_HS24"
     ]
   },
   {
-    "objectID": "hw1/index.html",
-    "href": "hw1/index.html",
-    "title": "Assignment 1: Hello World",
+    "objectID": "hw2/index.html",
+    "href": "hw2/index.html",
+    "title": "Assignment 2: Economic Simulation",
     "section": "",
-    "text": "Hello World that’s my first plot:\n\nCodehubi &lt;- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top",
+    "text": "Tasks\nThe second assignment has 2 components and you have the next 2 weeks to work on it. \n\nReplicate the first simulation from https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container in R\nAttempt to understand why the model produces such inequality by “playing with it”. You would have to first think about why it might do this, describe your thought process, and then change parts of the code, add new visualizations, etc, to see if you can explain why it behaves the way it does. This is going to be quite challenging and creative\n\n\n\nInstructions\nTo do this assignment and submit it you have to:\n\nmake a new folder “hw2” in your existing project folder\ncreate a new quarto document, for example “index.qmd” in the “hw2” folder\nadd “- hw2/index.qmd” to the “_quarto.yml” file sidebar section\nwrite your thoughts as text in the document, r code in R chunks\nRender the notebook to run the code and see the results intermixed with your description\nadd your new files and commit the to git as you make changes\nwhen you are done with the replication part of the assignment, push your changes to github - you will be able to see your results on your github website. Try to finish this first by next week\nresume from step 4 for the second part of the assignment to explore the model\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "About",
-      "Assignment 1: Hello World"
+      "Assignment 2: <br>Economic Simulation"
     ]
-  },
-  {
-    "objectID": "hubert_baechli_ICMB24/about.html",
-    "href": "hubert_baechli_ICMB24/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\nCode1 + 1\n\n[1] 2\n\n\ngasdzewag\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "hubert_baechli_ICMB24/index.html",
@@ -43,113 +29,160 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "hw2/index.html",
-    "href": "hw2/index.html",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "at an agent model with the information from the lesson\n\nCodeSplitHalve &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df[df$nE &lt; iE,\"ID\"], size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    if (NROW(df[df$nE &lt; iE,\"ID\"]) &lt; 2) {\n      iE &lt;- iE+1\n      }\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve(1000,30)\n\nsummary(df)\n\n       ID               nE           Ms               MT             Me      \n Min.   :   1.0   Min.   :30   Min.   : -35.7   Min.   :1011   Min.   :1011  \n 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 807.4   1st Qu.:1011   1st Qu.:1011  \n Median : 500.5   Median :30   Median :1017.2   Median :1011   Median :1011  \n Mean   : 500.5   Mean   :30   Mean   :1011.1   Mean   :1011   Mean   :1011  \n 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1216.8   3rd Qu.:1011   3rd Qu.:1011  \n Max.   :1000.0   Max.   :30   Max.   :2005.2   Max.   :1011   Max.   :1011  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\nAfter looking at the code on https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container there are some differences between my idea and the paper! These will now be adapted step by step.\n\nthe restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.\n\nCodeSplitHalve2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve2(1000,15000)\n\nsummary(df)\n\n       ID               nE              Ms                MT      \n Min.   :   1.0   Min.   :15.00   Min.   : -30.55   Min.   :1011  \n 1st Qu.: 250.8   1st Qu.:26.75   1st Qu.: 813.34   1st Qu.:1011  \n Median : 500.5   Median :30.00   Median :1018.55   Median :1012  \n Mean   : 500.5   Mean   :30.00   Mean   :1011.52   Mean   :1012  \n 3rd Qu.: 750.2   3rd Qu.:34.00   3rd Qu.:1215.90   3rd Qu.:1012  \n Max.   :1000.0   Max.   :44.00   Max.   :1965.63   Max.   :1015  \n       Me      \n Min.   :1011  \n 1st Qu.:1011  \n Median :1012  \n Mean   :1012  \n 3rd Qu.:1012  \n Max.   :1015  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\n\nis to change from a half-split to a random-split. In the hope that this can reflect the results of the paper\n\nCodeSplitRandom &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\n\nhere are the results for the random-split\n\nCodedf &lt;- SplitRandom(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms                MT        \n Min.   :   1.0   Min.   :13   Min.   : -54.73   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.51   1st Qu.: 254.5  \n Median : 500.5   Median :30   Median :1000.84   Median : 628.2  \n Mean   : 500.5   Mean   :30   Mean   : 998.07   Mean   : 998.1  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1206.97   3rd Qu.:1364.8  \n Max.   :1000.0   Max.   :48   Max.   :1944.15   Max.   :6632.3  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 253.7  \n Median : 628.2  \n Mean   : 998.1  \n 3rd Qu.:1364.8  \n Max.   :6632.3  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hubert_baechli_ICMB24/about.html",
+    "href": "hubert_baechli_ICMB24/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hw1/index.html",
+    "href": "hw1/index.html",
+    "title": "Hello World",
+    "section": "",
+    "text": "Hello World that’s my first plot: test\n\nCodehubi &lt;- rnorm(10000, mean = 46, sd = 1)\nhist(hubi)\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 1: <br>Hello World"
     ]
   },
   {
-    "objectID": "hw2/index.html#first-of-all",
-    "href": "hw2/index.html#first-of-all",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html",
+    "href": "hw2/sketchbook.html",
+    "title": "Sketchbook",
     "section": "",
-    "text": "the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.\n\nCodeSplitHalve2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve2(1000,15000)\n\nsummary(df)\n\n       ID               nE              Ms                MT      \n Min.   :   1.0   Min.   :15.00   Min.   : -30.55   Min.   :1011  \n 1st Qu.: 250.8   1st Qu.:26.75   1st Qu.: 813.34   1st Qu.:1011  \n Median : 500.5   Median :30.00   Median :1018.55   Median :1012  \n Mean   : 500.5   Mean   :30.00   Mean   :1011.52   Mean   :1012  \n 3rd Qu.: 750.2   3rd Qu.:34.00   3rd Qu.:1215.90   3rd Qu.:1012  \n Max.   :1000.0   Max.   :44.00   Max.   :1965.63   Max.   :1015  \n       Me      \n Min.   :1011  \n 1st Qu.:1011  \n Median :1012  \n Mean   :1012  \n 3rd Qu.:1012  \n Max.   :1015  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
+    "text": "at an agent model with the information from the lesson\n\nCodeSplitHalve &lt;- function (nAgent, maxExchange, Money_mean=1000, Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df[df$nE &lt; iE,\"ID\"], size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    if (NROW(df[df$nE &lt; iE,\"ID\"]) &lt; 2) {\n      iE &lt;- iE+1\n      }\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve(1000,30)\n\nsummary(df)\n\n       ID               nE           Ms                MT             Me      \n Min.   :   1.0   Min.   :30   Min.   : -37.88   Min.   :1014   Min.   :1014  \n 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 806.68   1st Qu.:1014   1st Qu.:1014  \n Median : 500.5   Median :30   Median :1016.58   Median :1014   Median :1014  \n Mean   : 500.5   Mean   :30   Mean   :1014.29   Mean   :1014   Mean   :1014  \n 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1215.53   3rd Qu.:1014   3rd Qu.:1014  \n Max.   :1000.0   Max.   :30   Max.   :2049.86   Max.   :1014   Max.   :1014  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1)),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\nAfter looking at the code on https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container there are some differences between my idea and the paper! These will now be adapted step by step.\n\nthe restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.\n\nCodeSplitHalve2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve2(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms                MT       \n Min.   :   1.0   Min.   :16   Min.   : -46.16   Min.   :994.9  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 779.75   1st Qu.:995.6  \n Median : 500.5   Median :30   Median : 991.46   Median :995.7  \n Mean   : 500.5   Mean   :30   Mean   : 995.70   Mean   :995.7  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1212.24   3rd Qu.:995.8  \n Max.   :1000.0   Max.   :47   Max.   :2107.43   Max.   :997.0  \n       Me       \n Min.   :994.9  \n 1st Qu.:995.6  \n Median :995.7  \n Mean   :995.7  \n 3rd Qu.:995.8  \n Max.   :997.0  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\n\nis to change from a half-split to a random-split. In the hope that this can reflect the results of the paper\n\nCodeSplitRandom &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\n\nhere are the results for the random-split\n\nCodedf &lt;- SplitRandom(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms               MT        \n Min.   :   1.0   Min.   :15   Min.   : 119.1   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 803.9   1st Qu.: 299.2  \n Median : 500.5   Median :30   Median : 996.0   Median : 690.7  \n Mean   : 500.5   Mean   :30   Mean   :1000.2   Mean   :1000.2  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1197.8   3rd Qu.:1361.5  \n Max.   :1000.0   Max.   :51   Max.   :1994.2   Max.   :6565.6  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 299.2  \n Median : 691.6  \n Mean   :1000.2  \n 3rd Qu.:1357.2  \n Max.   :6565.6  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1)),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#the-next-step",
-    "href": "hw2/index.html#the-next-step",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#first-of-all",
+    "href": "hw2/sketchbook.html#first-of-all",
+    "title": "Sketchbook",
     "section": "",
-    "text": "is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper\n\nCodeSplitRandom &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\n\nhere are the results for the random-split\n\nCodedf &lt;- SplitRandom(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms                MT        \n Min.   :   1.0   Min.   :13   Min.   : -54.73   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.51   1st Qu.: 254.5  \n Median : 500.5   Median :30   Median :1000.84   Median : 628.2  \n Mean   : 500.5   Mean   :30   Mean   : 998.07   Mean   : 998.1  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1206.97   3rd Qu.:1364.8  \n Max.   :1000.0   Max.   :48   Max.   :1944.15   Max.   :6632.3  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 253.7  \n Median : 628.2  \n Mean   : 998.1  \n 3rd Qu.:1364.8  \n Max.   :6632.3  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
+    "text": "the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.\n\nCodeSplitHalve2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])/2\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nPresentation of the results\n\nCodedf &lt;- SplitHalve2(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms                MT       \n Min.   :   1.0   Min.   :16   Min.   : -46.16   Min.   :994.9  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 779.75   1st Qu.:995.6  \n Median : 500.5   Median :30   Median : 991.46   Median :995.7  \n Mean   : 500.5   Mean   :30   Mean   : 995.70   Mean   :995.7  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1212.24   3rd Qu.:995.8  \n Max.   :1000.0   Max.   :47   Max.   :2107.43   Max.   :997.0  \n       Me       \n Min.   :994.9  \n 1st Qu.:995.6  \n Median :995.7  \n Mean   :995.7  \n 3rd Qu.:995.8  \n Max.   :997.0  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-halve\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#idea-from-a-proverb",
-    "href": "hw2/index.html#idea-from-a-proverb",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#the-next-step",
+    "href": "hw2/sketchbook.html#the-next-step",
+    "title": "Sketchbook",
+    "section": "",
+    "text": "is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper\n\nCodeSplitRandom &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\n\nhere are the results for the random-split\n\nCodedf &lt;- SplitRandom(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms               MT        \n Min.   :   1.0   Min.   :15   Min.   : 119.1   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 803.9   1st Qu.: 299.2  \n Median : 500.5   Median :30   Median : 996.0   Median : 690.7  \n Mean   : 500.5   Mean   :30   Mean   :1000.2   Mean   :1000.2  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1197.8   3rd Qu.:1361.5  \n Max.   :1000.0   Max.   :51   Max.   :1994.2   Max.   :6565.6  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 299.2  \n Median : 691.6  \n Mean   :1000.2  \n 3rd Qu.:1357.2  \n Max.   :6565.6  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1)),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))",
+    "crumbs": [
+      "About",
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
+    ]
+  },
+  {
+    "objectID": "hw2/sketchbook.html#idea-from-a-proverb",
+    "href": "hw2/sketchbook.html#idea-from-a-proverb",
+    "title": "Sketchbook",
     "section": "Idea from a proverb",
-    "text": "Idea from a proverb\ncan it be that it is harder to get money back once you have lost all the money “money goes to money”?\nas a first attempt, the random function is limited between 30% and 70%\n\nCodeSplitRandom2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(30:70, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nthe distribution seems to remain the same as the results here show,\n\nCodedf &lt;- SplitRandom2(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms               MT        \n Min.   :   1.0   Min.   :15   Min.   :-251.9   Min.   : 287.5  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.6   1st Qu.: 734.8  \n Median : 500.5   Median :30   Median : 980.3   Median : 941.1  \n Mean   : 500.5   Mean   :30   Mean   : 984.0   Mean   : 984.0  \n 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1192.8   3rd Qu.:1180.4  \n Max.   :1000.0   Max.   :51   Max.   :1974.1   Max.   :2389.9  \n       Me        \n Min.   : 287.5  \n 1st Qu.: 734.8  \n Median : 941.1  \n Mean   : 984.0  \n 3rd Qu.:1180.4  \n Max.   :2389.9  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random (30%-70%)\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nOn closer inspection, however, this does not help to understand the problem.",
+    "text": "Idea from a proverb\ncan it be that it is harder to get money back once you have lost all the money “money goes to money”?\nas a first attempt, the random function is limited between 30% and 70%\n\nCodeSplitRandom2 &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df$ID, size=2)\n    rds &lt;- sample(30:70, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    iE &lt;- iE+1\n  }\n  return(df)\n}\n\n\nthe distribution seems to remain the same as the results here show,\n\nCodedf &lt;- SplitRandom2(1000,15000)\n\nsummary(df)\n\n       ID               nE           Ms                MT        \n Min.   :   1.0   Min.   :13   Min.   :  55.18   Min.   : 298.8  \n 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 785.83   1st Qu.: 732.5  \n Median : 500.5   Median :30   Median : 977.53   Median : 937.5  \n Mean   : 500.5   Mean   :30   Mean   : 985.86   Mean   : 985.9  \n 3rd Qu.: 750.2   3rd Qu.:33   3rd Qu.:1194.89   3rd Qu.:1202.6  \n Max.   :1000.0   Max.   :49   Max.   :1923.52   Max.   :2756.2  \n       Me        \n Min.   : 298.8  \n 1st Qu.: 732.3  \n Median : 937.5  \n Mean   : 985.9  \n 3rd Qu.:1202.6  \n Max.   :2756.2  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random (30%-70%)\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1)),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nOn closer inspection, however, this does not help to understand the problem.",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#back-to-a-more-restrictive-simulation",
-    "href": "hw2/index.html#back-to-a-more-restrictive-simulation",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#back-to-a-more-restrictive-simulation",
+    "href": "hw2/sketchbook.html#back-to-a-more-restrictive-simulation",
+    "title": "Sketchbook",
     "section": "Back to a more restrictive Simulation",
-    "text": "Back to a more restrictive Simulation\nThat’s why I’m going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence…\n\nCodeSplitRandomR &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df[df$nE &lt; iE,\"ID\"], size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    if (NROW(df[df$nE &lt; iE,\"ID\"]) &lt; 2) {\n      iE &lt;- iE+1\n    }\n  }\n  return(df)\n}\n\n\nTime does not seem to have any effect either\n\nCodedf &lt;- SplitRandomR(1000,30)\n\nsummary(df)\n\n       ID               nE           Ms               MT        \n Min.   :   1.0   Min.   :30   Min.   : 140.0   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 791.3   1st Qu.: 317.1  \n Median : 500.5   Median :30   Median : 996.9   Median : 671.4  \n Mean   : 500.5   Mean   :30   Mean   : 998.8   Mean   : 998.8  \n 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1197.3   3rd Qu.:1376.1  \n Max.   :1000.0   Max.   :30   Max.   :2109.9   Max.   :5644.8  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 318.0  \n Median : 671.9  \n Mean   : 998.8  \n 3rd Qu.:1376.1  \n Max.   :5644.8  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\nBut still why???\nI think I need a simulation where I can save the money history!",
+    "text": "Back to a more restrictive Simulation\nThat’s why I’m going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence…\n\nCodeSplitRandomR &lt;- function(nAgent,maxExchange,Money_mean=1000,Money_sd=300) {\n  df &lt;- data.frame(ID=seq(1,nAgent),\n                   nE=0,\n                   Ms=rnorm(nAgent, mean = Money_mean, sd = Money_sd),\n                   MT=0,Me=0)\n  df$Me &lt;- df$Ms\n  iE &lt;- 1\n  while (iE &lt;= maxExchange) {\n    df$MT &lt;- df$Me\n    rdf &lt;- sample(df[df$nE &lt; iE,\"ID\"], size=2)\n    rds &lt;- sample(0:100, size=1)/100\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"] &lt;-\n      df[(df$ID == rdf[1] | df$ID == rdf[2]),\"nE\"]+1\n    df[(df$ID == rdf[1] | df$ID == rdf[2]),\"Me\"] &lt;-\n      sum(df[(df$ID == rdf[1] | df$ID == rdf[2]),\"MT\"])*c(rds,1-rds)\n    if (NROW(df[df$nE &lt; iE,\"ID\"]) &lt; 2) {\n      iE &lt;- iE+1\n    }\n  }\n  return(df)\n}\n\n\nTime does not seem to have any effect either\n\nCodedf &lt;- SplitRandomR(1000,30)\n\nsummary(df)\n\n       ID               nE           Ms                 MT        \n Min.   :   1.0   Min.   :30   Min.   :  -6.583   Min.   :   0.0  \n 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 784.234   1st Qu.: 280.6  \n Median : 500.5   Median :30   Median : 990.719   Median : 651.0  \n Mean   : 500.5   Mean   :30   Mean   : 975.880   Mean   : 975.9  \n 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1171.659   3rd Qu.:1358.7  \n Max.   :1000.0   Max.   :30   Max.   :1906.833   Max.   :8596.2  \n       Me        \n Min.   :   0.0  \n 1st Qu.: 280.6  \n Median : 649.9  \n Mean   : 975.9  \n 3rd Qu.:1362.6  \n Max.   :8596.2  \n\nCodehist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)*1.1)),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\nCodeplot(df$ID,df$nE,main=\"Number of Changes\",\n     xlab=\"ID\",ylab=\"Number of Changes\",\n     col=rgb(1,0,0,0.2))\n\n\n\n\n\n\n\nBut still why???\nI think I need a simulation where I can save the money history!",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#simple-timehistory",
-    "href": "hw2/index.html#simple-timehistory",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#simple-timehistory",
+    "href": "hw2/sketchbook.html#simple-timehistory",
+    "title": "Sketchbook",
     "section": "Simple Timehistory",
-    "text": "Simple Timehistory\nAfter the first change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,1)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nAfter the second change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,2)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))",
+    "text": "Simple Timehistory\nAfter the first change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,1)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms))*1.1),ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nAfter the second change for all Agents\n\nCodedf &lt;- SplitRandomR(1000,2)\n\nhist(df$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms)))*1.1,ylim=c(0,nrow(df)/2))\nhist(df$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#first-exchange",
-    "href": "hw2/index.html#first-exchange",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#first-exchange",
+    "href": "hw2/sketchbook.html#first-exchange",
+    "title": "Sketchbook",
     "section": "First Exchange",
-    "text": "First Exchange\nIn the first run in this simplified scenario, all agents have the same chance of being above or below 1000.\n\nCodedf1_even &lt;- SplitRandomR(1000,1,1000,0)\n\nhist(df1_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms))*1.1),ylim=c(0,nrow(df)))\nhist(df1_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nIn other words, the average value of Money is still 1000. Also the Median. So there should be about 50% agents with more than 1000\n\nCodedf1_summary &lt;- data.frame(\"Mean\"=mean(df1_even$Me),\n                          \"Median\"=median(df1_even$Me),\n                          \"nAover1000\"=nrow(df1_even[df1_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf1_summary\n\n  Mean Median nAover1000\n1 1000   1000        495",
+    "text": "First Exchange\nIn the first run in this simplified scenario, all agents have the same chance of being above or below 1000.\n\nCodedf1_even &lt;- SplitRandomR(1000,1,1000,0)\n\nhist(df1_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df1_even$Me,df1_even$Ms))*1.1),ylim=c(0,nrow(df1_even)))\nhist(df1_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nIn other words, the average value of Money is still 1000. Also the Median. So there should be about 50% agents with more than 1000\n\nCodedf1_summary &lt;- data.frame(\"Mean\"=mean(df1_even$Me),\n                          \"Median\"=median(df1_even$Me),\n                          \"nAover1000\"=nrow(df1_even[df1_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf1_summary\n\n  Mean Median nAover1000\n1 1000   1000        496",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#second-exchange",
-    "href": "hw2/index.html#second-exchange",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#second-exchange",
+    "href": "hw2/sketchbook.html#second-exchange",
+    "title": "Sketchbook",
     "section": "Second Exchange",
-    "text": "Second Exchange\nBut what happens now with the second swap!\nto get above 1000 or to stay there you “need” two conditions:\n\nyou have to meet someone who has over 1000 (p~0.5)\nyou must also emerge from the meeting as the winner (p~0.5)\n\nThe chance of staying or getting above 1000 is only around 25%.\nI know this isn’t formally correct, but it should explain the mechanism!\nThe real value should be under 50% (see conclusion)\n\nCodedf2_even &lt;- SplitRandomR(1000,2,1000,0)\n\nhist(df2_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms))*1.1),ylim=c(0,nrow(df)))\nhist(df2_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nafter the second round, the mean value is still 1000, but the median is now lower!\n\nCodedf2_summary &lt;- data.frame(\"Mean\"=mean(df2_even$Me),\n                          \"Median\"=median(df2_even$Me),\n                          \"nAover1000\"=nrow(df2_even[df2_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf2_summary\n\n  Mean Median nAover1000\n1 1000  818.4        428\n\n\nin other words, meeting someone who has over 1000 is now even smaller for the next round.",
+    "text": "Second Exchange\nBut what happens now with the second swap!\nto get above 1000 or to stay there you “need” two conditions:\n\nyou have to meet someone who has over 1000 (p~0.5)\nyou must also emerge from the meeting as the winner (p~0.5)\n\nThe chance of staying or getting above 1000 is only around 25%.\nI know this isn’t formally correct, but it should explain the mechanism!\nThe real value should be under 50% (see conclusion)\n\nCodedf2_even &lt;- SplitRandomR(1000,2,1000,0)\n\nhist(df2_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df2_even$Me,df2_even$Ms))*1.1),ylim=c(0,nrow(df2_even)))\nhist(df2_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nafter the second round, the mean value is still 1000, but the median is now lower!\n\nCodedf2_summary &lt;- data.frame(\"Mean\"=mean(df2_even$Me),\n                          \"Median\"=median(df2_even$Me),\n                          \"nAover1000\"=nrow(df2_even[df2_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf2_summary\n\n  Mean Median nAover1000\n1 1000  823.8        423\n\n\nin other words, meeting someone who has over 1000 is now even smaller for the next round.",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#third-exchange",
-    "href": "hw2/index.html#third-exchange",
-    "title": "Assignment 2: Economic Simulation",
+    "objectID": "hw2/sketchbook.html#third-exchange",
+    "href": "hw2/sketchbook.html#third-exchange",
+    "title": "Sketchbook",
     "section": "Third Exchange",
-    "text": "Third Exchange\n\nCodedf3_even &lt;- SplitRandomR(1000,3,1000,0)\n\nhist(df3_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df$Me,df$Ms))*1.1),ylim=c(0,nrow(df)))\nhist(df3_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nAs assumed, the median is again smaller, as is the number of agents with more than 1000\n\nCodedf3_summary &lt;- data.frame(\"Mean\"=mean(df3_even$Me),\n                          \"Median\"=median(df3_even$Me),\n                          \"nAover1000\"=nrow(df3_even[df3_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf3_summary\n\n  Mean  Median nAover1000\n1 1000 760.842        399\n\n\nfrom here on it seems clear that it tends towards the distribution with further steps",
+    "text": "Third Exchange\n\nCodedf3_even &lt;- SplitRandomR(1000,3,1000,0)\n\nhist(df3_even$Ms, xlab=\"Money\",main=\"Histogram for split-random Restricted\",\n     col=rgb(0,0,1,0.2),\n     xlim=c(0,max(c(df3_even$Me,df3_even$Ms))*1.1),ylim=c(0,nrow(df3_even)))\nhist(df3_even$Me, col=rgb(0,1,0,0.2),\n     add=TRUE)\nlegend('topright', c('Money befor', 'Money after'),\n       fill=c(rgb(0,0,1,0.5), rgb(0,1,0,0.2)))\n\n\n\n\n\n\n\nAs assumed, the median is again smaller, as is the number of agents with more than 1000\n\nCodedf3_summary &lt;- data.frame(\"Mean\"=mean(df3_even$Me),\n                          \"Median\"=median(df3_even$Me),\n                          \"nAover1000\"=nrow(df3_even[df3_even$Me&gt;1000,])) \n                          # number of Agents with more than 1000\ndf3_summary\n\n  Mean  Median nAover1000\n1 1000 784.574        401\n\n\nfrom here on it seems clear that it tends towards the distribution with further steps",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   },
   {
-    "objectID": "hw2/index.html#conclusion",
-    "href": "hw2/index.html#conclusion",
-    "title": "Assignment 2: Economic Simulation",
-    "section": "Conclusion",
-    "text": "Conclusion\nI must have made something like a conjunction error here. the conditional probability for winning of 50% is only given if everyone has the same amount of money. otherwise the chance of winning is always smaller (conjunction of two probability’s), which means that there are more and more poor and only a few rich agents in this game.",
+    "objectID": "hw2/sketchbook.html#computing-the-probability",
+    "href": "hw2/sketchbook.html#computing-the-probability",
+    "title": "Sketchbook",
+    "section": "Computing the Probability",
+    "text": "Computing the Probability\n\nCodewin_stab_prob &lt;- function( Moneyvec ) {\n  df &lt;- data.frame(Money=Moneyvec,\n                   winprobability=0)\n  MMA &lt;- median(df[, 1])\n  for(i in 1:nrow(df)) {\n    MA &lt;- df[i,1]\n    MoA &lt;- df[c(-i),1]\n    WP &lt;- MoA*0\n    for(ii in 1:NROW(MoA)) {\n      Sum_M &lt;- MA + MoA[ii]\n      if (Sum_M == 0) {\n        WP[ii] &lt;- 1.00\n      } else {\n        WP[ii] &lt;- WP[ii] &lt;- 1-min(1, MMA/Sum_M)\n      }\n    }\n    df[i,2] &lt;- round(mean(WP), digits =3)\n  }\n  return(df)\n}",
     "crumbs": [
       "About",
-      "Assignment 2: Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
+    ]
+  },
+  {
+    "objectID": "hw2/sketchbook.html#testing",
+    "href": "hw2/sketchbook.html#testing",
+    "title": "Sketchbook",
+    "section": "Testing",
+    "text": "Testing\nBefore the first Exchange it should be 0.5 for all Agents\n\nCodeprob_start &lt;- win_stab_prob(df1_even$Ms)[, 2]\nplot(prob_start,\n     type = \"l\",\n     lwd = 5,\n     main=\"Getting over the Median\",\n     xlab=\"ID\",\n     ylab=\"Probability\",\n     ylim=c(0,1),\n     col=rgb(0,0,1,1),)\n\n\n\n\n\n\n\nafter that first round it depends from the Money of the Agent.\n\nCodeprob_after1 &lt;- win_stab_prob(df1_even$Me)\nprob_after1 &lt;- prob_after1[order(prob_after1$Money, decreasing = FALSE), ]\npopMean &lt;- mean(prob_after1[, 2])\nplot(prob_after1,\n     lwd = 5,\n     main=c(\"Populationmean\", popMean),\n     xlab=\"Money\",\n     ylab=\"Probability\",\n     ylim=c(0,1),\n     col=rgb(0,0,1,0.1))\n     abline(h=popMean,\n            col =rgb(1,0,0,1))\n\n\n\n\n\n\n\nafter the second round\n\nCodeprob_after2 &lt;- win_stab_prob(df2_even$Me)\nprob_after2 &lt;- prob_after2[order(prob_after2$Money, decreasing = FALSE), ]\npopMean &lt;- mean(prob_after2[, 2])\nplot(prob_after2,\n     lwd = 5,\n     main=c(\"Populationmean\", popMean),\n     xlab=\"Money\",\n     ylab=\"Probability\",\n     ylim=c(0,1),\n     col=rgb(0,0,1,0.1))\n     abline(h=popMean,\n            col =rgb(1,0,0,1))\n\n\n\n\n\n\n\n… third\n\nCodeprob_after3 &lt;- win_stab_prob(df3_even$Me)\nprob_after3 &lt;- prob_after3[order(prob_after3$Money, decreasing = FALSE), ]\npopMean &lt;- mean(prob_after3[, 2])\nplot(prob_after3,\n     lwd = 5,\n     main=c(\"Populationmean\", popMean),\n     xlab=\"Money\",\n     ylab=\"Probability\",\n     ylim=c(0,1),\n     col=rgb(0,0,1,0.1))\n     abline(h=popMean,\n            col =rgb(1,0,0,1))\n\n\n\n\n\n\n\n…15th\n\nCodedf15_even &lt;- SplitRandomR(1000,15,1000,0)\n\nprob_after15 &lt;- win_stab_prob(df15_even$Me)\nprob_after15 &lt;- prob_after3[order(prob_after15$Money, decreasing = FALSE), ]\npopMean &lt;- mean(prob_after15[, 2])\nplot(prob_after15,\n     lwd = 5,\n     main=c(\"Populationmean\", popMean),\n     xlab=\"Money\",\n     ylab=\"Probability\",\n     ylim=c(0,1),\n     col=rgb(0,0,1,0.1))\n     abline(h=popMean,\n            col =rgb(1,0,0,1))",
+    "crumbs": [
+      "About",
+      "Assignment 2: <br>Economic Simulation",
+      "Sketchbook"
     ]
   }
 ]

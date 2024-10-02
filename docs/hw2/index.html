@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Hubert Baechli">
-<title>Assignment 2: Economic Simulation – Hubert Baechli: ICMB portfolio</title>
+
+<title>Assignment 2:  Economic Simulation – Hubert Baechli: ICMB portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -61,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../hw2/sketchbook.html" rel="next">
 <link href="../hw1/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -70,7 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -96,12 +102,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../styles.css">
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
 </head>
-<body class="nav-sidebar floating nav-fixed">
+
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Hubert Baechli: ICMB portfolio</span>
@@ -113,28 +125,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../hw2/index.html">Assignment 2: Economic Simulation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../hw2/index.html">Assignment 2: <br>Economic Simulation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">hubert_baechli_ICMB_HS24</span></a>
@@ -143,63 +169,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../hw1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Assignment 1: Hello World</span></a>
+ <span class="menu-text">Assignment 1: <br>Hello World</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../hw2/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Assignment 2: <br>Economic Simulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../hw2/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Assignment 2: Economic Simulation</span></a>
+  <a href="../hw2/sketchbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sketchbook</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li>
-<a href="#my-first-attempt" id="toc-my-first-attempt" class="nav-link active" data-scroll-target="#my-first-attempt">My first attempt</a>
-  <ul class="collapse">
-<li><a href="#first-of-all" id="toc-first-of-all" class="nav-link" data-scroll-target="#first-of-all">First of all,</a></li>
-  <li>
-<a href="#the-next-step" id="toc-the-next-step" class="nav-link" data-scroll-target="#the-next-step">The next step</a>
-  <ul class="collapse">
-<li><a href="#i-am-very-surprised" id="toc-i-am-very-surprised" class="nav-link" data-scroll-target="#i-am-very-surprised">I am very surprised!</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link active" data-scroll-target="#tasks">Tasks</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
   </ul>
-</li>
-  </ul>
-</li>
-  <li>
-<a href="#but-why" id="toc-but-why" class="nav-link" data-scroll-target="#but-why">But why??????????</a>
-  <ul class="collapse">
-<li><a href="#idea-from-a-proverb" id="toc-idea-from-a-proverb" class="nav-link" data-scroll-target="#idea-from-a-proverb">Idea from a proverb</a></li>
-  <li><a href="#back-to-a-more-restrictive-simulation" id="toc-back-to-a-more-restrictive-simulation" class="nav-link" data-scroll-target="#back-to-a-more-restrictive-simulation">Back to a more restrictive Simulation</a></li>
-  <li>
-<a href="#simple-timehistory" id="toc-simple-timehistory" class="nav-link" data-scroll-target="#simple-timehistory">Simple Timehistory</a>
-  <ul class="collapse">
-<li><a href="#after-the-first-change-for-all-agents" id="toc-after-the-first-change-for-all-agents" class="nav-link" data-scroll-target="#after-the-first-change-for-all-agents">After the first change for all Agents</a></li>
-  <li><a href="#after-the-second-change-for-all-agents" id="toc-after-the-second-change-for-all-agents" class="nav-link" data-scroll-target="#after-the-second-change-for-all-agents">After the second change for all Agents</a></li>
-  </ul>
-</li>
-  </ul>
-</li>
-  <li>
-<a href="#eureka" id="toc-eureka" class="nav-link" data-scroll-target="#eureka">Eureka!</a>
-  <ul class="collapse">
-<li><a href="#first-exchange" id="toc-first-exchange" class="nav-link" data-scroll-target="#first-exchange">First Exchange</a></li>
-  <li><a href="#second-exchange" id="toc-second-exchange" class="nav-link" data-scroll-target="#second-exchange">Second Exchange</a></li>
-  <li><a href="#third-exchange" id="toc-third-exchange" class="nav-link" data-scroll-target="#third-exchange">Third Exchange</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Assignment 2: Economic Simulation</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Assignment 2: <br>Economic Simulation</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -219,518 +229,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><section id="my-first-attempt" class="level1"><h1>My first attempt</h1>
-<p>at an agent model with the information from the lesson</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitHalve</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
-<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
-<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
-<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NROW</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
-<span>      <span class="op">}</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Presentation of the results</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">30</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms               MT             Me      
- Min.   :   1.0   Min.   :30   Min.   : -35.7   Min.   :1011   Min.   :1011  
- 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 807.4   1st Qu.:1011   1st Qu.:1011  
- Median : 500.5   Median :30   Median :1017.2   Median :1011   Median :1011  
- Mean   : 500.5   Mean   :30   Mean   :1011.1   Mean   :1011   Mean   :1011  
- 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1216.8   3rd Qu.:1011   3rd Qu.:1011  
- Max.   :1000.0   Max.   :30   Max.   :2005.2   Max.   :1011   Max.   :1011  </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">nE</span>,main<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>After looking at the code on <a href="https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container" class="uri">https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container</a> there are some differences between my idea and the paper! These will now be adapted step by step.</p>
-<section id="first-of-all" class="level2"><h2 class="anchored" data-anchor-id="first-of-all">First of all,</h2>
-<p>the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitHalve2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
-<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
-<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
-<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span>
-<span>    <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Presentation of the results</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitHalve2</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE              Ms                MT      
- Min.   :   1.0   Min.   :15.00   Min.   : -30.55   Min.   :1011  
- 1st Qu.: 250.8   1st Qu.:26.75   1st Qu.: 813.34   1st Qu.:1011  
- Median : 500.5   Median :30.00   Median :1018.55   Median :1012  
- Mean   : 500.5   Mean   :30.00   Mean   :1011.52   Mean   :1012  
- 3rd Qu.: 750.2   3rd Qu.:34.00   3rd Qu.:1215.90   3rd Qu.:1012  
- Max.   :1000.0   Max.   :44.00   Max.   :1965.63   Max.   :1015  
-       Me      
- Min.   :1011  
- 1st Qu.:1011  
- Median :1012  
- Mean   :1012  
- 3rd Qu.:1012  
- Max.   :1015  </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">nE</span>,main<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="the-next-step" class="level2"><h2 class="anchored" data-anchor-id="the-next-step">The next step</h2>
-<p>is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitRandom</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
-<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
-<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
-<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="va">rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">rds</span>,<span class="fl">1</span><span class="op">-</span><span class="va">rds</span><span class="op">)</span></span>
-<span>    <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="i-am-very-surprised" class="level3"><h3 class="anchored" data-anchor-id="i-am-very-surprised">I am very surprised!</h3>
-<p>here are the results for the random-split</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandom</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms                MT        
- Min.   :   1.0   Min.   :13   Min.   : -54.73   Min.   :   0.0  
- 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.51   1st Qu.: 254.5  
- Median : 500.5   Median :30   Median :1000.84   Median : 628.2  
- Mean   : 500.5   Mean   :30   Mean   : 998.07   Mean   : 998.1  
- 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1206.97   3rd Qu.:1364.8  
- Max.   :1000.0   Max.   :48   Max.   :1944.15   Max.   :6632.3  
-       Me        
- Min.   :   0.0  
- 1st Qu.: 253.7  
- Median : 628.2  
- Mean   : 998.1  
- 3rd Qu.:1364.8  
- Max.   :6632.3  </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">nE</span>,main<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section></section></section><section id="but-why" class="level1"><h1>But why??????????</h1>
-<p>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span>,<span class="va">df</span><span class="op">$</span><span class="va">Me</span>,main<span class="op">=</span><span class="st">"Correlation to the Number of Changes"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"Number of Changes"</span>,ylab<span class="op">=</span><span class="st">"Money at the End"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>,<span class="va">df</span><span class="op">$</span><span class="va">Me</span>,main<span class="op">=</span><span class="st">"Correlation to the Money at the Beginning"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"Money at the Beginning"</span>,ylab<span class="op">=</span><span class="st">"Money at the End"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">Me</span>,main<span class="op">=</span><span class="st">"Correlation to the ID"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Money at the End"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="idea-from-a-proverb" class="level2"><h2 class="anchored" data-anchor-id="idea-from-a-proverb">Idea from a proverb</h2>
-<p>can it be that it is harder to get money back once you have lost all the money <em>“money goes to money”</em>?</p>
-<p>as a first attempt, the random function is limited between 30% and 70%</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitRandom2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
-<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
-<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
-<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="va">rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">30</span><span class="op">:</span><span class="fl">70</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">rds</span>,<span class="fl">1</span><span class="op">-</span><span class="va">rds</span><span class="op">)</span></span>
-<span>    <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>the distribution seems to remain the same as the results here show,</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandom2</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">15000</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms               MT        
- Min.   :   1.0   Min.   :15   Min.   :-251.9   Min.   : 287.5  
- 1st Qu.: 250.8   1st Qu.:26   1st Qu.: 789.6   1st Qu.: 734.8  
- Median : 500.5   Median :30   Median : 980.3   Median : 941.1  
- Mean   : 500.5   Mean   :30   Mean   : 984.0   Mean   : 984.0  
- 3rd Qu.: 750.2   3rd Qu.:34   3rd Qu.:1192.8   3rd Qu.:1180.4  
- Max.   :1000.0   Max.   :51   Max.   :1974.1   Max.   :2389.9  
-       Me        
- Min.   : 287.5  
- 1st Qu.: 734.8  
- Median : 941.1  
- Mean   : 984.0  
- 3rd Qu.:1180.4  
- Max.   :2389.9  </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random (30%-70%)"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>On closer inspection, however, this does not help to understand the problem.</p>
-</section><section id="back-to-a-more-restrictive-simulation" class="level2"><h2 class="anchored" data-anchor-id="back-to-a-more-restrictive-simulation">Back to a more restrictive Simulation</h2>
-<p>That’s why I’m going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence…</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SplitRandomR</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nAgent</span>,<span class="va">maxExchange</span>,<span class="va">Money_mean</span><span class="op">=</span><span class="fl">1000</span>,<span class="va">Money_sd</span><span class="op">=</span><span class="fl">300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">nAgent</span><span class="op">)</span>,</span>
-<span>                   nE<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                   Ms<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nAgent</span>, mean <span class="op">=</span> <span class="va">Money_mean</span>, sd <span class="op">=</span> <span class="va">Money_sd</span><span class="op">)</span>,</span>
-<span>                   MT<span class="op">=</span><span class="fl">0</span>,Me<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">Me</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ms</span></span>
-<span>  <span class="va">iE</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="va">iE</span> <span class="op">&lt;=</span> <span class="va">maxExchange</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">df</span><span class="op">$</span><span class="va">MT</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Me</span></span>
-<span>    <span class="va">rdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span>    <span class="va">rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"nE"</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"Me"</span><span class="op">]</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">ID</span> <span class="op">==</span> <span class="va">rdf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,<span class="st">"MT"</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">rds</span>,<span class="fl">1</span><span class="op">-</span><span class="va">rds</span><span class="op">)</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NROW</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">nE</span> <span class="op">&lt;</span> <span class="va">iE</span>,<span class="st">"ID"</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="va">iE</span> <span class="op">&lt;-</span> <span class="va">iE</span><span class="op">+</span><span class="fl">1</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Time does not seem to have any effect either</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">30</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>       ID               nE           Ms               MT        
- Min.   :   1.0   Min.   :30   Min.   : 140.0   Min.   :   0.0  
- 1st Qu.: 250.8   1st Qu.:30   1st Qu.: 791.3   1st Qu.: 317.1  
- Median : 500.5   Median :30   Median : 996.9   Median : 671.4  
- Mean   : 500.5   Mean   :30   Mean   : 998.8   Mean   : 998.8  
- 3rd Qu.: 750.2   3rd Qu.:30   3rd Qu.:1197.3   3rd Qu.:1376.1  
- Max.   :1000.0   Max.   :30   Max.   :2109.9   Max.   :5644.8  
-       Me        
- Min.   :   0.0  
- 1st Qu.: 318.0  
- Median : 671.9  
- Mean   : 998.8  
- 3rd Qu.:1376.1  
- Max.   :5644.8  </code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">ID</span>,<span class="va">df</span><span class="op">$</span><span class="va">nE</span>,main<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     xlab<span class="op">=</span><span class="st">"ID"</span>,ylab<span class="op">=</span><span class="st">"Number of Changes"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>But still why???</strong></p>
-<p>I think I need a simulation where I can save the money history!</p>
-</section><section id="simple-timehistory" class="level2"><h2 class="anchored" data-anchor-id="simple-timehistory">Simple Timehistory</h2>
-<section id="after-the-first-change-for-all-agents" class="level3"><h3 class="anchored" data-anchor-id="after-the-first-change-for-all-agents">After the first change for all Agents</h3>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="after-the-second-change-for-all-agents" class="level3"><h3 class="anchored" data-anchor-id="after-the-second-change-for-all-agents">After the second change for all Agents</h3>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section></section></section><section id="eureka" class="level1"><h1>Eureka!</h1>
-<p><strong>Sleeping on it always helps!</strong></p>
-<p>I think the easiest way to understand the mechanism is to have all agents start with the same amount of money. I will do this here quick and durty with my restrictive simulation and a starting distribution with a mean of 1000 and a standard deviation of 0.</p>
-<section id="first-exchange" class="level2"><h2 class="anchored" data-anchor-id="first-exchange">First Exchange</h2>
-<p>In the first run in this simplified scenario, all agents have the same chance of being above or below 1000.</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df1_even</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">1</span>,<span class="fl">1000</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span><span class="op">)</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>In other words, the average value of Money is still 1000. Also the Median. So there should be about 50% agents with more than 1000</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df1_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Mean"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"Median"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"nAover1000"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df1_even</span><span class="op">[</span><span class="va">df1_even</span><span class="op">$</span><span class="va">Me</span><span class="op">&gt;</span><span class="fl">1000</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span><span class="va">df1_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>  Mean Median nAover1000
-1 1000   1000        495</code></pre>
-</div>
-</div>
-</section><section id="second-exchange" class="level2"><h2 class="anchored" data-anchor-id="second-exchange">Second Exchange</h2>
-<p>But what happens now with the second swap!</p>
-<p>to get above 1000 or to stay there you “need” two conditions:</p>
+</header>
+
+
+<section id="tasks" class="level1">
+<h1>Tasks</h1>
+<p>The second assignment has 2 components and you have the next 2 weeks to work on it.&nbsp;</p>
+<ul>
+<li><p>Replicate the first simulation from <a href="https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container" class="uri">https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container</a> in R</p></li>
+<li><p>Attempt to understand why the model produces such inequality by “playing with it”. You would have to first think about why it might do this, describe your thought process, and then change parts of the code, add new visualizations, etc, to see if you can explain why it behaves the way it does. This is going to be quite challenging and creative</p></li>
+</ul>
+</section>
+<section id="instructions" class="level1">
+<h1>Instructions</h1>
+<p>To do this assignment and submit it you have to:</p>
 <ol type="1">
-<li><p>you have to meet someone who has over 1000 (p~0.5)</p></li>
-<li><p>you must also emerge from the meeting as the winner (p~0.5)</p></li>
+<li><p>make a new folder “hw2” in your existing project folder</p></li>
+<li><p>create a new quarto document, for example “index.qmd” in the “hw2” folder</p></li>
+<li><p>add “- hw2/index.qmd” to the “_quarto.yml” file sidebar section</p></li>
+<li><p>write your thoughts as text in the document, r code in R chunks</p></li>
+<li><p>Render the notebook to run the code and see the results intermixed with your description</p></li>
+<li><p>add your new files and commit the to git as you make changes</p></li>
+<li><p>when you are done with the replication part of the assignment, push your changes to github - you will be able to see your results on your github website. Try to finish this first by next week</p></li>
+<li><p>resume from step 4 for the second part of the assignment to explore the model</p></li>
 </ol>
-<p>The chance of staying or getting above 1000 is only around 25%.</p>
-<p><strong><em>I know this isn’t formally correct, but it should explain the mechanism!</em></strong></p>
-<p><strong>The real value should be under 50% (see conclusion)</strong></p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df2_even</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">2</span>,<span class="fl">1000</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span><span class="op">)</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>after the second round, the mean value is still 1000, but the median is now lower!</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df2_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Mean"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"Median"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"nAover1000"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df2_even</span><span class="op">[</span><span class="va">df2_even</span><span class="op">$</span><span class="va">Me</span><span class="op">&gt;</span><span class="fl">1000</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span><span class="va">df2_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>  Mean Median nAover1000
-1 1000  818.4        428</code></pre>
-</div>
-</div>
-<p>in other words, meeting someone who has over 1000 is now even smaller for the next round.</p>
-</section><section id="third-exchange" class="level2"><h2 class="anchored" data-anchor-id="third-exchange">Third Exchange</h2>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df3_even</span> <span class="op">&lt;-</span> <span class="fu">SplitRandomR</span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">3</span>,<span class="fl">1000</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Ms</span>, xlab<span class="op">=</span><span class="st">"Money"</span>,main<span class="op">=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Me</span>,<span class="va">df</span><span class="op">$</span><span class="va">Ms</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1.1</span><span class="op">)</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Me</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>     add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">'topright'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Money befor'</span>, <span class="st">'Money after'</span><span class="op">)</span>,</span>
-<span>       fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As assumed, the median is again smaller, as is the number of agents with more than 1000</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df3_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Mean"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"Median"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Me</span><span class="op">)</span>,</span>
-<span>                          <span class="st">"nAover1000"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df3_even</span><span class="op">[</span><span class="va">df3_even</span><span class="op">$</span><span class="va">Me</span><span class="op">&gt;</span><span class="fl">1000</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span><span class="va">df3_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>  Mean  Median nAover1000
-1 1000 760.842        399</code></pre>
-</div>
-</div>
-<p>from here on it seems clear that it tends towards the distribution with further steps</p>
-</section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>I must have made something like a conjunction error here. the conditional probability for winning of 50% is only given if everyone has the same amount of money. otherwise the chance of winning is always smaller (conjunction of two probability’s), which means that there are more and more poor and only a few rich agents in this game.</p>
 
 
 <!-- -->
 
-</section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1200,411 +730,54 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../hw1/index.html" class="pagination-link" aria-label="Assignment 1: Hello World">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 1: Hello World</span>
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../hw1/index.html" class="pagination-link" aria-label="Assignment 1: <br>Hello World">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 1: <br>Hello World</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../hw2/sketchbook.html" class="pagination-link" aria-label="Sketchbook">
+        <span class="nav-page-text">Sketchbook</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb39" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Assignment 2: Economic Simulation"</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># My first attempt</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>at an agent model with the information from the lesson</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>SplitHalve <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>], <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">NROW</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>      iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a>After looking at the code on <span class="ot">&lt;https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container&gt;</span> there are some differences between my idea and the paper! These will now be adapted step by step.</span>
-<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## First of all,</span></span>
-<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a>the restriction that everyone finds an change partner at the same time will be lifted. In addition, the number and order of changes will also be removed.</span>
-<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a>SplitHalve2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb39-71"><a href="#cb39-71" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb39-72"><a href="#cb39-72" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb39-73"><a href="#cb39-73" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb39-74"><a href="#cb39-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb39-75"><a href="#cb39-75" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb39-76"><a href="#cb39-76" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb39-77"><a href="#cb39-77" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-78"><a href="#cb39-78" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-79"><a href="#cb39-79" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-80"><a href="#cb39-80" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb39-81"><a href="#cb39-81" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-83"><a href="#cb39-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb39-84"><a href="#cb39-84" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-85"><a href="#cb39-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-86"><a href="#cb39-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-87"><a href="#cb39-87" aria-hidden="true" tabindex="-1"></a>Presentation of the results</span>
-<span id="cb39-88"><a href="#cb39-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-91"><a href="#cb39-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-92"><a href="#cb39-92" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitHalve2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb39-93"><a href="#cb39-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-94"><a href="#cb39-94" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb39-95"><a href="#cb39-95" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-halve"</span>,</span>
-<span id="cb39-96"><a href="#cb39-96" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-97"><a href="#cb39-97" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-98"><a href="#cb39-98" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-99"><a href="#cb39-99" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-100"><a href="#cb39-100" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-101"><a href="#cb39-101" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-102"><a href="#cb39-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-103"><a href="#cb39-103" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-104"><a href="#cb39-104" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-105"><a href="#cb39-105" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-106"><a href="#cb39-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-107"><a href="#cb39-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-108"><a href="#cb39-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## The next step</span></span>
-<span id="cb39-109"><a href="#cb39-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-110"><a href="#cb39-110" aria-hidden="true" tabindex="-1"></a>is to change from a half-split to a random-split. In the hope that this can reflect the results of the paper</span>
-<span id="cb39-111"><a href="#cb39-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-114"><a href="#cb39-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-115"><a href="#cb39-115" aria-hidden="true" tabindex="-1"></a>SplitRandom <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb39-116"><a href="#cb39-116" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb39-117"><a href="#cb39-117" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb39-118"><a href="#cb39-118" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb39-119"><a href="#cb39-119" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb39-120"><a href="#cb39-120" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb39-121"><a href="#cb39-121" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb39-122"><a href="#cb39-122" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb39-123"><a href="#cb39-123" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb39-124"><a href="#cb39-124" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb39-125"><a href="#cb39-125" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb39-126"><a href="#cb39-126" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-127"><a href="#cb39-127" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-128"><a href="#cb39-128" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-129"><a href="#cb39-129" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
-<span id="cb39-130"><a href="#cb39-130" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-131"><a href="#cb39-131" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-132"><a href="#cb39-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb39-133"><a href="#cb39-133" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-134"><a href="#cb39-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-135"><a href="#cb39-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-136"><a href="#cb39-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-137"><a href="#cb39-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### I am very surprised!</span></span>
-<span id="cb39-138"><a href="#cb39-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-139"><a href="#cb39-139" aria-hidden="true" tabindex="-1"></a>here are the results for the random-split</span>
-<span id="cb39-140"><a href="#cb39-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-143"><a href="#cb39-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-144"><a href="#cb39-144" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb39-145"><a href="#cb39-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-146"><a href="#cb39-146" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb39-147"><a href="#cb39-147" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random"</span>,</span>
-<span id="cb39-148"><a href="#cb39-148" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-149"><a href="#cb39-149" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-150"><a href="#cb39-150" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-151"><a href="#cb39-151" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-152"><a href="#cb39-152" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-153"><a href="#cb39-153" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-154"><a href="#cb39-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-155"><a href="#cb39-155" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-156"><a href="#cb39-156" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-157"><a href="#cb39-157" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-158"><a href="#cb39-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-159"><a href="#cb39-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-160"><a href="#cb39-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># But why??????????</span></span>
-<span id="cb39-161"><a href="#cb39-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-162"><a href="#cb39-162" aria-hidden="true" tabindex="-1"></a>there seems to be no correlation to the number of meetings, to the money at the beginning or the ID (position in the matrix)</span>
-<span id="cb39-163"><a href="#cb39-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-166"><a href="#cb39-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-167"><a href="#cb39-167" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>nE,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Number of Changes"</span>,</span>
-<span id="cb39-168"><a href="#cb39-168" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number of Changes"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb39-169"><a href="#cb39-169" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-170"><a href="#cb39-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-171"><a href="#cb39-171" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>Ms,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the Money at the Beginning"</span>,</span>
-<span id="cb39-172"><a href="#cb39-172" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Money at the Beginning"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb39-173"><a href="#cb39-173" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-174"><a href="#cb39-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-175"><a href="#cb39-175" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>Me,<span class="at">main=</span><span class="st">"Correlation to the ID"</span>,</span>
-<span id="cb39-176"><a href="#cb39-176" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Money at the End"</span>,</span>
-<span id="cb39-177"><a href="#cb39-177" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-178"><a href="#cb39-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-179"><a href="#cb39-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-180"><a href="#cb39-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Idea from a proverb</span></span>
-<span id="cb39-181"><a href="#cb39-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-182"><a href="#cb39-182" aria-hidden="true" tabindex="-1"></a>can it be that it is harder to get money back once you have lost all the money *“money goes to money”*?</span>
-<span id="cb39-183"><a href="#cb39-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-184"><a href="#cb39-184" aria-hidden="true" tabindex="-1"></a>as a first attempt, the random function is limited between 30% and 70%</span>
-<span id="cb39-185"><a href="#cb39-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-188"><a href="#cb39-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-189"><a href="#cb39-189" aria-hidden="true" tabindex="-1"></a>SplitRandom2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb39-190"><a href="#cb39-190" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb39-191"><a href="#cb39-191" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb39-192"><a href="#cb39-192" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb39-193"><a href="#cb39-193" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb39-194"><a href="#cb39-194" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb39-195"><a href="#cb39-195" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb39-196"><a href="#cb39-196" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb39-197"><a href="#cb39-197" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb39-198"><a href="#cb39-198" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb39-199"><a href="#cb39-199" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">70</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb39-200"><a href="#cb39-200" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-201"><a href="#cb39-201" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-202"><a href="#cb39-202" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-203"><a href="#cb39-203" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
-<span id="cb39-204"><a href="#cb39-204" aria-hidden="true" tabindex="-1"></a>    iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-205"><a href="#cb39-205" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-206"><a href="#cb39-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb39-207"><a href="#cb39-207" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-208"><a href="#cb39-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-209"><a href="#cb39-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-210"><a href="#cb39-210" aria-hidden="true" tabindex="-1"></a>the distribution seems to remain the same as the results here show,</span>
-<span id="cb39-211"><a href="#cb39-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-214"><a href="#cb39-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-215"><a href="#cb39-215" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandom2</span>(<span class="dv">1000</span>,<span class="dv">15000</span>)</span>
-<span id="cb39-216"><a href="#cb39-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-217"><a href="#cb39-217" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb39-218"><a href="#cb39-218" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random (30%-70%)"</span>,</span>
-<span id="cb39-219"><a href="#cb39-219" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-220"><a href="#cb39-220" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-221"><a href="#cb39-221" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-222"><a href="#cb39-222" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-223"><a href="#cb39-223" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-224"><a href="#cb39-224" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-225"><a href="#cb39-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-226"><a href="#cb39-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-227"><a href="#cb39-227" aria-hidden="true" tabindex="-1"></a>On closer inspection, however, this does not help to understand the problem.</span>
-<span id="cb39-228"><a href="#cb39-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-229"><a href="#cb39-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## Back to a more restrictive Simulation</span></span>
-<span id="cb39-230"><a href="#cb39-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-231"><a href="#cb39-231" aria-hidden="true" tabindex="-1"></a>That's why I'm going back to my more restrictive Simulation where everyone has to have a meeting first so that someone can have a second meeting. This should help to understand how the timing of the meetings could have an influence...</span>
-<span id="cb39-232"><a href="#cb39-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-235"><a href="#cb39-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-236"><a href="#cb39-236" aria-hidden="true" tabindex="-1"></a>SplitRandomR <span class="ot">&lt;-</span> <span class="cf">function</span>(nAgent,maxExchange,<span class="at">Money_mean=</span><span class="dv">1000</span>,<span class="at">Money_sd=</span><span class="dv">300</span>) {</span>
-<span id="cb39-237"><a href="#cb39-237" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,nAgent),</span>
-<span id="cb39-238"><a href="#cb39-238" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb39-239"><a href="#cb39-239" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Ms=</span><span class="fu">rnorm</span>(nAgent, <span class="at">mean =</span> Money_mean, <span class="at">sd =</span> Money_sd),</span>
-<span id="cb39-240"><a href="#cb39-240" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT=</span><span class="dv">0</span>,<span class="at">Me=</span><span class="dv">0</span>)</span>
-<span id="cb39-241"><a href="#cb39-241" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Me <span class="ot">&lt;-</span> df<span class="sc">$</span>Ms</span>
-<span id="cb39-242"><a href="#cb39-242" aria-hidden="true" tabindex="-1"></a>  iE <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb39-243"><a href="#cb39-243" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (iE <span class="sc">&lt;=</span> maxExchange) {</span>
-<span id="cb39-244"><a href="#cb39-244" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>MT <span class="ot">&lt;-</span> df<span class="sc">$</span>Me</span>
-<span id="cb39-245"><a href="#cb39-245" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>], <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb39-246"><a href="#cb39-246" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb39-247"><a href="#cb39-247" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-248"><a href="#cb39-248" aria-hidden="true" tabindex="-1"></a>      df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"nE"</span>]<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-249"><a href="#cb39-249" aria-hidden="true" tabindex="-1"></a>    df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"Me"</span>] <span class="ot">&lt;-</span></span>
-<span id="cb39-250"><a href="#cb39-250" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(df[(df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">1</span>] <span class="sc">|</span> df<span class="sc">$</span>ID <span class="sc">==</span> rdf[<span class="dv">2</span>]),<span class="st">"MT"</span>])<span class="sc">*</span><span class="fu">c</span>(rds,<span class="dv">1</span><span class="sc">-</span>rds)</span>
-<span id="cb39-251"><a href="#cb39-251" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">NROW</span>(df[df<span class="sc">$</span>nE <span class="sc">&lt;</span> iE,<span class="st">"ID"</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
-<span id="cb39-252"><a href="#cb39-252" aria-hidden="true" tabindex="-1"></a>      iE <span class="ot">&lt;-</span> iE<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb39-253"><a href="#cb39-253" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb39-254"><a href="#cb39-254" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-255"><a href="#cb39-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb39-256"><a href="#cb39-256" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-257"><a href="#cb39-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-258"><a href="#cb39-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-259"><a href="#cb39-259" aria-hidden="true" tabindex="-1"></a>Time does not seem to have any effect either</span>
-<span id="cb39-260"><a href="#cb39-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-263"><a href="#cb39-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-264"><a href="#cb39-264" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">30</span>)</span>
-<span id="cb39-265"><a href="#cb39-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-266"><a href="#cb39-266" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb39-267"><a href="#cb39-267" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-268"><a href="#cb39-268" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-269"><a href="#cb39-269" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-270"><a href="#cb39-270" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-271"><a href="#cb39-271" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-272"><a href="#cb39-272" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-273"><a href="#cb39-273" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-274"><a href="#cb39-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-275"><a href="#cb39-275" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ID,df<span class="sc">$</span>nE,<span class="at">main=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-276"><a href="#cb39-276" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"ID"</span>,<span class="at">ylab=</span><span class="st">"Number of Changes"</span>,</span>
-<span id="cb39-277"><a href="#cb39-277" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb39-278"><a href="#cb39-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-279"><a href="#cb39-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-280"><a href="#cb39-280" aria-hidden="true" tabindex="-1"></a>**But still why???**</span>
-<span id="cb39-281"><a href="#cb39-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-282"><a href="#cb39-282" aria-hidden="true" tabindex="-1"></a>I think I need a simulation where I can save the money history!</span>
-<span id="cb39-283"><a href="#cb39-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-284"><a href="#cb39-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple Timehistory</span></span>
-<span id="cb39-285"><a href="#cb39-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-286"><a href="#cb39-286" aria-hidden="true" tabindex="-1"></a><span class="fu">### After the first change for all Agents</span></span>
-<span id="cb39-287"><a href="#cb39-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-290"><a href="#cb39-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-291"><a href="#cb39-291" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">1</span>)</span>
-<span id="cb39-292"><a href="#cb39-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-293"><a href="#cb39-293" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-294"><a href="#cb39-294" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-295"><a href="#cb39-295" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-296"><a href="#cb39-296" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-297"><a href="#cb39-297" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-298"><a href="#cb39-298" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-299"><a href="#cb39-299" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-300"><a href="#cb39-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-301"><a href="#cb39-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-302"><a href="#cb39-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-303"><a href="#cb39-303" aria-hidden="true" tabindex="-1"></a><span class="fu">### After the second change for all Agents</span></span>
-<span id="cb39-304"><a href="#cb39-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-307"><a href="#cb39-307" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-308"><a href="#cb39-308" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">2</span>)</span>
-<span id="cb39-309"><a href="#cb39-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-310"><a href="#cb39-310" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-311"><a href="#cb39-311" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-312"><a href="#cb39-312" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms)))<span class="sc">*</span><span class="fl">1.1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb39-313"><a href="#cb39-313" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-314"><a href="#cb39-314" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-315"><a href="#cb39-315" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-316"><a href="#cb39-316" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-317"><a href="#cb39-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-318"><a href="#cb39-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-319"><a href="#cb39-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-320"><a href="#cb39-320" aria-hidden="true" tabindex="-1"></a><span class="fu"># Eureka!</span></span>
-<span id="cb39-321"><a href="#cb39-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-322"><a href="#cb39-322" aria-hidden="true" tabindex="-1"></a>**Sleeping on it always helps!**</span>
-<span id="cb39-323"><a href="#cb39-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-324"><a href="#cb39-324" aria-hidden="true" tabindex="-1"></a>I think the easiest way to understand the mechanism is to have all agents start with the same amount of money. I will do this here quick and durty with my restrictive simulation and a starting distribution with a mean of 1000 and a standard deviation of 0.</span>
-<span id="cb39-325"><a href="#cb39-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-326"><a href="#cb39-326" aria-hidden="true" tabindex="-1"></a><span class="fu">## First Exchange</span></span>
-<span id="cb39-327"><a href="#cb39-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-328"><a href="#cb39-328" aria-hidden="true" tabindex="-1"></a>In the first run in this simplified scenario, all agents have the same chance of being above or below 1000.</span>
-<span id="cb39-329"><a href="#cb39-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-332"><a href="#cb39-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-333"><a href="#cb39-333" aria-hidden="true" tabindex="-1"></a>df1_even <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">1</span>,<span class="dv">1000</span>,<span class="dv">0</span>)</span>
-<span id="cb39-334"><a href="#cb39-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-335"><a href="#cb39-335" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df1_even<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-336"><a href="#cb39-336" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-337"><a href="#cb39-337" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms))<span class="sc">*</span><span class="fl">1.1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)))</span>
-<span id="cb39-338"><a href="#cb39-338" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df1_even<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-339"><a href="#cb39-339" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-340"><a href="#cb39-340" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-341"><a href="#cb39-341" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-342"><a href="#cb39-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-343"><a href="#cb39-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-344"><a href="#cb39-344" aria-hidden="true" tabindex="-1"></a>In other words, the average value of Money is still 1000. Also the Median. So there should be about 50% agents with more than 1000</span>
-<span id="cb39-345"><a href="#cb39-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-348"><a href="#cb39-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-349"><a href="#cb39-349" aria-hidden="true" tabindex="-1"></a>df1_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Mean"</span><span class="ot">=</span><span class="fu">mean</span>(df1_even<span class="sc">$</span>Me),</span>
-<span id="cb39-350"><a href="#cb39-350" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Median"</span><span class="ot">=</span><span class="fu">median</span>(df1_even<span class="sc">$</span>Me),</span>
-<span id="cb39-351"><a href="#cb39-351" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"nAover1000"</span><span class="ot">=</span><span class="fu">nrow</span>(df1_even[df1_even<span class="sc">$</span>Me<span class="sc">&gt;</span><span class="dv">1000</span>,])) </span>
-<span id="cb39-352"><a href="#cb39-352" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span id="cb39-353"><a href="#cb39-353" aria-hidden="true" tabindex="-1"></a>df1_summary</span>
-<span id="cb39-354"><a href="#cb39-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-355"><a href="#cb39-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-356"><a href="#cb39-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second Exchange</span></span>
-<span id="cb39-357"><a href="#cb39-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-358"><a href="#cb39-358" aria-hidden="true" tabindex="-1"></a>But what happens now with the second swap!</span>
-<span id="cb39-359"><a href="#cb39-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-360"><a href="#cb39-360" aria-hidden="true" tabindex="-1"></a>to get above 1000 or to stay there you "need" two conditions:</span>
-<span id="cb39-361"><a href="#cb39-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-362"><a href="#cb39-362" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>you have to meet someone who has over 1000 (p\~0.5)</span>
-<span id="cb39-363"><a href="#cb39-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-364"><a href="#cb39-364" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>you must also emerge from the meeting as the winner (p\~0.5)</span>
-<span id="cb39-365"><a href="#cb39-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-366"><a href="#cb39-366" aria-hidden="true" tabindex="-1"></a>The chance of staying or getting above 1000 is only around 25%.</span>
-<span id="cb39-367"><a href="#cb39-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-368"><a href="#cb39-368" aria-hidden="true" tabindex="-1"></a>***I know this isn't formally correct, but it should explain the mechanism!***</span>
-<span id="cb39-369"><a href="#cb39-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-370"><a href="#cb39-370" aria-hidden="true" tabindex="-1"></a>**The real value should be under 50% (see conclusion)**</span>
-<span id="cb39-371"><a href="#cb39-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-374"><a href="#cb39-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-375"><a href="#cb39-375" aria-hidden="true" tabindex="-1"></a>df2_even <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">2</span>,<span class="dv">1000</span>,<span class="dv">0</span>)</span>
-<span id="cb39-376"><a href="#cb39-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-377"><a href="#cb39-377" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df2_even<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-378"><a href="#cb39-378" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-379"><a href="#cb39-379" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms))<span class="sc">*</span><span class="fl">1.1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)))</span>
-<span id="cb39-380"><a href="#cb39-380" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df2_even<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-381"><a href="#cb39-381" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-382"><a href="#cb39-382" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-383"><a href="#cb39-383" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-384"><a href="#cb39-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-385"><a href="#cb39-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-386"><a href="#cb39-386" aria-hidden="true" tabindex="-1"></a>after the second round, the mean value is still 1000, but the median is now lower!</span>
-<span id="cb39-387"><a href="#cb39-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-390"><a href="#cb39-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-391"><a href="#cb39-391" aria-hidden="true" tabindex="-1"></a>df2_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Mean"</span><span class="ot">=</span><span class="fu">mean</span>(df2_even<span class="sc">$</span>Me),</span>
-<span id="cb39-392"><a href="#cb39-392" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Median"</span><span class="ot">=</span><span class="fu">median</span>(df2_even<span class="sc">$</span>Me),</span>
-<span id="cb39-393"><a href="#cb39-393" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"nAover1000"</span><span class="ot">=</span><span class="fu">nrow</span>(df2_even[df2_even<span class="sc">$</span>Me<span class="sc">&gt;</span><span class="dv">1000</span>,])) </span>
-<span id="cb39-394"><a href="#cb39-394" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span id="cb39-395"><a href="#cb39-395" aria-hidden="true" tabindex="-1"></a>df2_summary</span>
-<span id="cb39-396"><a href="#cb39-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-397"><a href="#cb39-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-398"><a href="#cb39-398" aria-hidden="true" tabindex="-1"></a>in other words, meeting someone who has over 1000 is now even smaller for the next round.</span>
-<span id="cb39-399"><a href="#cb39-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-400"><a href="#cb39-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## Third Exchange</span></span>
-<span id="cb39-401"><a href="#cb39-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-404"><a href="#cb39-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-405"><a href="#cb39-405" aria-hidden="true" tabindex="-1"></a>df3_even <span class="ot">&lt;-</span> <span class="fu">SplitRandomR</span>(<span class="dv">1000</span>,<span class="dv">3</span>,<span class="dv">1000</span>,<span class="dv">0</span>)</span>
-<span id="cb39-406"><a href="#cb39-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-407"><a href="#cb39-407" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df3_even<span class="sc">$</span>Ms, <span class="at">xlab=</span><span class="st">"Money"</span>,<span class="at">main=</span><span class="st">"Histogram for split-random Restricted"</span>,</span>
-<span id="cb39-408"><a href="#cb39-408" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-409"><a href="#cb39-409" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">c</span>(df<span class="sc">$</span>Me,df<span class="sc">$</span>Ms))<span class="sc">*</span><span class="fl">1.1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(df)))</span>
-<span id="cb39-410"><a href="#cb39-410" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df3_even<span class="sc">$</span>Me, <span class="at">col=</span><span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
-<span id="cb39-411"><a href="#cb39-411" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb39-412"><a href="#cb39-412" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'Money befor'</span>, <span class="st">'Money after'</span>),</span>
-<span id="cb39-413"><a href="#cb39-413" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.5</span>), <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.2</span>)))</span>
-<span id="cb39-414"><a href="#cb39-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-415"><a href="#cb39-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-416"><a href="#cb39-416" aria-hidden="true" tabindex="-1"></a>As assumed, the median is again smaller, as is the number of agents with more than 1000</span>
-<span id="cb39-417"><a href="#cb39-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-420"><a href="#cb39-420" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-421"><a href="#cb39-421" aria-hidden="true" tabindex="-1"></a>df3_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Mean"</span><span class="ot">=</span><span class="fu">mean</span>(df3_even<span class="sc">$</span>Me),</span>
-<span id="cb39-422"><a href="#cb39-422" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Median"</span><span class="ot">=</span><span class="fu">median</span>(df3_even<span class="sc">$</span>Me),</span>
-<span id="cb39-423"><a href="#cb39-423" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"nAover1000"</span><span class="ot">=</span><span class="fu">nrow</span>(df3_even[df3_even<span class="sc">$</span>Me<span class="sc">&gt;</span><span class="dv">1000</span>,])) </span>
-<span id="cb39-424"><a href="#cb39-424" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># number of Agents with more than 1000</span></span>
-<span id="cb39-425"><a href="#cb39-425" aria-hidden="true" tabindex="-1"></a>df3_summary</span>
-<span id="cb39-426"><a href="#cb39-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-427"><a href="#cb39-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-428"><a href="#cb39-428" aria-hidden="true" tabindex="-1"></a>from here on it seems clear that it tends towards the distribution with further steps</span>
-<span id="cb39-429"><a href="#cb39-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-430"><a href="#cb39-430" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
-<span id="cb39-431"><a href="#cb39-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-432"><a href="#cb39-432" aria-hidden="true" tabindex="-1"></a>I must have made something like a conjunction error here. the conditional probability for winning of 50% is only given if everyone has the same amount of money. otherwise the chance of winning is always smaller (conjunction of two probability's), which means that there are more and more poor and only a few rich agents in this game.</span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Assignment 2: &lt;br&gt;Economic Simulation"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tasks</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>The second assignment has 2 components and you have the next 2 weeks to work on it.&nbsp;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Replicate the first simulation from <span class="ot">&lt;https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container&gt;</span> in R</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Attempt to understand why the model produces such inequality by “playing with it”. You would have to first think about why it might do this, describe your thought process, and then change parts of the code, add new visualizations, etc, to see if you can explain why it behaves the way it does. This is going to be quite challenging and creative</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Instructions</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>To do this assignment and submit it you have to:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>make a new folder "hw2" in your existing project folder</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>create a new quarto document, for example "index.qmd" in the "hw2" folder</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>add "- hw2/index.qmd" to the "<span class="sc">\_</span>quarto.yml" file sidebar section</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>write your thoughts as text in the document, r code in R chunks</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Render the notebook to run the code and see the results intermixed with your description</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>add your new files and commit the to git as you make changes</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>when you are done with the replication part of the assignment, push your changes to github - you will be able to see your results on your github website. Try to finish this first by next week</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>resume from step 4 for the second part of the assignment to explore the model</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 
