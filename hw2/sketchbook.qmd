@@ -515,3 +515,9 @@ plot(prob_after15,
      abline(v=Money_Med,
             col =rgb(1,0,0,1))
 ```
+
+Be careful, this is not absolutly correct at the moment.
+
+-   For one thing, the data are not from a single simulation
+
+-   On the other hand, there are 101 possibilities in the exchange with my simple calculation only 100
