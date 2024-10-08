@@ -196,5 +196,29 @@
       "Assignment 2: <br>Economic Simulation",
       "Sketchbook"
     ]
+  },
+  {
+    "objectID": "hw2/notebook.html",
+    "href": "hw2/notebook.html",
+    "title": "Notebook",
+    "section": "",
+    "text": "At beginning i load some packets for nicer plots\n\nCodelibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n\n\nand some global definition as the Population from the paper and some more for playing.\n\nCodenA = 5000         # number of Agents\nID = seq_len(nA)  # ID of the Agents\nM0pop = 100       # Mean amount of Money in the Start-Population\n\n\n# generating Start-Population\n\nCHF_T0 &lt;- data.frame( ID = ID,\n                      PopNorm = sort(\n                                 rnorm(nA, mean = M0pop, sd = 0.2 * M0pop)\n                                ),\n                       PopUnif = sort(\n                                  runif(nA, min = 0, max = M0pop *2)\n                                ),\n                       PopEven = rep(M0pop, times = nA)\n                       )\n\n\n\n\nCodeFig01 &lt;- pivot_longer(data.frame(CHF_T0),\n                      cols = !matches(\"ID\"),\n                      names_to = \"Population\",\n                      values_to = \"Money\"\n                      )\n\nFig01$Population &lt;- factor(Fig01$Population,\n                           levels = c(\"PopNorm\",\n                                      \"PopEven\",\n                                      \"PopUnif\")\n                          )\n\nggplot(data = Fig01, aes(x = ID, y = Money, color = Population)) +\n  geom_line(linewidth = 1) +\n  scale_color_manual(name = \"Population's\",\n                     values = c(\"PopNorm\" = 4,\n                                \"PopEven\" = 3,\n                                \"PopUnif\" = 2)) +\n  theme_light() +\n  theme(legend.position = c(0.01, 0.99),\n        legend.justification = c(0, 1),\n        legend.background = element_rect(fill = \"white\"))\n\nWarning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2\n3.5.0.\nℹ Please use the `legend.position.inside` argument of `theme()` instead.",
+    "crumbs": [
+      "About",
+      "Assignment 2: <br>Economic Simulation",
+      "Notebook"
+    ]
+  },
+  {
+    "objectID": "hw2/notebook.html#definitions",
+    "href": "hw2/notebook.html#definitions",
+    "title": "Notebook",
+    "section": "",
+    "text": "At beginning i load some packets for nicer plots\n\nCodelibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n\n\nand some global definition as the Population from the paper and some more for playing.\n\nCodenA = 5000         # number of Agents\nID = seq_len(nA)  # ID of the Agents\nM0pop = 100       # Mean amount of Money in the Start-Population\n\n\n# generating Start-Population\n\nCHF_T0 &lt;- data.frame( ID = ID,\n                      PopNorm = sort(\n                                 rnorm(nA, mean = M0pop, sd = 0.2 * M0pop)\n                                ),\n                       PopUnif = sort(\n                                  runif(nA, min = 0, max = M0pop *2)\n                                ),\n                       PopEven = rep(M0pop, times = nA)\n                       )\n\n\n\n\nCodeFig01 &lt;- pivot_longer(data.frame(CHF_T0),\n                      cols = !matches(\"ID\"),\n                      names_to = \"Population\",\n                      values_to = \"Money\"\n                      )\n\nFig01$Population &lt;- factor(Fig01$Population,\n                           levels = c(\"PopNorm\",\n                                      \"PopEven\",\n                                      \"PopUnif\")\n                          )\n\nggplot(data = Fig01, aes(x = ID, y = Money, color = Population)) +\n  geom_line(linewidth = 1) +\n  scale_color_manual(name = \"Population's\",\n                     values = c(\"PopNorm\" = 4,\n                                \"PopEven\" = 3,\n                                \"PopUnif\" = 2)) +\n  theme_light() +\n  theme(legend.position = c(0.01, 0.99),\n        legend.justification = c(0, 1),\n        legend.background = element_rect(fill = \"white\"))\n\nWarning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2\n3.5.0.\nℹ Please use the `legend.position.inside` argument of `theme()` instead.",
+    "crumbs": [
+      "About",
+      "Assignment 2: <br>Economic Simulation",
+      "Notebook"
+    ]
   }
 ]

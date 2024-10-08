@@ -15,7 +15,7 @@ library(tidyr)
 library(dplyr)
 ```
 
-and some global definition as the Population from the paper and some more for playing.
+and some global definition as the Population from the paper (PopNorm) and some more for playing.
 
 ```{r}
 nA = 5000         # number of Agents
@@ -36,7 +36,7 @@ CHF_T0 <- data.frame( ID = ID,
                        )
 ```
 
-### Fig01: Start Populations
+### Fig01: Start Population's
 
 ```{r}
 Fig01 <- pivot_longer(data.frame(CHF_T0),
