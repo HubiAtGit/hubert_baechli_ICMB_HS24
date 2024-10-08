@@ -11,36 +11,16 @@
     ]
   },
   {
-    "objectID": "hw2/index.html",
-    "href": "hw2/index.html",
-    "title": "Assignment 2: Economic Simulation",
-    "section": "",
-    "text": "Tasks\nThe second assignment has 2 components and you have the next 2 weeks to work on it. \n\nReplicate the first simulation from https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container in R\nAttempt to understand why the model produces such inequality by “playing with it”. You would have to first think about why it might do this, describe your thought process, and then change parts of the code, add new visualizations, etc, to see if you can explain why it behaves the way it does. This is going to be quite challenging and creative\n\n\n\nInstructions\nTo do this assignment and submit it you have to:\n\nmake a new folder “hw2” in your existing project folder\ncreate a new quarto document, for example “index.qmd” in the “hw2” folder\nadd “- hw2/index.qmd” to the “_quarto.yml” file sidebar section\nwrite your thoughts as text in the document, r code in R chunks\nRender the notebook to run the code and see the results intermixed with your description\nadd your new files and commit the to git as you make changes\nwhen you are done with the replication part of the assignment, push your changes to github - you will be able to see your results on your github website. Try to finish this first by next week\nresume from step 4 for the second part of the assignment to explore the model\n\n\n\n\n\n\n\n Back to top",
+    "objectID": "hw2/notebook.html#fig01-start-populations",
+    "href": "hw2/notebook.html#fig01-start-populations",
+    "title": "Notebook",
+    "section": "Fig01: Start Populations",
+    "text": "Fig01: Start Populations\n\nCodeFig01 &lt;- pivot_longer(data.frame(CHF_T0),\n                      cols = !matches(\"ID\"),\n                      names_to = \"Population\",\n                      values_to = \"Money\"\n                      )\n\nFig01$Population &lt;- factor(Fig01$Population,\n                           levels = c(\"PopNorm\",\n                                      \"PopEven\",\n                                      \"PopUnif\")\n                          )\n\nggplot(data = Fig01, aes(x = ID, y = Money, color = Population)) +\n  geom_line(linewidth = 1) +\n  scale_color_manual(name = \"Population's\",\n                     values = c(\"PopNorm\" = 4,\n                                \"PopEven\" = 3,\n                                \"PopUnif\" = 2)) +\n  theme_light() +\n  theme(legend.position = c(0.01, 0.99),\n        legend.justification = c(0, 1),\n        legend.background = element_rect(fill = \"white\"))\n\nWarning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2\n3.5.0.\nℹ Please use the `legend.position.inside` argument of `theme()` instead.",
     "crumbs": [
       "About",
-      "Assignment 2: <br>Economic Simulation"
+      "Assignment 2: <br>Economic Simulation",
+      "Notebook"
     ]
-  },
-  {
-    "objectID": "hubert_baechli_ICMB24/index.html",
-    "href": "hubert_baechli_ICMB24/index.html",
-    "title": "hubert_baechli_ICMB24",
-    "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "hubert_baechli_ICMB24/about.html",
-    "href": "hubert_baechli_ICMB24/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "hw1/index.html",
@@ -51,6 +31,38 @@
     "crumbs": [
       "About",
       "Assignment 1: <br>Hello World"
+    ]
+  },
+  {
+    "objectID": "hubert_baechli_ICMB24/about.html",
+    "href": "hubert_baechli_ICMB24/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hubert_baechli_ICMB24/index.html",
+    "href": "hubert_baechli_ICMB24/index.html",
+    "title": "hubert_baechli_ICMB24",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nCode1 + 1\n\n[1] 2\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "hw2/index.html",
+    "href": "hw2/index.html",
+    "title": "Assignment 2: Economic Simulation",
+    "section": "",
+    "text": "Tasks\nThe second assignment has 2 components and you have the next 2 weeks to work on it. \n\nReplicate the first simulation from https://github.com/norvig/pytudes/blob/main/ipynb/Economics.ipynb#js-repo-pjax-container in R\nAttempt to understand why the model produces such inequality by “playing with it”. You would have to first think about why it might do this, describe your thought process, and then change parts of the code, add new visualizations, etc, to see if you can explain why it behaves the way it does. This is going to be quite challenging and creative\n\n\n\nInstructions\nTo do this assignment and submit it you have to:\n\nmake a new folder “hw2” in your existing project folder\ncreate a new quarto document, for example “index.qmd” in the “hw2” folder\nadd “- hw2/index.qmd” to the “_quarto.yml” file sidebar section\nwrite your thoughts as text in the document, r code in R chunks\nRender the notebook to run the code and see the results intermixed with your description\nadd your new files and commit the to git as you make changes\nwhen you are done with the replication part of the assignment, push your changes to github - you will be able to see your results on your github website. Try to finish this first by next week\nresume from step 4 for the second part of the assignment to explore the model\n\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "About",
+      "Assignment 2: <br>Economic Simulation"
     ]
   },
   {

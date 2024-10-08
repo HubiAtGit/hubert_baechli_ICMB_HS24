@@ -29,6 +29,7 @@ website:
         href: hw2/index.qmd
         contents:
         - hw2/sketchbook.qmd
+        - hw2/notebook.qmd
 
 format:
   html:

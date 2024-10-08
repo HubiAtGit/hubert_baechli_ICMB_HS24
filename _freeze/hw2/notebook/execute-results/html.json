@@ -1,0 +1,15 @@
+{
+  "hash": "53c8a7ea551cf1eb9a1016e8ef1b79c4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Notebook\"\nauthor: \"Hubert Baechli\"\n---\n\n\n\n\n# Final Version\n\n# Definitions\n\nAt beginning i load some packets for nicer plots\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyr)\nlibrary(dplyr)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttache Paket: 'dplyr'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n```\n\n\n:::\n\n```{.r .cell-code}\nlibrary(ggplot2)\n```\n:::\n\n\n\n\nand some global definition as the Population from the paper and some more for playing.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nnA = 5000         # number of Agents\nID = seq_len(nA)  # ID of the Agents\nM0pop = 100       # Mean amount of Money in the Start-Population\n\n\n# generating Start-Population\n\nCHF_T0 <- data.frame( ID = ID,\n                      PopNorm = sort(\n                                 rnorm(nA, mean = M0pop, sd = 0.2 * M0pop)\n                                ),\n                       PopUnif = sort(\n                                  runif(nA, min = 0, max = M0pop *2)\n                                ),\n                       PopEven = rep(M0pop, times = nA)\n                       )\n```\n:::\n\n\n\n\n## Fig01: Start Populations\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nFig01 <- pivot_longer(data.frame(CHF_T0),\n                      cols = !matches(\"ID\"),\n                      names_to = \"Population\",\n                      values_to = \"Money\"\n                      )\n\nFig01$Population <- factor(Fig01$Population,\n                           levels = c(\"PopNorm\",\n                                      \"PopEven\",\n                                      \"PopUnif\")\n                          )\n\nggplot(data = Fig01, aes(x = ID, y = Money, color = Population)) +\n  geom_line(linewidth = 1) +\n  scale_color_manual(name = \"Population's\",\n                     values = c(\"PopNorm\" = 4,\n                                \"PopEven\" = 3,\n                                \"PopUnif\" = 2)) +\n  theme_light() +\n  theme(legend.position = c(0.01, 0.99),\n        legend.justification = c(0, 1),\n        legend.background = element_rect(fill = \"white\"))\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2\n3.5.0.\nℹ Please use the `legend.position.inside` argument of `theme()` instead.\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](notebook_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
