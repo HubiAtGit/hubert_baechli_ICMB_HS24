@@ -10,9 +10,9 @@ author: "Hubert Baechli"
 At beginning i load some packets for nicer plots
 
 ```{r}
+library(ggplot2)
 library(tidyr)
 library(dplyr)
-library(ggplot2)
 ```
 
 and some global definition as the Population from the paper and some more for playing.
