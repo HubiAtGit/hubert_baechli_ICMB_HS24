@@ -1,40 +1,59 @@
-library(ggplot2)
-library(patchwork)
 library(tidyr)
 library(dplyr)
+library(ggplot2)
 
-
-
-nA = 1000         # number of Agents
+nA = 500          # number of Agents
 ID = seq_len(nA)  # ID of the Agents
 M0pop = 100       # Mean amount of Money in the Start-Population
 
 
 # generating Start-Population
 
-PopNorm <- data.frame( ID = ID,
-                       Money= sort(rnorm(nA, mean = M0pop, sd = 0.2 * M0pop))
+CHF_T0 <- data.frame( ID = ID,
+                      PopNorm = sort(
+                                 rnorm(nA, mean = M0pop, sd = 0.2 * M0pop)
+                                ),
+                       PopUnif = sort(
+                                  runif(nA, min = 0, max = M0pop *2)
+                                ),
+                       PopEven = rep(M0pop, times = nA)
+                       )
+
+# ploting Start-Population
+
+Fig01 <- pivot_longer(data.frame(CHF_T0),
+                      cols = !matches("ID"),
+                      names_to = "Population",
+                      values_to = "Money"
                       )
 
-ggplot(PopNorm, aes(x = Money)) +
-  geom_histogram(position = "identity", alpha = 0.5, bins = 50, fill = 4) +
-  ylab("Frequency") +
-  scale_fill_manual(values = 4) +
-  theme_minimal() +
-  theme(legend.position = "top")
+Fig01$Population <- factor(Fig01$Population,
+                           levels = c("PopNorm",
+                                      "PopEven",
+                                      "PopUnif")
+                          )
 
-# generating random split
+ggplot(data = Fig01, aes(x = ID, y = Money, color = Population)) +
+  geom_line(linewidth = 1) +
+  scale_color_manual(name = "Population's",
+                     values = c("PopNorm" = 4,
+                                "PopEven" = 3,
+                                "PopUnif" = 2)) +
+  theme_light() +
+  theme(legend.position = c(0.01, 0.99),
+        legend.justification = c(0, 1),
+        legend.background = element_rect(fill = "white"))
 
+# generating split-options
 
-splitopt <- function(){
-  rn <- runif(1)
-  c(rn,1-rn)
-}
-
+SplitOpt <- list(Random1 = seq(0, 100) / 100,
+                 Random10 = seq(0, 10) / 10,
+                 Halve = c( 0.5 )
+                 )
 
 # calculating the Probability for the next exchange
 
-calc_p <- function(M_dist) {
+prob <- function(M_dist, S_Opt) {
   Dist <- data.frame(Money = M_dist,
                      probwin = 0,
                      probmed = 0,
@@ -59,10 +78,11 @@ calc_p <- function(M_dist) {
     pmed <- M_oA*0
     pmean <- M_oA*0
     for(ii in 1:NROW(M_oA)) {
-      Pot <- max(M_A + M_oA[ii], 10e-8)
-      pwin[ii] <- 1-min(1, M_A/Pot)
-      pmed[ii] <- 1-min(1, M_Med/Pot)
-      pmean[ii] <- 1-min(1, M_Mean/Pot)
+      Pot <- M_A + M_oA[ii]
+      M_out <- S_Opt * Pot
+      pwin[ii] <- NROW(M_out[ M_out > M_A ]) / NROW(M_out)
+      pmed[ii] <- NROW(M_out[ M_out > M_Med ]) / NROW(M_out)
+      pmean[ii] <- NROW(M_out[ M_out > M_Mean ]) / NROW(M_out)
     }
     Dist[i,"probwin"] <- mean(pwin)
     Dist[i,"probmed"] <- mean(pmed)
@@ -81,107 +101,79 @@ calc_p <- function(M_dist) {
 }
 
 ntest <- 6
-df <- prob(rep(100, times = ntest))
+df <- prob(rep(100, times = ntest),SplitOpt$Random1)
 round(df$Dist, digits = 2)
 round(df$Sum, digits = 2)
 
 df$Dist$Money[1] <- 50
 df$Dist$Money[2] <- 150
 
-df <- prob(df$Dist$Money)
+df <- prob(df$Dist$Money,SplitOpt$Random1)
 round(df$Dist, digits = 2)
 round(df$Sum, digits = 2)
 
 df$Dist$Money[3] <- 200
 df$Dist$Money[2] <- 50
 
-df <- prob(df$Dist$Money)
+df <- prob(df$Dist$Money,SplitOpt$Random1)
 round(df$Dist, digits = 2)
 round(df$Sum, digits = 2)
 
+CHF_T0[,c("ID", "PopNorm")]
 
-ProbNorm <- calc_p(PopNorm$Money)
+probNorm <- prob(CHF_T0$PopNorm,SplitOpt$Random1)
 
-figProb <- function(Prob, Title, xmax) {
-  Figd <- pivot_longer(data.frame(Prob$Dist),
-                       cols = starts_with("p"),
-                       names_to = "Outcome",
-                       values_to = "Probability"
-                       )
-  Figs <- Prob$Sum
+Fig02 <- pivot_longer(data.frame(probNorm$Dist),
+                      cols = starts_with("p"),
+                      names_to = "Outcome",
+                      values_to = "Probability"
+)
 
-  Figp <- ggplot(data = Figd,
-                 aes(x = Money,
-                     y = Probability,
-                     color = Outcome
-                     )
-                 ) +
-    geom_point( alpha = 0.5, size = 1.5) +
-    scale_color_manual(name = "Probability to",
-                       values = c(2, 3, 4),
-                       labels = c("gain more than the Mean",
-                                  "gain more than the Median",
-                                  "gain")
-                       ) +
-    ylim(0, 1) +
-    xlim(0, xmax) +
+ggplot(data = Fig02, aes(x = Money, y = Probability, color = Outcome)) +
+  geom_line(linewidth = 1.1) +
+  ylim(0, 1) +
+  ggtitle("Probability for the Norm-Population") +
+  theme_light() +
+  theme(legend.position = c(0.7, 0.9),
+        legend.background = element_rect(fill = "white"))
 
-    geom_vline(xintercept = Figs["med","Money"],
-               linetype = "solid", color = 1) +
-    annotate("text",
-             x = Figs["med","Money"] * 0.95,
-             y = 0,
-             hjust = 1,
-             vjust = 0,
-             label = paste("Median =",
-                           round(Figs["med","Money"], 0)),
-             color = 1) +
+probEven <- prob(CHF_T0$PopEven,SplitOpt$Random1)
 
-    geom_vline(xintercept = Figs["mean","Money"],
-               linetype = "dashed", color = 1) +
-    annotate("text",
-             x = Figs["mean","Money"] * 1.05,
-             y = 0,
-             hjust = 0,
-             vjust = 0,
-             label = paste("Mean =",
-                           round(Figs["mean","Money"], 0)),
-             color = 1) +
+Fig03 <- pivot_longer(data.frame(ID = ID, probEven$Dist),
+                      cols = starts_with("p"),
+                      names_to = "Outcome",
+                      values_to = "Probability"
+)
 
-    geom_hline(yintercept = Figs["mean","probmed"],
-             linetype = "solid", color = 3) +
-    annotate("text",
-             x = xmax,
-             y = Figs["mean","probmed"] * 1.05,
-             hjust = 1,
-             vjust = 0,
-             label = paste("Mean =",
-                           round(Figs["mean","probmed"], 2)),
-             color = 3) +
+ggplot(data = Fig03, aes(x = ID, y = Probability, color = Outcome)) +
+  geom_line(linewidth = 1.1) +
+  ylim(0, 1) +
+  ggtitle("Probability for the Even-Population") +
+  theme_light() +
+  theme(legend.position = c(0.7, 0.9),
+        legend.background = element_rect(fill = "white"))
 
-    geom_hline(yintercept = Figs["mean","probmean"],
-               linetype = "solid", color = 2) +
-    annotate("text",
-             x = xmax,
-             y = Figs["mean","probmean"]*0.95,
-             hjust = 1,
-             vjust = 1,
-             label = paste("Mean =",
-                           round(Figs["mean","probmean"], 2)),
-             color = 2) +
+probUnif <- prob(CHF_T0$PopUnif,SplitOpt$Random1)
 
-    labs(title = Title) +
-    theme_light() +
-    theme(legend.position = "bottom")
-  return(Figp)
-}
+Fig04 <- pivot_longer(data.frame(probUnif$Dist),
+                      cols = starts_with("p"),
+                      names_to = "Outcome",
+                      values_to = "Probability"
+)
 
-figProb(ProbNorm, "Probability at Beginning", 250)
+ggplot(data = Fig04, aes(x = Money, y = Probability, color = Outcome)) +
+  geom_line(linewidth = 1.1) +
+  ylim(0, 1) +
+  ggtitle("Probability for the Uniform-Population") +
+  theme_light() +
+  theme(legend.position = c(0.7, 0.9),
+        legend.background = element_rect(fill = "white"))
+
 
 # Simulation
 
 
-ecosim <- function( n, M_dist, TL = 0 ) {
+ecosim <- function( n, M_dist, S_Opt, TL = 0 ) {
   df <- data.frame(ID=seq(1,NROW(M_dist)),
                    nE=0,
                    MT_S=M_dist,
@@ -192,9 +184,9 @@ ecosim <- function( n, M_dist, TL = 0 ) {
   }
   for(i in 1:n) {
     rdf <- sample(df$ID, size=2)
-    rds <- splitopt()
+    rds <- sample(S_Opt, size=1)
     df[rdf,"nE"] <- df[rdf,"nE"] + 1
-    df[rdf,"MT_E"] <- sum( df[rdf,"MT_E"]) * rds
+    df[rdf,"MT_E"] <- sum( df[rdf,"MT_E"]) * c(rds, 1-rds)
     if ( TL > 0 ) {
       if ( i %% TL == 0) {
         M_TL [[paste0("n",i)]]<- df$MT_E
@@ -211,39 +203,38 @@ ecosim <- function( n, M_dist, TL = 0 ) {
 
 
 
-df <- ecosim(50000, PopNorm$Money, TL = 500)
+df <- ecosim(7000, CHF_T0$PopNorm, SplitOpt$Random1, TL = 50)
+
+7000/50
 
 summary(df$Sum)
 df$Timeline
 
-figHist <- function(sim_sum) {
-  Fig <- pivot_longer(data.frame(sim_sum),
+Fig05 <- pivot_longer(data.frame(df$Sum),
                       cols = starts_with("MT"),
                       names_to = "Distribution",
                       values_to = "Money"
-                      )
-  Fig$Distribution <-recode(Fig$Distribution,
-                            "MT_S" = "at Begining",
-                            "MT_E" = "at the End"
-                            )
-  Figp <- ggplot(Fig02, aes(x = Money, fill = Distribution)) +
-    geom_histogram(position = "identity", alpha = 0.5, bins = 50) +
-    ylab("Frequency") +
-    scale_fill_manual(name = NULL, values = c(4,3)) +
-    scale_color_manual(name = NULL, values = c(4, 3)) +
-    theme_minimal() +
-    theme(legend.position = "top")
-  return(Figp)
-}
+)
 
-figHist(df$Sum)
+Fig05$Distribution <-recode(Fig05$Distribution,
+                            "MT_S" = "at Begining",
+                            "MT_E" = "at the End")
+
+ggplot(Fig05, aes(x = Money, fill = Distribution)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 50) +
+  ylab("Frequency") +
+  theme_minimal() +
+  theme(legend.position = c(0.7, 0.9),
+        legend.background = element_rect(fill = "white", color = NA))
+
+
 
 MTime <- data.frame(ID,df$Timeline)
 
 sID <- c(1,2,3,nA/2-1,nA/2,nA/2+1,nA-2,nA-1,nA)
 sMTime <- MTime[sID,]
 
-Fig03 <- pivot_longer(data.frame(sMTime),
+Fig06 <- pivot_longer(data.frame(sMTime),
                       cols = !matches("ID"),
                       names_to = "Time",
                       names_prefix = "n",
@@ -251,9 +242,9 @@ Fig03 <- pivot_longer(data.frame(sMTime),
                       values_to = "Money"
 )
 
-Fig03$ID <- sprintf("%04d", Fig03$ID)
+Fig06$ID <- sprintf("%04d", Fig06$ID)
 
-ggplot(data = Fig03, aes(x = Time, y = Money, color = ID)) +
+ggplot(data = Fig06, aes(x = Time, y = Money, color = ID)) +
   geom_line() +
   ggtitle("Timeline for seven Agents") +
   xlab("number of exchanges") +
@@ -263,27 +254,100 @@ ggplot(data = Fig03, aes(x = Time, y = Money, color = ID)) +
   theme(legend.position = "right",
         legend.background = element_rect(fill = "white"))
 
+pT <- 2
+pT <- 7
+pT <- 12
+pT <- NCOL(MTime)
 
 
-FigA <- figProb(calc_p(MTime[,2]), "Probability at Beginning", 700)
-FigB <- figProb(calc_p(MTime[,3]), "Probability after 500 exchanges", 700)
-FigC <- figProb(calc_p(MTime[,4]), "Probability after 1000 exchanges", 700)
-FigD <- figProb(calc_p(MTime[,NCOL(MTime)]), "Probability at the End", 700)
+probNormT <- prob(MTime[,pT],SplitOpt$Random1)
 
 
-(FigA + FigB) / (FigC + FigD)
+Fig07 <- pivot_longer(data.frame(probNormT$Dist),
+                      cols = starts_with("p"),
+                      names_to = "Outcome",
+                      values_to = "Probability"
+)
+
+Fig07l <- probNormT$Sum
+
+Fig07l["med","Money"]
+
+subTitle <- gsub("n", "",names(MTime)[pT])
+
+
+ggplot(data = Fig07, aes(x = Money, y = Probability, color = Outcome)) +
+  geom_point( alpha = 0.5, size = 1.5) +
+  scale_color_manual(values = c(2, 3, 1)) +
+  ylim(0, 1) +
+  xlim(0, 5500) +
+
+  geom_vline(xintercept = PopMed,
+             linetype = "solid",
+             color = "black") +
+  annotate("text",
+           x = Fig07l["med","Money"],
+           y = 0,
+           hjust = 0,
+           label = paste(" Population Median =", round(Fig07l["med","Money"], 0)),
+           color = "black") +
+
+  geom_vline(xintercept = Fig07l["mean","Money"],
+             linetype = "dashed",
+             color = "black") +
+  annotate("text",
+           x = PopMean,
+           y = 0.08,
+           hjust = 0,
+           label = paste(" Population Mean =", round(Fig07l["mean","Money"], 0)),
+           color = "black") +
+
+  geom_hline(yintercept = Fig07l["mean","probmed"],
+             linetype = "solid",
+             color = 3) +
+  annotate("text",
+           x = 5500,
+           y = Fig07l["mean","probmed"] * 1.05,
+           hjust = 1,
+           vjust = 0,
+           label = paste(" Population Probability =", round(Fig07l["mean","probmed"], 2)),
+           color = 3) +
+
+  geom_hline(yintercept = Fig07l["mean","probmean"],
+             linetype = "solid",
+             color = 2) +
+  annotate("text",
+           x = 5500,
+           y = Fig07l["mean","probmean"]*0.95,
+           hjust = 1,
+           vjust = 1,
+           label = paste(" Population Probability =", round(Fig07l["mean","probmean"], 2)),
+           color = 2) +
+
+  labs(title = "Probability for the Norm-Population") +
+  annotate("text",
+           x = 0,
+           y = 1,
+           hjust = 0,
+           vjust = 0,
+           label = paste(" (number of exchanges = ", subTitle, ")"),
+           color = "black") +
+
+  theme_light() +
+  theme(legend.position = c(0.93, 0.95),
+        legend.background = element_rect(fill = "white"))
 
 
 
-calc_p_t <- function(M_dist) {
-  pnt <- prob(M_dist[,1])
+probt <- function(M_dist, S_Opt) {
+  pnt <- prob(M_dist[,1],S_Opt)
   tx <- as.numeric(gsub("n", "",colnames(M_dist)[1]))
   pnts <- data.frame(Time = rep(tx, times = 4),
                      Res = colnames(pnt$Sum),
                      t(pnt$Sum)
                      )
   for(i in 2:ncol(M_dist)) {
-    pnt <- prob(M_dist[,i])
+    pnt <- prob(M_dist[,i],S_Opt)
     tx <- as.numeric(gsub("n", "",colnames(M_dist)[i]))
     pnti <- data.frame(Time = rep(tx, times = 4),
                        Res = colnames(pnt$Sum),
@@ -295,7 +359,7 @@ calc_p_t <- function(M_dist) {
   return(pnts)
 }
 
-probNormt <- calc_p_t(df$Timeline)
+probNormt <- probt(df$Timeline,SplitOpt$Random1)
 probNormt
 
 
@@ -369,7 +433,7 @@ Fig12 <- probNormt[probNormt$Res!="Money",c("Time","Res","mean")]
 
 ggplot(data = Fig12, aes(x = Time, y = mean, color = Res)) +
   geom_line(size = 1) +
-  scale_color_manual(name = NULL, values = c(2, 3, 4),
+  scale_color_manual(name = NULL, values = c(2, 3, 1),
                      labels = c("gain more than the Mean",
                                 "gain more than the Median",
                                 "gain")) +
@@ -378,7 +442,7 @@ ggplot(data = Fig12, aes(x = Time, y = mean, color = Res)) +
   ylab("Mean-Probability in the Population") +
   ylim(0.35, 0.55) +
   theme_light() +
-  theme(legend.position = "bottom",
+  theme(legend.position = c(0.01, 1),
         legend.justification = c(0, 1),
         legend.background = element_rect(fill = "white"))
 
