@@ -21,7 +21,7 @@ Start Population from the paper (PopNorm) with less Agents to spend calculationt
 ```{r}
 nA = 1000         # number of Agents
 ID = seq_len(nA)  # ID of the Agents
-M0pop = 100       # Mean amount of Money in the Start-Population
+M0pop = 150       # Mean amount of Money in the Start-Population
 
 # generating Start-Population
 
@@ -103,7 +103,7 @@ calc_p <- function(M_dist) {
 Calculating for Normpopulation
 
 ```{r}
-probNorm <- calc_p(PopNorm$Money)
+ProbNorm <- calc_p(PopNorm$Money)
 ```
 
 plot
@@ -183,7 +183,7 @@ figProb <- function(Prob, Title, xmax) {
   return(Figp)
 }
 
-figProb(ProbNorm, "Probability at Beginning", 250)
+figProb(ProbNorm, "Probability at Beginning", 300)
 ```
 
 # Simulation
@@ -200,7 +200,7 @@ ecosim <- function( n, M_dist, TL = 0 ) {
   }
   for(i in 1:n) {
     rdf <- sample(df$ID, size=2)
-    rds <- splitopt()
+    rds <- splitpair()
     df[rdf,"nE"] <- df[rdf,"nE"] + 1
     df[rdf,"MT_E"] <- sum( df[rdf,"MT_E"]) * rds
     if ( TL > 0 ) {
@@ -237,7 +237,7 @@ figHist <- function(Sim_Sum) {
                             "MT_S" = "at Begining",
                             "MT_E" = "at the End"
                             )
-  Figp <- ggplot(Fig02, aes(x = Money, fill = Distribution)) +
+  Figp <- ggplot(Fig, aes(x = Money, fill = Distribution)) +
     geom_histogram(position = "identity", alpha = 0.5, bins = 50) +
     ylab("Frequency") +
     scale_fill_manual(name = NULL, values = c(4,3)) +
@@ -282,10 +282,10 @@ ggplot(data = Fig03, aes(x = Time, y = Money, color = ID)) +
 Probabilitiy at some Timepoints
 
 ```{r}
-FigA <- figProb(calc_p(MTime[,2]), "Probability at Beginning", 750)
-FigB <- figProb(calc_p(MTime[,3]), "Probability after 500 exchanges", 750)
-FigC <- figProb(calc_p(MTime[,4]), "Probability after 1000 exchanges", 750)
-FigD <- figProb(calc_p(MTime[,NCOL(MTime)]), "Probability at the End", 750)
+FigA <- figProb(calc_p(MTime[,2]), "Probability at Beginning", 850)
+FigB <- figProb(calc_p(MTime[,3]), "Probability after 500 exchanges", 850)
+FigC <- figProb(calc_p(MTime[,4]), "Probability after 1000 exchanges", 850)
+FigD <- figProb(calc_p(MTime[,NCOL(MTime)]), "Probability at the End", 850)
 
 FigA 
 FigB
