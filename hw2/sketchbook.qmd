@@ -389,7 +389,7 @@ df3_summary
 
 from here on it seems clear that it tends towards the distribution with further steps
 
-# Conclusion
+# Hypothesis
 
 I must have made something like a conjunction error here. the conditional probability for winning of 50% is only given if everyone has the same amount of money. Otherwise the chance of getting over the Median of the distribusion is always smaller (conjunction of two probability's), which means that there are more and more poor and only a few rich agents in this game.
 
@@ -521,3 +521,5 @@ Be careful, this is not absolutly correct at the moment.
 -   For one thing, the data are not from a single simulation
 
 -   On the other hand, there are 101 possibilities in the exchange with my simple calculation only 100
+
+***For final results and explanations see \[notebook\](notebook.qmd)***
