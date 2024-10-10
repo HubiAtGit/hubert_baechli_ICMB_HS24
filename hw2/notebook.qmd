@@ -30,6 +30,29 @@ PopNorm <- data.frame( ID = ID,
 
 ```
 
+```{r}
+gini <- function(Pop) {
+  n <- NROW(Pop)
+  numer <- 0
+  for (i in 1:n) {
+    numer <- numer + 2 * i * Pop[i]
+  }
+  denom = n * sum(Pop)
+  return((numer / denom) - (n + 1) / n)
+}
+
+gini_t <- function(Pop) {
+  n <- NCOL(Pop)
+  GT <- c(0)
+  for (i in 1:n) {
+    GT[i] <-  gini(Pop[,i])
+  }
+  return(GT)
+  }
+
+gini(PopNorm$Money)
+```
+
 Plot
 
 ```{r}
@@ -37,6 +60,8 @@ ggplot(PopNorm, aes(x = Money)) +
   geom_histogram(position = "identity", alpha = 0.5, bins = 50, fill = 4) +
   ylab("Frequency") +
   scale_fill_manual(values = 4) +
+  labs(title = paste0("Population with G=",
+                      round(gini(PopNorm$Money),digits =3))) +
   theme_minimal() +
   theme(legend.position = "top")
 ```
@@ -405,8 +430,33 @@ ProbEvents <- calc_p_t(eNorms$Timeline)
 ```
 
 ```{r}
-figProb_t(ProbNorms, 
+
+GsNorms <- gini_t(sNorms$Timeline)
+
+ProbNorms[ProbNorms$Res == "Money",c("Time")]
+
+GeNorms <- gini_t(eNorms$Timeline)
+
+```
+
+```{r}
+FigE <- figProb_t(ProbNorms, 
           "Probability to ... of Money\nTimeline for the Norm Population")
+FigE <- FigE + geom_line(aes(x = ProbNorms[ProbNorms$Res == "Money",c("Time")], 
+                             y = GsNorms),
+               linetype = "solid", color = 1) +
+               annotate("text",
+                        x = 1000,
+                        y = 0,
+                        hjust = 1,
+                        vjust = 0,
+                        label = "GINI",
+                        color = 1)
+  
+FigE
+ProbNorms[ProbNorms$Res == "Money",c("Time")]
+  
 figProb_t(ProbEvents, 
           "Probability to ... of Money\nTimeline for a even Population")
+
 ```
