@@ -192,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a></li>
-  <li><a href="#evenpop" id="toc-evenpop" class="nav-link" data-scroll-target="#evenpop">EvenPop</a></li>
+  <li><a href="#equal-pop" id="toc-equal-pop" class="nav-link" data-scroll-target="#equal-pop">Equal Pop</a></li>
   <li><a href="#vergleich" id="toc-vergleich" class="nav-link" data-scroll-target="#vergleich">Vergleich</a></li>
   </ul></nav>
     </div>
@@ -242,6 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gini</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
 <span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NROW</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
 <span>  <span class="va">numer</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
@@ -249,6 +250,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="op">}</span></span>
 <span>  <span class="va">denom</span> <span class="op">=</span> <span class="va">n</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">(</span><span class="va">numer</span> <span class="op">/</span> <span class="va">denom</span><span class="op">)</span> <span class="op">-</span> <span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">gini_t</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NCOL</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
+<span>  <span class="va">GT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">ii</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nc</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">GT</span><span class="op">[</span><span class="va">ii</span><span class="op">]</span> <span class="op">&lt;-</span>  <span class="fu">gini</span><span class="op">(</span><span class="va">Pop</span><span class="op">[</span>,<span class="va">ii</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">GT</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
 <span><span class="fu">gini</span><span class="op">(</span><span class="va">PopNorm</span><span class="op">$</span><span class="va">Money</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -615,34 +625,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="evenpop" class="level1"><h1>EvenPop</h1>
+</section><section id="equal-pop" class="level1"><h1>Equal Pop</h1>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># generating Start-Population</span></span>
 <span></span>
-<span><span class="va">PopEven</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> ID <span class="op">=</span> <span class="va">ID</span>,</span>
+<span><span class="va">PopEqual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> ID <span class="op">=</span> <span class="va">ID</span>,</span>
 <span>                       Money <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">M0pop</span>, times <span class="op">=</span> <span class="va">nA</span><span class="op">)</span></span>
 <span>                      <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ProbEven</span> <span class="op">&lt;-</span> <span class="fu">calc_p</span><span class="op">(</span><span class="va">PopEven</span><span class="op">$</span><span class="va">Money</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb</span><span class="op">(</span><span class="va">ProbEven</span>, <span class="st">"Probability at Beginning"</span>, <span class="fl">300</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gini</span><span class="op">(</span><span class="va">PopEqual</span><span class="op">$</span><span class="va">Money</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eNorm</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">50000</span>, <span class="va">PopEven</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eNorm</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">50000</span>, <span class="va">PopEqual</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="fu">figHist</span><span class="op">(</span><span class="va">eNorm</span><span class="op">$</span><span class="va">Sum</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -660,21 +663,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">FigA</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FigB</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FigC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-20-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -685,20 +688,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-20-4.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ProbEvent</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">eNorm</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ProbEqualt</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">eNorm</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbEvent</span>, <span class="st">"Probability to ... of Money - Timeline"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbEqualt</span>, <span class="st">"Probability to ... of Money - Timeline"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -706,25 +709,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="vergleich" class="level1"><h1>Vergleich</h1>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sNorms</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">5000</span>, <span class="va">PopNorm</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span><span class="va">ProbNorms</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">sNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span>
-<span><span class="va">eNorms</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">5000</span>, <span class="va">PopEven</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span><span class="va">ProbEvents</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">eNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">ProbNormts</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">sNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span>
+<span><span class="va">eNorms</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">5000</span>, <span class="va">PopEqual</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span><span class="va">ProbEqualts</span> <span class="op">&lt;-</span> <span class="fu">calc_p_t</span><span class="op">(</span><span class="va">eNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbNorms</span>, </span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbNormts</span>, </span>
 <span>          <span class="st">"Probability to ... of Money\nTimeline for the Norm Population"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbEqualts</span>, </span>
+<span>          <span class="st">"Probability to ... of Money\nTimeline for a equal Population"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FigE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> Time <span class="op">=</span> <span class="va">ProbNormts</span><span class="op">[</span><span class="va">ProbNormts</span><span class="op">$</span><span class="va">Res</span> <span class="op">==</span> <span class="st">"Money"</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Time"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>                    Norm <span class="op">=</span> <span class="fu">gini_t</span><span class="op">(</span><span class="va">sNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span>,</span>
+<span>                    Equal <span class="op">=</span> <span class="fu">gini_t</span><span class="op">(</span><span class="va">eNorms</span><span class="op">$</span><span class="va">Timeline</span><span class="op">)</span></span>
+<span>                   <span class="op">)</span></span>
+<span><span class="va">FigE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">FigE</span><span class="op">)</span>,</span>
+<span>                      cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"Time"</span><span class="op">)</span>,</span>
+<span>                      names_to <span class="op">=</span> <span class="st">"Pop"</span>,</span>
+<span>                      values_to <span class="op">=</span> <span class="st">"Gini"</span></span>
+<span>                      <span class="op">)</span></span>
+<span>                    </span>
+<span><span class="va">FigEp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">FigE</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Time</span>, y <span class="op">=</span> <span class="va">Gini</span>, color <span class="op">=</span> <span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Start Population"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Gini-Faktor - Timeline"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"number of exchanges"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Gini"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>        legend.justification <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">FigEp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">figProb_t</span><span class="op">(</span><span class="va">ProbEvents</span>, </span>
-<span>          <span class="st">"Probability to ... of Money\nTimeline for a even Population"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FigF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> Time <span class="op">=</span> <span class="va">ProbNormts</span><span class="op">[</span><span class="va">ProbNormts</span><span class="op">$</span><span class="va">Res</span> <span class="op">==</span> <span class="st">"Money"</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Time"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>                    GNorm <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">FigE</span><span class="op">[</span><span class="va">FigE</span><span class="op">$</span><span class="va">Pop</span> <span class="op">==</span> <span class="st">"Norm"</span>,<span class="st">"Gini"</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                    PNorm <span class="op">=</span> <span class="va">ProbNormts</span><span class="op">[</span><span class="va">ProbNormts</span><span class="op">$</span><span class="va">Res</span> <span class="op">==</span> <span class="st">"probmean"</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>                    GEqual <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="va">FigE</span><span class="op">[</span><span class="va">FigE</span><span class="op">$</span><span class="va">Pop</span> <span class="op">==</span> <span class="st">"Equal"</span>,<span class="st">"Gini"</span><span class="op">]</span>,</span>
+<span>                    PEqual <span class="op">=</span> <span class="va">ProbEqualts</span><span class="op">[</span><span class="va">ProbEqualts</span><span class="op">$</span><span class="va">Res</span> <span class="op">==</span> <span class="st">"probmean"</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean"</span><span class="op">)</span><span class="op">]</span></span>
+<span>                   <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">FigF</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Time"</span>, <span class="st">"GNorm"</span>, <span class="st">"PNorm"</span>, <span class="st">"GEqual"</span>, <span class="st">"PEqual"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">FigF</span><span class="op">$</span><span class="va">Faktn</span> <span class="op">&lt;-</span> <span class="va">FigF</span><span class="op">$</span><span class="va">GNorm</span><span class="op">/</span><span class="va">FigF</span><span class="op">$</span><span class="va">PNorm</span></span>
+<span><span class="va">FigF</span><span class="op">$</span><span class="va">Fakte</span> <span class="op">&lt;-</span> <span class="va">FigF</span><span class="op">$</span><span class="va">GEqual</span><span class="op">/</span><span class="va">FigF</span><span class="op">$</span><span class="va">PEqual</span></span>
+<span></span>
+<span><span class="va">FigF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">FigF</span><span class="op">)</span>,</span>
+<span>                      cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"F"</span><span class="op">)</span>,</span>
+<span>                      names_to <span class="op">=</span> <span class="st">"Pop"</span>,</span>
+<span>                      values_to <span class="op">=</span> <span class="st">"Fakt"</span></span>
+<span>                      <span class="op">)</span></span>
+<span></span>
+<span><span class="va">FigFp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">FigF</span>, </span>
+<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Time</span>, y <span class="op">=</span> <span class="va">Fakt</span>, color <span class="op">=</span> <span class="va">Pop</span>, linetype <span class="op">=</span> <span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Start Population"</span>, </span>
+<span>                     values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Equal"</span>, <span class="st">"Norm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span><span class="op">(</span><span class="st">"Start Population"</span>,</span>
+<span>                        values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"dashed"</span><span class="op">)</span>,</span>
+<span>                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Equal"</span>, <span class="st">"Norm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Relation between\n </span></span>
+<span><span class="st">          Probability to gain more than the Mean\n</span></span>
+<span><span class="st">          and (1-Gini) - Timeline"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"number of exchanges"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Faktor"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>        legend.justification <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">FigFp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="notebook_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1211,467 +1287,506 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb35" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Notebook"</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Final Version</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definitions</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>At beginning I load some packets for nicer plots.</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>Start Population from the paper (PopNorm) with less Agents to spend calculationtime</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">=</span> <span class="dv">1000</span>         <span class="co"># number of Agents</span></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">=</span> <span class="fu">seq_len</span>(nA)  <span class="co"># ID of the Agents</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>M0pop <span class="ot">=</span> <span class="dv">100</span>       <span class="co"># Mean amount of Money in the Start-Population</span></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="co"># generating Start-Population</span></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>PopNorm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> ID,</span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Money=</span> <span class="fu">sort</span>(<span class="fu">rnorm</span>(nA, <span class="at">mean =</span> M0pop, <span class="at">sd =</span> <span class="fl">0.2</span> <span class="sc">*</span> M0pop))</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>                      )</span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>gini <span class="ot">&lt;-</span> <span class="cf">function</span>(Pop) {</span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">NROW</span>(Pop)</span>
-<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>  numer <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>    numer <span class="ot">&lt;-</span> numer <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> i <span class="sc">*</span> Pop[i]</span>
-<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>  denom <span class="ot">=</span> n <span class="sc">*</span> <span class="fu">sum</span>(Pop)</span>
-<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((numer <span class="sc">/</span> denom) <span class="sc">-</span> (n <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> n)</span>
-<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a>gini_t <span class="ot">&lt;-</span> <span class="cf">function</span>(Pop) {</span>
-<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">NCOL</span>(Pop)</span>
-<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a>  GT <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>)</span>
-<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a>    GT[i] <span class="ot">&lt;-</span>  <span class="fu">gini</span>(Pop[,i])</span>
-<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(GT)</span>
-<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a><span class="fu">gini</span>(PopNorm<span class="sc">$</span>Money)</span>
-<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a>Plot</span>
-<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PopNorm, <span class="fu">aes</span>(<span class="at">x =</span> Money)) <span class="sc">+</span></span>
-<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Population with G="</span>,</span>
-<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">gini</span>(PopNorm<span class="sc">$</span>Money),<span class="at">digits =</span><span class="dv">3</span>))) <span class="sc">+</span></span>
-<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a>splitpair <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a>  rn <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
-<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(rn,<span class="dv">1</span><span class="sc">-</span>rn)</span>
-<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a><span class="fu">splitpair</span>()</span>
-<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a>calculating the Probability for the next exchange</span>
-<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a>calc_p <span class="ot">&lt;-</span> <span class="cf">function</span>(M_dist) {</span>
-<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a>  Dist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Money =</span> M_dist,</span>
-<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probwin =</span> <span class="dv">0</span>,</span>
-<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probmed =</span> <span class="dv">0</span>,</span>
-<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probmean =</span> <span class="dv">0</span></span>
-<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>                     )</span>
-<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a>  Sum <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Money =</span> <span class="fu">c</span>(<span class="fu">min</span>(Dist<span class="sc">$</span>Money),</span>
-<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">max</span>(Dist<span class="sc">$</span>Money),</span>
-<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">median</span>(Dist<span class="sc">$</span>Money),</span>
-<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">mean</span>(Dist<span class="sc">$</span>Money)</span>
-<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a>                              ),</span>
-<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probwin =</span> <span class="dv">0</span>,</span>
-<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probmed =</span> <span class="dv">0</span>,</span>
-<span id="cb35-105"><a href="#cb35-105" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probmean =</span> <span class="dv">0</span></span>
-<span id="cb35-106"><a href="#cb35-106" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb35-107"><a href="#cb35-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(Sum) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"min"</span>, <span class="st">"max"</span>, <span class="st">"med"</span>, <span class="st">"mean"</span>)</span>
-<span id="cb35-108"><a href="#cb35-108" aria-hidden="true" tabindex="-1"></a>  M_Med <span class="ot">&lt;-</span> Sum[<span class="st">"med"</span>, <span class="st">"Money"</span>]</span>
-<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a>  M_Mean <span class="ot">&lt;-</span> Sum[<span class="st">"mean"</span>, <span class="st">"Money"</span>]</span>
-<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Dist)) {</span>
-<span id="cb35-111"><a href="#cb35-111" aria-hidden="true" tabindex="-1"></a>    M_A <span class="ot">&lt;-</span> Dist[i,<span class="st">"Money"</span>]</span>
-<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a>    M_oA <span class="ot">&lt;-</span> Dist[<span class="fu">c</span>(<span class="sc">-</span>i),<span class="st">"Money"</span>]</span>
-<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a>    pwin <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
-<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>    pmed <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
-<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a>    pmean <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
-<span id="cb35-116"><a href="#cb35-116" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">NROW</span>(M_oA)) {</span>
-<span id="cb35-117"><a href="#cb35-117" aria-hidden="true" tabindex="-1"></a>      Pot <span class="ot">&lt;-</span> <span class="fu">max</span>(M_A <span class="sc">+</span> M_oA[ii], <span class="fl">10e-8</span>)</span>
-<span id="cb35-118"><a href="#cb35-118" aria-hidden="true" tabindex="-1"></a>      pwin[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_A<span class="sc">/</span>Pot)</span>
-<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a>      pmed[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_Med<span class="sc">/</span>Pot)</span>
-<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a>      pmean[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_Mean<span class="sc">/</span>Pot)</span>
-<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probwin"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pwin)</span>
-<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probmed"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pmed)</span>
-<span id="cb35-124"><a href="#cb35-124" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probmean"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pmean)</span>
-<span id="cb35-125"><a href="#cb35-125" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-126"><a href="#cb35-126" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"probwin"</span>,<span class="st">"probmed"</span>,<span class="st">"probmean"</span>)) {</span>
-<span id="cb35-127"><a href="#cb35-127" aria-hidden="true" tabindex="-1"></a>    Sum[[i]] <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">min</span>(Dist[[i]]),</span>
-<span id="cb35-128"><a href="#cb35-128" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">max</span>(Dist[[i]]),</span>
-<span id="cb35-129"><a href="#cb35-129" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">median</span>(Dist[[i]]),</span>
-<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mean</span>(Dist[[i]])</span>
-<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Sum =</span> Sum, <span class="at">Dist =</span> Dist)</span>
-<span id="cb35-135"><a href="#cb35-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
-<span id="cb35-136"><a href="#cb35-136" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-137"><a href="#cb35-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-138"><a href="#cb35-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-139"><a href="#cb35-139" aria-hidden="true" tabindex="-1"></a>Calculating for Normpopulation</span>
-<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-144"><a href="#cb35-144" aria-hidden="true" tabindex="-1"></a>ProbNorm <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(PopNorm<span class="sc">$</span>Money)</span>
-<span id="cb35-145"><a href="#cb35-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-146"><a href="#cb35-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-147"><a href="#cb35-147" aria-hidden="true" tabindex="-1"></a>plot</span>
-<span id="cb35-148"><a href="#cb35-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-152"><a href="#cb35-152" aria-hidden="true" tabindex="-1"></a>figProb <span class="ot">&lt;-</span> <span class="cf">function</span>(Prob, Title, xmax) {</span>
-<span id="cb35-153"><a href="#cb35-153" aria-hidden="true" tabindex="-1"></a>  Figd <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(Prob<span class="sc">$</span>Dist),</span>
-<span id="cb35-154"><a href="#cb35-154" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"p"</span>),</span>
-<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_to =</span> <span class="st">"Outcome"</span>,</span>
-<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">"Probability"</span></span>
-<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a>                       )</span>
-<span id="cb35-158"><a href="#cb35-158" aria-hidden="true" tabindex="-1"></a>  Figs <span class="ot">&lt;-</span> Prob<span class="sc">$</span>Sum</span>
-<span id="cb35-159"><a href="#cb35-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-160"><a href="#cb35-160" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Figd,</span>
-<span id="cb35-161"><a href="#cb35-161" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> Money,</span>
-<span id="cb35-162"><a href="#cb35-162" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> Probability,</span>
-<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> Outcome</span>
-<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a>                     )</span>
-<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a>                 ) <span class="sc">+</span></span>
-<span id="cb35-166"><a href="#cb35-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>( <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb35-167"><a href="#cb35-167" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Probability to"</span>,</span>
-<span id="cb35-168"><a href="#cb35-168" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb35-169"><a href="#cb35-169" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gain more than the Mean"</span>,</span>
-<span id="cb35-170"><a href="#cb35-170" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"gain more than the Median"</span>,</span>
-<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"gain"</span>)</span>
-<span id="cb35-172"><a href="#cb35-172" aria-hidden="true" tabindex="-1"></a>                       ) <span class="sc">+</span></span>
-<span id="cb35-173"><a href="#cb35-173" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, xmax) <span class="sc">+</span></span>
-<span id="cb35-175"><a href="#cb35-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-176"><a href="#cb35-176" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>],</span>
-<span id="cb35-177"><a href="#cb35-177" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-178"><a href="#cb35-178" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>] <span class="sc">*</span> <span class="fl">0.95</span>,</span>
-<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb35-182"><a href="#cb35-182" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
-<span id="cb35-183"><a href="#cb35-183" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Median</span><span class="sc">\n</span><span class="st">="</span>,</span>
-<span id="cb35-184"><a href="#cb35-184" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>], <span class="dv">0</span>)),</span>
-<span id="cb35-185"><a href="#cb35-185" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-186"><a href="#cb35-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>],</span>
-<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb35-190"><a href="#cb35-190" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>] <span class="sc">*</span> <span class="fl">1.05</span>,</span>
-<span id="cb35-191"><a href="#cb35-191" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb35-192"><a href="#cb35-192" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">0</span>,</span>
-<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
-<span id="cb35-194"><a href="#cb35-194" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean</span><span class="sc">\n</span><span class="st">="</span>,</span>
-<span id="cb35-195"><a href="#cb35-195" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>], <span class="dv">0</span>)),</span>
-<span id="cb35-196"><a href="#cb35-196" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-197"><a href="#cb35-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-198"><a href="#cb35-198" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>],</span>
-<span id="cb35-199"><a href="#cb35-199" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb35-200"><a href="#cb35-200" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb35-201"><a href="#cb35-201" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> xmax,</span>
-<span id="cb35-202"><a href="#cb35-202" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>] <span class="sc">*</span> <span class="fl">1.05</span>,</span>
-<span id="cb35-203"><a href="#cb35-203" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb35-204"><a href="#cb35-204" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
-<span id="cb35-205"><a href="#cb35-205" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean ="</span>,</span>
-<span id="cb35-206"><a href="#cb35-206" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>], <span class="dv">2</span>)),</span>
-<span id="cb35-207"><a href="#cb35-207" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb35-208"><a href="#cb35-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-209"><a href="#cb35-209" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>],</span>
-<span id="cb35-210"><a href="#cb35-210" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb35-211"><a href="#cb35-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb35-212"><a href="#cb35-212" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> xmax,</span>
-<span id="cb35-213"><a href="#cb35-213" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>]<span class="sc">*</span><span class="fl">0.95</span>,</span>
-<span id="cb35-214"><a href="#cb35-214" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb35-215"><a href="#cb35-215" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">1</span>,</span>
-<span id="cb35-216"><a href="#cb35-216" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean ="</span>,</span>
-<span id="cb35-217"><a href="#cb35-217" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>], <span class="dv">2</span>)),</span>
-<span id="cb35-218"><a href="#cb35-218" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb35-219"><a href="#cb35-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-220"><a href="#cb35-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> Title) <span class="sc">+</span></span>
-<span id="cb35-221"><a href="#cb35-221" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb35-222"><a href="#cb35-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb35-223"><a href="#cb35-223" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb35-224"><a href="#cb35-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
-<span id="cb35-225"><a href="#cb35-225" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-226"><a href="#cb35-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-227"><a href="#cb35-227" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb</span>(ProbNorm, <span class="st">"Probability at Beginning"</span>, <span class="dv">200</span>)</span>
-<span id="cb35-228"><a href="#cb35-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-229"><a href="#cb35-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-230"><a href="#cb35-230" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulation</span></span>
-<span id="cb35-231"><a href="#cb35-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-234"><a href="#cb35-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-235"><a href="#cb35-235" aria-hidden="true" tabindex="-1"></a>ecosim <span class="ot">&lt;-</span> <span class="cf">function</span>( n, M_dist, <span class="at">TL =</span> <span class="dv">0</span> ) {</span>
-<span id="cb35-236"><a href="#cb35-236" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">NROW</span>(M_dist)),</span>
-<span id="cb35-237"><a href="#cb35-237" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
-<span id="cb35-238"><a href="#cb35-238" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT_S=</span>M_dist,</span>
-<span id="cb35-239"><a href="#cb35-239" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT_E=</span>M_dist</span>
-<span id="cb35-240"><a href="#cb35-240" aria-hidden="true" tabindex="-1"></a>                   )</span>
-<span id="cb35-241"><a href="#cb35-241" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (TL <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb35-242"><a href="#cb35-242" aria-hidden="true" tabindex="-1"></a>    M_TL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n0 =</span> df<span class="sc">$</span>MT_S)</span>
-<span id="cb35-243"><a href="#cb35-243" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-244"><a href="#cb35-244" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb35-245"><a href="#cb35-245" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
-<span id="cb35-246"><a href="#cb35-246" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">splitpair</span>()</span>
-<span id="cb35-247"><a href="#cb35-247" aria-hidden="true" tabindex="-1"></a>    df[rdf,<span class="st">"nE"</span>] <span class="ot">&lt;-</span> df[rdf,<span class="st">"nE"</span>] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb35-248"><a href="#cb35-248" aria-hidden="true" tabindex="-1"></a>    df[rdf,<span class="st">"MT_E"</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>( df[rdf,<span class="st">"MT_E"</span>]) <span class="sc">*</span> rds</span>
-<span id="cb35-249"><a href="#cb35-249" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ( TL <span class="sc">&gt;</span> <span class="dv">0</span> ) {</span>
-<span id="cb35-250"><a href="#cb35-250" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ( i <span class="sc">%%</span> TL <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb35-251"><a href="#cb35-251" aria-hidden="true" tabindex="-1"></a>        M_TL [[<span class="fu">paste0</span>(<span class="st">"n"</span>,i)]]<span class="ot">&lt;-</span> df<span class="sc">$</span>MT_E</span>
-<span id="cb35-252"><a href="#cb35-252" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb35-253"><a href="#cb35-253" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb35-254"><a href="#cb35-254" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-255"><a href="#cb35-255" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"Sum"</span> <span class="ot">=</span> df)</span>
-<span id="cb35-256"><a href="#cb35-256" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( TL <span class="sc">&gt;</span> <span class="dv">0</span> ) {</span>
-<span id="cb35-257"><a href="#cb35-257" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(M_TL) <span class="ot">&lt;-</span> df<span class="sc">$</span>ID</span>
-<span id="cb35-258"><a href="#cb35-258" aria-hidden="true" tabindex="-1"></a>    Output<span class="sc">$</span>Timeline <span class="ot">&lt;-</span> M_TL</span>
-<span id="cb35-259"><a href="#cb35-259" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-260"><a href="#cb35-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
-<span id="cb35-261"><a href="#cb35-261" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-262"><a href="#cb35-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-263"><a href="#cb35-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-264"><a href="#cb35-264" aria-hidden="true" tabindex="-1"></a>simulieren</span>
-<span id="cb35-265"><a href="#cb35-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-268"><a href="#cb35-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-269"><a href="#cb35-269" aria-hidden="true" tabindex="-1"></a>sNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">50000</span>, PopNorm<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
-<span id="cb35-270"><a href="#cb35-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-271"><a href="#cb35-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-272"><a href="#cb35-272" aria-hidden="true" tabindex="-1"></a>ploten Histogram</span>
-<span id="cb35-273"><a href="#cb35-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-276"><a href="#cb35-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-277"><a href="#cb35-277" aria-hidden="true" tabindex="-1"></a>figHist <span class="ot">&lt;-</span> <span class="cf">function</span>(Sim_Sum) {</span>
-<span id="cb35-278"><a href="#cb35-278" aria-hidden="true" tabindex="-1"></a>  Fig <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(Sim_Sum),</span>
-<span id="cb35-279"><a href="#cb35-279" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"MT"</span>),</span>
-<span id="cb35-280"><a href="#cb35-280" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Distribution"</span>,</span>
-<span id="cb35-281"><a href="#cb35-281" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Money"</span></span>
-<span id="cb35-282"><a href="#cb35-282" aria-hidden="true" tabindex="-1"></a>                      )</span>
-<span id="cb35-283"><a href="#cb35-283" aria-hidden="true" tabindex="-1"></a>  Fig<span class="sc">$</span>Distribution <span class="ot">&lt;-</span><span class="fu">recode</span>(Fig<span class="sc">$</span>Distribution,</span>
-<span id="cb35-284"><a href="#cb35-284" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MT_S"</span> <span class="ot">=</span> <span class="st">"at Begining"</span>,</span>
-<span id="cb35-285"><a href="#cb35-285" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MT_E"</span> <span class="ot">=</span> <span class="st">"at the End"</span></span>
-<span id="cb35-286"><a href="#cb35-286" aria-hidden="true" tabindex="-1"></a>                            )</span>
-<span id="cb35-287"><a href="#cb35-287" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Fig, <span class="fu">aes</span>(<span class="at">x =</span> Money, <span class="at">fill =</span> Distribution)) <span class="sc">+</span></span>
-<span id="cb35-288"><a href="#cb35-288" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb35-289"><a href="#cb35-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb35-290"><a href="#cb35-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb35-291"><a href="#cb35-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb35-292"><a href="#cb35-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb35-293"><a href="#cb35-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb35-294"><a href="#cb35-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
-<span id="cb35-295"><a href="#cb35-295" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-296"><a href="#cb35-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-297"><a href="#cb35-297" aria-hidden="true" tabindex="-1"></a><span class="fu">figHist</span>(sNorm<span class="sc">$</span>Sum)</span>
-<span id="cb35-298"><a href="#cb35-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-299"><a href="#cb35-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-300"><a href="#cb35-300" aria-hidden="true" tabindex="-1"></a>Timeline Money of 9 Agents</span>
-<span id="cb35-301"><a href="#cb35-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-304"><a href="#cb35-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-305"><a href="#cb35-305" aria-hidden="true" tabindex="-1"></a>MTime <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ID,sNorm<span class="sc">$</span>Timeline)</span>
-<span id="cb35-306"><a href="#cb35-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-307"><a href="#cb35-307" aria-hidden="true" tabindex="-1"></a>sID <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,nA<span class="sc">/</span><span class="dv">2-1</span>,nA<span class="sc">/</span><span class="dv">2</span>,nA<span class="sc">/</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>,nA<span class="dv">-2</span>,nA<span class="dv">-1</span>,nA)</span>
-<span id="cb35-308"><a href="#cb35-308" aria-hidden="true" tabindex="-1"></a>sMTime <span class="ot">&lt;-</span> MTime[sID,]</span>
-<span id="cb35-309"><a href="#cb35-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-310"><a href="#cb35-310" aria-hidden="true" tabindex="-1"></a>Fig03 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(sMTime),</span>
-<span id="cb35-311"><a href="#cb35-311" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="sc">!</span><span class="fu">matches</span>(<span class="st">"ID"</span>),</span>
-<span id="cb35-312"><a href="#cb35-312" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
-<span id="cb35-313"><a href="#cb35-313" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_prefix =</span> <span class="st">"n"</span>,</span>
-<span id="cb35-314"><a href="#cb35-314" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">Time =</span> as.integer),</span>
-<span id="cb35-315"><a href="#cb35-315" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Money"</span></span>
-<span id="cb35-316"><a href="#cb35-316" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-317"><a href="#cb35-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-318"><a href="#cb35-318" aria-hidden="true" tabindex="-1"></a>Fig03<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%04d"</span>, Fig03<span class="sc">$</span>ID)</span>
-<span id="cb35-319"><a href="#cb35-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-320"><a href="#cb35-320" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Fig03, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Money, <span class="at">color =</span> ID)) <span class="sc">+</span></span>
-<span id="cb35-321"><a href="#cb35-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb35-322"><a href="#cb35-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Timeline for some Agents"</span>) <span class="sc">+</span></span>
-<span id="cb35-323"><a href="#cb35-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
-<span id="cb35-324"><a href="#cb35-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Agents ID"</span>) <span class="sc">+</span></span>
-<span id="cb35-325"><a href="#cb35-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb35-326"><a href="#cb35-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb35-327"><a href="#cb35-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb35-328"><a href="#cb35-328" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb35-329"><a href="#cb35-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-330"><a href="#cb35-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-331"><a href="#cb35-331" aria-hidden="true" tabindex="-1"></a>Probabilitiy at some Timepoints</span>
-<span id="cb35-332"><a href="#cb35-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-335"><a href="#cb35-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-336"><a href="#cb35-336" aria-hidden="true" tabindex="-1"></a>FigA <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">1</span>]), </span>
-<span id="cb35-337"><a href="#cb35-337" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at Beginning"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-338"><a href="#cb35-338" aria-hidden="true" tabindex="-1"></a>FigB <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">2</span>]), </span>
-<span id="cb35-339"><a href="#cb35-339" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 500 exchanges"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-340"><a href="#cb35-340" aria-hidden="true" tabindex="-1"></a>FigC <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">4</span>]), </span>
-<span id="cb35-341"><a href="#cb35-341" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 1000 exchanges"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-342"><a href="#cb35-342" aria-hidden="true" tabindex="-1"></a>FigD <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="fu">NCOL</span>(sNorm<span class="sc">$</span>Timeline)]), </span>
-<span id="cb35-343"><a href="#cb35-343" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at the End"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-344"><a href="#cb35-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-345"><a href="#cb35-345" aria-hidden="true" tabindex="-1"></a>FigA </span>
-<span id="cb35-346"><a href="#cb35-346" aria-hidden="true" tabindex="-1"></a>FigB</span>
-<span id="cb35-347"><a href="#cb35-347" aria-hidden="true" tabindex="-1"></a>FigC</span>
-<span id="cb35-348"><a href="#cb35-348" aria-hidden="true" tabindex="-1"></a>FigD</span>
-<span id="cb35-349"><a href="#cb35-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-350"><a href="#cb35-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-351"><a href="#cb35-351" aria-hidden="true" tabindex="-1"></a>calculating Probabilities for all timesteps</span>
-<span id="cb35-352"><a href="#cb35-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-355"><a href="#cb35-355" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-356"><a href="#cb35-356" aria-hidden="true" tabindex="-1"></a>calc_p_t <span class="ot">&lt;-</span> <span class="cf">function</span>(M_dist) {</span>
-<span id="cb35-357"><a href="#cb35-357" aria-hidden="true" tabindex="-1"></a>  pnt <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(M_dist[,<span class="dv">1</span>])</span>
-<span id="cb35-358"><a href="#cb35-358" aria-hidden="true" tabindex="-1"></a>  tx <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"n"</span>, <span class="st">""</span>,<span class="fu">colnames</span>(M_dist)[<span class="dv">1</span>]))</span>
-<span id="cb35-359"><a href="#cb35-359" aria-hidden="true" tabindex="-1"></a>  pnts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Time =</span> <span class="fu">rep</span>(tx, <span class="at">times =</span> <span class="dv">4</span>),</span>
-<span id="cb35-360"><a href="#cb35-360" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Res =</span> <span class="fu">colnames</span>(pnt<span class="sc">$</span>Sum),</span>
-<span id="cb35-361"><a href="#cb35-361" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">t</span>(pnt<span class="sc">$</span>Sum)</span>
-<span id="cb35-362"><a href="#cb35-362" aria-hidden="true" tabindex="-1"></a>                     )</span>
-<span id="cb35-363"><a href="#cb35-363" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(M_dist)) {</span>
-<span id="cb35-364"><a href="#cb35-364" aria-hidden="true" tabindex="-1"></a>    pnt <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(M_dist[,i])</span>
-<span id="cb35-365"><a href="#cb35-365" aria-hidden="true" tabindex="-1"></a>    tx <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"n"</span>, <span class="st">""</span>,<span class="fu">colnames</span>(M_dist)[i]))</span>
-<span id="cb35-366"><a href="#cb35-366" aria-hidden="true" tabindex="-1"></a>    pnti <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Time =</span> <span class="fu">rep</span>(tx, <span class="at">times =</span> <span class="dv">4</span>),</span>
-<span id="cb35-367"><a href="#cb35-367" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Res =</span> <span class="fu">colnames</span>(pnt<span class="sc">$</span>Sum),</span>
-<span id="cb35-368"><a href="#cb35-368" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">t</span>(pnt<span class="sc">$</span>Sum)</span>
-<span id="cb35-369"><a href="#cb35-369" aria-hidden="true" tabindex="-1"></a>                       )</span>
-<span id="cb35-370"><a href="#cb35-370" aria-hidden="true" tabindex="-1"></a>    pnts <span class="ot">&lt;-</span> <span class="fu">rbind</span>(pnts,pnti)</span>
-<span id="cb35-371"><a href="#cb35-371" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-372"><a href="#cb35-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(pnts) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb35-373"><a href="#cb35-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pnts)</span>
-<span id="cb35-374"><a href="#cb35-374" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-375"><a href="#cb35-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-376"><a href="#cb35-376" aria-hidden="true" tabindex="-1"></a>ProbNormt <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(sNorm<span class="sc">$</span>Timeline)</span>
-<span id="cb35-377"><a href="#cb35-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-378"><a href="#cb35-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-379"><a href="#cb35-379" aria-hidden="true" tabindex="-1"></a>Plot</span>
-<span id="cb35-380"><a href="#cb35-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-383"><a href="#cb35-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-384"><a href="#cb35-384" aria-hidden="true" tabindex="-1"></a>figProb_t <span class="ot">&lt;-</span> <span class="cf">function</span>(Prob, Title) {</span>
-<span id="cb35-385"><a href="#cb35-385" aria-hidden="true" tabindex="-1"></a>  Fig <span class="ot">&lt;-</span> Prob[Prob<span class="sc">$</span>Res<span class="sc">!=</span><span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>,<span class="st">"Res"</span>,<span class="st">"mean"</span>)]</span>
-<span id="cb35-386"><a href="#cb35-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-387"><a href="#cb35-387" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Fig, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> mean, <span class="at">color =</span> Res)) <span class="sc">+</span></span>
-<span id="cb35-388"><a href="#cb35-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-389"><a href="#cb35-389" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb35-390"><a href="#cb35-390" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gain more than the Mean"</span>,</span>
-<span id="cb35-391"><a href="#cb35-391" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"gain more than the Median"</span>,</span>
-<span id="cb35-392"><a href="#cb35-392" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"gain"</span>)) <span class="sc">+</span></span>
-<span id="cb35-393"><a href="#cb35-393" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(Title) <span class="sc">+</span></span>
-<span id="cb35-394"><a href="#cb35-394" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
-<span id="cb35-395"><a href="#cb35-395" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Mean-Probability in the Population"</span>) <span class="sc">+</span></span>
-<span id="cb35-396"><a href="#cb35-396" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="fl">0.30</span>, <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb35-397"><a href="#cb35-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb35-398"><a href="#cb35-398" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb35-399"><a href="#cb35-399" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb35-400"><a href="#cb35-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
-<span id="cb35-401"><a href="#cb35-401" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-402"><a href="#cb35-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-403"><a href="#cb35-403" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbNormt, <span class="st">"Probability to ... of Money - Timeline"</span>)</span>
-<span id="cb35-404"><a href="#cb35-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-405"><a href="#cb35-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-406"><a href="#cb35-406" aria-hidden="true" tabindex="-1"></a><span class="fu"># EvenPop</span></span>
-<span id="cb35-407"><a href="#cb35-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-410"><a href="#cb35-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-411"><a href="#cb35-411" aria-hidden="true" tabindex="-1"></a><span class="co"># generating Start-Population</span></span>
-<span id="cb35-412"><a href="#cb35-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-413"><a href="#cb35-413" aria-hidden="true" tabindex="-1"></a>PopEven <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> ID,</span>
-<span id="cb35-414"><a href="#cb35-414" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Money =</span> <span class="fu">rep</span>(M0pop, <span class="at">times =</span> nA)</span>
-<span id="cb35-415"><a href="#cb35-415" aria-hidden="true" tabindex="-1"></a>                      )</span>
-<span id="cb35-416"><a href="#cb35-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-417"><a href="#cb35-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-420"><a href="#cb35-420" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-421"><a href="#cb35-421" aria-hidden="true" tabindex="-1"></a>ProbEven <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(PopEven<span class="sc">$</span>Money)</span>
-<span id="cb35-422"><a href="#cb35-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-423"><a href="#cb35-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-426"><a href="#cb35-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-427"><a href="#cb35-427" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb</span>(ProbEven, <span class="st">"Probability at Beginning"</span>, <span class="dv">300</span>)</span>
-<span id="cb35-428"><a href="#cb35-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-429"><a href="#cb35-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-432"><a href="#cb35-432" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-433"><a href="#cb35-433" aria-hidden="true" tabindex="-1"></a>eNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">50000</span>, PopEven<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
-<span id="cb35-434"><a href="#cb35-434" aria-hidden="true" tabindex="-1"></a><span class="fu">figHist</span>(eNorm<span class="sc">$</span>Sum)</span>
-<span id="cb35-435"><a href="#cb35-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-436"><a href="#cb35-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-439"><a href="#cb35-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-440"><a href="#cb35-440" aria-hidden="true" tabindex="-1"></a>FigA <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">1</span>]), </span>
-<span id="cb35-441"><a href="#cb35-441" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at Beginning"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-442"><a href="#cb35-442" aria-hidden="true" tabindex="-1"></a>FigB <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">2</span>]), </span>
-<span id="cb35-443"><a href="#cb35-443" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 500 exchanges"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-444"><a href="#cb35-444" aria-hidden="true" tabindex="-1"></a>FigC <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">4</span>]), </span>
-<span id="cb35-445"><a href="#cb35-445" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 1000 exchanges"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-446"><a href="#cb35-446" aria-hidden="true" tabindex="-1"></a>FigD <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="fu">NCOL</span>(eNorm<span class="sc">$</span>Timeline)]), </span>
-<span id="cb35-447"><a href="#cb35-447" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at the End"</span>, <span class="dv">850</span>)</span>
-<span id="cb35-448"><a href="#cb35-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-449"><a href="#cb35-449" aria-hidden="true" tabindex="-1"></a>FigA </span>
-<span id="cb35-450"><a href="#cb35-450" aria-hidden="true" tabindex="-1"></a>FigB</span>
-<span id="cb35-451"><a href="#cb35-451" aria-hidden="true" tabindex="-1"></a>FigC</span>
-<span id="cb35-452"><a href="#cb35-452" aria-hidden="true" tabindex="-1"></a>FigD</span>
-<span id="cb35-453"><a href="#cb35-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-454"><a href="#cb35-454" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-457"><a href="#cb35-457" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-458"><a href="#cb35-458" aria-hidden="true" tabindex="-1"></a>ProbEvent <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(eNorm<span class="sc">$</span>Timeline)</span>
-<span id="cb35-459"><a href="#cb35-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-460"><a href="#cb35-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-463"><a href="#cb35-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-464"><a href="#cb35-464" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbEvent, <span class="st">"Probability to ... of Money - Timeline"</span>)</span>
-<span id="cb35-465"><a href="#cb35-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-466"><a href="#cb35-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-467"><a href="#cb35-467" aria-hidden="true" tabindex="-1"></a><span class="fu"># Vergleich</span></span>
-<span id="cb35-468"><a href="#cb35-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-471"><a href="#cb35-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-472"><a href="#cb35-472" aria-hidden="true" tabindex="-1"></a>sNorms <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">5000</span>, PopNorm<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">50</span>)</span>
-<span id="cb35-473"><a href="#cb35-473" aria-hidden="true" tabindex="-1"></a>ProbNorms <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(sNorms<span class="sc">$</span>Timeline)</span>
-<span id="cb35-474"><a href="#cb35-474" aria-hidden="true" tabindex="-1"></a>eNorms <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">5000</span>, PopEven<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">50</span>)</span>
-<span id="cb35-475"><a href="#cb35-475" aria-hidden="true" tabindex="-1"></a>ProbEvents <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(eNorms<span class="sc">$</span>Timeline)</span>
-<span id="cb35-476"><a href="#cb35-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-477"><a href="#cb35-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-480"><a href="#cb35-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-481"><a href="#cb35-481" aria-hidden="true" tabindex="-1"></a>GsNorms <span class="ot">&lt;-</span> <span class="fu">gini_t</span>(sNorms<span class="sc">$</span>Timeline)</span>
-<span id="cb35-482"><a href="#cb35-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-483"><a href="#cb35-483" aria-hidden="true" tabindex="-1"></a>ProbNorms[ProbNorms<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>)]</span>
-<span id="cb35-484"><a href="#cb35-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-485"><a href="#cb35-485" aria-hidden="true" tabindex="-1"></a>GeNorms <span class="ot">&lt;-</span> <span class="fu">gini_t</span>(eNorms<span class="sc">$</span>Timeline)</span>
-<span id="cb35-486"><a href="#cb35-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-487"><a href="#cb35-487" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-488"><a href="#cb35-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-491"><a href="#cb35-491" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-492"><a href="#cb35-492" aria-hidden="true" tabindex="-1"></a>FigE <span class="ot">&lt;-</span> <span class="fu">figProb_t</span>(ProbNorms, </span>
-<span id="cb35-493"><a href="#cb35-493" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Probability to ... of Money</span><span class="sc">\n</span><span class="st">Timeline for the Norm Population"</span>)</span>
-<span id="cb35-494"><a href="#cb35-494" aria-hidden="true" tabindex="-1"></a>FigE <span class="ot">&lt;-</span> FigE <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ProbNorms[ProbNorms<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>)], </span>
-<span id="cb35-495"><a href="#cb35-495" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> GsNorms),</span>
-<span id="cb35-496"><a href="#cb35-496" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb35-497"><a href="#cb35-497" aria-hidden="true" tabindex="-1"></a>               <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb35-498"><a href="#cb35-498" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x =</span> <span class="dv">1000</span>,</span>
-<span id="cb35-499"><a href="#cb35-499" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb35-500"><a href="#cb35-500" aria-hidden="true" tabindex="-1"></a>                        <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb35-501"><a href="#cb35-501" aria-hidden="true" tabindex="-1"></a>                        <span class="at">vjust =</span> <span class="dv">0</span>,</span>
-<span id="cb35-502"><a href="#cb35-502" aria-hidden="true" tabindex="-1"></a>                        <span class="at">label =</span> <span class="st">"GINI"</span>,</span>
-<span id="cb35-503"><a href="#cb35-503" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color =</span> <span class="dv">1</span>)</span>
-<span id="cb35-504"><a href="#cb35-504" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb35-505"><a href="#cb35-505" aria-hidden="true" tabindex="-1"></a>FigE</span>
-<span id="cb35-506"><a href="#cb35-506" aria-hidden="true" tabindex="-1"></a>ProbNorms[ProbNorms<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>)]</span>
-<span id="cb35-507"><a href="#cb35-507" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb35-508"><a href="#cb35-508" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbEvents, </span>
-<span id="cb35-509"><a href="#cb35-509" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Probability to ... of Money</span><span class="sc">\n</span><span class="st">Timeline for a even Population"</span>)</span>
-<span id="cb35-510"><a href="#cb35-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-511"><a href="#cb35-511" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Notebook"</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Final Version</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definitions</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>At beginning I load some packets for nicer plots.</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>Start Population from the paper (PopNorm) with less Agents to spend calculationtime</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">=</span> <span class="dv">1000</span>         <span class="co"># number of Agents</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">=</span> <span class="fu">seq_len</span>(nA)  <span class="co"># ID of the Agents</span></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>M0pop <span class="ot">=</span> <span class="dv">100</span>       <span class="co"># Mean amount of Money in the Start-Population</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co"># generating Start-Population</span></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>PopNorm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> ID,</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Money=</span> <span class="fu">sort</span>(<span class="fu">rnorm</span>(nA, <span class="at">mean =</span> M0pop, <span class="at">sd =</span> <span class="fl">0.2</span> <span class="sc">*</span> M0pop))</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>gini <span class="ot">&lt;-</span> <span class="cf">function</span>(Pop) {</span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>  Pop <span class="ot">&lt;-</span> <span class="fu">sort</span>(Pop)</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">NROW</span>(Pop)</span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>  numer <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a>    numer <span class="ot">&lt;-</span> numer <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> i <span class="sc">*</span> Pop[i]</span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a>  denom <span class="ot">=</span> n <span class="sc">*</span> <span class="fu">sum</span>(Pop)</span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((numer <span class="sc">/</span> denom) <span class="sc">-</span> (n <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> n)</span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>gini_t <span class="ot">&lt;-</span> <span class="cf">function</span>(Pop) {</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>  nc <span class="ot">&lt;-</span> <span class="fu">NCOL</span>(Pop)</span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a>  GT <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>)</span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nc) {</span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a>    GT[ii] <span class="ot">&lt;-</span>  <span class="fu">gini</span>(Pop[,ii])</span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(GT)</span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a><span class="fu">gini</span>(PopNorm<span class="sc">$</span>Money)</span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a>Plot</span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(PopNorm, <span class="fu">aes</span>(<span class="at">x =</span> Money)) <span class="sc">+</span></span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Population with G="</span>,</span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">gini</span>(PopNorm<span class="sc">$</span>Money),<span class="at">digits =</span><span class="dv">3</span>))) <span class="sc">+</span></span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-81"><a href="#cb37-81" aria-hidden="true" tabindex="-1"></a>splitpair <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb37-82"><a href="#cb37-82" aria-hidden="true" tabindex="-1"></a>  rn <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(rn,<span class="dv">1</span><span class="sc">-</span>rn)</span>
+<span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="fu">splitpair</span>()</span>
+<span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a>calculating the Probability for the next exchange</span>
+<span id="cb37-89"><a href="#cb37-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-93"><a href="#cb37-93" aria-hidden="true" tabindex="-1"></a>calc_p <span class="ot">&lt;-</span> <span class="cf">function</span>(M_dist) {</span>
+<span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a>  Dist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Money =</span> M_dist,</span>
+<span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probwin =</span> <span class="dv">0</span>,</span>
+<span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probmed =</span> <span class="dv">0</span>,</span>
+<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a>                     <span class="at">probmean =</span> <span class="dv">0</span></span>
+<span id="cb37-98"><a href="#cb37-98" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb37-99"><a href="#cb37-99" aria-hidden="true" tabindex="-1"></a>  Sum <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Money =</span> <span class="fu">c</span>(<span class="fu">min</span>(Dist<span class="sc">$</span>Money),</span>
+<span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">max</span>(Dist<span class="sc">$</span>Money),</span>
+<span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">median</span>(Dist<span class="sc">$</span>Money),</span>
+<span id="cb37-102"><a href="#cb37-102" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">mean</span>(Dist<span class="sc">$</span>Money)</span>
+<span id="cb37-103"><a href="#cb37-103" aria-hidden="true" tabindex="-1"></a>                              ),</span>
+<span id="cb37-104"><a href="#cb37-104" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probwin =</span> <span class="dv">0</span>,</span>
+<span id="cb37-105"><a href="#cb37-105" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probmed =</span> <span class="dv">0</span>,</span>
+<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probmean =</span> <span class="dv">0</span></span>
+<span id="cb37-107"><a href="#cb37-107" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb37-108"><a href="#cb37-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(Sum) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"min"</span>, <span class="st">"max"</span>, <span class="st">"med"</span>, <span class="st">"mean"</span>)</span>
+<span id="cb37-109"><a href="#cb37-109" aria-hidden="true" tabindex="-1"></a>  M_Med <span class="ot">&lt;-</span> Sum[<span class="st">"med"</span>, <span class="st">"Money"</span>]</span>
+<span id="cb37-110"><a href="#cb37-110" aria-hidden="true" tabindex="-1"></a>  M_Mean <span class="ot">&lt;-</span> Sum[<span class="st">"mean"</span>, <span class="st">"Money"</span>]</span>
+<span id="cb37-111"><a href="#cb37-111" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Dist)) {</span>
+<span id="cb37-112"><a href="#cb37-112" aria-hidden="true" tabindex="-1"></a>    M_A <span class="ot">&lt;-</span> Dist[i,<span class="st">"Money"</span>]</span>
+<span id="cb37-113"><a href="#cb37-113" aria-hidden="true" tabindex="-1"></a>    M_oA <span class="ot">&lt;-</span> Dist[<span class="fu">c</span>(<span class="sc">-</span>i),<span class="st">"Money"</span>]</span>
+<span id="cb37-114"><a href="#cb37-114" aria-hidden="true" tabindex="-1"></a>    pwin <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
+<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a>    pmed <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
+<span id="cb37-116"><a href="#cb37-116" aria-hidden="true" tabindex="-1"></a>    pmean <span class="ot">&lt;-</span> M_oA<span class="sc">*</span><span class="dv">0</span></span>
+<span id="cb37-117"><a href="#cb37-117" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">NROW</span>(M_oA)) {</span>
+<span id="cb37-118"><a href="#cb37-118" aria-hidden="true" tabindex="-1"></a>      Pot <span class="ot">&lt;-</span> <span class="fu">max</span>(M_A <span class="sc">+</span> M_oA[ii], <span class="fl">10e-8</span>)</span>
+<span id="cb37-119"><a href="#cb37-119" aria-hidden="true" tabindex="-1"></a>      pwin[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_A<span class="sc">/</span>Pot)</span>
+<span id="cb37-120"><a href="#cb37-120" aria-hidden="true" tabindex="-1"></a>      pmed[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_Med<span class="sc">/</span>Pot)</span>
+<span id="cb37-121"><a href="#cb37-121" aria-hidden="true" tabindex="-1"></a>      pmean[ii] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">min</span>(<span class="dv">1</span>, M_Mean<span class="sc">/</span>Pot)</span>
+<span id="cb37-122"><a href="#cb37-122" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb37-123"><a href="#cb37-123" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probwin"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pwin)</span>
+<span id="cb37-124"><a href="#cb37-124" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probmed"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pmed)</span>
+<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a>    Dist[i,<span class="st">"probmean"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(pmean)</span>
+<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-127"><a href="#cb37-127" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"probwin"</span>,<span class="st">"probmed"</span>,<span class="st">"probmean"</span>)) {</span>
+<span id="cb37-128"><a href="#cb37-128" aria-hidden="true" tabindex="-1"></a>    Sum[[i]] <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">min</span>(Dist[[i]]),</span>
+<span id="cb37-129"><a href="#cb37-129" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">max</span>(Dist[[i]]),</span>
+<span id="cb37-130"><a href="#cb37-130" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">median</span>(Dist[[i]]),</span>
+<span id="cb37-131"><a href="#cb37-131" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mean</span>(Dist[[i]])</span>
+<span id="cb37-132"><a href="#cb37-132" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb37-133"><a href="#cb37-133" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-134"><a href="#cb37-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Sum =</span> Sum, <span class="at">Dist =</span> Dist)</span>
+<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
+<span id="cb37-137"><a href="#cb37-137" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-138"><a href="#cb37-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-139"><a href="#cb37-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-140"><a href="#cb37-140" aria-hidden="true" tabindex="-1"></a>Calculating for Normpopulation</span>
+<span id="cb37-141"><a href="#cb37-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-144"><a href="#cb37-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a>ProbNorm <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(PopNorm<span class="sc">$</span>Money)</span>
+<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-147"><a href="#cb37-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-148"><a href="#cb37-148" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb37-149"><a href="#cb37-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-152"><a href="#cb37-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-153"><a href="#cb37-153" aria-hidden="true" tabindex="-1"></a>figProb <span class="ot">&lt;-</span> <span class="cf">function</span>(Prob, Title, xmax) {</span>
+<span id="cb37-154"><a href="#cb37-154" aria-hidden="true" tabindex="-1"></a>  Figd <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(Prob<span class="sc">$</span>Dist),</span>
+<span id="cb37-155"><a href="#cb37-155" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"p"</span>),</span>
+<span id="cb37-156"><a href="#cb37-156" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_to =</span> <span class="st">"Outcome"</span>,</span>
+<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">"Probability"</span></span>
+<span id="cb37-158"><a href="#cb37-158" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb37-159"><a href="#cb37-159" aria-hidden="true" tabindex="-1"></a>  Figs <span class="ot">&lt;-</span> Prob<span class="sc">$</span>Sum</span>
+<span id="cb37-160"><a href="#cb37-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-161"><a href="#cb37-161" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Figd,</span>
+<span id="cb37-162"><a href="#cb37-162" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> Money,</span>
+<span id="cb37-163"><a href="#cb37-163" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> Probability,</span>
+<span id="cb37-164"><a href="#cb37-164" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> Outcome</span>
+<span id="cb37-165"><a href="#cb37-165" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb37-166"><a href="#cb37-166" aria-hidden="true" tabindex="-1"></a>                 ) <span class="sc">+</span></span>
+<span id="cb37-167"><a href="#cb37-167" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>( <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Probability to"</span>,</span>
+<span id="cb37-169"><a href="#cb37-169" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb37-170"><a href="#cb37-170" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gain more than the Mean"</span>,</span>
+<span id="cb37-171"><a href="#cb37-171" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"gain more than the Median"</span>,</span>
+<span id="cb37-172"><a href="#cb37-172" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"gain"</span>)</span>
+<span id="cb37-173"><a href="#cb37-173" aria-hidden="true" tabindex="-1"></a>                       ) <span class="sc">+</span></span>
+<span id="cb37-174"><a href="#cb37-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-175"><a href="#cb37-175" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, xmax) <span class="sc">+</span></span>
+<span id="cb37-176"><a href="#cb37-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-177"><a href="#cb37-177" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>],</span>
+<span id="cb37-178"><a href="#cb37-178" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-179"><a href="#cb37-179" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb37-180"><a href="#cb37-180" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>] <span class="sc">*</span> <span class="fl">0.95</span>,</span>
+<span id="cb37-181"><a href="#cb37-181" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb37-182"><a href="#cb37-182" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
+<span id="cb37-184"><a href="#cb37-184" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Median</span><span class="sc">\n</span><span class="st">="</span>,</span>
+<span id="cb37-185"><a href="#cb37-185" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"med"</span>,<span class="st">"Money"</span>], <span class="dv">0</span>)),</span>
+<span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-187"><a href="#cb37-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>],</span>
+<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>] <span class="sc">*</span> <span class="fl">1.05</span>,</span>
+<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
+<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean</span><span class="sc">\n</span><span class="st">="</span>,</span>
+<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"Money"</span>], <span class="dv">0</span>)),</span>
+<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-199"><a href="#cb37-199" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>],</span>
+<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> xmax,</span>
+<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>] <span class="sc">*</span> <span class="fl">1.05</span>,</span>
+<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">0</span>,</span>
+<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean ="</span>,</span>
+<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"probmed"</span>], <span class="dv">2</span>)),</span>
+<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>],</span>
+<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">color =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> xmax,</span>
+<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>]<span class="sc">*</span><span class="fl">0.95</span>,</span>
+<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean ="</span>,</span>
+<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(Figs[<span class="st">"mean"</span>,<span class="st">"probmean"</span>], <span class="dv">2</span>)),</span>
+<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-221"><a href="#cb37-221" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> Title) <span class="sc">+</span></span>
+<span id="cb37-222"><a href="#cb37-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
+<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb</span>(ProbNorm, <span class="st">"Probability at Beginning"</span>, <span class="dv">200</span>)</span>
+<span id="cb37-229"><a href="#cb37-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulation</span></span>
+<span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a>ecosim <span class="ot">&lt;-</span> <span class="cf">function</span>( n, M_dist, <span class="at">TL =</span> <span class="dv">0</span> ) {</span>
+<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">NROW</span>(M_dist)),</span>
+<span id="cb37-238"><a href="#cb37-238" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nE=</span><span class="dv">0</span>,</span>
+<span id="cb37-239"><a href="#cb37-239" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT_S=</span>M_dist,</span>
+<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MT_E=</span>M_dist</span>
+<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (TL <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a>    M_TL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n0 =</span> df<span class="sc">$</span>MT_S)</span>
+<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a>    rdf <span class="ot">&lt;-</span> <span class="fu">sample</span>(df<span class="sc">$</span>ID, <span class="at">size=</span><span class="dv">2</span>)</span>
+<span id="cb37-247"><a href="#cb37-247" aria-hidden="true" tabindex="-1"></a>    rds <span class="ot">&lt;-</span> <span class="fu">splitpair</span>()</span>
+<span id="cb37-248"><a href="#cb37-248" aria-hidden="true" tabindex="-1"></a>    df[rdf,<span class="st">"nE"</span>] <span class="ot">&lt;-</span> df[rdf,<span class="st">"nE"</span>] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a>    df[rdf,<span class="st">"MT_E"</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>( df[rdf,<span class="st">"MT_E"</span>]) <span class="sc">*</span> rds</span>
+<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ( TL <span class="sc">&gt;</span> <span class="dv">0</span> ) {</span>
+<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ( i <span class="sc">%%</span> TL <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a>        M_TL [[<span class="fu">paste0</span>(<span class="st">"n"</span>,i)]]<span class="ot">&lt;-</span> df<span class="sc">$</span>MT_E</span>
+<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-256"><a href="#cb37-256" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"Sum"</span> <span class="ot">=</span> df)</span>
+<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ( TL <span class="sc">&gt;</span> <span class="dv">0</span> ) {</span>
+<span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(M_TL) <span class="ot">&lt;-</span> df<span class="sc">$</span>ID</span>
+<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a>    Output<span class="sc">$</span>Timeline <span class="ot">&lt;-</span> M_TL</span>
+<span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
+<span id="cb37-262"><a href="#cb37-262" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-265"><a href="#cb37-265" aria-hidden="true" tabindex="-1"></a>simulieren</span>
+<span id="cb37-266"><a href="#cb37-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-270"><a href="#cb37-270" aria-hidden="true" tabindex="-1"></a>sNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">50000</span>, PopNorm<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
+<span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-272"><a href="#cb37-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a>ploten Histogram</span>
+<span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-277"><a href="#cb37-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-278"><a href="#cb37-278" aria-hidden="true" tabindex="-1"></a>figHist <span class="ot">&lt;-</span> <span class="cf">function</span>(Sim_Sum) {</span>
+<span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a>  Fig <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(Sim_Sum),</span>
+<span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"MT"</span>),</span>
+<span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Distribution"</span>,</span>
+<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Money"</span></span>
+<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb37-284"><a href="#cb37-284" aria-hidden="true" tabindex="-1"></a>  Fig<span class="sc">$</span>Distribution <span class="ot">&lt;-</span><span class="fu">recode</span>(Fig<span class="sc">$</span>Distribution,</span>
+<span id="cb37-285"><a href="#cb37-285" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MT_S"</span> <span class="ot">=</span> <span class="st">"at Begining"</span>,</span>
+<span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"MT_E"</span> <span class="ot">=</span> <span class="st">"at the End"</span></span>
+<span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a>                            )</span>
+<span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Fig, <span class="fu">aes</span>(<span class="at">x =</span> Money, <span class="at">fill =</span> Distribution)) <span class="sc">+</span></span>
+<span id="cb37-289"><a href="#cb37-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb37-290"><a href="#cb37-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb37-291"><a href="#cb37-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb37-292"><a href="#cb37-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb37-293"><a href="#cb37-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
+<span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-297"><a href="#cb37-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-298"><a href="#cb37-298" aria-hidden="true" tabindex="-1"></a><span class="fu">figHist</span>(sNorm<span class="sc">$</span>Sum)</span>
+<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-301"><a href="#cb37-301" aria-hidden="true" tabindex="-1"></a>Timeline Money of 9 Agents</span>
+<span id="cb37-302"><a href="#cb37-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-306"><a href="#cb37-306" aria-hidden="true" tabindex="-1"></a>MTime <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ID,sNorm<span class="sc">$</span>Timeline)</span>
+<span id="cb37-307"><a href="#cb37-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-308"><a href="#cb37-308" aria-hidden="true" tabindex="-1"></a>sID <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,nA<span class="sc">/</span><span class="dv">2-1</span>,nA<span class="sc">/</span><span class="dv">2</span>,nA<span class="sc">/</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>,nA<span class="dv">-2</span>,nA<span class="dv">-1</span>,nA)</span>
+<span id="cb37-309"><a href="#cb37-309" aria-hidden="true" tabindex="-1"></a>sMTime <span class="ot">&lt;-</span> MTime[sID,]</span>
+<span id="cb37-310"><a href="#cb37-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-311"><a href="#cb37-311" aria-hidden="true" tabindex="-1"></a>Fig03 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(sMTime),</span>
+<span id="cb37-312"><a href="#cb37-312" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="sc">!</span><span class="fu">matches</span>(<span class="st">"ID"</span>),</span>
+<span id="cb37-313"><a href="#cb37-313" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
+<span id="cb37-314"><a href="#cb37-314" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_prefix =</span> <span class="st">"n"</span>,</span>
+<span id="cb37-315"><a href="#cb37-315" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">Time =</span> as.integer),</span>
+<span id="cb37-316"><a href="#cb37-316" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Money"</span></span>
+<span id="cb37-317"><a href="#cb37-317" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-318"><a href="#cb37-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a>Fig03<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%04d"</span>, Fig03<span class="sc">$</span>ID)</span>
+<span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Fig03, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Money, <span class="at">color =</span> ID)) <span class="sc">+</span></span>
+<span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb37-323"><a href="#cb37-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Timeline for some Agents"</span>) <span class="sc">+</span></span>
+<span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
+<span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Agents ID"</span>) <span class="sc">+</span></span>
+<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a>Probabilitiy at some Timepoints</span>
+<span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-336"><a href="#cb37-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-337"><a href="#cb37-337" aria-hidden="true" tabindex="-1"></a>FigA <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">1</span>]), </span>
+<span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at Beginning"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-339"><a href="#cb37-339" aria-hidden="true" tabindex="-1"></a>FigB <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">2</span>]), </span>
+<span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 500 exchanges"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-341"><a href="#cb37-341" aria-hidden="true" tabindex="-1"></a>FigC <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="dv">4</span>]), </span>
+<span id="cb37-342"><a href="#cb37-342" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 1000 exchanges"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-343"><a href="#cb37-343" aria-hidden="true" tabindex="-1"></a>FigD <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(sNorm<span class="sc">$</span>Timeline[,<span class="fu">NCOL</span>(sNorm<span class="sc">$</span>Timeline)]), </span>
+<span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at the End"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-345"><a href="#cb37-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a>FigA </span>
+<span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a>FigB</span>
+<span id="cb37-348"><a href="#cb37-348" aria-hidden="true" tabindex="-1"></a>FigC</span>
+<span id="cb37-349"><a href="#cb37-349" aria-hidden="true" tabindex="-1"></a>FigD</span>
+<span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-351"><a href="#cb37-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a>calculating Probabilities for all timesteps</span>
+<span id="cb37-353"><a href="#cb37-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-357"><a href="#cb37-357" aria-hidden="true" tabindex="-1"></a>calc_p_t <span class="ot">&lt;-</span> <span class="cf">function</span>(M_dist) {</span>
+<span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a>  pnt <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(M_dist[,<span class="dv">1</span>])</span>
+<span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a>  tx <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"n"</span>, <span class="st">""</span>,<span class="fu">colnames</span>(M_dist)[<span class="dv">1</span>]))</span>
+<span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a>  pnts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Time =</span> <span class="fu">rep</span>(tx, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb37-361"><a href="#cb37-361" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Res =</span> <span class="fu">colnames</span>(pnt<span class="sc">$</span>Sum),</span>
+<span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">t</span>(pnt<span class="sc">$</span>Sum)</span>
+<span id="cb37-363"><a href="#cb37-363" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb37-364"><a href="#cb37-364" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(M_dist)) {</span>
+<span id="cb37-365"><a href="#cb37-365" aria-hidden="true" tabindex="-1"></a>    pnt <span class="ot">&lt;-</span> <span class="fu">calc_p</span>(M_dist[,i])</span>
+<span id="cb37-366"><a href="#cb37-366" aria-hidden="true" tabindex="-1"></a>    tx <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"n"</span>, <span class="st">""</span>,<span class="fu">colnames</span>(M_dist)[i]))</span>
+<span id="cb37-367"><a href="#cb37-367" aria-hidden="true" tabindex="-1"></a>    pnti <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Time =</span> <span class="fu">rep</span>(tx, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb37-368"><a href="#cb37-368" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Res =</span> <span class="fu">colnames</span>(pnt<span class="sc">$</span>Sum),</span>
+<span id="cb37-369"><a href="#cb37-369" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">t</span>(pnt<span class="sc">$</span>Sum)</span>
+<span id="cb37-370"><a href="#cb37-370" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a>    pnts <span class="ot">&lt;-</span> <span class="fu">rbind</span>(pnts,pnti)</span>
+<span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(pnts) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pnts)</span>
+<span id="cb37-375"><a href="#cb37-375" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-376"><a href="#cb37-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-377"><a href="#cb37-377" aria-hidden="true" tabindex="-1"></a>ProbNormt <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(sNorm<span class="sc">$</span>Timeline)</span>
+<span id="cb37-378"><a href="#cb37-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-379"><a href="#cb37-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a>Plot</span>
+<span id="cb37-381"><a href="#cb37-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-384"><a href="#cb37-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-385"><a href="#cb37-385" aria-hidden="true" tabindex="-1"></a>figProb_t <span class="ot">&lt;-</span> <span class="cf">function</span>(Prob, Title) {</span>
+<span id="cb37-386"><a href="#cb37-386" aria-hidden="true" tabindex="-1"></a>  Fig <span class="ot">&lt;-</span> Prob[Prob<span class="sc">$</span>Res<span class="sc">!=</span><span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>,<span class="st">"Res"</span>,<span class="st">"mean"</span>)]</span>
+<span id="cb37-387"><a href="#cb37-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-388"><a href="#cb37-388" aria-hidden="true" tabindex="-1"></a>  Figp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Fig, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> mean, <span class="at">color =</span> Res)) <span class="sc">+</span></span>
+<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-390"><a href="#cb37-390" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb37-391"><a href="#cb37-391" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gain more than the Mean"</span>,</span>
+<span id="cb37-392"><a href="#cb37-392" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"gain more than the Median"</span>,</span>
+<span id="cb37-393"><a href="#cb37-393" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"gain"</span>)) <span class="sc">+</span></span>
+<span id="cb37-394"><a href="#cb37-394" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(Title) <span class="sc">+</span></span>
+<span id="cb37-395"><a href="#cb37-395" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
+<span id="cb37-396"><a href="#cb37-396" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Mean-Probability in the Population"</span>) <span class="sc">+</span></span>
+<span id="cb37-397"><a href="#cb37-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="fl">0.30</span>, <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-399"><a href="#cb37-399" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb37-400"><a href="#cb37-400" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb37-401"><a href="#cb37-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Figp)</span>
+<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-403"><a href="#cb37-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-404"><a href="#cb37-404" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbNormt, <span class="st">"Probability to ... of Money - Timeline"</span>)</span>
+<span id="cb37-405"><a href="#cb37-405" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-407"><a href="#cb37-407" aria-hidden="true" tabindex="-1"></a><span class="fu"># Equal Pop</span></span>
+<span id="cb37-408"><a href="#cb37-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-411"><a href="#cb37-411" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-412"><a href="#cb37-412" aria-hidden="true" tabindex="-1"></a><span class="co"># generating Start-Population</span></span>
+<span id="cb37-413"><a href="#cb37-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a>PopEqual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> ID,</span>
+<span id="cb37-415"><a href="#cb37-415" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Money =</span> <span class="fu">rep</span>(M0pop, <span class="at">times =</span> nA)</span>
+<span id="cb37-416"><a href="#cb37-416" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb37-417"><a href="#cb37-417" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-418"><a href="#cb37-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a><span class="fu">gini</span>(PopEqual<span class="sc">$</span>Money)</span>
+<span id="cb37-423"><a href="#cb37-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-424"><a href="#cb37-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-427"><a href="#cb37-427" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-428"><a href="#cb37-428" aria-hidden="true" tabindex="-1"></a>eNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">50000</span>, PopEqual<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
+<span id="cb37-429"><a href="#cb37-429" aria-hidden="true" tabindex="-1"></a><span class="fu">figHist</span>(eNorm<span class="sc">$</span>Sum)</span>
+<span id="cb37-430"><a href="#cb37-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-431"><a href="#cb37-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-434"><a href="#cb37-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-435"><a href="#cb37-435" aria-hidden="true" tabindex="-1"></a>FigA <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">1</span>]), </span>
+<span id="cb37-436"><a href="#cb37-436" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at Beginning"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-437"><a href="#cb37-437" aria-hidden="true" tabindex="-1"></a>FigB <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">2</span>]), </span>
+<span id="cb37-438"><a href="#cb37-438" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 500 exchanges"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-439"><a href="#cb37-439" aria-hidden="true" tabindex="-1"></a>FigC <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="dv">4</span>]), </span>
+<span id="cb37-440"><a href="#cb37-440" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability after 1000 exchanges"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-441"><a href="#cb37-441" aria-hidden="true" tabindex="-1"></a>FigD <span class="ot">&lt;-</span> <span class="fu">figProb</span>(<span class="fu">calc_p</span>(eNorm<span class="sc">$</span>Timeline[,<span class="fu">NCOL</span>(eNorm<span class="sc">$</span>Timeline)]), </span>
+<span id="cb37-442"><a href="#cb37-442" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Probability at the End"</span>, <span class="dv">850</span>)</span>
+<span id="cb37-443"><a href="#cb37-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-444"><a href="#cb37-444" aria-hidden="true" tabindex="-1"></a>FigA </span>
+<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a>FigB</span>
+<span id="cb37-446"><a href="#cb37-446" aria-hidden="true" tabindex="-1"></a>FigC</span>
+<span id="cb37-447"><a href="#cb37-447" aria-hidden="true" tabindex="-1"></a>FigD</span>
+<span id="cb37-448"><a href="#cb37-448" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-449"><a href="#cb37-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-452"><a href="#cb37-452" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-453"><a href="#cb37-453" aria-hidden="true" tabindex="-1"></a>ProbEqualt <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(eNorm<span class="sc">$</span>Timeline)</span>
+<span id="cb37-454"><a href="#cb37-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-455"><a href="#cb37-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-458"><a href="#cb37-458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-459"><a href="#cb37-459" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbEqualt, <span class="st">"Probability to ... of Money - Timeline"</span>)</span>
+<span id="cb37-460"><a href="#cb37-460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-461"><a href="#cb37-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-462"><a href="#cb37-462" aria-hidden="true" tabindex="-1"></a><span class="fu"># Vergleich</span></span>
+<span id="cb37-463"><a href="#cb37-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-466"><a href="#cb37-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-467"><a href="#cb37-467" aria-hidden="true" tabindex="-1"></a>sNorms <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">5000</span>, PopNorm<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">50</span>)</span>
+<span id="cb37-468"><a href="#cb37-468" aria-hidden="true" tabindex="-1"></a>ProbNormts <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(sNorms<span class="sc">$</span>Timeline)</span>
+<span id="cb37-469"><a href="#cb37-469" aria-hidden="true" tabindex="-1"></a>eNorms <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">5000</span>, PopEqual<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">50</span>)</span>
+<span id="cb37-470"><a href="#cb37-470" aria-hidden="true" tabindex="-1"></a>ProbEqualts <span class="ot">&lt;-</span> <span class="fu">calc_p_t</span>(eNorms<span class="sc">$</span>Timeline)</span>
+<span id="cb37-471"><a href="#cb37-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-472"><a href="#cb37-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-475"><a href="#cb37-475" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-476"><a href="#cb37-476" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbNormts, </span>
+<span id="cb37-477"><a href="#cb37-477" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Probability to ... of Money</span><span class="sc">\n</span><span class="st">Timeline for the Norm Population"</span>)</span>
+<span id="cb37-478"><a href="#cb37-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-479"><a href="#cb37-479" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-480"><a href="#cb37-480" aria-hidden="true" tabindex="-1"></a><span class="fu">figProb_t</span>(ProbEqualts, </span>
+<span id="cb37-481"><a href="#cb37-481" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Probability to ... of Money</span><span class="sc">\n</span><span class="st">Timeline for a equal Population"</span>)</span>
+<span id="cb37-482"><a href="#cb37-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-483"><a href="#cb37-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-484"><a href="#cb37-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-487"><a href="#cb37-487" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-488"><a href="#cb37-488" aria-hidden="true" tabindex="-1"></a>FigE <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Time =</span> ProbNormts[ProbNormts<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>)],</span>
+<span id="cb37-489"><a href="#cb37-489" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Norm =</span> <span class="fu">gini_t</span>(sNorms<span class="sc">$</span>Timeline),</span>
+<span id="cb37-490"><a href="#cb37-490" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Equal =</span> <span class="fu">gini_t</span>(eNorms<span class="sc">$</span>Timeline)</span>
+<span id="cb37-491"><a href="#cb37-491" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb37-492"><a href="#cb37-492" aria-hidden="true" tabindex="-1"></a>FigE <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(FigE),</span>
+<span id="cb37-493"><a href="#cb37-493" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="sc">!</span><span class="fu">matches</span>(<span class="st">"Time"</span>),</span>
+<span id="cb37-494"><a href="#cb37-494" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Pop"</span>,</span>
+<span id="cb37-495"><a href="#cb37-495" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Gini"</span></span>
+<span id="cb37-496"><a href="#cb37-496" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb37-497"><a href="#cb37-497" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb37-498"><a href="#cb37-498" aria-hidden="true" tabindex="-1"></a>FigEp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> FigE, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Gini, <span class="at">color =</span> Pop)) <span class="sc">+</span></span>
+<span id="cb37-499"><a href="#cb37-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-500"><a href="#cb37-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Start Population"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb37-501"><a href="#cb37-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Gini-Faktor - Timeline"</span>) <span class="sc">+</span></span>
+<span id="cb37-502"><a href="#cb37-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
+<span id="cb37-503"><a href="#cb37-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Gini"</span>) <span class="sc">+</span></span>
+<span id="cb37-504"><a href="#cb37-504" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-505"><a href="#cb37-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb37-506"><a href="#cb37-506" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb37-507"><a href="#cb37-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-508"><a href="#cb37-508" aria-hidden="true" tabindex="-1"></a>FigEp</span>
+<span id="cb37-509"><a href="#cb37-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-510"><a href="#cb37-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-513"><a href="#cb37-513" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-514"><a href="#cb37-514" aria-hidden="true" tabindex="-1"></a>FigF <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Time =</span> ProbNormts[ProbNormts<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"Money"</span>,<span class="fu">c</span>(<span class="st">"Time"</span>)],</span>
+<span id="cb37-515"><a href="#cb37-515" aria-hidden="true" tabindex="-1"></a>                    <span class="at">GNorm =</span> (<span class="dv">1</span><span class="sc">-</span>FigE[FigE<span class="sc">$</span>Pop <span class="sc">==</span> <span class="st">"Norm"</span>,<span class="st">"Gini"</span>]),</span>
+<span id="cb37-516"><a href="#cb37-516" aria-hidden="true" tabindex="-1"></a>                    <span class="at">PNorm =</span> ProbNormts[ProbNormts<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"probmean"</span>,<span class="fu">c</span>(<span class="st">"mean"</span>)],</span>
+<span id="cb37-517"><a href="#cb37-517" aria-hidden="true" tabindex="-1"></a>                    <span class="at">GEqual =</span> <span class="dv">1</span><span class="sc">-</span>FigE[FigE<span class="sc">$</span>Pop <span class="sc">==</span> <span class="st">"Equal"</span>,<span class="st">"Gini"</span>],</span>
+<span id="cb37-518"><a href="#cb37-518" aria-hidden="true" tabindex="-1"></a>                    <span class="at">PEqual =</span> ProbEqualts[ProbEqualts<span class="sc">$</span>Res <span class="sc">==</span> <span class="st">"probmean"</span>,<span class="fu">c</span>(<span class="st">"mean"</span>)]</span>
+<span id="cb37-519"><a href="#cb37-519" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb37-520"><a href="#cb37-520" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(FigF) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Time"</span>, <span class="st">"GNorm"</span>, <span class="st">"PNorm"</span>, <span class="st">"GEqual"</span>, <span class="st">"PEqual"</span>)</span>
+<span id="cb37-521"><a href="#cb37-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-522"><a href="#cb37-522" aria-hidden="true" tabindex="-1"></a>FigF<span class="sc">$</span>Faktn <span class="ot">&lt;-</span> FigF<span class="sc">$</span>GNorm<span class="sc">/</span>FigF<span class="sc">$</span>PNorm</span>
+<span id="cb37-523"><a href="#cb37-523" aria-hidden="true" tabindex="-1"></a>FigF<span class="sc">$</span>Fakte <span class="ot">&lt;-</span> FigF<span class="sc">$</span>GEqual<span class="sc">/</span>FigF<span class="sc">$</span>PEqual</span>
+<span id="cb37-524"><a href="#cb37-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-525"><a href="#cb37-525" aria-hidden="true" tabindex="-1"></a>FigF <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">data.frame</span>(FigF),</span>
+<span id="cb37-526"><a href="#cb37-526" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"F"</span>),</span>
+<span id="cb37-527"><a href="#cb37-527" aria-hidden="true" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">"Pop"</span>,</span>
+<span id="cb37-528"><a href="#cb37-528" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">"Fakt"</span></span>
+<span id="cb37-529"><a href="#cb37-529" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb37-530"><a href="#cb37-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-531"><a href="#cb37-531" aria-hidden="true" tabindex="-1"></a>FigFp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> FigF, </span>
+<span id="cb37-532"><a href="#cb37-532" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Fakt, <span class="at">color =</span> Pop, <span class="at">linetype =</span> Pop)) <span class="sc">+</span></span>
+<span id="cb37-533"><a href="#cb37-533" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-534"><a href="#cb37-534" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Start Population"</span>, </span>
+<span id="cb37-535"><a href="#cb37-535" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb37-536"><a href="#cb37-536" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Equal"</span>, <span class="st">"Norm"</span>)) <span class="sc">+</span></span>
+<span id="cb37-537"><a href="#cb37-537" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="st">"Start Population"</span>,</span>
+<span id="cb37-538"><a href="#cb37-538" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"solid"</span>, <span class="st">"dashed"</span>),</span>
+<span id="cb37-539"><a href="#cb37-539" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Equal"</span>, <span class="st">"Norm"</span>)) <span class="sc">+</span></span>
+<span id="cb37-540"><a href="#cb37-540" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Relation between</span><span class="sc">\n</span><span class="st"> </span></span>
+<span id="cb37-541"><a href="#cb37-541" aria-hidden="true" tabindex="-1"></a><span class="st">          Probability to gain more than the Mean</span><span class="sc">\n</span></span>
+<span id="cb37-542"><a href="#cb37-542" aria-hidden="true" tabindex="-1"></a><span class="st">          and (1-Gini) - Timeline"</span>) <span class="sc">+</span></span>
+<span id="cb37-543"><a href="#cb37-543" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"number of exchanges"</span>) <span class="sc">+</span></span>
+<span id="cb37-544"><a href="#cb37-544" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Faktor"</span>) <span class="sc">+</span></span>
+<span id="cb37-545"><a href="#cb37-545" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-546"><a href="#cb37-546" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb37-547"><a href="#cb37-547" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb37-548"><a href="#cb37-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-549"><a href="#cb37-549" aria-hidden="true" tabindex="-1"></a>FigFp</span>
+<span id="cb37-550"><a href="#cb37-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

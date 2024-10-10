@@ -374,30 +374,22 @@ figProb_t <- function(Prob, Title) {
 figProb_t(ProbNormt, "Probability to ... of Money - Timeline")
 ```
 
-# EvenPop
+# Equal Pop
 
 ```{r}
 # generating Start-Population
 
-PopEven <- data.frame( ID = ID,
+PopEqual <- data.frame( ID = ID,
                        Money = rep(M0pop, times = nA)
                       )
 ```
 
 ```{r}
-gini(PopEven$Money)
+gini(PopEqual$Money)
 ```
 
 ```{r}
-ProbEven <- calc_p(PopEven$Money)
-```
-
-```{r}
-figProb(ProbEven, "Probability at Beginning", 300)
-```
-
-```{r}
-eNorm <- ecosim(50000, PopEven$Money, TL = 500)
+eNorm <- ecosim(50000, PopEqual$Money, TL = 500)
 figHist(eNorm$Sum)
 ```
 
@@ -418,27 +410,36 @@ FigD
 ```
 
 ```{r}
-ProbEvent <- calc_p_t(eNorm$Timeline)
+ProbEqualt <- calc_p_t(eNorm$Timeline)
 ```
 
 ```{r}
-figProb_t(ProbEvent, "Probability to ... of Money - Timeline")
+figProb_t(ProbEqualt, "Probability to ... of Money - Timeline")
 ```
 
 # Vergleich
 
 ```{r}
 sNorms <- ecosim(5000, PopNorm$Money, TL = 50)
-ProbNorms <- calc_p_t(sNorms$Timeline)
-eNorms <- ecosim(5000, PopEven$Money, TL = 50)
-ProbEvents <- calc_p_t(eNorms$Timeline)
+ProbNormts <- calc_p_t(sNorms$Timeline)
+eNorms <- ecosim(5000, PopEqual$Money, TL = 50)
+ProbEqualts <- calc_p_t(eNorms$Timeline)
 ```
 
 ```{r}
+figProb_t(ProbNormts, 
+          "Probability to ... of Money\nTimeline for the Norm Population")
 
-FigE <- data.frame( Time = ProbNorms[ProbNorms$Res == "Money",c("Time")],
+  
+figProb_t(ProbEqualts, 
+          "Probability to ... of Money\nTimeline for a equal Population")
+
+```
+
+```{r}
+FigE <- data.frame( Time = ProbNormts[ProbNormts$Res == "Money",c("Time")],
                     Norm = gini_t(sNorms$Timeline),
-                    Even = gini_t(eNorms$Timeline)
+                    Equal = gini_t(eNorms$Timeline)
                    )
 FigE <- pivot_longer(data.frame(FigE),
                       cols = !matches("Time"),
@@ -460,11 +461,40 @@ FigEp
 ```
 
 ```{r}
-figProb_t(ProbNorms, 
-          "Probability to ... of Money\nTimeline for the Norm Population")
+FigF <- data.frame( Time = ProbNormts[ProbNormts$Res == "Money",c("Time")],
+                    GNorm = (1-FigE[FigE$Pop == "Norm","Gini"]),
+                    PNorm = ProbNormts[ProbNormts$Res == "probmean",c("mean")],
+                    GEqual = 1-FigE[FigE$Pop == "Equal","Gini"],
+                    PEqual = ProbEqualts[ProbEqualts$Res == "probmean",c("mean")]
+                   )
+colnames(FigF) <- c("Time", "GNorm", "PNorm", "GEqual", "PEqual")
 
-  
-figProb_t(ProbEvents, 
-          "Probability to ... of Money\nTimeline for a even Population")
+FigF$Faktn <- FigF$GNorm/FigF$PNorm
+FigF$Fakte <- FigF$GEqual/FigF$PEqual
 
+FigF <- pivot_longer(data.frame(FigF),
+                      cols = starts_with("F"),
+                      names_to = "Pop",
+                      values_to = "Fakt"
+                      )
+
+FigFp <- ggplot(data = FigF, 
+                aes(x = Time, y = Fakt, color = Pop, linetype = Pop)) +
+  geom_line(linewidth = 1) +
+  scale_color_manual(name = "Start Population", 
+                     values = c(2, 1),
+                     labels = c("Equal", "Norm")) +
+  scale_linetype_manual("Start Population",
+                        values = c("solid", "dashed"),
+                        labels = c("Equal", "Norm")) +
+  ggtitle("Relation between\n 
+          Probability to gain more than the Mean\n
+          and (1-Gini) - Timeline") +
+  xlab("number of exchanges") +
+  ylab("Faktor") +
+  theme_light() +
+  theme(legend.position = "top",
+        legend.justification = c(0, 1))
+
+FigFp
 ```
