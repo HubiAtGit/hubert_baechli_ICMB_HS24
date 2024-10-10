@@ -32,6 +32,7 @@ PopNorm <- data.frame( ID = ID,
 
 ```{r}
 gini <- function(Pop) {
+  Pop <- sort(Pop)
   n <- NROW(Pop)
   numer <- 0
   for (i in 1:n) {
@@ -42,10 +43,10 @@ gini <- function(Pop) {
 }
 
 gini_t <- function(Pop) {
-  n <- NCOL(Pop)
+  nc <- NCOL(Pop)
   GT <- c(0)
-  for (i in 1:n) {
-    GT[i] <-  gini(Pop[,i])
+  for (ii in 1:nc) {
+    GT[ii] <-  gini(Pop[,ii])
   }
   return(GT)
   }
@@ -384,6 +385,10 @@ PopEven <- data.frame( ID = ID,
 ```
 
 ```{r}
+gini(PopEven$Money)
+```
+
+```{r}
 ProbEven <- calc_p(PopEven$Money)
 ```
 
@@ -431,30 +436,33 @@ ProbEvents <- calc_p_t(eNorms$Timeline)
 
 ```{r}
 
-GsNorms <- gini_t(sNorms$Timeline)
+FigE <- data.frame( Time = ProbNorms[ProbNorms$Res == "Money",c("Time")],
+                    Norm = gini_t(sNorms$Timeline),
+                    Even = gini_t(eNorms$Timeline)
+                   )
+FigE <- pivot_longer(data.frame(FigE),
+                      cols = !matches("Time"),
+                      names_to = "Pop",
+                      values_to = "Gini"
+                      )
+                    
+FigEp <- ggplot(data = FigE, aes(x = Time, y = Gini, color = Pop)) +
+  geom_line(linewidth = 1) +
+  scale_color_manual(name = "Start Population", values = c(2, 1)) +
+  ggtitle("Gini-Faktor - Timeline") +
+  xlab("number of exchanges") +
+  ylab("Gini") +
+  theme_light() +
+  theme(legend.position = "top",
+        legend.justification = c(0, 1))
 
-ProbNorms[ProbNorms$Res == "Money",c("Time")]
-
-GeNorms <- gini_t(eNorms$Timeline)
-
+FigEp
 ```
 
 ```{r}
-FigE <- figProb_t(ProbNorms, 
+figProb_t(ProbNorms, 
           "Probability to ... of Money\nTimeline for the Norm Population")
-FigE <- FigE + geom_line(aes(x = ProbNorms[ProbNorms$Res == "Money",c("Time")], 
-                             y = GsNorms),
-               linetype = "solid", color = 1) +
-               annotate("text",
-                        x = 1000,
-                        y = 0,
-                        hjust = 1,
-                        vjust = 0,
-                        label = "GINI",
-                        color = 1)
-  
-FigE
-ProbNorms[ProbNorms$Res == "Money",c("Time")]
+
   
 figProb_t(ProbEvents, 
           "Probability to ... of Money\nTimeline for a even Population")
