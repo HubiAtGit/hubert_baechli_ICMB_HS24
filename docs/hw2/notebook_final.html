@@ -706,13 +706,13 @@ Attache Paket: 'dplyr'</code></pre>
 </div>
 </section></section></section></section><section id="simulation-for" class="level1"><h1>Simulation for…</h1>
 <section id="normal-population" class="level2"><h2 class="anchored" data-anchor-id="normal-population">Normal Population</h2>
-<p>Simulation for 50000 exchanges with output after every 250th exchange.</p>
+<p>Simulation for 100000 exchanges with output after every 500th exchange.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sNorm</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">100000</span>, <span class="va">PopNorm</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="presentation-of-the-end-results" class="level3"><h3 class="anchored" data-anchor-id="presentation-of-the-end-results">Presentation of the end results</h3>
-<p>At the beginning, the distribution of money in the population looks like this. After simulating 50,000 money exchanges, the following distribution emerges.</p>
+<p>At the beginning, the distribution of money in the population looks like this. After simulating 100,000 money exchanges, the following distribution emerges.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Fig01</span> <span class="op">&lt;-</span> <span class="fu">figHist</span><span class="op">(</span><span class="va">sNorm</span><span class="op">$</span><span class="va">Sum</span><span class="op">)</span></span>
 <span><span class="va">Fig01</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -829,7 +829,7 @@ Attache Paket: 'dplyr'</code></pre>
 </div>
 </div>
 </section></section><section id="equal-population-1" class="level2"><h2 class="anchored" data-anchor-id="equal-population-1">Equal Population</h2>
-<p>Simulation for 50000 exchanges with output after every 500th exchange.</p>
+<p>Simulation for 100000 exchanges with output after every 500th exchange.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eNorm</span> <span class="op">&lt;-</span> <span class="fu">ecosim</span><span class="op">(</span><span class="fl">100000</span>, <span class="va">PopEqual</span><span class="op">$</span><span class="va">Money</span>, TL <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1974,7 +1974,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb43-486"><a href="#cb43-486" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-487"><a href="#cb43-487" aria-hidden="true" tabindex="-1"></a><span class="fu">## Normal Population</span></span>
 <span id="cb43-488"><a href="#cb43-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-489"><a href="#cb43-489" aria-hidden="true" tabindex="-1"></a>Simulation for 50000 exchanges with output after every 250th exchange.</span>
+<span id="cb43-489"><a href="#cb43-489" aria-hidden="true" tabindex="-1"></a>Simulation for 100000 exchanges with output after every 500th exchange.</span>
 <span id="cb43-490"><a href="#cb43-490" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-493"><a href="#cb43-493" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-494"><a href="#cb43-494" aria-hidden="true" tabindex="-1"></a>sNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">100000</span>, PopNorm<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
@@ -1982,7 +1982,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb43-496"><a href="#cb43-496" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-497"><a href="#cb43-497" aria-hidden="true" tabindex="-1"></a><span class="fu">### Presentation of the end results</span></span>
 <span id="cb43-498"><a href="#cb43-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-499"><a href="#cb43-499" aria-hidden="true" tabindex="-1"></a>At the beginning, the distribution of money in the population looks like this. After simulating 50,000 money exchanges, the following distribution emerges.</span>
+<span id="cb43-499"><a href="#cb43-499" aria-hidden="true" tabindex="-1"></a>At the beginning, the distribution of money in the population looks like this. After simulating 100,000 money exchanges, the following distribution emerges.</span>
 <span id="cb43-500"><a href="#cb43-500" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-503"><a href="#cb43-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-504"><a href="#cb43-504" aria-hidden="true" tabindex="-1"></a>Fig01 <span class="ot">&lt;-</span> <span class="fu">figHist</span>(sNorm<span class="sc">$</span>Sum)</span>
@@ -2078,7 +2078,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb43-610"><a href="#cb43-610" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-611"><a href="#cb43-611" aria-hidden="true" tabindex="-1"></a><span class="fu">## Equal Population</span></span>
 <span id="cb43-612"><a href="#cb43-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-613"><a href="#cb43-613" aria-hidden="true" tabindex="-1"></a>Simulation for 50000 exchanges with output after every 500th exchange.</span>
+<span id="cb43-613"><a href="#cb43-613" aria-hidden="true" tabindex="-1"></a>Simulation for 100000 exchanges with output after every 500th exchange.</span>
 <span id="cb43-614"><a href="#cb43-614" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-617"><a href="#cb43-617" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-618"><a href="#cb43-618" aria-hidden="true" tabindex="-1"></a>eNorm <span class="ot">&lt;-</span> <span class="fu">ecosim</span>(<span class="dv">100000</span>, PopEqual<span class="sc">$</span>Money, <span class="at">TL =</span> <span class="dv">500</span>)</span>
