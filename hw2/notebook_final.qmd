@@ -663,7 +663,7 @@ In the population with the same initial amount of money, the two lines remain ve
 Fig15
 ```
 
-This makes sense because the meetings are random, and therefore some agents keep their starting balance of 100 longer. After 1000 meetings, or about two meetings per agent, this becomes increasingly unlikely.
+This makes sense because the meetings are random, and therefore some agents keep their starting balance of 100 longer. After 2500 meetings, or about two meetings per agent, this becomes increasingly unlikely.
 
 # Exploration
 
