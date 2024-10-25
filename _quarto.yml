@@ -4,7 +4,7 @@ project:
   output-dir: docs
 
 execute:
-  freeze: true
+  freeze: auto
   engine: knitr
   port: 8877
   cache: true

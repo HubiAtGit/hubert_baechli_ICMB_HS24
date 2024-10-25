@@ -21,10 +21,10 @@ library(dplyr)
 
 Initial Populations In line with the paper, a population is generated where the money is normally distributed with a mean of 100.
 
-To save computation time, the number of agents is reduced from 5000 to 1000. Additionally, the population is sorted and assigned an ID to track them. Agents with small IDs receive the least money, while agents with large IDs have a lot of money.
+To save computation time, the number of agents is reduced from 5000 to 2500. Additionally, the population is sorted and assigned an ID to track them. Agents with small IDs receive the least money, while agents with large IDs have a lot of money.
 
 ```{r}
-nA = 1000         # number of Agents
+nA = 2500         # number of Agents
 ID = seq_len(nA)  # ID of the Agents
 M0pop = 100       # Mean amount of Money in the Start-Population
 
@@ -176,6 +176,53 @@ calc_p <- function(VM) {
     )
   }
 
+  Output <- list(Sum = Sum, Dist = Dist)
+  return(Output)
+}
+```
+
+The same Function with matrix calculations, what is much faster!
+
+```{r}
+calc_p <- function(VM) {
+  n <- length(VM)
+  MM <- matrix(rep(VM,times=n),n,n)
+  S <- (VM+t(MM))
+  S[S==0] <- 10e-8
+  pwin <- (1-t(MM)/S)
+  diag(pwin) <- 0
+  pmed <- 1-(median(VM)/S)
+  pmed[pmed<0] <- 0
+  diag(pmed) <- 0
+  pmean <- 1-(mean(VM)/S)
+  pmean[pmean<0] <- 0
+  diag(pmean) <- 0
+
+  Dist <- data.frame(Money = VM,
+                     probwin = colSums(pwin)/(n-1),
+                     probmed = colSums(pmed)/(n-1),
+                     probmean = colSums(pmean)/(n-1)
+                     )
+
+  Sum <- data.frame(Money = c(min(Dist$Money),
+                              max(Dist$Money),
+                              median(Dist$Money),
+                              mean(Dist$Money)),
+                    probwin = c(min(Dist$probwin),
+                                max(Dist$probwin),
+                                median(Dist$probwin),
+                                mean(Dist$probwin)),
+                    probmed = c(min(Dist$probmed),
+                                max(Dist$probmed),
+                                median(Dist$probmed),
+                                mean(Dist$probmed)),
+                    probmean = c(min(Dist$probmean),
+                                max(Dist$probmean),
+                                median(Dist$probmean),
+                                mean(Dist$probmean))
+                    )
+
+  rownames(Sum) <- c("min", "max", "med", "mean")
   Output <- list(Sum = Sum, Dist = Dist)
   return(Output)
 }
@@ -413,10 +460,10 @@ figProb_t <- function(Prob, Title) {
 
 ## Normal Population
 
-Simulation for 50000 exchanges with output after every 500th exchange.
+Simulation for 50000 exchanges with output after every 250th exchange.
 
 ```{r}
-sNorm <- ecosim(50000, PopNorm$Money, TL = 500)
+sNorm <- ecosim(100000, PopNorm$Money, TL = 500)
 ```
 
 ### Presentation of the end results
@@ -468,7 +515,7 @@ Fig03 <- figProb(calc_p(sNorm$Timeline[,1]),
                 "Probability at Beginning", 850)
 Fig04 <- figProb(calc_p(sNorm$Timeline[,2]), 
                 "Probability after 500 exchanges", 850)
-Fig05 <- figProb(calc_p(sNorm$Timeline[,4]), 
+Fig05 <- figProb(calc_p(sNorm$Timeline[,3]), 
                 "Probability after 1000 exchanges", 850)
 Fig06 <- figProb(calc_p(sNorm$Timeline[,NCOL(sNorm$Timeline)]), 
                 "Probability at the End", 850)
@@ -494,7 +541,7 @@ This effect intensifies over time.
 Fig05
 ```
 
-After 50,000 meetings, the distribution of probabilities in the population looks like this.
+After 100,000 meetings, the distribution of probabilities in the population looks like this.
 
 ```{r}
 Fig06
@@ -520,7 +567,7 @@ Fig07
 Simulation for 50000 exchanges with output after every 500th exchange.
 
 ```{r}
-eNorm <- ecosim(50000, PopEqual$Money, TL = 500)
+eNorm <- ecosim(100000, PopEqual$Money, TL = 500)
 ```
 
 ### Presentation of the end results
@@ -539,7 +586,7 @@ Fig09 <- figProb(calc_p(eNorm$Timeline[,1]),
                 "Probability at Beginning", 850)
 Fig10 <- figProb(calc_p(eNorm$Timeline[,2]), 
                 "Probability after 500 exchanges", 850)
-Fig11 <- figProb(calc_p(eNorm$Timeline[,4]), 
+Fig11 <- figProb(calc_p(eNorm$Timeline[,3]), 
                 "Probability after 1000 exchanges", 850)
 Fig12 <- figProb(calc_p(eNorm$Timeline[,NCOL(eNorm$Timeline)]), 
                 "Probability at the End", 850)
@@ -563,7 +610,7 @@ Therefore, the probability of meeting a rich agent in the future also decreases 
 Fig11
 ```
 
-After 50,000 meetings, the distribution of probabilities in this population looks almost identical.
+After 100,000 meetings, the distribution of probabilities in this population looks almost identical.
 
 ```{r}
 Fig12
@@ -589,9 +636,9 @@ Fig13
 To better compare the two populations, two new simulations are conducted. The number is restricted to the interesting initial range, and the time resolution is increased.
 
 ```{r}
-sNorms <- ecosim(5000, PopNorm$Money, TL = 50)
+sNorms <- ecosim(10000, PopNorm$Money, TL = 100)
 ProbNormts <- calc_p_t(sNorms$Timeline)
-eNorms <- ecosim(5000, PopEqual$Money, TL = 50)
+eNorms <- ecosim(10000, PopEqual$Money, TL = 100)
 ProbEqualts <- calc_p_t(eNorms$Timeline)
 ```
 

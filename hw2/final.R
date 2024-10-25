@@ -80,6 +80,55 @@ calc_p <- function(M_dist) {
   return(Output)
 }
 
+
+calc_pf <- function(M) {
+  n <- length(M)
+  MM <- matrix(rep(M,times=n),n,n)
+  S <- (M+t(MM))
+  S[S==0] <- 10e-8
+  pwin <- (1-t(MM)/S)
+  diag(pwin) <- 0
+  pmed <- 1-(median(M)/S)
+  pmed[pmed<0] <- 0
+  diag(pmed) <- 0
+  pmean <- 1-(mean(M)/S)
+  pmean[pmean<0] <- 0
+  diag(pmean) <- 0
+
+  Dist <- data.frame(Money = M,
+                     probwin = colSums(pwin)/(n-1),
+                     probmed = colSums(pmed)/(n-1),
+                     probmean = colSums(pmean)/(n-1)
+                     )
+
+  Sum <- data.frame(Money = c(min(Dist$Money),
+                              max(Dist$Money),
+                              median(Dist$Money),
+                              mean(Dist$Money)),
+                    probwin = c(min(Dist$probwin),
+                                max(Dist$probwin),
+                                median(Dist$probwin),
+                                mean(Dist$probwin)),
+                    probmed = c(min(Dist$probmed),
+                                max(Dist$probmed),
+                                median(Dist$probmed),
+                                mean(Dist$probmed)),
+                    probmean = c(min(Dist$probmean),
+                                max(Dist$probmean),
+                                median(Dist$probmean),
+                                mean(Dist$probmean))
+                    )
+
+  rownames(Sum) <- c("min", "max", "med", "mean")
+  Output <- list(Sum = Sum, Dist = Dist)
+  return(Output)
+}
+
+M <- c(50,100,150,0,0)
+
+calc_p(M)
+calc_pf(M)
+
 ntest <- 6
 df <- prob(rep(100, times = ntest))
 round(df$Dist, digits = 2)
