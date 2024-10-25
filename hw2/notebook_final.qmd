@@ -8,6 +8,7 @@ author: "Hubert Baechli"
 Loading some Packages for Better Presentation of Results
 
 ```{r}
+library(rmarkdown)
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -21,10 +22,10 @@ library(dplyr)
 
 Initial Populations In line with the paper, a population is generated where the money is normally distributed with a mean of 100.
 
-To save computation time, the number of agents is reduced from 5000 to 2500. Additionally, the population is sorted and assigned an ID to track them. Agents with small IDs receive the least money, while agents with large IDs have a lot of money.
+To save computation time, the number of agents is reduced from 5000 to 1500. Additionally, the population is sorted and assigned an ID to track them. Agents with small IDs receive the least money, while agents with large IDs have a lot of money.
 
 ```{r}
-nA = 2500         # number of Agents
+nA = 1500         # number of Agents
 ID = seq_len(nA)  # ID of the Agents
 M0pop = 100       # Mean amount of Money in the Start-Population
 
@@ -134,7 +135,7 @@ Since it was suspected in the sketchbook that the reason for the outcome is the 
 2.  Distribution (Dist) for the same values
 
 ```{r}
-calc_p <- function(VM) {
+calc_p_s <- function(VM) {
   Dist <- data.frame(Money = VM,
                      probwin = 0,
                      probmed = 0,
@@ -460,15 +461,15 @@ figProb_t <- function(Prob, Title) {
 
 ## Normal Population
 
-Simulation for 100000 exchanges with output after every 500th exchange.
+Simulation for 50000 exchanges with output after every 500th exchange.
 
 ```{r}
-sNorm <- ecosim(100000, PopNorm$Money, TL = 500)
+sNorm <- ecosim(50000, PopNorm$Money, TL = 250)
 ```
 
 ### Presentation of the end results
 
-At the beginning, the distribution of money in the population looks like this. After simulating 100,000 money exchanges, the following distribution emerges.
+At the beginning, the distribution of money in the population looks like this. After simulating 50000 money exchanges, the following distribution emerges.
 
 ```{r}
 Fig01 <- figHist(sNorm$Sum)
@@ -513,9 +514,9 @@ This can also be shown with the calculated probabilities for the next meeting fo
 ```{r}
 Fig03 <- figProb(calc_p(sNorm$Timeline[,1]), 
                 "Probability at Beginning", 850)
-Fig04 <- figProb(calc_p(sNorm$Timeline[,2]), 
+Fig04 <- figProb(calc_p(sNorm$Timeline[,3]), 
                 "Probability after 500 exchanges", 850)
-Fig05 <- figProb(calc_p(sNorm$Timeline[,3]), 
+Fig05 <- figProb(calc_p(sNorm$Timeline[,5]), 
                 "Probability after 1000 exchanges", 850)
 Fig06 <- figProb(calc_p(sNorm$Timeline[,NCOL(sNorm$Timeline)]), 
                 "Probability at the End", 850)
@@ -541,7 +542,7 @@ This effect intensifies over time.
 Fig05
 ```
 
-After 100,000 meetings, the distribution of probabilities in the population looks like this.
+After 50000 meetings, the distribution of probabilities in the population looks like this.
 
 ```{r}
 Fig06
@@ -564,10 +565,10 @@ Fig07
 
 ## Equal Population
 
-Simulation for 100000 exchanges with output after every 500th exchange.
+Simulation for 50000 exchanges with output after every 250th exchange.
 
 ```{r}
-eNorm <- ecosim(100000, PopEqual$Money, TL = 500)
+eNorm <- ecosim(50000, PopEqual$Money, TL = 250)
 ```
 
 ### Presentation of the end results
@@ -584,9 +585,9 @@ Fig08
 ```{r}
 Fig09 <- figProb(calc_p(eNorm$Timeline[,1]), 
                 "Probability at Beginning", 850)
-Fig10 <- figProb(calc_p(eNorm$Timeline[,2]), 
+Fig10 <- figProb(calc_p(eNorm$Timeline[,3]), 
                 "Probability after 500 exchanges", 850)
-Fig11 <- figProb(calc_p(eNorm$Timeline[,3]), 
+Fig11 <- figProb(calc_p(eNorm$Timeline[,5]), 
                 "Probability after 1000 exchanges", 850)
 Fig12 <- figProb(calc_p(eNorm$Timeline[,NCOL(eNorm$Timeline)]), 
                 "Probability at the End", 850)
@@ -610,7 +611,7 @@ Therefore, the probability of meeting a rich agent in the future also decreases 
 Fig11
 ```
 
-After 100,000 meetings, the distribution of probabilities in this population looks almost identical.
+After 50000 meetings, the distribution of probabilities in this population looks almost identical.
 
 ```{r}
 Fig12
@@ -636,9 +637,9 @@ Fig13
 To better compare the two populations, two new simulations are conducted. The number is restricted to the interesting initial range, and the time resolution is increased.
 
 ```{r}
-sNorms <- ecosim(10000, PopNorm$Money, TL = 100)
+sNorms <- ecosim(8000, PopNorm$Money, TL = 50)
 ProbNormts <- calc_p_t(sNorms$Timeline)
-eNorms <- ecosim(10000, PopEqual$Money, TL = 100)
+eNorms <- ecosim(8000, PopEqual$Money, TL = 50)
 ProbEqualts <- calc_p_t(eNorms$Timeline)
 ```
 
