@@ -522,4 +522,4 @@ Be careful, this is not absolutly correct at the moment.
 
 -   On the other hand, there are 101 possibilities in the exchange with my simple calculation only 100
 
-***`For final results and explanations see`*** [notebook(Final)](notebook_final.qmd)
+***`For final results and explanations see`*** [notebook(Final)](notebook_final_fast.qmd)
