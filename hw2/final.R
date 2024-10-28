@@ -1,3 +1,4 @@
+library(gt)
 library(ggplot2)
 library(patchwork)
 library(tidyr)
@@ -81,25 +82,26 @@ calc_p <- function(M_dist) {
 }
 
 
-calc_pf <- function(M) {
-  n <- length(M)
-  MM <- matrix(rep(M,times=n),n,n)
-  S <- (M+t(MM))
+calc_p <- function(VM, Detailed=FALSE) {
+  n <- length(VM)
+  ID <- seq(1:n)
+  MM <- matrix(rep(VM,times=n),n,n)
+  S <- (VM+t(MM))
   S[S==0] <- 10e-8
   pwin <- (1-t(MM)/S)
   diag(pwin) <- 0
-  pmed <- 1-(median(M)/S)
+  pmed <- 1-(median(VM)/S)
   pmed[pmed<0] <- 0
   diag(pmed) <- 0
-  pmean <- 1-(mean(M)/S)
+  pmean <- 1-(mean(VM)/S)
   pmean[pmean<0] <- 0
   diag(pmean) <- 0
 
-  Dist <- data.frame(Money = M,
+  Dist <- data.frame(Money = VM,
                      probwin = colSums(pwin)/(n-1),
                      probmed = colSums(pmed)/(n-1),
                      probmean = colSums(pmean)/(n-1)
-                     )
+  )
 
   Sum <- data.frame(Money = c(min(Dist$Money),
                               max(Dist$Money),
@@ -114,22 +116,73 @@ calc_pf <- function(M) {
                                 median(Dist$probmed),
                                 mean(Dist$probmed)),
                     probmean = c(min(Dist$probmean),
-                                max(Dist$probmean),
-                                median(Dist$probmean),
-                                mean(Dist$probmean))
-                    )
+                                 max(Dist$probmean),
+                                 median(Dist$probmean),
+                                 mean(Dist$probmean))
+  )
 
   rownames(Sum) <- c("min", "max", "med", "mean")
   Output <- list(Sum = Sum, Dist = Dist)
+  if (Detailed) {
+    D <- data.frame(t(pmed))
+    diag(D) <- colSums(pmed)/(n-1)
+    D <- round(D, digits=2)
+    D <- format(D, digits=2)
+    VMm <- round(median(VM), digits=1)
+    VMm <- format(VMm, digits=4)
+    VM <- round(VM, digits=1)
+    VM <- format(VM, digits=4)
+    D <- rbind(VM, D)
+    D <- cbind(c("Money",ID),c(VMm,VM), D)
+    colnames(D) <- c("ID","Money",ID)
+    D <- gt(D)
+    D <- tab_spanner(D, label = "Probabilities", columns = 3:(n+2))
+    for (i in 1:(n + 1)) {
+      if (i==1) {
+        D <- tab_style(D,
+                       style = list(cell_text(style = "italic")),
+                       locations = cells_body(i+1,))
+        D <- tab_style(D,
+                       style = list(cell_text(style = "italic")),
+                       locations = cells_body(,i))
+        }
+      D <- tab_style(D,
+                     style = list(cell_text(weight = "bold")),
+                     locations = cells_body(i+1, i))
+    }
+    D <- tab_source_note(
+      D,
+      source_note = "Italic/bold = Median of Money, Bold = Populatianmean"
+    )
+    Output$SumD <- D
+  }
   return(Output)
 }
 
-M <- c(50,100,150,0,0)
 
-calc_p(M)
-calc_pf(M)
+M <- c(100,100,100)
 
-ntest <- 6
+DF <- calc_p(M, TRUE)
+
+DF$SumD
+
+
+
+
+
+
+
+
+
+
+
+SumDf <- rbind(SumD, format(c(Dist$probwin,Dist$probmed,Dist$probmean), digits=2))
+rownames(SumD) <- c(ID,"Mean")
+colnames(SumD) <- rep(ID,3)
+Output$SumD <- data.frame(SumD)
+
+
+yntest <- 6
 df <- prob(rep(100, times = ntest))
 round(df$Dist, digits = 2)
 round(df$Sum, digits = 2)
