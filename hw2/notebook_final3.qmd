@@ -500,15 +500,15 @@ figProb_t <- function(Prob, Title) {
 
 ## Normal Population
 
-Simulation for 50000 exchanges with output after every 500th exchange.
+Simulation for 60000 exchanges with output after every 500th exchange.
 
 ```{r}
-sNorm <- ecosim(50000, PopNorm$Money, TL = 250)
+sNorm <- ecosim(60000, PopNorm$Money, TL = 250)
 ```
 
 ### Presentation of the end results
 
-At the beginning, the distribution of money in the population looks like this. After simulating 50000 money exchanges, the following distribution emerges.
+At the beginning, the distribution of money in the population looks like this. After simulating 60000 money exchanges, the following distribution emerges.
 
 ```{r}
 Fig01 <- figHist(sNorm$Sum)
@@ -581,7 +581,7 @@ This effect intensifies over time.
 Fig05
 ```
 
-After 50000 meetings, the distribution of probabilities in the population looks like this.
+After 60000 meetings, the distribution of probabilities in the population looks like this.
 
 ```{r}
 Fig06
@@ -604,10 +604,10 @@ Fig07
 
 ## Equal Population
 
-Simulation for 50000 exchanges with output after every 250th exchange.
+Simulation for 60000 exchanges with output after every 250th exchange.
 
 ```{r}
-eNorm <- ecosim(50000, PopEqual$Money, TL = 250)
+eNorm <- ecosim(60000, PopEqual$Money, TL = 250)
 ```
 
 ### Presentation of the end results
