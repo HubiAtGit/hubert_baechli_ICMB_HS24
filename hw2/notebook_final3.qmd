@@ -15,6 +15,8 @@ library(gt)
 library(ggplot2)
 library(tidyr)
 library(dplyr)
+
+set.seed(1)
 ```
 
 # Definitions

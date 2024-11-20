@@ -15,7 +15,7 @@
     "href": "hw2/notebook_final3.html",
     "title": "Notebook(Final)",
     "section": "",
-    "text": "Final Version\nLoading some Packages for Better Presentation of Results\nCodelibrary(gt)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n\n\nAttache Paket: 'dplyr'\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union",
+    "text": "Final Version\nLoading some Packages for Better Presentation of Results\nCodelibrary(gt)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n\n\nAttache Paket: 'dplyr'\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nCodeset.seed(1)",
     "crumbs": [
       "About",
       "Assignment 2: <br>Economic Simulation",
@@ -51,7 +51,7 @@
     "href": "hw2/notebook_final3.html#transaction-rule",
     "title": "Notebook(Final)",
     "section": "Transaction rule",
-    "text": "Transaction rule\nIn line with the paper, a random distribution of money between two agents is defined.\nNeeds\n\nNothing\nOutput\n\nVector with a random number and 1minus this number\n\n\nCodesplitpair &lt;- function(){\n  rn &lt;- runif(1)\n  c(rn,1-rn)\n}\nsplitpair()\n\n[1] 0.7059348 0.2940652",
+    "text": "Transaction rule\nIn line with the paper, a random distribution of money between two agents is defined.\nNeeds\n\nNothing\nOutput\n\nVector with a random number and 1minus this number\n\n\nCodesplitpair &lt;- function(){\n  rn &lt;- runif(1)\n  c(rn,1-rn)\n}\nsplitpair()\n\n[1] 0.8023495 0.1976505",
     "crumbs": [
       "About",
       "Assignment 2: <br>Economic Simulation",
