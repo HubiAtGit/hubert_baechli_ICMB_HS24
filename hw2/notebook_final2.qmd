@@ -3,7 +3,7 @@ title: "Notebook(Final)"
 author: "Hubert Baechli"
 
 execute: 
-  cache: false
+  cache: true
 ---
 
 **Final Version**
