@@ -3,4 +3,4 @@ title: "Snippets"
 author: "Hubert Baechli"
 ---
 
-# [BetaDistribution](Snippets/BetaDistribution.qmd)
+# [BetaDistribution](BetaDistribution.qmd)

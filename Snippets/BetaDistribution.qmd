@@ -50,6 +50,7 @@ gen_rbeta <- function(n = n,
 }
 
 data <- gen_rbeta(mu = 0.1, sigma = 0.05)
+beta_par(mu = 0.1, sigma = 0.05)
 summary(data)
 hist(data)
 plot(data)
@@ -61,4 +62,5 @@ library(fitdistrplus)
 
 
 fit <- fitdist(data, "beta", start = list(shape1 = 1, shape2 = 1))
+fit
 ```
