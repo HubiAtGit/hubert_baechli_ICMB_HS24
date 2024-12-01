@@ -6,12 +6,12 @@ execute:
   cache: false
 ---
 
-**Final Version**
-
-Loading some Packages for Better Presentation of Results
+Loading some Packages
 
 ```{r}
+
 library(tidyverse)
+library(fitdistrplus)
 
 # set.seed(1)
 ```
@@ -27,9 +27,9 @@ beta_par <- function(mu, sigma) {
   #a_b <- abs(a_b)
   a <- mu * a_b
   b <- (1 - mu) * a_b
-  return(list(alpha = a, beta = b, a_b))
+  return(list(alpha = a, beta = b))
 }
-10E-4
+
 beta_par(mu = 0.5, sigma = 0.1)
 ```
 
@@ -51,16 +51,22 @@ gen_rbeta <- function(n = n,
 
 data <- gen_rbeta(mu = 0.1, sigma = 0.05)
 beta_par(mu = 0.1, sigma = 0.05)
+
+```
+
+```{r}
 summary(data)
+```
+
+```{r}
 hist(data)
+```
+
+```{r}
 plot(data)
 ```
 
 ```{r}
-
-library(fitdistrplus)
-
-
 fit <- fitdist(data, "beta", start = list(shape1 = 1, shape2 = 1))
 fit
 ```
