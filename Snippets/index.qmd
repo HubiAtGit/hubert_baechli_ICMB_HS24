@@ -1,0 +1,6 @@
+---
+title: "Snippets"
+author: "Hubert Baechli"
+---
+
+# [BetaDistribution](Snippets/BetaDistribution.qmd)

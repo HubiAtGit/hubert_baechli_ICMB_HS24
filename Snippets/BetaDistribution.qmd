@@ -1,0 +1,64 @@
+---
+title: "Beta Distribution"
+author: "Hubert Baechli"
+
+execute: 
+  cache: false
+---
+
+**Final Version**
+
+Loading some Packages for Better Presentation of Results
+
+```{r}
+library(tidyverse)
+
+# set.seed(1)
+```
+
+# Generating Betakurve Parameter
+
+```{r}
+beta_par <- function(mu, sigma) {
+  mu <- max(mu, 1E-6)
+  sigma <- max(sigma, 1E-6)
+  a_b <- mu * (1 - mu) / sigma^2 - 1  # calc alpha + beta
+  a_b <- max(a_b,1E-6)
+  #a_b <- abs(a_b)
+  a <- mu * a_b
+  b <- (1 - mu) * a_b
+  return(list(alpha = a, beta = b, a_b))
+}
+10E-4
+beta_par(mu = 0.5, sigma = 0.1)
+```
+
+# Generating random values
+
+```{r}
+gen_rbeta <- function(n = n,
+                      mu = mu, 
+                      sigma = sigma
+                      ) {
+  par <- beta_par(mu = mu, sigma = sigma)
+  data <- rbeta(n = 1000, 
+                shape1 = par$alpha, 
+                shape2 = par$beta)
+  data <- sort(data)
+
+  return(data)
+}
+
+data <- gen_rbeta(mu = 0.1, sigma = 0.05)
+summary(data)
+hist(data)
+plot(data)
+```
+
+```{r}
+
+library(fitdistrplus)
+
+
+fit <- fitdist(data, "beta", start = list(shape1 = 1, shape2 = 1))
+```

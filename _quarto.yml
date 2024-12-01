@@ -30,6 +30,10 @@ website:
         contents:
         - hw2/sketchbook.qmd
         - hw2/notebook_final3.qmd
+      - section:
+        href: Snippets/index.qmd
+        contents:
+        - Snippets/BetaDistribution.qmd
 
 format:
   html:
