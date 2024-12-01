@@ -1,0 +1,15 @@
+{
+  "hash": "12e632d31b9cb338b824486046eb5499",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Sketchbook Learningkurve\"\nauthor: \"Hubert Baechli\"\n---\n\n\n\n**Final Version**\n\nLoading some Packages for Better Presentation of Results\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(gt)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttache Paket: 'dplyr'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n```\n\n\n:::\n\n```{.r .cell-code}\n# set.seed(1)\n```\n:::\n\n\n\n# Definitions\n\n## Initial Population\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nnA = 20           # number of Agents\nID = seq_len(nA)  # ID of the Agents\nM0pop = 0.3       # Mean Knowlege\n\nPop20 <- data.frame( ID = ID,\n                     Knowlege = sort(rnorm(nA, mean = M0pop, sd = 0.2 * M0pop))\n                     )\n```\n:::\n\n\n\n# Functions\n\n## Knowlege gain per time\n\nTo describe the distribution of money in the population, a function is defined to calculate the Gini coefficient.\n\n#### Needs\n\n1.  \n\n#### Output\n\n1.  \n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlearning_alone <- function(kb = KnowlegeAtBegining,\n                               lt = LearningHouers,\n                               lr = kb) { \n                                # lr = LearningRate (optional)\n  tb <- ( 1 - kb )^( 1 / -lr )  # assumed time learnd allready\n  ke <- 1 - ( tb + lt )^( -lr ) # Knowlege after time learnd\n  return(ke - kb)\n}\n```\n:::\n\n\n\n## **Learning Simulation**\n\nFinally, a simulation is created that simulates a certain number of money exchanges.\n\n#### Needs\n\n1.  Number of exchanges\n\n2.  Startdistribition of Money\n\n3.  Steps for the timeline (optional)\n\n#### Output\n\n1.  Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End\n\n2.  Matrix with Money distribution(Timeline) for given time steps as vectors (if steps \\> 0)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
