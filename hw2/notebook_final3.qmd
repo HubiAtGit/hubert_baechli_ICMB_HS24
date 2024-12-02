@@ -1,9 +1,6 @@
 ---
 title: "Notebook(Final)"
 author: "Hubert Baechli"
-
-execute: 
-  cache: false
 ---
 
 **Final Version**
@@ -780,6 +777,8 @@ Fig17p
 
 ## Minimal Population
 
+To better illustrate the mechanism, I create a minimal population of three agents with a starting amount of 100.
+
 ```{r}
 set.seed(2)
 PopMin <- rep(100,3)  
@@ -788,6 +787,8 @@ sMint <- calc_p_t(sMin$Timeline)
 Fig18 <- figProb_t(sMint,"Probability to ... of Money\nTimeline for the Minimal Population") 
 Fig18 
 ```
+
+As you can see in Figure 18, the curves are very unstable, so I try a larger population with 5 agents.
 
 ```{r}
 set.seed(2)
@@ -798,6 +799,8 @@ Fig19 <- figProb_t(sMint,"Probability to ... of Money\nTimeline for the Minimal 
 Fig19 
 ```
 
+Here we still have the same problem, so the next time we double the number of agents to 10.
+
 ```{r}
 set.seed(2)
 PopMin <- rep(100,10)  
@@ -807,20 +810,32 @@ Fig20 <- figProb_t(sMint,"Probability to ... of Money\nTimeline for the Minimal 
 Fig20 
 ```
 
+This seems to produce a reasonably stable curve. And this population is still small enough to make the tables clear. This is shown below for the start situation in Table1.
+
+So all Probabilities for winning more than the median of Monay are exactly 0.5 unless which Agent is the next Meeting partner. The diagonals also show the mean scores for each agent in the given population.
+
 ```{r echo=FALSE, fig.width=12, fig.height=12}
 Tab00 <- calc_p(sMin$Timeline[,1],TRUE) 
 Tab00$SumD
 ```
+
+Table 1 clearly shows that the first money exchange does not only change the probability of the two affected agents. The other agents now also have the chance of meeting an agent with less money, which reduces the probability for all agents in the population.
 
 ```{r echo=FALSE, fig.width=12, fig.height=12}
 Tab01 <- calc_p(sMin$Timeline[,2],TRUE) 
 Tab01$SumD
 ```
 
+Until the 8th exchange The median and mean are exactly the same. (Table 2) As you can see, two agents still have the starting capital of 100. so the Median of Money is still 100.
+
 ```{r echo=FALSE, fig.width=12, fig.height=12}
 Tab02 <- calc_p(sMin$Timeline[,8],TRUE) 
 Tab02$SumD
 ```
+
+This is changing in the next steps (exchange 9 and 10) as seen in Table 3 and 4. Also to see there is that the median of Money falls down now and with this the probability to gain more than the median increases again.
+
+**The easiest way to see all this mechanistics is with Agent 10, who still has the starting amount of 100.**
 
 ```{r echo=FALSE, fig.width=12, fig.height=12}
 Tab03 <- calc_p(sMin$Timeline[,9],TRUE) 
@@ -833,6 +848,8 @@ Tab04 <- calc_p(sMin$Timeline[,10],TRUE)
 Tab04$SumD
 
 ```
+
+After 80 money exchanges, the median of the money takes on a kind of minimum. The probability of landing above the median is again 50% in the population. This is not quite correct, as Table 5 shows, because the simulation with only 10 agents is not very stable (Figure 20).
 
 ```{r echo=FALSE, fig.width=12, fig.height=12}
 Tab05 <- calc_p(sMin$Timeline[,81],TRUE) 

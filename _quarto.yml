@@ -34,6 +34,10 @@ website:
         href: Snippets/index.qmd
         contents:
         - Snippets/BetaDistribution.qmd
+      - section:
+        href: Project/index.qmd
+        contents:
+        - Project/sketchbook00.qmd
 
 format:
   html:
