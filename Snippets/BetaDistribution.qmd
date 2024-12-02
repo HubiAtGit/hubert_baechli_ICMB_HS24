@@ -1,17 +1,16 @@
 ---
 title: "Beta Distribution"
 author: "Hubert Baechli"
-
-execute: 
-  cache: false
 ---
 
 Loading some Packages
 
 ```{r}
 
-library(tidyverse)
 library(fitdistrplus)
+library(survival)
+library(tidyverse)
+
 
 # set.seed(1)
 ```
@@ -20,17 +19,24 @@ library(fitdistrplus)
 
 ```{r}
 beta_par <- function(mu, sigma) {
-  mu <- max(mu, 1E-6)
-  sigma <- max(sigma, 1E-6)
-  a_b <- mu * (1 - mu) / sigma^2 - 1  # calc alpha + beta
-  a_b <- max(a_b,1E-6)
-  #a_b <- abs(a_b)
+  mu <- max(mu, 0.0001)
+  mu <- min(mu, 0.9999)
+  sigma <- max(sigma, 0.00001)
+  par <- c(sqrt(mu * (1 - mu))*0.99, sigma)
+  sigma <- min(par)
+  a_b <- (mu * (1 - mu)) / sigma^2 - 1  # calc alpha + beta
   a <- mu * a_b
   b <- (1 - mu) * a_b
-  return(list(alpha = a, beta = b))
+  Output <- list(alpha = a,
+                   beta = b)
+  return(Output)
 }
 
-beta_par(mu = 0.5, sigma = 0.1)
+sigma <- 0.1
+mu <- 0.4
+
+beta_par(mu = mu, sigma = sigma)
+
 ```
 
 # Generating random values
@@ -41,32 +47,131 @@ gen_rbeta <- function(n = n,
                       sigma = sigma
                       ) {
   par <- beta_par(mu = mu, sigma = sigma)
-  data <- rbeta(n = 1000, 
-                shape1 = par$alpha, 
-                shape2 = par$beta)
-  data <- sort(data)
+  vec <- rbeta(n = 1000, shape1 = par$alpha, shape2 = par$beta)
 
-  return(data)
+  return(vec)
 }
 
-data <- gen_rbeta(mu = 0.1, sigma = 0.05)
-beta_par(mu = 0.1, sigma = 0.05)
+```
 
+# Testing for different Parameters
+
+```{r}
+n <- 1000
+m <- 10
+
+data01 <- data.frame(ID = seq(1,n))  
+
+# Weitere Spalten hinzufügen
+for (i in seq(0, 10)) {
+  temp <- round(gen_rbeta(n = n, mu = i / m, sigma = 0.1), 3)
+  temp <- sort(temp)
+  name <- sprintf("Set%03d", i)
+  data01[[name]] <- temp
+}
+summary(data01$Set000)
 ```
 
 ```{r}
-summary(data)
+
+data001 <- pivot_longer(data01,
+                     cols = starts_with("Set"),
+                     names_to = "Set",
+                     values_to = "Values")
+
+ggplot(data = data001, aes(x = ID, y = Values, color = Set))  +
+  geom_line() +
+  ggtitle("") +
+  xlab("number") +
+  labs(color = "Data Sets") +
+  theme_light() +
+  theme()
 ```
 
 ```{r}
-hist(data)
+
+data02 <- data.frame(ID = seq(1,n))  
+
+# Weitere Spalten hinzufügen
+for (i in seq(0, 10)) {
+  temp <- round(gen_rbeta(n = n, mu = i / m, sigma = 0.5), 3)
+  temp <- sort(temp)
+  name <- sprintf("Set%03d", i)
+  data02[[name]] <- temp
+}
+data002 <- pivot_longer(data02,
+                     cols = starts_with("Set"),
+                     names_to = "Set",
+                     values_to = "Values")
+
+ggplot(data = data002, aes(x = ID, y = Values, color = Set))  +
+  geom_line() +
+  ggtitle("") +
+  xlab("number") +
+  labs(color = "Data Sets") +
+  theme_light() +
+  theme()
 ```
 
 ```{r}
-plot(data)
+
+data03 <- data.frame(ID = seq(1,n))  
+
+# Weitere Spalten hinzufügen
+for (i in seq(0, 10)) {
+  temp <- round(gen_rbeta(n = n, mu = 0.5, sigma = i / m), 3)
+  temp <- sort(temp)
+  name <- sprintf("Set%03d", i)
+  data03[[name]] <- temp
+}
+data003 <- pivot_longer(data03,
+                     cols = starts_with("Set"),
+                     names_to = "Set",
+                     values_to = "Values")
+
+ggplot(data = data003, aes(x = ID, y = Values, color = Set))  +
+  geom_line() +
+  ggtitle("") +
+  xlab("number") +
+  labs(color = "Data Sets") +
+  theme_light() +
+  theme()
 ```
 
 ```{r}
-fit <- fitdist(data, "beta", start = list(shape1 = 1, shape2 = 1))
+
+data04 <- data.frame(ID = seq(1,n))  
+
+# Weitere Spalten hinzufügen
+for (i in seq(0, 10)) {
+  temp <- round(gen_rbeta(n = n, mu = 0.1, sigma = i / m), 3)
+  temp <- sort(temp)
+  name <- sprintf("Set%03d", i)
+  data04[[name]] <- temp
+}
+data04 <- pivot_longer(data04,
+                     cols = starts_with("Set"),
+                     names_to = "Set",
+                     values_to = "Values")
+
+ggplot(data = data04, aes(x = ID, y = Values, color = Set))  +
+  geom_line() +
+  ggtitle("") +
+  xlab("number") +
+  labs(color = "Data Sets") +
+  theme_light() +
+  theme()
+```
+
+# Fit Betaparameter
+
+```{r}
+datah <- data03[, "Set002"]
+beta_par(mu = 0.5, sigma = 2/10)
+hist(datah)
+```
+
+```{r}
+fit <- fitdist(datah, "beta", start = list(shape1 = 0.5, shape2 = 0.2))
 fit
 ```
