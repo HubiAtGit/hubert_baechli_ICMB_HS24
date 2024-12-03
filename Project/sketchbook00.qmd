@@ -1,0 +1,224 @@
+---
+title: "Simple Learningkurve"
+author: "Hubert Baechli"
+
+execute: 
+  cache: false
+---
+
+# Simple Learningkurve
+
+First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
+
+# Definitions
+
+Loading some Packages for easier Data management and Presentation of Results
+
+```{r}
+library(tidyverse)  
+# set.seed(1)
+```
+
+## Population for testing the Functions
+
+```{r}
+nA = 5            # number of Agents
+ID = seq_len(nA)  # ID of the Agents
+
+Pop <- tibble( ID = ID )
+Pop
+```
+
+# Functions
+
+## Knowledge
+
+Functions to set and update Knowledge
+
+### Set Knowledge 
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's
+
+2.  A value for the Knowledge (K) between 0 and 1. could be a scalar or e vector with the same length as the Population
+
+3.  optional for future implementations a name (Typ) for the specific Knowledge
+
+```{r}
+set_Knowledge <- function(Pop = Pop,
+                          Typ = FALSE,
+                          K = Knowledge) {
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  if (Kname %in% colnames(Pop)) {
+    Pop <- Pop %>%
+      mutate(!!Kname := K)
+  } else {
+    Pop[[Kname]] <- K
+  }
+  Pop <- Pop %>%
+
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with the defined Knowledge
+
+```{r}
+K <- seq_len(nA)/5
+
+Pop <- set_Knowledge( Pop = Pop, K = 0.5 )
+Pop <- set_Knowledge( Pop = Pop, Typ = "A", K = K )
+Pop
+```
+
+### Update Knowledge 
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's
+
+2.  A value to add to the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 0 is used to add
+
+3.  A value to multiplie (fac) the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 1 is used for the multiplikation
+
+4.  optional for future implementations a name (Typ) for the specific Knowledge
+
+#### Hints
+
+-   The add operation is always used first!
+
+-   If the Knowledge is not defined before it will be generated with the start value (add) and the multiplication with the value (fac)
+
+```{r}
+update_Knowledge <- function(Pop = Pop,
+                            Typ = FALSE,
+                            add = 0,
+                            fac = 1) {
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  if (Kname %in% colnames(Pop)) {
+    Pop <- Pop %>%
+      mutate( !!Kname := ( .data[[Kname]] + add ) * fac )
+  } else {
+    Pop <- set_Knowledge(Pop = Pop, K = add, Typ = Typ)
+    Pop <- Pop %>%
+      mutate( !!Kname := .data[[Kname]] * fac )
+  }
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with the defined Knowledge
+
+```{r}
+add <- seq_len(nA)/20
+fac <- seq_len(nA)/10 
+
+Pop <- update_Knowledge( Pop = Pop, add = add ) 
+Pop <- update_Knowledge( Pop = Pop, Typ = "A", fac = fac ) 
+Pop <- update_Knowledge( Pop = Pop, Typ = "B", add = add, fac = fac ) 
+Pop
+```
+
+## LearnRate
+
+Functions to set and update the learn rate
+
+### Set LearnRate 
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's
+
+2.  A value for the learn rate (LR) between 0 and 1. could be a scalar or e vector with the same length as the Population
+
+```{r}
+set_LearnRate <- function(Pop = Pop,
+                          LR = LearnRate) {
+  LRname <- "LearnRate"
+  if (LRname %in% colnames(Pop)) {
+    Pop <- Pop %>%
+      mutate(!!LRname := LR)
+  } else {
+    Pop[[LRname]] <- LR
+  }
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with the defined learn rate
+
+```{r}
+LR <- seq_len(nA)/5  
+Pop <- set_LearnRate( Pop = Pop, LR = LR ) 
+Pop
+```
+
+### Update LearnRate by Knowledge
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's and Knowledge
+
+2.  optional for future implementations a name (Typ) for the specific Knowledge
+
+#### Hints
+
+-   The learn rate is defined as 50% of the Knowledge for each Agent
+
+```{r}
+update_LearnRate_Knowledge <- function(Pop = Pop,
+                                       Typ = FALSE) {
+  LR <- "LearnRate"
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  if (Kname %in% colnames(Pop)) {
+    Pop <- Pop %>%
+      mutate( !!LR := .data[[Kname]] * 0.5 )
+  }
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with the defined learn rate
+
+```{r}
+Pop <- update_LearnRate_Knowledge( Pop = Pop )  
+Pop
+```
+
+### 
+
+## **Learning Simulation**
+
+Finally, a simulation is created that simulates a certain number of money exchanges.
+
+#### Needs
+
+1.  Number of exchanges
+
+2.  Startdistribition of Money
+
+3.  Steps for the timeline (optional)
+
+#### Output
+
+1.  Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End
+
+2.  Matrix with Money distribution(Timeline) for given time steps as vectors (if steps \> 0)

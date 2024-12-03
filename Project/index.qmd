@@ -1,0 +1,10 @@
+---
+title: "How knowledge is distributed <br> in the population?<br> Mayby!!"
+author: "Hubert Baechli"
+---
+
+# Contents
+
+First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
+
+## [Simple Learningkurve](sketchbook00.qmd)

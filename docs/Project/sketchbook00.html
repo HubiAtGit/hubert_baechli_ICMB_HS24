@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Hubert Baechli">
-<title>Sketchbook Learningkurve – Hubert Baechli: ICMB portfolio</title>
+<title>Simple Learningkurve – Hubert Baechli: ICMB portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Project/index.html">How knowledge is distributed <br> in the population?<br> Mayby!</a></li><li class="breadcrumb-item"><a href="../Project/sketchbook00.html">Sketchbook Learningkurve</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Project/index.html">How knowledge is distributed <br> in the population?<br> Mayby!!</a></li><li class="breadcrumb-item"><a href="../Project/sketchbook00.html">Simple Learningkurve</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../Project/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">How knowledge is distributed <br> in the population?<br> Mayby!</span></a>
+ <span class="menu-text">How knowledge is distributed <br> in the population?<br> Mayby!!</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Project/sketchbook00.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Sketchbook Learningkurve</span></a>
+ <span class="menu-text">Simple Learningkurve</span></a>
   </div>
 </li>
       </ul>
@@ -219,24 +219,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-<li>
-<a href="#definitions" id="toc-definitions" class="nav-link active" data-scroll-target="#definitions">Definitions</a>
+<li><a href="#simple-learningkurve" id="toc-simple-learningkurve" class="nav-link active" data-scroll-target="#simple-learningkurve">Simple Learningkurve</a></li>
+  <li>
+<a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a>
   <ul class="collapse">
-<li><a href="#initial-population" id="toc-initial-population" class="nav-link" data-scroll-target="#initial-population">Initial Population</a></li>
+<li><a href="#population-for-testing-the-functions" id="toc-population-for-testing-the-functions" class="nav-link" data-scroll-target="#population-for-testing-the-functions">Population for testing the Functions</a></li>
   </ul>
 </li>
   <li>
 <a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
   <ul class="collapse">
-<li><a href="#knowlege-gain-per-time" id="toc-knowlege-gain-per-time" class="nav-link" data-scroll-target="#knowlege-gain-per-time">Knowlege gain per time</a></li>
+<li>
+<a href="#knowledge" id="toc-knowledge" class="nav-link" data-scroll-target="#knowledge">Knowledge</a>
+  <ul class="collapse">
+<li><a href="#set-knowledge" id="toc-set-knowledge" class="nav-link" data-scroll-target="#set-knowledge">Set Knowledge</a></li>
+  <li><a href="#update-knowledge" id="toc-update-knowledge" class="nav-link" data-scroll-target="#update-knowledge">Update Knowledge</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#learnrate" id="toc-learnrate" class="nav-link" data-scroll-target="#learnrate">LearnRate</a>
+  <ul class="collapse">
+<li><a href="#set-learnrate" id="toc-set-learnrate" class="nav-link" data-scroll-target="#set-learnrate">Set LearnRate</a></li>
+  <li><a href="#update-learnrate-by-knowledge" id="toc-update-learnrate-by-knowledge" class="nav-link" data-scroll-target="#update-learnrate-by-knowledge">Update LearnRate by Knowledge</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul>
+</li>
   <li><a href="#learning-simulation" id="toc-learning-simulation" class="nav-link" data-scroll-target="#learning-simulation"><strong>Learning Simulation</strong></a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Project/index.html">How knowledge is distributed <br> in the population?<br> Mayby!</a></li><li class="breadcrumb-item"><a href="../Project/sketchbook00.html">Sketchbook Learningkurve</a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Sketchbook Learningkurve</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Project/index.html">How knowledge is distributed <br> in the population?<br> Mayby!!</a></li><li class="breadcrumb-item"><a href="../Project/sketchbook00.html">Simple Learningkurve</a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Simple Learningkurve</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -256,71 +271,245 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p><strong>Final Version</strong></p>
-<p>Loading some Packages for Better Presentation of Results</p>
+</header><section id="simple-learningkurve" class="level1"><h1>Simple Learningkurve</h1>
+<p>First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.</p>
+</section><section id="definitions" class="level1"><h1>Definitions</h1>
+<p>Loading some Packages for easier Data management and Presentation of Results</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stderr">
-<pre><code>
-Attache Paket: 'dplyr'</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Die folgenden Objekte sind maskiert von 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Die folgenden Objekte sind maskiert von 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set.seed(1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set.seed(1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="definitions" class="level1"><h1>Definitions</h1>
-<section id="initial-population" class="level2"><h2 class="anchored" data-anchor-id="initial-population">Initial Population</h2>
+<section id="population-for-testing-the-functions" class="level2"><h2 class="anchored" data-anchor-id="population-for-testing-the-functions">Population for testing the Functions</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nA</span> <span class="op">=</span> <span class="fl">20</span>           <span class="co"># number of Agents</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nA</span> <span class="op">=</span> <span class="fl">5</span>            <span class="co"># number of Agents</span></span>
 <span><span class="va">ID</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">nA</span><span class="op">)</span>  <span class="co"># ID of the Agents</span></span>
-<span><span class="va">M0pop</span> <span class="op">=</span> <span class="fl">0.3</span>       <span class="co"># Mean Knowlege</span></span>
 <span></span>
-<span><span class="va">Pop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> ID <span class="op">=</span> <span class="va">ID</span>,</span>
-<span>                     Knowlege <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nA</span>, mean <span class="op">=</span> <span class="va">M0pop</span>, sd <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="va">M0pop</span><span class="op">)</span><span class="op">)</span></span>
-<span>                     <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span> ID <span class="op">=</span> <span class="va">ID</span> <span class="op">)</span></span>
+<span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+     ID
+  &lt;int&gt;
+1     1
+2     2
+3     3
+4     4
+5     5</code></pre>
+</div>
 </div>
 </section></section><section id="functions" class="level1"><h1>Functions</h1>
-<section id="knowlege-gain-per-time" class="level2"><h2 class="anchored" data-anchor-id="knowlege-gain-per-time">Knowlege gain per time</h2>
-<p>To describe the distribution of money in the population, a function is defined to calculate the Gini coefficient.</p>
+<section id="knowledge" class="level2"><h2 class="anchored" data-anchor-id="knowledge">Knowledge</h2>
+<p>Functions to set and update Knowledge</p>
+<section id="set-knowledge" class="level3"><h3 class="anchored" data-anchor-id="set-knowledge">Set Knowledge</h3>
 <section id="needs" class="level4"><h4 class="anchored" data-anchor-id="needs">Needs</h4>
 <ol type="1">
-<li>
-</li></ol></section><section id="output" class="level4"><h4 class="anchored" data-anchor-id="output">Output</h4>
-<ol type="1">
-<li>
-</li></ol>
+<li><p>A Population (Pop) with several Agents defined by ID’s</p></li>
+<li><p>A value for the Knowledge (K) between 0 and 1. could be a scalar or e vector with the same length as the Population</p></li>
+<li><p>optional for future implementations a name (Typ) for the specific Knowledge</p></li>
+</ol>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">learning_alone</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">kb</span> <span class="op">=</span> <span class="va">KnowlegeAtBegining</span>,</span>
-<span>                               <span class="va">lt</span> <span class="op">=</span> <span class="va">LearningHouers</span>,</span>
-<span>                               <span class="va">lr</span> <span class="op">=</span> <span class="va">kb</span><span class="op">)</span> <span class="op">{</span> </span>
-<span>                                <span class="co"># lr = LearningRate (optional)</span></span>
-<span>  <span class="va">tb</span> <span class="op">&lt;-</span> <span class="op">(</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">kb</span> <span class="op">)</span><span class="op">^</span><span class="op">(</span> <span class="fl">1</span> <span class="op">/</span> <span class="op">-</span><span class="va">lr</span> <span class="op">)</span>  <span class="co"># assumed time learnd allready</span></span>
-<span>  <span class="va">ke</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="op">(</span> <span class="va">tb</span> <span class="op">+</span> <span class="va">lt</span> <span class="op">)</span><span class="op">^</span><span class="op">(</span> <span class="op">-</span><span class="va">lr</span> <span class="op">)</span> <span class="co"># Knowlege after time learnd</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ke</span> <span class="op">-</span> <span class="va">kb</span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">set_Knowledge</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span> <span class="op">=</span> <span class="va">Pop</span>,</span>
+<span>                          <span class="va">Typ</span> <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                          <span class="va">K</span> <span class="op">=</span> <span class="va">Knowledge</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Typ</span> <span class="op">!=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">Kname</span>, <span class="va">Typ</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Kname</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">Kname</span> <span class="op">:=</span> <span class="va">K</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span><span class="op">[[</span><span class="va">Kname</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">K</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section><section id="output" class="level4"><h4 class="anchored" data-anchor-id="output">Output</h4>
+<ol type="1">
+<li>Population with the defined Knowledge</li>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">nA</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">set_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, K <span class="op">=</span> <span class="fl">0.5</span> <span class="op">)</span></span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">set_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, Typ <span class="op">=</span> <span class="st">"A"</span>, K <span class="op">=</span> <span class="va">K</span> <span class="op">)</span></span>
+<span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+     ID Knowledge Knowledge_A
+  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1     1       0.5         0.2
+2     2       0.5         0.4
+3     3       0.5         0.6
+4     4       0.5         0.8
+5     5       0.5         1  </code></pre>
+</div>
+</div>
+</section></section><section id="update-knowledge" class="level3"><h3 class="anchored" data-anchor-id="update-knowledge">Update Knowledge</h3>
+<section id="needs-1" class="level4"><h4 class="anchored" data-anchor-id="needs-1">Needs</h4>
+<ol type="1">
+<li><p>A Population (Pop) with several Agents defined by ID’s</p></li>
+<li><p>A value to add to the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 0 is used to add</p></li>
+<li><p>A value to multiplie (fac) the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 1 is used for the multiplikation</p></li>
+<li><p>optional for future implementations a name (Typ) for the specific Knowledge</p></li>
+</ol></section><section id="hints" class="level4"><h4 class="anchored" data-anchor-id="hints">Hints</h4>
+<ul>
+<li><p>The add operation is always used first!</p></li>
+<li><p>If the Knowledge is not defined before it will be generated with the start value (add) and the multiplication with the value (fac)</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">update_Knowledge</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span> <span class="op">=</span> <span class="va">Pop</span>,</span>
+<span>                            <span class="va">Typ</span> <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                            <span class="va">add</span> <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                            <span class="va">fac</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Typ</span> <span class="op">!=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">Kname</span>, <span class="va">Typ</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Kname</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span> <span class="op">!</span><span class="op">!</span><span class="va">Kname</span> <span class="op">:=</span> <span class="op">(</span> <span class="va">.data</span><span class="op">[[</span><span class="va">Kname</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">add</span> <span class="op">)</span> <span class="op">*</span> <span class="va">fac</span> <span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">set_Knowledge</span><span class="op">(</span>Pop <span class="op">=</span> <span class="va">Pop</span>, K <span class="op">=</span> <span class="va">add</span>, Typ <span class="op">=</span> <span class="va">Typ</span><span class="op">)</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span> <span class="op">!</span><span class="op">!</span><span class="va">Kname</span> <span class="op">:=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">Kname</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="va">fac</span> <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="output-1" class="level4"><h4 class="anchored" data-anchor-id="output-1">Output</h4>
+<ol type="1">
+<li>Population with the defined Knowledge</li>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">nA</span><span class="op">)</span><span class="op">/</span><span class="fl">20</span></span>
+<span><span class="va">fac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">nA</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span> </span>
+<span></span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">update_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, add <span class="op">=</span> <span class="va">add</span> <span class="op">)</span> </span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">update_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, Typ <span class="op">=</span> <span class="st">"A"</span>, fac <span class="op">=</span> <span class="va">fac</span> <span class="op">)</span> </span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">update_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, Typ <span class="op">=</span> <span class="st">"B"</span>, add <span class="op">=</span> <span class="va">add</span>, fac <span class="op">=</span> <span class="va">fac</span> <span class="op">)</span> </span>
+<span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+     ID Knowledge Knowledge_A Knowledge_B
+  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1     1      0.55        0.02       0.005
+2     2      0.6         0.08       0.02 
+3     3      0.65        0.18       0.045
+4     4      0.7         0.32       0.08 
+5     5      0.75        0.5        0.125</code></pre>
+</div>
+</div>
+</section></section></section><section id="learnrate" class="level2"><h2 class="anchored" data-anchor-id="learnrate">LearnRate</h2>
+<p>Functions to set and update the learn rate</p>
+<section id="set-learnrate" class="level3"><h3 class="anchored" data-anchor-id="set-learnrate">Set LearnRate</h3>
+<section id="needs-2" class="level4"><h4 class="anchored" data-anchor-id="needs-2">Needs</h4>
+<ol type="1">
+<li><p>A Population (Pop) with several Agents defined by ID’s</p></li>
+<li><p>A value for the learn rate (LR) between 0 and 1. could be a scalar or e vector with the same length as the Population</p></li>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">set_LearnRate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span> <span class="op">=</span> <span class="va">Pop</span>,</span>
+<span>                          <span class="va">LR</span> <span class="op">=</span> <span class="va">LearnRate</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">LRname</span> <span class="op">&lt;-</span> <span class="st">"LearnRate"</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">LRname</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">LRname</span> <span class="op">:=</span> <span class="va">LR</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span><span class="op">[[</span><span class="va">LRname</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">LR</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="output-2" class="level4"><h4 class="anchored" data-anchor-id="output-2">Output</h4>
+<ol type="1">
+<li>Population with the defined learn rate</li>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">nA</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span>  </span>
+<span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">set_LearnRate</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, LR <span class="op">=</span> <span class="va">LR</span> <span class="op">)</span> </span>
+<span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+     ID Knowledge Knowledge_A Knowledge_B LearnRate
+  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1     1      0.55        0.02       0.005       0.2
+2     2      0.6         0.08       0.02        0.4
+3     3      0.65        0.18       0.045       0.6
+4     4      0.7         0.32       0.08        0.8
+5     5      0.75        0.5        0.125       1  </code></pre>
+</div>
+</div>
+</section></section><section id="update-learnrate-by-knowledge" class="level3"><h3 class="anchored" data-anchor-id="update-learnrate-by-knowledge">Update LearnRate by Knowledge</h3>
+<section id="needs-3" class="level4"><h4 class="anchored" data-anchor-id="needs-3">Needs</h4>
+<ol type="1">
+<li><p>A Population (Pop) with several Agents defined by ID’s and Knowledge</p></li>
+<li><p>optional for future implementations a name (Typ) for the specific Knowledge</p></li>
+</ol></section><section id="hints-1" class="level4"><h4 class="anchored" data-anchor-id="hints-1">Hints</h4>
+<ul>
+<li>The learn rate is defined as 50% of the Knowledge for each Agent</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">update_LearnRate_Knowledge</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span> <span class="op">=</span> <span class="va">Pop</span>,</span>
+<span>                                       <span class="va">Typ</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">LR</span> <span class="op">&lt;-</span> <span class="st">"LearnRate"</span></span>
+<span>  <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Typ</span> <span class="op">!=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Kname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">Kname</span>, <span class="va">Typ</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">Kname</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="va">Pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span> <span class="op">!</span><span class="op">!</span><span class="va">LR</span> <span class="op">:=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">Kname</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">0.5</span> <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">Pop</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="output-3" class="level4"><h4 class="anchored" data-anchor-id="output-3">Output</h4>
+<ol type="1">
+<li>Population with the defined learn rate</li>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">update_LearnRate_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span> <span class="op">)</span>  </span>
+<span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+     ID Knowledge Knowledge_A Knowledge_B LearnRate
+  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1     1      0.55        0.02       0.005     0.275
+2     2      0.6         0.08       0.02      0.3  
+3     3      0.65        0.18       0.045     0.325
+4     4      0.7         0.32       0.08      0.35 
+5     5      0.75        0.5        0.125     0.375</code></pre>
+</div>
+</div>
+</section></section><section id="section" class="level3"><h3 class="anchored" data-anchor-id="section"></h3>
 </section></section><section id="learning-simulation" class="level2"><h2 class="anchored" data-anchor-id="learning-simulation"><strong>Learning Simulation</strong></h2>
 <p>Finally, a simulation is created that simulates a certain number of money exchanges.</p>
-<section id="needs-1" class="level4"><h4 class="anchored" data-anchor-id="needs-1">Needs</h4>
+<section id="needs-4" class="level4"><h4 class="anchored" data-anchor-id="needs-4">Needs</h4>
 <ol type="1">
 <li><p>Number of exchanges</p></li>
 <li><p>Startdistribition of Money</p></li>
 <li><p>Steps for the timeline (optional)</p></li>
-</ol></section><section id="output-1" class="level4"><h4 class="anchored" data-anchor-id="output-1">Output</h4>
+</ol></section><section id="output-4" class="level4"><h4 class="anchored" data-anchor-id="output-4">Output</h4>
 <ol type="1">
 <li><p>Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End</p></li>
 <li><p>Matrix with Money distribution(Timeline) for given time steps as vectors (if steps &gt; 0)</p></li>
@@ -800,92 +989,237 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../Project/index.html" class="pagination-link" aria-label="How knowledge is distributed <br> in the population?<br> Mayby!">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How knowledge is distributed <br> in the population?<br> Mayby!</span>
+      <a href="../Project/index.html" class="pagination-link" aria-label="How knowledge is distributed <br> in the population?<br> Mayby!!">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How knowledge is distributed <br> in the population?<br> Mayby!!</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sketchbook Learningkurve"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span><span class="co"> </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: false</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>**Final Version**</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Loading some Packages for Better Presentation of Results</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(1)</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># Definitions</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Initial Population</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">=</span> <span class="dv">20</span>           <span class="co"># number of Agents</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">=</span> <span class="fu">seq_len</span>(nA)  <span class="co"># ID of the Agents</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>M0pop <span class="ot">=</span> <span class="fl">0.3</span>       <span class="co"># Mean Knowlege</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>Pop20 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> ID,</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Knowlege =</span> <span class="fu">sort</span>(<span class="fu">rnorm</span>(nA, <span class="at">mean =</span> M0pop, <span class="at">sd =</span> <span class="fl">0.2</span> <span class="sc">*</span> M0pop))</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>                     )</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># Functions</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Knowlege gain per time</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>To describe the distribution of money in the population, a function is defined to calculate the Gini coefficient.</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>learning_alone <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">kb =</span> KnowlegeAtBegining,</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>                               <span class="at">lt =</span> LearningHouers,</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>                               <span class="at">lr =</span> kb) { </span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>                                <span class="co"># lr = LearningRate (optional)</span></span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>  tb <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">-</span> kb )<span class="sc">^</span>( <span class="dv">1</span> <span class="sc">/</span> <span class="sc">-</span>lr )  <span class="co"># assumed time learnd allready</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  ke <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ( tb <span class="sc">+</span> lt )<span class="sc">^</span>( <span class="sc">-</span>lr ) <span class="co"># Knowlege after time learnd</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ke <span class="sc">-</span> kb)</span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Learning Simulation**</span></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>Finally, a simulation is created that simulates a certain number of money exchanges.</span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Number of exchanges</span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Startdistribition of Money</span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Steps for the timeline (optional)</span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End</span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Matrix with Money distribution(Timeline) for given time steps as vectors (if steps <span class="sc">\&gt;</span> 0)</span>
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Simple Learningkurve"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Hubert Baechli"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span><span class="co"> </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: false</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simple Learningkurve</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Definitions</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>Loading some Packages for easier Data management and Presentation of Results</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># set.seed(1)</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Population for testing the Functions</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">=</span> <span class="dv">5</span>            <span class="co"># number of Agents</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">=</span> <span class="fu">seq_len</span>(nA)  <span class="co"># ID of the Agents</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> ID )</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="fu"># Functions</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Knowledge</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>Functions to set and update Knowledge</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### Set Knowledge </span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A Population (Pop) with several Agents defined by ID's</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>A value for the Knowledge (K) between 0 and 1. could be a scalar or e vector with the same length as the Population</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>optional for future implementations a name (Typ) for the specific Knowledge</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>set_Knowledge <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Typ =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>                          <span class="at">K =</span> Knowledge) {</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  Kname <span class="ot">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Typ <span class="sc">!=</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>    Kname <span class="ot">&lt;-</span> <span class="fu">paste</span>(Kname, Typ, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Kname <span class="sc">%in%</span> <span class="fu">colnames</span>(Pop)) {</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="sc">!!</span><span class="at">Kname :=</span> K)</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>    Pop[[Kname]] <span class="ot">&lt;-</span> K</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Pop)</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Population with the defined Knowledge</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)<span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">K =</span> <span class="fl">0.5</span> )</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">Typ =</span> <span class="st">"A"</span>, <span class="at">K =</span> K )</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### Update Knowledge </span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A Population (Pop) with several Agents defined by ID's</span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>A value to add to the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 0 is used to add</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>A value to multiplie (fac) the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 1 is used for the multiplikation</span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>optional for future implementations a name (Typ) for the specific Knowledge</span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Hints</span></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The add operation is always used first!</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If the Knowledge is not defined before it will be generated with the start value (add) and the multiplication with the value (fac)</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>update_Knowledge <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Typ =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>                            <span class="at">add =</span> <span class="dv">0</span>,</span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fac =</span> <span class="dv">1</span>) {</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>  Kname <span class="ot">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Typ <span class="sc">!=</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>    Kname <span class="ot">&lt;-</span> <span class="fu">paste</span>(Kname, Typ, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Kname <span class="sc">%in%</span> <span class="fu">colnames</span>(Pop)) {</span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>( <span class="sc">!!</span><span class="at">Kname :=</span> ( .data[[Kname]] <span class="sc">+</span> add ) <span class="sc">*</span> fac )</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>(<span class="at">Pop =</span> Pop, <span class="at">K =</span> add, <span class="at">Typ =</span> Typ)</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>( <span class="sc">!!</span><span class="at">Kname :=</span> .data[[Kname]] <span class="sc">*</span> fac )</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Pop)</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Population with the defined Knowledge</span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)<span class="sc">/</span><span class="dv">20</span></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>fac <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)<span class="sc">/</span><span class="dv">10</span> </span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">update_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">add =</span> add ) </span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">update_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">Typ =</span> <span class="st">"A"</span>, <span class="at">fac =</span> fac ) </span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">update_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">Typ =</span> <span class="st">"B"</span>, <span class="at">add =</span> add, <span class="at">fac =</span> fac ) </span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## LearnRate</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>Functions to set and update the learn rate</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Set LearnRate </span></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A Population (Pop) with several Agents defined by ID's</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>A value for the learn rate (LR) between 0 and 1. could be a scalar or e vector with the same length as the Population</span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>set_LearnRate <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>                          <span class="at">LR =</span> LearnRate) {</span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>  LRname <span class="ot">&lt;-</span> <span class="st">"LearnRate"</span></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (LRname <span class="sc">%in%</span> <span class="fu">colnames</span>(Pop)) {</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="sc">!!</span><span class="at">LRname :=</span> LR)</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>    Pop[[LRname]] <span class="ot">&lt;-</span> LR</span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Pop)</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Population with the defined learn rate</span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>LR <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)<span class="sc">/</span><span class="dv">5</span>  </span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_LearnRate</span>( <span class="at">Pop =</span> Pop, <span class="at">LR =</span> LR ) </span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### Update LearnRate by Knowledge</span></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A Population (Pop) with several Agents defined by ID's and Knowledge</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>optional for future implementations a name (Typ) for the specific Knowledge</span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Hints</span></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>The learn rate is defined as 50% of the Knowledge for each Agent</span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a>update_LearnRate_Knowledge <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">Typ =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>  LR <span class="ot">&lt;-</span> <span class="st">"LearnRate"</span></span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>  Kname <span class="ot">&lt;-</span> <span class="st">"Knowledge"</span></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Typ <span class="sc">!=</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>    Kname <span class="ot">&lt;-</span> <span class="fu">paste</span>(Kname, Typ, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Kname <span class="sc">%in%</span> <span class="fu">colnames</span>(Pop)) {</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> Pop <span class="sc">%&gt;%</span></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>( <span class="sc">!!</span><span class="at">LR :=</span> .data[[Kname]] <span class="sc">*</span> <span class="fl">0.5</span> )</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Pop)</span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Population with the defined learn rate</span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">update_LearnRate_Knowledge</span>( <span class="at">Pop =</span> Pop )  </span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="fu">### </span></span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Learning Simulation**</span></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>Finally, a simulation is created that simulates a certain number of money exchanges.</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Needs</span></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Number of exchanges</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Startdistribition of Money</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Steps for the timeline (optional)</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End</span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Matrix with Money distribution(Timeline) for given time steps as vectors (if steps <span class="sc">\&gt;</span> 0)</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

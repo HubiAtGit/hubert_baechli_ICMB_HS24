@@ -13,49 +13,61 @@
   {
     "objectID": "Project/sketchbook00.html",
     "href": "Project/sketchbook00.html",
-    "title": "Sketchbook Learningkurve",
+    "title": "Simple Learningkurve",
     "section": "",
-    "text": "Final Version\nLoading some Packages for Better Presentation of Results\nCodelibrary(gt)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(dplyr)\n\n\nAttache Paket: 'dplyr'\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nCode# set.seed(1)",
+    "text": "First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.",
     "crumbs": [
       "About",
-      "How knowledge is distributed <br> in the population?<br> Mayby!",
-      "Sketchbook Learningkurve"
+      "How knowledge is distributed <br> in the population?<br> Mayby!!",
+      "Simple Learningkurve"
     ]
   },
   {
-    "objectID": "Project/sketchbook00.html#initial-population",
-    "href": "Project/sketchbook00.html#initial-population",
-    "title": "Sketchbook Learningkurve",
-    "section": "Initial Population",
-    "text": "Initial Population\n\nCodenA = 20           # number of Agents\nID = seq_len(nA)  # ID of the Agents\nM0pop = 0.3       # Mean Knowlege\n\nPop20 &lt;- data.frame( ID = ID,\n                     Knowlege = sort(rnorm(nA, mean = M0pop, sd = 0.2 * M0pop))\n                     )",
+    "objectID": "Project/sketchbook00.html#population-for-testing-the-functions",
+    "href": "Project/sketchbook00.html#population-for-testing-the-functions",
+    "title": "Simple Learningkurve",
+    "section": "Population for testing the Functions",
+    "text": "Population for testing the Functions\n\nCodenA = 5            # number of Agents\nID = seq_len(nA)  # ID of the Agents\n\nPop &lt;- tibble( ID = ID )\nPop\n\n# A tibble: 5 × 1\n     ID\n  &lt;int&gt;\n1     1\n2     2\n3     3\n4     4\n5     5",
     "crumbs": [
       "About",
-      "How knowledge is distributed <br> in the population?<br> Mayby!",
-      "Sketchbook Learningkurve"
+      "How knowledge is distributed <br> in the population?<br> Mayby!!",
+      "Simple Learningkurve"
     ]
   },
   {
-    "objectID": "Project/sketchbook00.html#knowlege-gain-per-time",
-    "href": "Project/sketchbook00.html#knowlege-gain-per-time",
-    "title": "Sketchbook Learningkurve",
-    "section": "Knowlege gain per time",
-    "text": "Knowlege gain per time\nTo describe the distribution of money in the population, a function is defined to calculate the Gini coefficient.\nNeeds\n\n\nOutput\n\n\n\n\nCodelearning_alone &lt;- function(kb = KnowlegeAtBegining,\n                               lt = LearningHouers,\n                               lr = kb) { \n                                # lr = LearningRate (optional)\n  tb &lt;- ( 1 - kb )^( 1 / -lr )  # assumed time learnd allready\n  ke &lt;- 1 - ( tb + lt )^( -lr ) # Knowlege after time learnd\n  return(ke - kb)\n}",
+    "objectID": "Project/sketchbook00.html#knowledge",
+    "href": "Project/sketchbook00.html#knowledge",
+    "title": "Simple Learningkurve",
+    "section": "Knowledge",
+    "text": "Knowledge\nFunctions to set and update Knowledge\nSet Knowledge\nNeeds\n\nA Population (Pop) with several Agents defined by ID’s\nA value for the Knowledge (K) between 0 and 1. could be a scalar or e vector with the same length as the Population\noptional for future implementations a name (Typ) for the specific Knowledge\n\n\nCodeset_Knowledge &lt;- function(Pop = Pop,\n                          Typ = FALSE,\n                          K = Knowledge) {\n  Kname &lt;- \"Knowledge\"\n  if (Typ != FALSE) {\n    Kname &lt;- paste(Kname, Typ, sep = \"_\")\n  }\n  if (Kname %in% colnames(Pop)) {\n    Pop &lt;- Pop %&gt;%\n      mutate(!!Kname := K)\n  } else {\n    Pop[[Kname]] &lt;- K\n  }\n  Pop &lt;- Pop %&gt;%\n\n  return(Pop)\n}\n\n\nOutput\n\nPopulation with the defined Knowledge\n\n\nCodeK &lt;- seq_len(nA)/5\n\nPop &lt;- set_Knowledge( Pop = Pop, K = 0.5 )\nPop &lt;- set_Knowledge( Pop = Pop, Typ = \"A\", K = K )\nPop\n\n# A tibble: 5 × 3\n     ID Knowledge Knowledge_A\n  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;\n1     1       0.5         0.2\n2     2       0.5         0.4\n3     3       0.5         0.6\n4     4       0.5         0.8\n5     5       0.5         1  \n\n\nUpdate Knowledge\nNeeds\n\nA Population (Pop) with several Agents defined by ID’s\nA value to add to the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 0 is used to add\nA value to multiplie (fac) the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 1 is used for the multiplikation\noptional for future implementations a name (Typ) for the specific Knowledge\nHints\n\nThe add operation is always used first!\nIf the Knowledge is not defined before it will be generated with the start value (add) and the multiplication with the value (fac)\n\n\nCodeupdate_Knowledge &lt;- function(Pop = Pop,\n                            Typ = FALSE,\n                            add = 0,\n                            fac = 1) {\n  Kname &lt;- \"Knowledge\"\n  if (Typ != FALSE) {\n    Kname &lt;- paste(Kname, Typ, sep = \"_\")\n  }\n  if (Kname %in% colnames(Pop)) {\n    Pop &lt;- Pop %&gt;%\n      mutate( !!Kname := ( .data[[Kname]] + add ) * fac )\n  } else {\n    Pop &lt;- set_Knowledge(Pop = Pop, K = add, Typ = Typ)\n    Pop &lt;- Pop %&gt;%\n      mutate( !!Kname := .data[[Kname]] * fac )\n  }\n  return(Pop)\n}\n\n\nOutput\n\nPopulation with the defined Knowledge\n\n\nCodeadd &lt;- seq_len(nA)/20\nfac &lt;- seq_len(nA)/10 \n\nPop &lt;- update_Knowledge( Pop = Pop, add = add ) \nPop &lt;- update_Knowledge( Pop = Pop, Typ = \"A\", fac = fac ) \nPop &lt;- update_Knowledge( Pop = Pop, Typ = \"B\", add = add, fac = fac ) \nPop\n\n# A tibble: 5 × 4\n     ID Knowledge Knowledge_A Knowledge_B\n  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1     1      0.55        0.02       0.005\n2     2      0.6         0.08       0.02 \n3     3      0.65        0.18       0.045\n4     4      0.7         0.32       0.08 \n5     5      0.75        0.5        0.125",
     "crumbs": [
       "About",
-      "How knowledge is distributed <br> in the population?<br> Mayby!",
-      "Sketchbook Learningkurve"
+      "How knowledge is distributed <br> in the population?<br> Mayby!!",
+      "Simple Learningkurve"
+    ]
+  },
+  {
+    "objectID": "Project/sketchbook00.html#learnrate",
+    "href": "Project/sketchbook00.html#learnrate",
+    "title": "Simple Learningkurve",
+    "section": "LearnRate",
+    "text": "LearnRate\nFunctions to set and update the learn rate\nSet LearnRate\nNeeds\n\nA Population (Pop) with several Agents defined by ID’s\nA value for the learn rate (LR) between 0 and 1. could be a scalar or e vector with the same length as the Population\n\n\nCodeset_LearnRate &lt;- function(Pop = Pop,\n                          LR = LearnRate) {\n  LRname &lt;- \"LearnRate\"\n  if (LRname %in% colnames(Pop)) {\n    Pop &lt;- Pop %&gt;%\n      mutate(!!LRname := LR)\n  } else {\n    Pop[[LRname]] &lt;- LR\n  }\n  return(Pop)\n}\n\n\nOutput\n\nPopulation with the defined learn rate\n\n\nCodeLR &lt;- seq_len(nA)/5  \nPop &lt;- set_LearnRate( Pop = Pop, LR = LR ) \nPop\n\n# A tibble: 5 × 5\n     ID Knowledge Knowledge_A Knowledge_B LearnRate\n  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;\n1     1      0.55        0.02       0.005       0.2\n2     2      0.6         0.08       0.02        0.4\n3     3      0.65        0.18       0.045       0.6\n4     4      0.7         0.32       0.08        0.8\n5     5      0.75        0.5        0.125       1  \n\n\nUpdate LearnRate by Knowledge\nNeeds\n\nA Population (Pop) with several Agents defined by ID’s and Knowledge\noptional for future implementations a name (Typ) for the specific Knowledge\nHints\n\nThe learn rate is defined as 50% of the Knowledge for each Agent\n\n\nCodeupdate_LearnRate_Knowledge &lt;- function(Pop = Pop,\n                                       Typ = FALSE) {\n  LR &lt;- \"LearnRate\"\n  Kname &lt;- \"Knowledge\"\n  if (Typ != FALSE) {\n    Kname &lt;- paste(Kname, Typ, sep = \"_\")\n  }\n  if (Kname %in% colnames(Pop)) {\n    Pop &lt;- Pop %&gt;%\n      mutate( !!LR := .data[[Kname]] * 0.5 )\n  }\n  return(Pop)\n}\n\n\nOutput\n\nPopulation with the defined learn rate\n\n\nCodePop &lt;- update_LearnRate_Knowledge( Pop = Pop )  \nPop\n\n# A tibble: 5 × 5\n     ID Knowledge Knowledge_A Knowledge_B LearnRate\n  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;\n1     1      0.55        0.02       0.005     0.275\n2     2      0.6         0.08       0.02      0.3  \n3     3      0.65        0.18       0.045     0.325\n4     4      0.7         0.32       0.08      0.35 \n5     5      0.75        0.5        0.125     0.375",
+    "crumbs": [
+      "About",
+      "How knowledge is distributed <br> in the population?<br> Mayby!!",
+      "Simple Learningkurve"
     ]
   },
   {
     "objectID": "Project/sketchbook00.html#learning-simulation",
     "href": "Project/sketchbook00.html#learning-simulation",
-    "title": "Sketchbook Learningkurve",
+    "title": "Simple Learningkurve",
     "section": "Learning Simulation",
     "text": "Learning Simulation\nFinally, a simulation is created that simulates a certain number of money exchanges.\nNeeds\n\nNumber of exchanges\nStartdistribition of Money\nSteps for the timeline (optional)\nOutput\n\nSummary (Sum) with ID, number of exchanges, Money at beginning and Money at the End\nMatrix with Money distribution(Timeline) for given time steps as vectors (if steps &gt; 0)",
     "crumbs": [
       "About",
-      "How knowledge is distributed <br> in the population?<br> Mayby!",
-      "Sketchbook Learningkurve"
+      "How knowledge is distributed <br> in the population?<br> Mayby!!",
+      "Simple Learningkurve"
     ]
   },
   {
@@ -486,12 +498,12 @@
   {
     "objectID": "Project/index.html",
     "href": "Project/index.html",
-    "title": "How knowledge is distributed  in the population? Mayby!",
+    "title": "How knowledge is distributed  in the population? Mayby!!",
     "section": "",
-    "text": "Contents\n\n\n\n\n\n\n Back to top",
+    "text": "First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.",
     "crumbs": [
       "About",
-      "How knowledge is distributed <br> in the population?<br> Mayby!"
+      "How knowledge is distributed <br> in the population?<br> Mayby!!"
     ]
   },
   {
