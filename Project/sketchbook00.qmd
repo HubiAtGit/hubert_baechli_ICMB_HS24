@@ -1,14 +1,11 @@
 ---
-title: "Simple Learningkurve"
+title: "Simple Learning kurve"
 author: "Hubert Baechli"
-
-execute: 
-  cache: false
 ---
 
-# Simple Learningkurve
+# Simple Learning kurve
 
-First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement. The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
+First and foremost, the distribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement.
 
 # Definitions
 
@@ -35,7 +32,7 @@ Pop
 
 Functions to set and update Knowledge
 
-### Set Knowledge 
+### Set Knowledge
 
 #### Needs
 
@@ -77,7 +74,7 @@ Pop <- set_Knowledge( Pop = Pop, Typ = "A", K = K )
 Pop
 ```
 
-### Update Knowledge 
+### Update Knowledge
 
 #### Needs
 
@@ -134,24 +131,25 @@ Pop
 
 Functions to set and update the learn rate
 
-### Set LearnRate 
+### Set LearnRate
 
 #### Needs
 
 1.  A Population (Pop) with several Agents defined by ID's
 
-2.  A value for the learn rate (LR) between 0 and 1. could be a scalar or e vector with the same length as the Population
+2.  A value for the learn rate (LR) greater than 0 and up to 1. could be a scalar or e vector with the same length as the Population
+
+#### Hints
+
+-   LernRate 0 leads to Problems so it ist limited it to 1E-3
 
 ```{r}
 set_LearnRate <- function(Pop = Pop,
                           LR = LearnRate) {
   LRname <- "LearnRate"
-  if (LRname %in% colnames(Pop)) {
-    Pop <- Pop %>%
-      mutate(!!LRname := LR)
-  } else {
-    Pop[[LRname]] <- LR
-  }
+  Pop <- Pop %>%
+    mutate(!!LRname := LR,
+           !!LRname := pmax(.data[[LRname]],1E-3))
   return(Pop)
 }
 ```
@@ -162,33 +160,66 @@ set_LearnRate <- function(Pop = Pop,
 
 ```{r}
 LR <- seq_len(nA)/5  
-Pop <- set_LearnRate( Pop = Pop, LR = LR ) 
+Pop <- set_LearnRate( Pop = Pop, LR = 1 ) 
 Pop
 ```
 
-### Update LearnRate by Knowledge
+## StudyTime
+
+Functions to set and update the StudyTime
+
+### Set StudyTime
 
 #### Needs
 
-1.  A Population (Pop) with several Agents defined by ID's and Knowledge
+1.  A Population (Pop) with several Agents defined by ID's
 
-2.  optional for future implementations a name (Typ) for the specific Knowledge
+2.  A value for the StudyTime (ST). could be a scalar or a vector with the same length as the Population
 
 #### Hints
 
--   The learn rate is defined as 50% of the Knowledge for each Agent
+-   If StudyTime isn't given the Population will be initializing with 0
 
 ```{r}
-update_LearnRate_Knowledge <- function(Pop = Pop,
-                                       Typ = FALSE) {
-  LR <- "LearnRate"
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
-  }
-  if (Kname %in% colnames(Pop)) {
+set_StudyTime <- function(Pop = Pop,
+                          ST = 0) {
+  STname <- "StudyTime"
+  Pop <- Pop %>%
+    mutate(!!STname := ST)
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with the defined StudyTime
+
+```{r}
+Pop <- set_StudyTime( Pop = Pop, ST = 3)  
+Pop
+```
+
+### Update StudyTime
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's and StudyTime
+
+2.  A Time (dT) that should added.
+
+#### Hints
+
+-   If StudyTime isn't defined in Population it will be initialising with dT
+
+```{r}
+update_StudyTime <- function(Pop = Pop,
+                             dT = TimeToAdd) {
+  STname <- "StudyTime"
+  if (STname %in% colnames(Pop)) {
     Pop <- Pop %>%
-      mutate( !!LR := .data[[Kname]] * 0.5 )
+      mutate( !!STname := .data[[STname]] + dT )
+  } else {
+    Pop <- set_StudyTime(Pop = Pop, ST = dT )
   }
   return(Pop)
 }
@@ -196,29 +227,244 @@ update_LearnRate_Knowledge <- function(Pop = Pop,
 
 #### Output
 
-1.  Population with the defined learn rate
+1.  Population with the defined StudyTime
 
 ```{r}
-Pop <- update_LearnRate_Knowledge( Pop = Pop )  
+Pop <- update_StudyTime( Pop = Pop, dT = 1)   
 Pop
 ```
 
-### 
+## Timelines
 
-## **Learning Simulation**
+saving Timelines during Simulations
 
-Finally, a simulation is created that simulates a certain number of money exchanges.
+### Get Agents-Timelines
 
 #### Needs
 
-1.  Number of exchanges
+1.  A containername for the Timeline
 
-2.  Startdistribition of Money
+2.  A value for the Time
 
-3.  Steps for the timeline (optional)
+3.  A Population (Pop) with several Agents defined by ID's
+
+4.  A colname from the Population which should followed ver Time
+
+5.  optional parameter Sum. Ich Sum = 1 a mean and median is calculated for each Time
+
+```{r}
+
+get_Timeline <- function(TL = Timeline,
+                          Time = 0,
+                          Pop = Pop,
+                          Info = name,
+                          Sum = 0) {
+  TLadd <- tibble( ID = Pop[["ID"]],
+                   Time = Time,
+                   !!Info := Pop[[Info]])
+  if (Sum == 1) {
+    Sumname1 <- paste(Info,"mean", sep = "_")
+    Sumname2 <- paste(Info,"median", sep = "_")
+    TLadd <- TLadd %>%
+        mutate(!!Sumname1 := mean(Pop[[Info]], na.rm = TRUE),
+               !!Sumname2 := median(Pop[[Info]], na.rm = TRUE))
+    }
+  if (Time == 0) {
+    TL <- TLadd
+  } else {
+    TL <- bind_rows(TL, TLadd)
+  }
+  return(TL) 
+}
+```
 
 #### Output
 
-1.  Summary (Sum) with ID, number of exchanges, Money at beginning and Money at the End
+1.  A Timeline in a long format
 
-2.  Matrix with Money distribution(Timeline) for given time steps as vectors (if steps \> 0)
+```{r}
+Timeline <- get_Timeline( TL = Timeline, 
+                           Time = 0, 
+                           Pop = Pop, 
+                           Info = "Knowledge", 
+                           Sum = 1)
+Timeline <- get_Timeline( TL = Timeline, 
+                           Time = 1, 
+                           Pop = Pop, 
+                           Info = "Knowledge", 
+                           Sum = 1)
+Timeline
+
+```
+
+## **Learning**
+
+Learning with a exponential Lernrate
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's and Knowledge
+
+2.  optional for future implementations a name (Typ) for the specific Knowledge
+
+3.  A value for the lLearnRate (LR). could be a scalar or e vector with the same length as the Population
+
+4.  A value for the StudyTime (ST). could be a scalar or e vector with the same length as the Population
+
+#### Hints
+
+-   If LearnRate isn't given the values from the Population will be used, if this is missing in the Population 0 is used.
+
+```{r}
+learn <- function(Pop = Pop,
+                  Typ = FALSE,
+                  LR = FALSE,
+                  ST = StudyTime) {
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  if (Kname %in% colnames(Pop)) {
+    K <- Pop[[Kname]]
+  }
+  if (LR == FALSE) {
+    if ("LearnRate" %in% colnames(Pop)) {
+      LR <- Pop[["LearnRate"]]
+    }
+  }
+
+  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready
+  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd
+  
+  Pop <- set_Knowledge(Pop = Pop, Typ = Typ, K = K)
+  Pop <- update_StudyTime(Pop = Pop, dT = ST)
+  return(Pop)
+}
+```
+
+#### Output
+
+1.  Population with updated Knowledge
+
+```{r}
+
+Pop <- tibble( ID = ID )
+Pop <- set_Knowledge(Pop = Pop, K = 0.1)
+Pop <- set_LearnRate(Pop = Pop, LR = 1)
+Pop
+
+Pop <- learn( Pop = Pop, ST = 10)
+Pop
+```
+
+## **Plots**
+
+### Plot Timeline
+
+#### Needs
+
+1.  A Timeline from get_Timeline
+
+```{r}
+plt_Timeline <- function(TL = Timeline) {
+  ggplot(data = TL, aes(x = Time)) +
+  geom_line(aes(y = Knowledge, group = ID, color = "Agents"), 
+            alpha = 0.5,
+            linetype = "solid") +
+  geom_line(aes(y = Knowledge_mean, color = "Mean"),
+            linetype = "solid")  +
+  geom_line(aes(y = Knowledge_median, color = "Median"),
+            linetype = "dashed") +
+  ggtitle("Timeline") +
+  xlab("Number of itterations") +
+  ylab("Knowledge") +
+  scale_y_continuous(
+    limits = c(0, 1),
+    breaks = seq(0, 1, 0.2)
+  ) +
+    scale_color_manual(
+    values = c("Agents" = "grey", "Mean" = "black", "Median" = "black"),
+    labels = c("Agents" = "Agents", "Mean" = "Mean", "Median" = "Median")
+  ) +
+  theme_light() +
+  theme(legend.title = element_blank(),
+        legend.position = c(1, 0),
+        legend.justification = c(1, 0))
+}
+    
+
+```
+
+# **Simulation**
+
+A learning process with fixed LearnRate
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's and Knowledge
+
+2.  optional for future implementations a name (Typ) for the specific Knowledge
+
+3.  A value for the learn rate (LR) greater than 0 and up to 1. could be a scalar or e vector with the same length as the Population
+
+4.  A value for the StudyTime (ST). could be a scalar or a vector with the same length as the Population
+
+5.  A number of itterations (STn)
+
+```{r}
+sim_learn <- function(Pop = Pop,
+                      Typ = FALSE,
+                      LR = LearnRate,
+                      ST = 1,
+                      STn = Itterations) {
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  Pop <- set_LearnRate( Pop = Pop, 
+                        LR = LR)
+  Pop <- set_StudyTime( Pop = Pop )
+  TL <- get_Timeline( TL =TL,
+                       Time = 0,
+                       Pop = Pop,
+                       Info = Kname,
+                       Sum = 1 )
+  
+  for(i in 1:STn) {
+    Pop <- learn(  Pop = Pop,
+                   LR = LR,
+                   ST = ST)
+    TL <- get_Timeline( TL =TL,
+                         Time = i,
+                         Pop = Pop,
+                         Info = Kname,
+                         Sum = 1 )
+  }
+    
+  Output <- list( Pop = Pop,
+                  TL = TL)
+  return(Output)
+}
+```
+
+#### Output
+
+1.  A List with the new Population and a Timeline over the number of itterations
+
+```{r}
+
+nA = 50                          # number of Agents
+ID = seq_len(nA)                 # ID of the Agents
+K = (seq_len(nA)-1)/50           # Knowledge
+
+Pop <- tibble( ID = ID )
+Pop <- set_Knowledge( Pop = Pop, K = K )
+Pop
+
+res <- sim_learn(Pop = Pop,
+                 LR = 0.1,
+                 ST = 1,
+                 STn = 500)
+res$Pop
+plt_Timeline(res$TL)
+```

@@ -1,9 +1,6 @@
 ---
 title: "Notebook(Final)"
 author: "Hubert Baechli"
-
-execute: 
-  cache: true
 ---
 
 **Final Version**
