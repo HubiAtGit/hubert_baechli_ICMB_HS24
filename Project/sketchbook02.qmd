@@ -303,7 +303,8 @@ sel_SubPop <- function(Pop = Pop,
     }
   SubPop <- list()
   SubPop$sel <- Pop %>%
-    filter(ID %in% IDs)
+    filter(ID %in% IDs) %>%
+    arrange(match(ID, IDs))
   SubPop$rest <- Pop %>%
     filter(!ID %in% IDs)
   return(SubPop)
@@ -321,7 +322,7 @@ SubPop$rest
 ```
 
 ```{r}
-SubPop <- sel_SubPop( Pop = Pop , IDs = c(1,2))
+SubPop <- sel_SubPop( Pop = Pop , IDs = c(2, 1))
 SubPop$sel
 SubPop$rest
 ```
@@ -345,6 +346,8 @@ int_SubPop <- function(SubPop = SubPop,
   SubPop <- SubPop[, col_sort]
   IDs <- SubPop[["ID"]]
   Pop[Pop$ID %in% IDs,] <- SubPop
+  Pop <- Pop %>%
+    arrange(ID)
   return(Pop)
 }
 ```
@@ -355,7 +358,7 @@ int_SubPop <- function(SubPop = SubPop,
 
 ```{r}
 Pop
-SubPop <- sel_SubPop(Pop = Pop,n=2 )$sel
+SubPop <- sel_SubPop(Pop = Pop, n = 2 )$sel
 SubPop <- set_Knowledge(Pop = SubPop, K = 0)
 SubPop
 Pop <- int_SubPop(SubPop = SubPop, Pop = Pop)
@@ -556,7 +559,9 @@ sim_meeting <- function(Pop = Pop,
                        Sum = 1 )
   for(i in 1:STn) {
     SubPop <- sel_SubPop( Pop = Pop, n = 2 )$sel
-    SubPop <- learn( Pop = SubPop, ST = ST )
+    SubPop <- learn( Pop = SubPop, 
+                     ST = ST,
+                     LR = mean( SubPop[["LearnRate"]] ))
     SubPop <- update_LearnRate_Knowledge( Pop = SubPop )
     SubPop <- update_StudyTime( Pop = SubPop, dT = ST)
     Pop <- int_SubPop( SubPop = SubPop, Pop = Pop )
@@ -589,7 +594,23 @@ Pop
 
 res <- sim_meeting(Pop = Pop,
                    ST = 1,
-                   STn = 5000)
+                   STn = 2000)
+
+res$Pop
+plt_Timeline(res$TL)
+```
+
+```{r}
+K = 0           # Knowledge
+
+Pop <- tibble( ID = ID )
+Pop <- set_Knowledge( Pop = Pop, K = K )
+Pop[ID == 1, "Knowledge"] <- 0.8
+Pop
+
+res <- sim_meeting(Pop = Pop,
+                   ST = 1,
+                   STn = 2000)
 
 res$Pop
 plt_Timeline(res$TL)
