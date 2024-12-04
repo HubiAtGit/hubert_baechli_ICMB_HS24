@@ -38,6 +38,8 @@ website:
         href: Project/index.qmd
         contents:
         - Project/sketchbook00.qmd
+        - Project/sketchbook01.qmd
+        - Project/sketchbook02.qmd
 
 format:
   html:
