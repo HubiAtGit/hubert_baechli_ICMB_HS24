@@ -40,6 +40,7 @@ website:
         - Project/sketchbook00.qmd
         - Project/sketchbook01.qmd
         - Project/sketchbook02.qmd
+        - Project/sketchbook03.qmd
 
 format:
   html:
