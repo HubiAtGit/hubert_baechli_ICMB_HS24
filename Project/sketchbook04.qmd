@@ -1,14 +1,16 @@
 ---
-title: "Random meetings"
+title: "in a Day Structer"
 author: "Hubert Baechli"
 
 execute: 
   cache: false
 ---
 
-# Simulating random meetings
+# Simulating random meetings (in a Day Structer)
 
 The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
+
+If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
 
 # Definitions
 
@@ -53,13 +55,8 @@ set_Knowledge <- function(Pop = Pop,
   if (Typ != FALSE) {
     Kname <- paste(Kname, Typ, sep = "_")
   }
-  if (Kname %in% colnames(Pop)) {
-    Pop <- Pop %>%
-      mutate(!!Kname := K)
-  } else {
-    Pop[[Kname]] <- K
-  }
   Pop <- Pop %>%
+    mutate(!!Kname := K)
 
   return(Pop)
 }
@@ -270,9 +267,7 @@ update_StudyTime <- function(Pop = Pop,
 1.  Population with the defined StudyTime
 
 ```{r}
-s <- Pop
-
-Pop <- update_StudyTime( Pop = s, dT = 1)   
+Pop <- update_StudyTime( Pop = Pop, dT = 1)   
 Pop
 ```
 
@@ -478,14 +473,169 @@ learn <- function(Pop = Pop,
 1.  Population with updated Knowledge
 
 ```{r}
-
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge(Pop = Pop, K = 0.1)
 Pop <- set_LearnRate(Pop = Pop, LR = 1)
 Pop
 
-Pop <- learn( Pop = Pop, ST = 10)
+Pop <- learn( Pop = Pop, ST = 1)
 Pop
+```
+
+## Slots
+
+Functions to select and sets learning slots from a Population
+
+### Select a random Slot of pairs
+
+#### Needs
+
+1.  A Population (Pop) with several Agents defined by ID's
+
+2.  A size of the Slot in percents of the population
+
+#### Hints
+
+-   because it leads to trouble will selecting otherwise the calculated n is limited at the moment between 1 and half of the Population
+
+```{r}
+sel_Slot_rnd <- function(Pop = Pop,
+                         psize = PrecentOfPop) {   
+  sID <- "Slot_ID"
+  n <- round(nrow(Pop)*psize / 2, 0)
+  n <- max(n, 1)
+  n <- min(n, round(nrow(Pop) / 2, 0))
+  
+  SubPop <- sel_SubPop( Pop = Pop, n = n)   
+  Slot1 <- SubPop$sel %>%     
+    mutate(!!sID := seq_len(n)) 
+  SubPop <- sel_SubPop( Pop = SubPop$rest, n = n) 
+  Slot2 <- SubPop$sel %>%     
+    mutate(!!sID := seq_len(n))
+  Slot <- bind_rows(Slot1, Slot2)
+  return(Slot)  
+  }  
+```
+
+#### Output
+
+1.  A random Slot-Population with Slot ID's which marks the pairs
+
+```{r}
+Pop
+Slot <- sel_Slot_rnd(Pop = Pop, psize = 1)
+Slot
+```
+
+### Sets Slot parameter by Slot-ID's
+
+#### Needs
+
+1.  A Slot of paird Agents defined by Slot_ID's
+
+2.  A duration of the slot. could be a scalar or a vector with the same length as the number of pairs in the Slot
+
+```{r}
+set_SlotPar <- function(Slot = Slot,
+                    ST = SlotDuration) {
+  LRname <- "LearnRate"
+  sLRname <- "Slot_LearnRate"
+  Slot <- Slot %>%
+    group_by(Slot_ID) %>%
+    mutate( !!sLRname := mean(.data[[LRname]], na.rm = TRUE),
+            Slot_Duration := ST) %>%
+    ungroup()
+  return(Slot)
+}
+
+```
+
+#### Output
+
+1.  A random Slot-Population with Slot ID's which marks the pairs, learn rate and duration of the Slot defined by pairs
+
+```{r}
+Slot <- set_SlotPar(Slot = Slot, ST = 1)
+Slot
+```
+
+### **Learning by Slots**
+
+Learning with a exponential learn rate defined by pairs
+
+#### Needs
+
+1.  A Slot-Population with several paired Agents defined by Slot-ID's. Prepaerd by the function set_SlotPar()
+
+2.  optional for future implementations a name (Typ) for the specific Knowledge
+
+```{r}
+learn_Slot <- function(Slot = Slot,
+                       Typ = FALSE) {
+  Kname <- "Knowledge"
+  if (Typ != FALSE) {
+    Kname <- paste(Kname, Typ, sep = "_")
+  }
+  LRname <- "Slot_LearnRate"
+  STname <- "Slot_Duration"
+  K <- Slot[[Kname]]
+  LR <- Slot[[LRname]]
+  ST <- Slot[[STname]]
+
+  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready
+  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd
+  Slot <- set_Knowledge(Pop = Slot, Typ = Typ, K = K)
+  Slot <- update_StudyTime(Pop = Slot, dT = ST)
+  return(Slot)
+}
+```
+
+#### Output
+
+1.  Slot-Population with updated Knowledge
+
+```{r}
+Slot <- learn_Slot(Slot = Slot)
+Slot
+```
+
+## L**earning by** Days
+
+Learning with a exponential learn rate defined by pairs
+
+#### Needs
+
+1.  A Slot-Population with several paired Agents defined by Slot-ID's. Prepaerd by the function set_SlotPar()
+
+2.  optional for future implementations a name (Typ) for the specific Knowledge
+
+```{r}
+learn_Slot <- function(Slot = Slot,                        
+                       Typ = FALSE) {   
+  Kname <- "Knowledge"   
+  if (Typ != FALSE) {     
+    Kname <- paste(Kname, Typ, sep = "_")   
+  }   
+  LRname <- "Slot_LearnRate"   
+  STname <- "Slot_Duration"   
+  K <- Slot[[Kname]]   
+  LR <- Slot[[LRname]]   
+  ST <- Slot[[STname]]    
+  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready   
+  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd   
+  Slot <- set_Knowledge(Pop = Slot, Typ = Typ, K = K)   
+  Slot <- update_StudyTime(Pop = Slot, dT = ST)   
+  return(Slot) 
+  }
+```
+
+#### Output
+
+1.  Slot-Population with updated Knowledge
+
+```{r}
+Slot <- learn_Slot(Slot = Slot) 
+Slot
 ```
 
 ## **Plots**
@@ -507,7 +657,7 @@ plt_Timeline <- function(TL = Timeline) {
   geom_line(aes(y = Knowledge_median, color = "Median"),
             linetype = "dashed") +
   ggtitle("Timeline") +
-  xlab("Number of Iterations") +
+  xlab("Number of Days") +
   ylab("Knowledge") +
   scale_y_continuous(
     limits = c(0, 1),
@@ -531,7 +681,7 @@ plt_Timeline <- function(TL = Timeline) {
 
 # **Simulation**
 
-A learning process with updated learn rate by current knowledge when two Agents meet randomly
+A learning process with updated learn rate by current knowledge when Agents meet randomly by Slots
 
 #### Needs
 
@@ -539,18 +689,19 @@ A learning process with updated learn rate by current knowledge when two Agents 
 
 2.  optional for future implementations a name (Typ) for the specific Knowledge
 
-3.  A value for the learn rate (LR) greater than 0 and up to 1. could be a scalar or e vector with the same length as the Population
+3.  A size of the Slot in percents of the population
 
-4.  A value for the StudyTime (ST). could be a scalar or a vector with the same length as the Population
+4.  A duration of the slot. could be a scalar or a vector with the same length as the number of pairs in the Slot
 
-5.  A number of iterations (STn)
+5.  A number of Slots (STn)
 
 ```{r}
-sim_meeting <- function(Pop = Pop,
-                      Typ = FALSE,
-                      LR = FALSE,
-                      ST = 1,
-                      STn = Itterations) {
+
+sim_Slot <- function(Pop = Pop,
+                     Typ = FALSE,
+                     psize = PrecentOfPop,
+                     ST = 1,
+                     STn = Itterations) {
   Kname <- "Knowledge"
   if (Typ != FALSE) {
     Kname <- paste(Kname, Typ, sep = "_")
@@ -563,13 +714,12 @@ sim_meeting <- function(Pop = Pop,
                        Info = Kname,
                        Sum = 1 )
   for(i in 1:STn) {
-    SubPop <- sel_SubPop( Pop = Pop, n = 2 )$sel
-    SubPop <- learn( Pop = SubPop, 
-                     ST = ST,
-                     LR = mean( SubPop[["LearnRate"]] ))
-    SubPop <- update_LearnRate_Knowledge( Pop = SubPop )
-    SubPop <- update_StudyTime( Pop = SubPop, dT = ST)
-    Pop <- int_SubPop( SubPop = SubPop, Pop = Pop )
+    Slot <- sel_Slot_rnd( Pop = Pop, psize = psize )
+    Slot <- set_SlotPar(Slot = Slot, ST = ST)
+    Slot <- learn_Slot(Slot = Slot, Typ = Typ)
+    Slot <- update_LearnRate_Knowledge( Pop = Slot )
+    Slot <- update_StudyTime( Pop = Slot, dT = ST)
+    Pop <- int_SubPop( SubPop = Slot, Pop = Pop )
     TL <- get_Timeline( TL =TL,
                          Time = i,
                          Pop = Pop,
@@ -594,19 +744,22 @@ ID <- seq_len(nA)                 # ID of the Agents
 K <- (seq_len(nA)-1)/50           # Knowledge
 
 nM <- 160                         # number of meetings(mean)
-STn <- nM * nA / 4
+psize <- 0.6
+STn <- (nM * nA / 4) / (psize * nA / 2)
 
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge( Pop = Pop, K = K )
 Pop
 
-res <- sim_meeting(Pop = Pop,
-                   ST = 1,
-                   STn = STn)
+res <- sim_Slot(Pop = Pop,
+                psize = psize,
+                ST = 1,
+                STn = STn)
 
 mean(res$Pop[["StudyTime"]])
 res$Pop
 plt_Timeline(res$TL)
+
 ```
 
 ## ... Special Cases
@@ -621,11 +774,11 @@ Pop <- set_Knowledge( Pop = Pop, K = K )
 Pop[ID == 1, "Knowledge"] <- 0.8
 Pop
 
-res <- sim_meeting(Pop = Pop,
-                   ST = 1,
-                   STn = STn)
+res <- sim_Slot(Pop = Pop,
+                psize = psize,
+                ST = 1,
+                STn = STn)
 
 res$Pop
 plt_Timeline(res$TL)
-
 ```

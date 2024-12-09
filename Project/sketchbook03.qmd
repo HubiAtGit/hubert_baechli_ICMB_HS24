@@ -503,8 +503,9 @@ sel_Slot_rnd <- function(Pop = Pop,
                          psize = PrecentOfPop) {   
   sID <- "Slot_ID"
   n <- round(nrow(Pop)*psize / 2, 0)
-  n <- min(n, 1)
-  n <- max(n, round(nrow(Pop) / 2), 0)
+  n <- max(n, 1)
+  n <- min(n, round(nrow(Pop) / 2, 0))
+ 
   SubPop <- sel_SubPop( Pop = Pop, n = n)   
   Slot1 <- SubPop$sel %>%     
     mutate(!!sID := seq_len(n)) 
@@ -522,7 +523,8 @@ sel_Slot_rnd <- function(Pop = Pop,
 
 ```{r}
 Pop
-Slot <- sel_Slot_rnd(Pop = Pop, psize = 1)
+round(nrow(Pop) / 2,0)
+Slot <- sel_Slot_rnd(Pop = Pop, psize = 0.8)
 Slot
 ```
 
@@ -596,6 +598,8 @@ learn_Slot <- function(Slot = Slot,
 ```{r}
 Slot <- learn_Slot(Slot = Slot)
 Slot
+Pop <- int_SubPop(SubPop = Slot, Pop = Pop)
+Pop
 ```
 
 ## **Plots**
@@ -703,8 +707,9 @@ nA <- 50                          # number of Agents
 ID <- seq_len(nA)                 # ID of the Agents
 K <- (seq_len(nA)-1)/50           # Knowledge
 
-psize <- 0.5
-STn <- 200 * psize
+nM <- 160                         # number of meetings(mean)
+psize <- 0.6
+STn <- (nM * nA / 4) / (psize * nA / 2)
 
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge( Pop = Pop, K = K )
@@ -715,6 +720,7 @@ res <- sim_Slot(Pop = Pop,
                 ST = 1,
                 STn = STn)
 
+mean(res$Pop[["StudyTime"]])
 res$Pop
 plt_Timeline(res$TL)
 
@@ -725,7 +731,7 @@ plt_Timeline(res$TL)
 ### Only one Agent with Knowledge (0.8)
 
 ```{r}
-K = 0           # Knowledge
+K <- 0           # Knowledge
 
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge( Pop = Pop, K = K )
