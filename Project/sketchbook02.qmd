@@ -1,12 +1,12 @@
 ---
-title: "Random Meetings"
+title: "Random meetings"
 author: "Hubert Baechli"
 
 execute: 
   cache: false
 ---
 
-# Simulating random Meetings
+# Simulating random meetings
 
 The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
 
@@ -276,11 +276,11 @@ Pop <- update_StudyTime( Pop = s, dT = 1)
 Pop
 ```
 
-## Data management
+## Data Management
 
 Functions to select and reintegrate a Sub Populations
 
-### Select a sub Population
+### Select a Sub Population
 
 #### Needs
 
@@ -373,7 +373,7 @@ saving Timelines during Simulations
 
 #### Needs
 
-1.  A containername for the Timeline
+1.  A container name for the Timeline
 
 2.  A value for the Time
 
@@ -430,7 +430,7 @@ Timeline
 
 ## **Learning**
 
-Learning with a exponential Lernrate
+Learning with a exponential lern rate
 
 #### Needs
 
@@ -438,13 +438,13 @@ Learning with a exponential Lernrate
 
 2.  optional for future implementations a name (Typ) for the specific Knowledge
 
-3.  A value for the lLearnRate (LR). could be a scalar or e vector with the same length as the Population
+3.  A value for the learn rate (LR). could be a scalar or e vector with the same length as the Population
 
-4.  A value for the StudyTime (ST). could be a scalar or e vector with the same length as the Population
+4.  A value for the study time (ST). could be a scalar or e vector with the same length as the Population
 
 #### Hints
 
--   If LearnRate isn't given the values from the Population will be used, if this is missing in the Population 0 is used.
+-   If learn rate isn't given the values from the Population will be used, if this is missing in the Population 0 is used.
 
 ```{r}
 learn <- function(Pop = Pop,
@@ -507,26 +507,31 @@ plt_Timeline <- function(TL = Timeline) {
   geom_line(aes(y = Knowledge_median, color = "Median"),
             linetype = "dashed") +
   ggtitle("Timeline") +
-  xlab("Number of iterations") +
+  xlab("Number of Iterations") +
   ylab("Knowledge") +
   scale_y_continuous(
     limits = c(0, 1),
     breaks = seq(0, 1, 0.2)
   ) +
-    scale_color_manual(
+  scale_color_manual(
     values = c("Agents" = "grey", "Mean" = "black", "Median" = "black"),
     labels = c("Agents" = "Agents", "Mean" = "Mean", "Median" = "Median")
   ) +
   theme_light() +
   theme(legend.title = element_blank(),
-        legend.position = c(1, 0),
-        legend.justification = c(1, 0))
+        legend.position = "top",
+        legend.justification = "left"
+        )
 }
 ```
 
+#### Output
+
+1.  ggplot2
+
 # **Simulation**
 
-A learning process with uptated LearnRate by actual Knowledge when to Agents meet randomly
+A learning process with updated learn rate by current knowledge when two Agents meet randomly
 
 #### Needs
 
@@ -599,6 +604,10 @@ res <- sim_meeting(Pop = Pop,
 res$Pop
 plt_Timeline(res$TL)
 ```
+
+## ... Special Cases
+
+### Only one Agent with Knowledge (0.8)
 
 ```{r}
 K = 0           # Knowledge

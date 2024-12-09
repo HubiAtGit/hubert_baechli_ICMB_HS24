@@ -5,12 +5,18 @@ author: "Hubert Baechli"
 
 # Contents
 
-First and foremost, the disdribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement.
+First and foremost, the distribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement.
 
-## [Simple Learning kurve](sketchbook00.qmd)
+## [Simple learning curve](sketchbook00.qmd)
 
-### [with updated Learn rate](sketchbook01.qmd)
+It does not seem realistic that the learn rate will remain constant over time. Therefore, the learning rate is redefined on the basis of current knowledge. In the absence of better knowledge, a factor of 0.5 is used.
+
+### [with updated learn rate](sketchbook01.qmd)
 
 The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
 
 ## [Simulating random Meetings](sketchbook02.qmd)
+
+If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
+
+### [Grouped in Slots](sketchbook03.qmd)

@@ -1,9 +1,9 @@
 ---
-title: "Simple Learning kurve"
+title: "Simple learningcurve"
 author: "Hubert Baechli"
 ---
 
-# Simple Learning kurve
+# Simple learning curve
 
 First and foremost, the distribution of information and knowledge should have something to do with learning. So I start with an exponential learning curve, which is easy to implement.
 
