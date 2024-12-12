@@ -682,7 +682,6 @@ sim_Slot <- function(Pop = Pop,
     Slot <- set_SlotPar(Slot = Slot, ST = ST)
     Slot <- learn_Slot(Slot = Slot, Typ = Typ)
     Slot <- update_LearnRate_Knowledge( Pop = Slot )
-    Slot <- update_StudyTime( Pop = Slot, dT = ST)
     Pop <- int_SubPop( SubPop = Slot, Pop = Pop )
     TL <- get_Timeline( TL =TL,
                          Time = i,
@@ -709,7 +708,7 @@ K <- (seq_len(nA)-1)/50           # Knowledge
 
 nM <- 160                         # number of meetings(mean)
 psize <- 0.6
-STn <- (nM * nA / 4) / (psize * nA / 2)
+STn <- (nM * nA ) / (psize * nA )
 
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge( Pop = Pop, K = K )

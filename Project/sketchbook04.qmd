@@ -24,7 +24,7 @@ library(tidyverse)
 ## Population for testing the Functions
 
 ```{r}
-nA = 5            # number of Agents
+nA = 10            # number of Agents
 ID = seq_len(nA)  # ID of the Agents
 
 Pop <- tibble( ID = ID )
@@ -160,7 +160,7 @@ set_LearnRate <- function(Pop = Pop,
 
 ```{r}
 LR <- seq_len(nA)/5  
-Pop <- set_LearnRate( Pop = Pop, LR = 1 ) 
+Pop <- set_LearnRate( Pop = Pop, LR = 0 ) 
 Pop
 ```
 
@@ -186,7 +186,8 @@ update_LearnRate_Knowledge <- function(Pop = Pop,
   }
   if (Kname %in% colnames(Pop)) {
     Pop <- Pop %>%
-      mutate( !!LR := .data[[Kname]] * 0.5 )
+      mutate( !!LR := .data[[Kname]] * 0.5,
+              !!LR := pmax(.data[[LR]],1E-3))
   }
   return(Pop)
 }
@@ -500,7 +501,7 @@ Functions to select and sets learning slots from a Population
 
 ```{r}
 sel_Slot_rnd <- function(Pop = Pop,
-                         psize = PrecentOfPop) {   
+                         psize = percentsOfPop) {   
   sID <- "Slot_ID"
   n <- round(nrow(Pop)*psize / 2, 0)
   n <- max(n, 1)
@@ -537,13 +538,14 @@ Slot
 
 ```{r}
 set_SlotPar <- function(Slot = Slot,
-                    ST = SlotDuration) {
+                        ST = SlotDuration) {
   LRname <- "LearnRate"
   sLRname <- "Slot_LearnRate"
+  STname <- "Slot_Duration"
   Slot <- Slot %>%
     group_by(Slot_ID) %>%
     mutate( !!sLRname := mean(.data[[LRname]], na.rm = TRUE),
-            Slot_Duration := ST) %>%
+            !!STname := ST) %>%
     ungroup()
   return(Slot)
 }
@@ -601,41 +603,53 @@ Slot
 
 ## L**earning by** Days
 
-Learning with a exponential learn rate defined by pairs
+Learning by Days with a exponential learn rate defined by pairs according learning by Slots
 
 #### Needs
 
-1.  A Slot-Population with several paired Agents defined by Slot-ID's. Prepaerd by the function set_SlotPar()
+1.  A Population (Pop) with several Agents defined by ID's and Knowledge
 
 2.  optional for future implementations a name (Typ) for the specific Knowledge
 
+3.  A percentage of Daytime which each agents stays in meetings (mean-value). has to be a scalar.
+
+4.  A amount of hours for the day, is set to 8
+
+5.  A duration for the meetings in hours, is set to 1
+
+#### Hints
+
+-   The learn rate is fixed during the Day and updated at the end of the Day
+
 ```{r}
-learn_Slot <- function(Slot = Slot,                        
-                       Typ = FALSE) {   
-  Kname <- "Knowledge"   
-  if (Typ != FALSE) {     
-    Kname <- paste(Kname, Typ, sep = "_")   
-  }   
-  LRname <- "Slot_LearnRate"   
-  STname <- "Slot_Duration"   
-  K <- Slot[[Kname]]   
-  LR <- Slot[[LRname]]   
-  ST <- Slot[[STname]]    
-  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready   
-  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd   
-  Slot <- set_Knowledge(Pop = Slot, Typ = Typ, K = K)   
-  Slot <- update_StudyTime(Pop = Slot, dT = ST)   
-  return(Slot) 
+learn_Days <- function(Pop = Pop,                        
+                       Typ = FALSE,
+                       pM = percentsOfMeetings,
+                       dH = 8,
+                       ST = 1) { 
+  Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = Typ )
+  Pop <- update_StudyTime( Pop = Pop , dT = 0)
+  for(i in 1:dH) {
+    Slot <- sel_Slot_rnd( Pop = Pop, psize = pM )
+    Slot <- set_SlotPar(Slot = Slot, ST = ST)
+    Slot <- learn_Slot(Slot = Slot, Typ = Typ)
+    Pop <- int_SubPop( SubPop = Slot, Pop = Pop )
+  } 
+  Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = Typ )
+  return(Pop) 
   }
 ```
 
 #### Output
 
-1.  Slot-Population with updated Knowledge
+1.  Population with updated Knowledge, learn rate and study time
 
 ```{r}
-Slot <- learn_Slot(Slot = Slot) 
-Slot
+Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = FALSE )
+Pop <- set_StudyTime( Pop = Pop , ST = 0)
+Pop
+Pop <- learn_Days(Pop = Pop, pM = 0.8, dH = 8 ) 
+Pop
 ```
 
 ## **Plots**
@@ -681,7 +695,7 @@ plt_Timeline <- function(TL = Timeline) {
 
 # **Simulation**
 
-A learning process with updated learn rate by current knowledge when Agents meet randomly by Slots
+A learning process with updated learn rate by current knowledge when Agents meet randomly by Days
 
 #### Needs
 
@@ -689,37 +703,39 @@ A learning process with updated learn rate by current knowledge when Agents meet
 
 2.  optional for future implementations a name (Typ) for the specific Knowledge
 
-3.  A size of the Slot in percents of the population
+3.  A number of Days (nD)
 
-4.  A duration of the slot. could be a scalar or a vector with the same length as the number of pairs in the Slot
+4.  A percentage of Daytime which each agents stays in meetings (mean-value). has to be a scalar.
 
-5.  A number of Slots (STn)
+5.  A amount of hours for the day, is set to 8
+
+6.  A duration for the meetings in hours, is set to 1
 
 ```{r}
 
-sim_Slot <- function(Pop = Pop,
+sim_Days <- function(Pop = Pop,
                      Typ = FALSE,
-                     psize = PrecentOfPop,
-                     ST = 1,
-                     STn = Itterations) {
+                     nD = NumberOfDays,
+                     pM = precentsOfMeetings,
+                     dH = 8,
+                     ST = 1) {
   Kname <- "Knowledge"
   if (Typ != FALSE) {
     Kname <- paste(Kname, Typ, sep = "_")
   }
   Pop <- update_LearnRate_Knowledge( Pop = Pop )
-  Pop <- set_StudyTime( Pop = Pop )
+  Pop <- set_StudyTime( Pop = Pop, ST = 0 )
   TL <- get_Timeline( TL =TL,
                        Time = 0,
                        Pop = Pop,
                        Info = Kname,
                        Sum = 1 )
-  for(i in 1:STn) {
-    Slot <- sel_Slot_rnd( Pop = Pop, psize = psize )
-    Slot <- set_SlotPar(Slot = Slot, ST = ST)
-    Slot <- learn_Slot(Slot = Slot, Typ = Typ)
-    Slot <- update_LearnRate_Knowledge( Pop = Slot )
-    Slot <- update_StudyTime( Pop = Slot, dT = ST)
-    Pop <- int_SubPop( SubPop = Slot, Pop = Pop )
+  for(i in 1:nD) {
+    Pop <- learn_Days(Pop = Pop,
+                      Typ = Typ,
+                      pM = pM,
+                      dH = dH,
+                      ST = ST)
     TL <- get_Timeline( TL =TL,
                          Time = i,
                          Pop = Pop,
@@ -735,7 +751,7 @@ sim_Slot <- function(Pop = Pop,
 
 #### Output
 
-1.  A List with the new Population and a Timeline over the number of itterations
+1.  A List with the new Population and a Timeline over the number of Days
 
 ```{r}
 
@@ -744,17 +760,16 @@ ID <- seq_len(nA)                 # ID of the Agents
 K <- (seq_len(nA)-1)/50           # Knowledge
 
 nM <- 160                         # number of meetings(mean)
-psize <- 0.6
-STn <- (nM * nA / 4) / (psize * nA / 2)
+pM <- 0.80
+nD <- nM / 8 / pM
 
 Pop <- tibble( ID = ID )
 Pop <- set_Knowledge( Pop = Pop, K = K )
 Pop
 
-res <- sim_Slot(Pop = Pop,
-                psize = psize,
-                ST = 1,
-                STn = STn)
+res <- sim_Days(Pop = Pop,
+                nD = nD,
+                pM = pM)
 
 mean(res$Pop[["StudyTime"]])
 res$Pop
@@ -774,10 +789,9 @@ Pop <- set_Knowledge( Pop = Pop, K = K )
 Pop[ID == 1, "Knowledge"] <- 0.8
 Pop
 
-res <- sim_Slot(Pop = Pop,
-                psize = psize,
-                ST = 1,
-                STn = STn)
+res <- sim_Days(Pop = Pop,
+                nD = nD,
+                pM = pM)
 
 res$Pop
 plt_Timeline(res$TL)

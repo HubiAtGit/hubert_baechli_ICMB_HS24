@@ -679,8 +679,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 2 × 6
      ID Knowledge Knowledge_A Knowledge_B LearnRate StudyTime
   &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1     1      0.55        0.02       0.005     0.275         4
-2     3      0.65        0.18       0.045     0.325         4</code></pre>
+1     3      0.65        0.18       0.045     0.325         4
+2     1      0.55        0.02       0.005     0.275         4</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">SubPop</span><span class="op">$</span><span class="va">rest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
@@ -968,10 +968,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 5
      ID Knowledge LearnRate StudyTime Slot_ID
   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;int&gt;
-1     1     0.526         1         1       1
-2     4     0.526         1         1       2
-3     5     0.526         1         1       1
-4     2     0.526         1         1       2</code></pre>
+1     4     0.526         1         1       1
+2     3     0.526         1         1       2
+3     2     0.526         1         1       1
+4     1     0.526         1         1       2</code></pre>
 </div>
 </div>
 </section></section><section id="sets-slot-parameter-by-slot-ids" class="level3"><h3 class="anchored" data-anchor-id="sets-slot-parameter-by-slot-ids">Sets Slot parameter by Slot-ID’s</h3>
@@ -1005,10 +1005,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 7
      ID Knowledge LearnRate StudyTime Slot_ID Slot_LearnRate Slot_Duration
   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
-1     1     0.526         1         1       1              1             1
-2     4     0.526         1         1       2              1             1
-3     5     0.526         1         1       1              1             1
-4     2     0.526         1         1       2              1             1</code></pre>
+1     4     0.526         1         1       1              1             1
+2     3     0.526         1         1       2              1             1
+3     2     0.526         1         1       1              1             1
+4     1     0.526         1         1       2              1             1</code></pre>
 </div>
 </div>
 </section></section><section id="learning-by-slots" class="level3"><h3 class="anchored" data-anchor-id="learning-by-slots"><strong>Learning by Slots</strong></h3>
@@ -1050,10 +1050,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 7
      ID Knowledge LearnRate StudyTime Slot_ID Slot_LearnRate Slot_Duration
   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
-1     1     0.679         1         2       1              1             1
-2     4     0.679         1         2       2              1             1
-3     5     0.679         1         2       1              1             1
-4     2     0.679         1         2       2              1             1</code></pre>
+1     4     0.679         1         2       1              1             1
+2     3     0.679         1         2       2              1             1
+3     2     0.679         1         2       1              1             1
+4     1     0.679         1         2       2              1             1</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">int_SubPop</span><span class="op">(</span>SubPop <span class="op">=</span> <span class="va">Slot</span>, Pop <span class="op">=</span> <span class="va">Pop</span><span class="op">)</span></span>
 <span><span class="va">Pop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1063,9 +1063,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 1     1     0.679         1         2
 2     2     0.679         1         2
-3     3     0.526         1         1
+3     3     0.679         1         2
 4     4     0.679         1         2
-5     5     0.679         1         2</code></pre>
+5     5     0.526         1         1</code></pre>
 </div>
 </div>
 </section></section></section><section id="plots" class="level2"><h2 class="anchored" data-anchor-id="plots"><strong>Plots</strong></h2>
@@ -1138,7 +1138,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>    <span class="va">Slot</span> <span class="op">&lt;-</span> <span class="fu">set_SlotPar</span><span class="op">(</span>Slot <span class="op">=</span> <span class="va">Slot</span>, ST <span class="op">=</span> <span class="va">ST</span><span class="op">)</span></span>
 <span>    <span class="va">Slot</span> <span class="op">&lt;-</span> <span class="fu">learn_Slot</span><span class="op">(</span>Slot <span class="op">=</span> <span class="va">Slot</span>, Typ <span class="op">=</span> <span class="va">Typ</span><span class="op">)</span></span>
 <span>    <span class="va">Slot</span> <span class="op">&lt;-</span> <span class="fu">update_LearnRate_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Slot</span> <span class="op">)</span></span>
-<span>    <span class="va">Slot</span> <span class="op">&lt;-</span> <span class="fu">update_StudyTime</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Slot</span>, dT <span class="op">=</span> <span class="va">ST</span><span class="op">)</span></span>
 <span>    <span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">int_SubPop</span><span class="op">(</span> SubPop <span class="op">=</span> <span class="va">Slot</span>, Pop <span class="op">=</span> <span class="va">Pop</span> <span class="op">)</span></span>
 <span>    <span class="va">TL</span> <span class="op">&lt;-</span> <span class="fu">get_Timeline</span><span class="op">(</span> TL <span class="op">=</span><span class="va">TL</span>,</span>
 <span>                         Time <span class="op">=</span> <span class="va">i</span>,</span>
@@ -1164,7 +1163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span><span class="va">nM</span> <span class="op">&lt;-</span> <span class="fl">160</span>                         <span class="co"># number of meetings(mean)</span></span>
 <span><span class="va">psize</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
-<span><span class="va">STn</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">nM</span> <span class="op">*</span> <span class="va">nA</span> <span class="op">/</span> <span class="fl">4</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">psize</span> <span class="op">*</span> <span class="va">nA</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">STn</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">nM</span> <span class="op">*</span> <span class="va">nA</span> <span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">psize</span> <span class="op">*</span> <span class="va">nA</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span> ID <span class="op">=</span> <span class="va">ID</span> <span class="op">)</span></span>
 <span><span class="va">Pop</span> <span class="op">&lt;-</span> <span class="fu">set_Knowledge</span><span class="op">(</span> Pop <span class="op">=</span> <span class="va">Pop</span>, K <span class="op">=</span> <span class="va">K</span> <span class="op">)</span></span>
@@ -1199,16 +1198,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 50 × 4
       ID Knowledge LearnRate StudyTime
    &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
- 1     1     0.790     0.395       146
- 2     2     0.779     0.390       140
- 3     3     0.795     0.398       158
- 4     4     0.797     0.398       156
- 5     5     0.803     0.401       166
- 6     6     0.805     0.402       166
- 7     7     0.813     0.407       176
- 8     8     0.789     0.394       152
- 9     9     0.795     0.398       156
-10    10     0.795     0.398       156
+ 1     1     0.872     0.436       163
+ 2     2     0.867     0.434       153
+ 3     3     0.874     0.437       164
+ 4     4     0.872     0.436       158
+ 5     5     0.871     0.435       160
+ 6     6     0.873     0.437       161
+ 7     7     0.874     0.437       164
+ 8     8     0.873     0.436       161
+ 9     9     0.872     0.436       155
+10    10     0.875     0.438       170
 # ℹ 40 more rows</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plt_Timeline</span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">TL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1254,16 +1253,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 50 × 4
       ID Knowledge LearnRate StudyTime
    &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
- 1     1     0.821     0.410       172
- 2     2     0.638     0.319       146
- 3     3     0.641     0.321       146
- 4     4     0.637     0.318       168
- 5     5     0.642     0.321       168
- 6     6     0.646     0.323       148
- 7     7     0.640     0.320       164
- 8     8     0.633     0.317       164
- 9     9     0.642     0.321       150
-10    10     0.627     0.314       144
+ 1     1     0.864     0.432       152
+ 2     2     0.825     0.413       162
+ 3     3     0.817     0.409       156
+ 4     4     0.816     0.408       159
+ 5     5     0.817     0.408       154
+ 6     6     0.821     0.411       161
+ 7     7     0.820     0.410       157
+ 8     8     0.817     0.408       162
+ 9     9     0.825     0.413       168
+10    10     0.828     0.414       168
 # ℹ 40 more rows</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plt_Timeline</span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">TL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2438,69 +2437,68 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb77-742"><a href="#cb77-742" aria-hidden="true" tabindex="-1"></a>    Slot <span class="ot">&lt;-</span> <span class="fu">set_SlotPar</span>(<span class="at">Slot =</span> Slot, <span class="at">ST =</span> ST)</span>
 <span id="cb77-743"><a href="#cb77-743" aria-hidden="true" tabindex="-1"></a>    Slot <span class="ot">&lt;-</span> <span class="fu">learn_Slot</span>(<span class="at">Slot =</span> Slot, <span class="at">Typ =</span> Typ)</span>
 <span id="cb77-744"><a href="#cb77-744" aria-hidden="true" tabindex="-1"></a>    Slot <span class="ot">&lt;-</span> <span class="fu">update_LearnRate_Knowledge</span>( <span class="at">Pop =</span> Slot )</span>
-<span id="cb77-745"><a href="#cb77-745" aria-hidden="true" tabindex="-1"></a>    Slot <span class="ot">&lt;-</span> <span class="fu">update_StudyTime</span>( <span class="at">Pop =</span> Slot, <span class="at">dT =</span> ST)</span>
-<span id="cb77-746"><a href="#cb77-746" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> <span class="fu">int_SubPop</span>( <span class="at">SubPop =</span> Slot, <span class="at">Pop =</span> Pop )</span>
-<span id="cb77-747"><a href="#cb77-747" aria-hidden="true" tabindex="-1"></a>    TL <span class="ot">&lt;-</span> <span class="fu">get_Timeline</span>( <span class="at">TL =</span>TL,</span>
-<span id="cb77-748"><a href="#cb77-748" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Time =</span> i,</span>
-<span id="cb77-749"><a href="#cb77-749" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Pop =</span> Pop,</span>
-<span id="cb77-750"><a href="#cb77-750" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Info =</span> Kname,</span>
-<span id="cb77-751"><a href="#cb77-751" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sum =</span> <span class="dv">1</span> )</span>
-<span id="cb77-752"><a href="#cb77-752" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb77-753"><a href="#cb77-753" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb77-754"><a href="#cb77-754" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="at">Pop =</span> Pop,</span>
-<span id="cb77-755"><a href="#cb77-755" aria-hidden="true" tabindex="-1"></a>                  <span class="at">TL =</span> TL)</span>
-<span id="cb77-756"><a href="#cb77-756" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
-<span id="cb77-757"><a href="#cb77-757" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb77-758"><a href="#cb77-758" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb77-759"><a href="#cb77-759" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-760"><a href="#cb77-760" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
-<span id="cb77-761"><a href="#cb77-761" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-762"><a href="#cb77-762" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A List with the new Population and a Timeline over the number of itterations</span>
-<span id="cb77-763"><a href="#cb77-763" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-766"><a href="#cb77-766" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb77-767"><a href="#cb77-767" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">50</span>                          <span class="co"># number of Agents</span></span>
-<span id="cb77-768"><a href="#cb77-768" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)                 <span class="co"># ID of the Agents</span></span>
-<span id="cb77-769"><a href="#cb77-769" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> (<span class="fu">seq_len</span>(nA)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">50</span>           <span class="co"># Knowledge</span></span>
-<span id="cb77-770"><a href="#cb77-770" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-771"><a href="#cb77-771" aria-hidden="true" tabindex="-1"></a>nM <span class="ot">&lt;-</span> <span class="dv">160</span>                         <span class="co"># number of meetings(mean)</span></span>
-<span id="cb77-772"><a href="#cb77-772" aria-hidden="true" tabindex="-1"></a>psize <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
-<span id="cb77-773"><a href="#cb77-773" aria-hidden="true" tabindex="-1"></a>STn <span class="ot">&lt;-</span> (nM <span class="sc">*</span> nA <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">/</span> (psize <span class="sc">*</span> nA <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb77-774"><a href="#cb77-774" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-775"><a href="#cb77-775" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> ID )</span>
-<span id="cb77-776"><a href="#cb77-776" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">K =</span> K )</span>
-<span id="cb77-777"><a href="#cb77-777" aria-hidden="true" tabindex="-1"></a>Pop</span>
-<span id="cb77-778"><a href="#cb77-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-779"><a href="#cb77-779" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sim_Slot</span>(<span class="at">Pop =</span> Pop,</span>
-<span id="cb77-780"><a href="#cb77-780" aria-hidden="true" tabindex="-1"></a>                <span class="at">psize =</span> psize,</span>
-<span id="cb77-781"><a href="#cb77-781" aria-hidden="true" tabindex="-1"></a>                <span class="at">ST =</span> <span class="dv">1</span>,</span>
-<span id="cb77-782"><a href="#cb77-782" aria-hidden="true" tabindex="-1"></a>                <span class="at">STn =</span> STn)</span>
-<span id="cb77-783"><a href="#cb77-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-784"><a href="#cb77-784" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(res<span class="sc">$</span>Pop[[<span class="st">"StudyTime"</span>]])</span>
-<span id="cb77-785"><a href="#cb77-785" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>Pop</span>
-<span id="cb77-786"><a href="#cb77-786" aria-hidden="true" tabindex="-1"></a><span class="fu">plt_Timeline</span>(res<span class="sc">$</span>TL)</span>
-<span id="cb77-787"><a href="#cb77-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-788"><a href="#cb77-788" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb77-789"><a href="#cb77-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-790"><a href="#cb77-790" aria-hidden="true" tabindex="-1"></a><span class="fu">## ... Special Cases</span></span>
-<span id="cb77-791"><a href="#cb77-791" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-792"><a href="#cb77-792" aria-hidden="true" tabindex="-1"></a><span class="fu">### Only one Agent with Knowledge (0.8)</span></span>
-<span id="cb77-793"><a href="#cb77-793" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-796"><a href="#cb77-796" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb77-797"><a href="#cb77-797" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">0</span>           <span class="co"># Knowledge</span></span>
-<span id="cb77-798"><a href="#cb77-798" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-799"><a href="#cb77-799" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> ID )</span>
-<span id="cb77-800"><a href="#cb77-800" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">K =</span> K )</span>
-<span id="cb77-801"><a href="#cb77-801" aria-hidden="true" tabindex="-1"></a>Pop[ID <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Knowledge"</span>] <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb77-802"><a href="#cb77-802" aria-hidden="true" tabindex="-1"></a>Pop</span>
-<span id="cb77-803"><a href="#cb77-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-804"><a href="#cb77-804" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sim_Slot</span>(<span class="at">Pop =</span> Pop,</span>
-<span id="cb77-805"><a href="#cb77-805" aria-hidden="true" tabindex="-1"></a>                <span class="at">psize =</span> psize,</span>
-<span id="cb77-806"><a href="#cb77-806" aria-hidden="true" tabindex="-1"></a>                <span class="at">ST =</span> <span class="dv">1</span>,</span>
-<span id="cb77-807"><a href="#cb77-807" aria-hidden="true" tabindex="-1"></a>                <span class="at">STn =</span> STn)</span>
-<span id="cb77-808"><a href="#cb77-808" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-809"><a href="#cb77-809" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>Pop</span>
-<span id="cb77-810"><a href="#cb77-810" aria-hidden="true" tabindex="-1"></a><span class="fu">plt_Timeline</span>(res<span class="sc">$</span>TL)</span>
-<span id="cb77-811"><a href="#cb77-811" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-745"><a href="#cb77-745" aria-hidden="true" tabindex="-1"></a>    Pop <span class="ot">&lt;-</span> <span class="fu">int_SubPop</span>( <span class="at">SubPop =</span> Slot, <span class="at">Pop =</span> Pop )</span>
+<span id="cb77-746"><a href="#cb77-746" aria-hidden="true" tabindex="-1"></a>    TL <span class="ot">&lt;-</span> <span class="fu">get_Timeline</span>( <span class="at">TL =</span>TL,</span>
+<span id="cb77-747"><a href="#cb77-747" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Time =</span> i,</span>
+<span id="cb77-748"><a href="#cb77-748" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Pop =</span> Pop,</span>
+<span id="cb77-749"><a href="#cb77-749" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Info =</span> Kname,</span>
+<span id="cb77-750"><a href="#cb77-750" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sum =</span> <span class="dv">1</span> )</span>
+<span id="cb77-751"><a href="#cb77-751" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb77-752"><a href="#cb77-752" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb77-753"><a href="#cb77-753" aria-hidden="true" tabindex="-1"></a>  Output <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="at">Pop =</span> Pop,</span>
+<span id="cb77-754"><a href="#cb77-754" aria-hidden="true" tabindex="-1"></a>                  <span class="at">TL =</span> TL)</span>
+<span id="cb77-755"><a href="#cb77-755" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Output)</span>
+<span id="cb77-756"><a href="#cb77-756" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb77-757"><a href="#cb77-757" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-758"><a href="#cb77-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-759"><a href="#cb77-759" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Output</span></span>
+<span id="cb77-760"><a href="#cb77-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-761"><a href="#cb77-761" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>A List with the new Population and a Timeline over the number of itterations</span>
+<span id="cb77-762"><a href="#cb77-762" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-765"><a href="#cb77-765" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb77-766"><a href="#cb77-766" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="dv">50</span>                          <span class="co"># number of Agents</span></span>
+<span id="cb77-767"><a href="#cb77-767" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(nA)                 <span class="co"># ID of the Agents</span></span>
+<span id="cb77-768"><a href="#cb77-768" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> (<span class="fu">seq_len</span>(nA)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">50</span>           <span class="co"># Knowledge</span></span>
+<span id="cb77-769"><a href="#cb77-769" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-770"><a href="#cb77-770" aria-hidden="true" tabindex="-1"></a>nM <span class="ot">&lt;-</span> <span class="dv">160</span>                         <span class="co"># number of meetings(mean)</span></span>
+<span id="cb77-771"><a href="#cb77-771" aria-hidden="true" tabindex="-1"></a>psize <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
+<span id="cb77-772"><a href="#cb77-772" aria-hidden="true" tabindex="-1"></a>STn <span class="ot">&lt;-</span> (nM <span class="sc">*</span> nA ) <span class="sc">/</span> (psize <span class="sc">*</span> nA )</span>
+<span id="cb77-773"><a href="#cb77-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-774"><a href="#cb77-774" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> ID )</span>
+<span id="cb77-775"><a href="#cb77-775" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">K =</span> K )</span>
+<span id="cb77-776"><a href="#cb77-776" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb77-777"><a href="#cb77-777" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-778"><a href="#cb77-778" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sim_Slot</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb77-779"><a href="#cb77-779" aria-hidden="true" tabindex="-1"></a>                <span class="at">psize =</span> psize,</span>
+<span id="cb77-780"><a href="#cb77-780" aria-hidden="true" tabindex="-1"></a>                <span class="at">ST =</span> <span class="dv">1</span>,</span>
+<span id="cb77-781"><a href="#cb77-781" aria-hidden="true" tabindex="-1"></a>                <span class="at">STn =</span> STn)</span>
+<span id="cb77-782"><a href="#cb77-782" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-783"><a href="#cb77-783" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(res<span class="sc">$</span>Pop[[<span class="st">"StudyTime"</span>]])</span>
+<span id="cb77-784"><a href="#cb77-784" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>Pop</span>
+<span id="cb77-785"><a href="#cb77-785" aria-hidden="true" tabindex="-1"></a><span class="fu">plt_Timeline</span>(res<span class="sc">$</span>TL)</span>
+<span id="cb77-786"><a href="#cb77-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-787"><a href="#cb77-787" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-788"><a href="#cb77-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-789"><a href="#cb77-789" aria-hidden="true" tabindex="-1"></a><span class="fu">## ... Special Cases</span></span>
+<span id="cb77-790"><a href="#cb77-790" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-791"><a href="#cb77-791" aria-hidden="true" tabindex="-1"></a><span class="fu">### Only one Agent with Knowledge (0.8)</span></span>
+<span id="cb77-792"><a href="#cb77-792" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-795"><a href="#cb77-795" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb77-796"><a href="#cb77-796" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">0</span>           <span class="co"># Knowledge</span></span>
+<span id="cb77-797"><a href="#cb77-797" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-798"><a href="#cb77-798" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>( <span class="at">ID =</span> ID )</span>
+<span id="cb77-799"><a href="#cb77-799" aria-hidden="true" tabindex="-1"></a>Pop <span class="ot">&lt;-</span> <span class="fu">set_Knowledge</span>( <span class="at">Pop =</span> Pop, <span class="at">K =</span> K )</span>
+<span id="cb77-800"><a href="#cb77-800" aria-hidden="true" tabindex="-1"></a>Pop[ID <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Knowledge"</span>] <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb77-801"><a href="#cb77-801" aria-hidden="true" tabindex="-1"></a>Pop</span>
+<span id="cb77-802"><a href="#cb77-802" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-803"><a href="#cb77-803" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sim_Slot</span>(<span class="at">Pop =</span> Pop,</span>
+<span id="cb77-804"><a href="#cb77-804" aria-hidden="true" tabindex="-1"></a>                <span class="at">psize =</span> psize,</span>
+<span id="cb77-805"><a href="#cb77-805" aria-hidden="true" tabindex="-1"></a>                <span class="at">ST =</span> <span class="dv">1</span>,</span>
+<span id="cb77-806"><a href="#cb77-806" aria-hidden="true" tabindex="-1"></a>                <span class="at">STn =</span> STn)</span>
+<span id="cb77-807"><a href="#cb77-807" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-808"><a href="#cb77-808" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>Pop</span>
+<span id="cb77-809"><a href="#cb77-809" aria-hidden="true" tabindex="-1"></a><span class="fu">plt_Timeline</span>(res<span class="sc">$</span>TL)</span>
+<span id="cb77-810"><a href="#cb77-810" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
