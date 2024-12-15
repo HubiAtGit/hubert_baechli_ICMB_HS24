@@ -21,258 +21,171 @@ library(tidyverse)
 # set.seed(1)
 ```
 
-## Population for testing the Functions
+# Population
 
 ```{r}
-nA = 10            # number of Agents
-ID = seq_len(nA)  # ID of the Agents
-
-Pop <- tibble( ID = ID )
-Pop
+nA = 10           # number of Agents
 ```
 
-# Functions
-
-## Knowledge
-
-Functions to set and update Knowledge
-
-### Set Knowledge
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's
-
-2.  A value for the Knowledge (K) between 0 and 1. could be a scalar or e vector with the same length as the Population
-
-3.  optional for future implementations a name (Typ) for the specific Knowledge
-
 ```{r}
-set_Knowledge <- function(Pop = Pop,
-                          Typ = FALSE,
-                          K = Knowledge) {
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
+update_Pop <- function(Pop = Pop,
+                       name = Parametername,
+                       Typ = "",
+                       add = 0,
+                       fac = 1,
+                       set = FALSE) {
+  if (Typ != "") {
+    name <- paste(name, Typ, sep = "_")
   }
-  Pop <- Pop %>%
-    mutate(!!Kname := K)
-
-  return(Pop)
-}
-```
-
-#### Output
-
-1.  Population with the defined Knowledge
-
-```{r}
-K <- seq_len(nA)/5
-
-Pop <- set_Knowledge( Pop = Pop, K = 0.5 )
-Pop <- set_Knowledge( Pop = Pop, Typ = "A", K = K )
-Pop
-```
-
-### Update Knowledge
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's
-
-2.  A value to add to the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 0 is used to add
-
-3.  A value to multiplie (fac) the Knowledge. could be a scalar or e vector with the same length as the Population. if not defined 1 is used for the multiplikation
-
-4.  optional for future implementations a name (Typ) for the specific Knowledge
-
-#### Hints
-
--   The add operation is always used first!
-
--   If the Knowledge is not defined before it will be generated with the start value (add) and the multiplication with the value (fac)
-
-```{r}
-update_Knowledge <- function(Pop = Pop,
-                            Typ = FALSE,
-                            add = 0,
-                            fac = 1) {
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
-  }
-  if (Kname %in% colnames(Pop)) {
-    Pop <- Pop %>%
-      mutate( !!Kname := ( .data[[Kname]] + add ) * fac )
+  if (set == FALSE) {
+    if (name %in% colnames(Pop)) {
+      Pop <- Pop %>%
+        mutate( !!name := ( .data[[name]] + add ) * fac )
+    }
   } else {
-    Pop <- set_Knowledge(Pop = Pop, K = add, Typ = Typ)
     Pop <- Pop %>%
-      mutate( !!Kname := .data[[Kname]] * fac )
+      mutate( !!name := add * fac )
   }
   return(Pop)
 }
 ```
 
-#### Output
-
-1.  Population with the defined Knowledge
-
 ```{r}
-add <- seq_len(nA)/20
-fac <- seq_len(nA)/10 
-
-Pop <- update_Knowledge( Pop = Pop, add = add ) 
-Pop <- update_Knowledge( Pop = Pop, Typ = "A", fac = fac ) 
-Pop <- update_Knowledge( Pop = Pop, Typ = "B", add = add, fac = fac ) 
-Pop
+longer_Pop <- function(Pop = Pop){
+  Pop_long <- Pop %>%
+  pivot_longer(cols = starts_with("Knowledge_"),
+               names_to = "Typ",
+               names_prefix = "Knowledge_",  
+               values_to = "Knowledge" )
+  return(Pop_long)
+}
 ```
 
-## LearnRate
-
-Functions to set and update the learn rate
-
-### Set LearnRate
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's
-
-2.  A value for the learn rate (LR) greater than 0 and up to 1. could be a scalar or e vector with the same length as the Population
-
-#### Hints
-
--   LernRate 0 leads to Problems so it ist limited it to 1E-3
-
 ```{r}
-set_LearnRate <- function(Pop = Pop,
-                          LR = LearnRate) {
-  LRname <- "LearnRate"
-  Pop <- Pop %>%
-    mutate(!!LRname := LR,
-           !!LRname := pmax(.data[[LRname]],1E-3))
+wider_Pop <- function(Pop_long = Pop_long){
+  Pop <- Pop_long %>%
+    select(-starts_with("tmp_")) %>%
+    pivot_wider(names_from = Typ,
+                values_from = Knowledge,
+                names_prefix = "Knowledge_" ) %>%
+  select(starts_with("ID"),
+         starts_with("A_"),
+         starts_with("Knowledge_"),
+         starts_with("r_"),
+         starts_with("c_"),
+         everything())
   return(Pop)
 }
 ```
 
-#### Output
-
-1.  Population with the defined learn rate
-
 ```{r}
-LR <- seq_len(nA)/5  
-Pop <- set_LearnRate( Pop = Pop, LR = 0 ) 
-Pop
+update_Knowledge <- function(Pop = Pop){
+  Pop_long <- longer_Pop(Pop = Pop)
+  Pop_long <- Pop_long %>%
+    group_by(ID) %>%
+    mutate(tmp_Rank = rank(Knowledge, ties.method = "random"),
+           tmp_Rank = max(tmp_Rank) - tmp_Rank + 1,
+           tmp_Rank = 0.5 ^ tmp_Rank,
+           tmp_LR = Knowledge * tmp_Rank,
+           A_Knowledge = max(Knowledge),
+           A_LearnRate = max(sum(tmp_LR),1E-3),
+           A_Profile = min((A_LearnRate) / (A_Knowledge * sum(tmp_Rank)), 1),
+           A_Profile = (A_Profile - 0.5) * 2,
+           A_Knowledge = round(A_Knowledge, digits = 2)) %>%
+    ungroup() 
+  Pop <- wider_Pop(Pop_long = Pop_long)
+return(Pop)
+}
 ```
 
-### Update LearnRate by Knowledge
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's and Knowledge
-
-2.  optional for future implementations a name (Typ) for the specific Knowledge
-
-#### Hints
-
--   The learn rate is defined as 50% of the Knowledge for each Agent
+```{r}
+update_Topic <- function(Pop = Pop){
+  Pop_long <- longer_Pop(Pop = Pop)
+  Pop_long <- Pop_long %>%
+    group_by(ID) %>%
+    mutate(tmp_Rank = rank(Knowledge, ties.method = "random"),
+           tmp_Rank = max(tmp_Rank) - tmp_Rank + 1,
+           tmp_Rank = 0.5 ^ tmp_Rank,
+           A_Topic = Typ[which.max(tmp_Rank)]) %>%
+    ungroup() 
+  Pop <- wider_Pop(Pop_long = Pop_long)
+return(Pop)
+}
+```
 
 ```{r}
-update_LearnRate_Knowledge <- function(Pop = Pop,
-                                       Typ = FALSE) {
-  LR <- "LearnRate"
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
+gen_Pop <- function(nA = NumberOfAgents,
+                    K = Knowledge,
+                    Typ = SpezKnowledge,
+                    pMD = percentsMeetingsaDay){
+  ID <- seq_len(nA)
+  Pop <- tibble( ID = ID, "A_Topic" = "")
+  Pop <- update_Pop(Pop = Pop, name = "A_Knowledge", add = 0, set = TRUE)
+  Pop <- update_Pop(Pop = Pop, name = "A_Profile", add = 0, set = TRUE)
+  Pop <- update_Pop(Pop = Pop, name = "A_LearnRate", add = 0, set = TRUE)
+  Pop <- update_Pop(Pop = Pop, name = "A_pMeetDay", add = pMD, set = TRUE)
+  if (length(Typ) > 0) {
+    for (i in seq_along(Typ)) {
+      Pop <- update_Pop(Pop = Pop, 
+                        name = "Knowledge", 
+                        Typ = Typ[[i]], 
+                        add = K[[i]],
+                        set = TRUE)
+    }
   }
-  if (Kname %in% colnames(Pop)) {
-    Pop <- Pop %>%
-      mutate( !!LR := .data[[Kname]] * 0.5,
-              !!LR := pmax(.data[[LR]],1E-3))
+  Pop <- update_Knowledge(Pop = Pop)
+  Pop <- update_Topic(Pop = Pop)
+  return(Pop)
   }
-  return(Pop)
-}
+
 ```
 
-#### Output
-
-1.  Population with the defined learn rate
-
 ```{r}
-Pop <- update_LearnRate_Knowledge( Pop = Pop )  
+Pop <- gen_Pop( nA = 10, K = list(0.2,0.2), Typ = list("M0", "M1"), pMD = 0.8)
+Pop <- gen_Pop( nA = 10, 
+                K = list(0.1, 0.2, 0.0), 
+                Typ = list("M1", "M2", "M3"), 
+                pMD = 0.8)
 Pop
 ```
 
-## StudyTime
-
-Functions to set and update the StudyTime
-
-### Set StudyTime
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's
-
-2.  A value for the StudyTime (ST). could be a scalar or a vector with the same length as the Population
-
-#### Hints
-
--   If StudyTime isn't given the Population will be initialising with 0
-
 ```{r}
-set_StudyTime <- function(Pop = Pop,
-                          ST = 0) {
-  STname <- "StudyTime"
-  Pop <- Pop %>%
-    mutate(!!STname := ST)
+prep_Counter <- function(Pop = Pop,
+                         set = TRUE){
+  Pop <- update_Pop(Pop = Pop, name = "c_time_meet", add = 0, set = set)
+  Pop <- update_Pop(Pop = Pop, name = "c_time_learn", add = 0, set = set)
+  Pop <- update_Pop(Pop = Pop, name = "c_n_meet", add = 0, set = set)
   return(Pop)
-}
-```
-
-#### Output
-
-1.  Population with the defined StudyTime
-
-```{r}
-Pop <- set_StudyTime( Pop = Pop, ST = 3)  
-Pop
-```
-
-### Update StudyTime
-
-#### Needs
-
-1.  A Population (Pop) with several Agents defined by ID's and StudyTime
-
-2.  A Time (dT) that should added.
-
-#### Hints
-
--   If StudyTime isn't defined in Population it will be initialising with dT
-
-```{r}
-update_StudyTime <- function(Pop = Pop,
-                             dT = TimeToAdd) {
-  STname <- "StudyTime"
-  if (STname %in% colnames(Pop)) {
-    Pop <- Pop %>%
-      mutate( !!STname := .data[[STname]] + dT )
-  } else {
-    Pop <- set_StudyTime(Pop = Pop, ST = dT )
   }
-  return(Pop)
-}
 ```
 
-#### Output
-
-1.  Population with the defined StudyTime
+```{r}
+prep_DayRes <- function(Pop = Pop,
+                        tD = hoursDay,
+                        set = TRUE){
+  Pop <- update_Pop(Pop = Pop, name = "r_time_meetDay", 
+                    add = tD, 
+                    fac = Pop[["A_pMeetDay"]],
+                    set = set)
+  Pop <- update_Pop(Pop = Pop, name = "r_time_learnDay", 
+                    add = tD, 
+                    fac = 1 - Pop[["A_pMeetDay"]],
+                    set = set)
+  return(Pop)
+  }
+```
 
 ```{r}
-Pop <- update_StudyTime( Pop = Pop, dT = 1)   
+Pop <- gen_Pop( nA = 10, 
+                K = list(0.01, 0.2), 
+                Typ = list("M1", "M2"), 
+                pMD = 0.8)
+Pop <- prep_Counter( Pop = Pop)
+Pop <- prep_DayRes( Pop = Pop, tD = 8)
 Pop
 ```
 
-## Data Management
+# Data Management
 
 Functions to select and reintegrate a Sub Populations
 
@@ -294,8 +207,8 @@ Functions to select and reintegrate a Sub Populations
 sel_SubPop <- function(Pop = Pop,
                        IDs = NULL,
                        n = 2) {
-    if (is.null(IDs)) {
-      IDs <- sample( Pop[["ID"]], size=n )
+  if (is.null(IDs)) {
+    IDs <- sample( Pop[["ID"]], size=n )
     }
   SubPop <- list()
   SubPop$sel <- Pop %>%
@@ -355,9 +268,14 @@ int_SubPop <- function(SubPop = SubPop,
 ```{r}
 Pop
 SubPop <- sel_SubPop(Pop = Pop, n = 2 )$sel
-SubPop <- set_Knowledge(Pop = SubPop, K = 0)
-SubPop
+SubPop <- update_Pop(Pop = SubPop,
+                     name = "Knowledge",
+                     Typ = "M2",
+                     add = 0,
+                     set = TRUE)
 Pop <- int_SubPop(SubPop = SubPop, Pop = Pop)
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
 Pop
 ```
 
@@ -424,7 +342,7 @@ Timeline
 
 ```
 
-## **Learning**
+# **Learning**
 
 Learning with a exponential lern rate
 
@@ -443,29 +361,18 @@ Learning with a exponential lern rate
 -   If learn rate isn't given the values from the Population will be used, if this is missing in the Population 0 is used.
 
 ```{r}
-learn <- function(Pop = Pop,
-                  Typ = FALSE,
-                  LR = FALSE,
-                  ST = StudyTime) {
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
-  }
-  if (Kname %in% colnames(Pop)) {
-    K <- Pop[[Kname]]
-  }
-  if (LR == FALSE) {
-    if ("LearnRate" %in% colnames(Pop)) {
-      LR <- Pop[["LearnRate"]]
-    }
-  }
-
-  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready
-  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd
-  
-  Pop <- set_Knowledge(Pop = Pop, Typ = Typ, K = K)
-  Pop <- update_StudyTime(Pop = Pop, dT = ST)
-  return(Pop)
+learn <- function(Pop = Pop) {
+  Pop_long <- longer_Pop(Pop = Pop)
+  Pop_long <- Pop_long %>%
+    group_by(ID) %>%
+    mutate(r_time_learnDay = ifelse(Typ == A_Topic, r_time_learnDay, 0)) %>%
+    mutate(tmp_Time0 = ( 1 - Knowledge )^( 1 / -A_LearnRate ),
+           Knowledge = 1 - ( tmp_Time0 + r_time_learnDay )^( -A_LearnRate )) %>%
+    mutate(c_time_learn = c_time_learn + sum(r_time_learnDay),
+           r_time_learnDay = 0) %>%
+    ungroup()
+  Pop <- wider_Pop(Pop_long = Pop_long)
+return(Pop)
 }
 ```
 
@@ -474,12 +381,16 @@ learn <- function(Pop = Pop,
 1.  Population with updated Knowledge
 
 ```{r}
-Pop <- tibble( ID = ID )
-Pop <- set_Knowledge(Pop = Pop, K = 0.1)
-Pop <- set_LearnRate(Pop = Pop, LR = 1)
-Pop
+Pop <- gen_Pop( nA = 3, 
+                K = list(c(0.8, 0.3, 0.0), c(0.0, 0.4, 0.7)), 
+                Typ = list("M1", "M2"), 
+                pMD = 0.8)
 
-Pop <- learn( Pop = Pop, ST = 1)
+Pop <- prep_Counter( Pop = Pop)
+Pop <- prep_DayRes( Pop = Pop, tD = 8)
+Pop <- learn(Pop = Pop)
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
 Pop
 ```
 
@@ -524,7 +435,7 @@ sel_Slot_rnd <- function(Pop = Pop,
 
 ```{r}
 Pop
-Slot <- sel_Slot_rnd(Pop = Pop, psize = 1)
+Slot <- sel_Slot_rnd(Pop = Pop, psize = 0.6)
 Slot
 ```
 
@@ -559,6 +470,10 @@ set_SlotPar <- function(Slot = Slot,
 ```{r}
 Slot <- set_SlotPar(Slot = Slot, ST = 1)
 Slot
+Slot %>%
+  group_by(Slot_ID) %>%
+  mutate( test := sum(.data[["ID"]], na.rm = TRUE) - .data[["ID"]])
+  
 ```
 
 ### **Learning by Slots**
