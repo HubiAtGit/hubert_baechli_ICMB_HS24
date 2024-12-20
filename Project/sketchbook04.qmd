@@ -12,6 +12,8 @@ The basic idea is that when two agents meet, they learn together. Later, this sh
 
 If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
 
+A daily structure with a certain number of working hours is introduced to enable better interpretation of the results.
+
 # Definitions
 
 Loading some Packages for easier Data management and Presentation of Results

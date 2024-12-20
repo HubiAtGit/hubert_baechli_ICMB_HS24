@@ -20,3 +20,11 @@ The basic idea is that when two agents meet, they learn together. Later, this sh
 If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
 
 ### [Grouped in Slots](sketchbook03.qmd)
+
+A daily structure with a certain number of working hours is introduced to enable better interpretation of the results.
+
+### [... in a Day Structure](sketchbook04.qmd)
+
+Now it seems to be time to add other aspects. At first it seems central that different areas of knowledge should be possible.
+
+### [Areas of Knowledge](sketchbook05.qmd)

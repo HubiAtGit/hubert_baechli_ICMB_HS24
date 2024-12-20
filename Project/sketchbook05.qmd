@@ -1,16 +1,18 @@
 ---
-title: "in a Day Structure"
+title: "Areas of Knowledge"
 author: "Hubert Baechli"
 
 execute: 
   cache: false
 ---
 
-# Simulating random meetings (in a Day Structure)
+# Simulating random meetings (Areas of Knowledge)
 
 The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
 
 If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
+
+Now it seems to be time to add other aspects. At first it seems central that different areas of knowledge should be possible.
 
 # Definitions
 
@@ -117,12 +119,14 @@ return(Pop)
 gen_Pop <- function(nA = NumberOfAgents,
                     K = Knowledge,
                     Typ = SpezKnowledge,
+                    pWD = percentsWorkingaDay,
                     pMD = percentsMeetingsaDay){
   ID <- seq_len(nA)
   Pop <- tibble( ID = ID, "A_Topic" = "")
   Pop <- update_Pop(Pop = Pop, name = "A_Knowledge", add = 0, set = TRUE)
   Pop <- update_Pop(Pop = Pop, name = "A_Profile", add = 0, set = TRUE)
   Pop <- update_Pop(Pop = Pop, name = "A_LearnRate", add = 0, set = TRUE)
+  Pop <- update_Pop(Pop = Pop, name = "A_pWorkDay", add = pWD, set = TRUE)
   Pop <- update_Pop(Pop = Pop, name = "A_pMeetDay", add = pMD, set = TRUE)
   if (length(Typ) > 0) {
     for (i in seq_along(Typ)) {
@@ -141,10 +145,15 @@ gen_Pop <- function(nA = NumberOfAgents,
 ```
 
 ```{r}
-Pop <- gen_Pop( nA = 10, K = list(0.2,0.2), Typ = list("M0", "M1"), pMD = 0.8)
+Pop <- gen_Pop( nA = 10, 
+                K = list(0.2,0.2), 
+                Typ = list("M0", "M1"), 
+                pWD = 1, 
+                pMD = 0.8)
 Pop <- gen_Pop( nA = 10, 
                 K = list(0.1, 0.2, 0.0), 
                 Typ = list("M1", "M2", "M3"), 
+                pWD = 1,
                 pMD = 0.8)
 Pop
 ```
@@ -160,16 +169,18 @@ prep_Counter <- function(Pop = Pop,
 ```
 
 ```{r}
-prep_DayRes <- function(Pop = Pop,
-                        tD = hoursDay,
+prep_Res <- function(Pop = Pop,
+                        time_day = hoursDay,
                         set = TRUE){
-  Pop <- update_Pop(Pop = Pop, name = "r_time_meetDay", 
-                    add = tD, 
+  Pop <- update_Pop(Pop = Pop, 
+                    name = "r_time_meet", 
+                    add = time_day * Pop[["A_pWorkDay"]], 
                     fac = Pop[["A_pMeetDay"]],
                     set = set)
-  Pop <- update_Pop(Pop = Pop, name = "r_time_learnDay", 
-                    add = tD, 
-                    fac = 1 - Pop[["A_pMeetDay"]],
+  Pop <- update_Pop(Pop = Pop, 
+                    name = "r_time_learn", 
+                    add = time_day * Pop[["A_pWorkDay"]], 
+                    fac = 1 - (Pop[["A_pMeetDay"]]) ,
                     set = set)
   return(Pop)
   }
@@ -179,9 +190,10 @@ prep_DayRes <- function(Pop = Pop,
 Pop <- gen_Pop( nA = 10, 
                 K = list(0.01, 0.2), 
                 Typ = list("M1", "M2"), 
+                pWD = 0.5,
                 pMD = 0.8)
 Pop <- prep_Counter( Pop = Pop)
-Pop <- prep_DayRes( Pop = Pop, tD = 8)
+Pop <- prep_Res( Pop = Pop, time_day = 8)
 Pop
 ```
 
@@ -300,20 +312,14 @@ saving Timelines during Simulations
 ```{r}
 
 get_Timeline <- function(TL = Timeline,
-                          Time = 0,
-                          Pop = Pop,
-                          Info = name,
-                          Sum = 0) {
-  TLadd <- tibble( ID = Pop[["ID"]],
-                   Time = Time,
-                   !!Info := Pop[[Info]])
-  if (Sum == 1) {
-    Sumname1 <- paste(Info,"mean", sep = "_")
-    Sumname2 <- paste(Info,"median", sep = "_")
-    TLadd <- TLadd %>%
-        mutate(!!Sumname1 := mean(Pop[[Info]], na.rm = TRUE),
-               !!Sumname2 := median(Pop[[Info]], na.rm = TRUE))
-    }
+                         Time = 0,
+                         Pop = Pop) {
+  TLadd <- Pop %>%
+    mutate(Time = Time) %>%
+    select(starts_with("ID"),
+           starts_with("Time"),
+           starts_with("A_Knowledge"),
+           starts_with("Knowledge_"))
   if (Time == 0) {
     TL <- TLadd
   } else {
@@ -328,16 +334,12 @@ get_Timeline <- function(TL = Timeline,
 1.  A Timeline in a long format
 
 ```{r}
-Timeline <- get_Timeline( TL = Timeline, 
-                           Time = 0, 
-                           Pop = Pop, 
-                           Info = "Knowledge", 
-                           Sum = 1)
-Timeline <- get_Timeline( TL = Timeline, 
-                           Time = 1, 
-                           Pop = Pop, 
-                           Info = "Knowledge", 
-                           Sum = 1)
+Timeline <- get_Timeline(TL = Timeline,
+                         Time = 0,
+                         Pop = Pop)
+Timeline <- get_Timeline(TL = Timeline,
+                         Time = 1,
+                         Pop = Pop)
 Timeline
 
 ```
@@ -361,15 +363,25 @@ Learning with a exponential lern rate
 -   If learn rate isn't given the values from the Population will be used, if this is missing in the Population 0 is used.
 
 ```{r}
-learn <- function(Pop = Pop) {
+learn <- function(Pop = Pop,
+                  con = TRUE) {
+  if (con == TRUE){
+    Pop <- Pop %>%
+      mutate(r_time_learn = r_time_learn + r_time_meet,
+             r_time_meet = 0)
+    Pop <- update_Knowledge(Pop = Pop)
+    Pop <- update_Topic(Pop = Pop)
+  } 
+  
   Pop_long <- longer_Pop(Pop = Pop)
   Pop_long <- Pop_long %>%
     group_by(ID) %>%
-    mutate(r_time_learnDay = ifelse(Typ == A_Topic, r_time_learnDay, 0)) %>%
-    mutate(tmp_Time0 = ( 1 - Knowledge )^( 1 / -A_LearnRate ),
-           Knowledge = 1 - ( tmp_Time0 + r_time_learnDay )^( -A_LearnRate )) %>%
-    mutate(c_time_learn = c_time_learn + sum(r_time_learnDay),
-           r_time_learnDay = 0) %>%
+    mutate(r_time_learn = ifelse(Typ == A_Topic, r_time_learn, 0)) %>%
+    mutate(tmp_LearnRate = A_LearnRate,
+           tmp_Time0 = ( 1 - Knowledge )^( 1 / -tmp_LearnRate ),
+           Knowledge = 1 - ( tmp_Time0 + r_time_learn )^( -tmp_LearnRate )) %>%
+    mutate(c_time_learn = c_time_learn + sum(r_time_learn),
+           r_time_learn = 0) %>%
     ungroup()
   Pop <- wider_Pop(Pop_long = Pop_long)
 return(Pop)
@@ -381,14 +393,17 @@ return(Pop)
 1.  Population with updated Knowledge
 
 ```{r}
-Pop <- gen_Pop( nA = 3, 
-                K = list(c(0.8, 0.3, 0.0), c(0.0, 0.4, 0.7)), 
-                Typ = list("M1", "M2"), 
+Pop <- gen_Pop( nA = 5, 
+                K = list(c(0.8, 0.3, 0, 0 ,0), 
+                         c(0.0, 0.4, 0.7, 0 ,0), 
+                         c(0.0, 0.4, 0.7, 0 ,0)), 
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 1.0,
                 pMD = 0.8)
 
 Pop <- prep_Counter( Pop = Pop)
-Pop <- prep_DayRes( Pop = Pop, tD = 8)
-Pop <- learn(Pop = Pop)
+Pop <- prep_Res( Pop = Pop, time_day = 8)
+Pop <- learn(Pop = Pop, con = FALSE)
 Pop <- update_Knowledge(Pop = Pop)
 Pop <- update_Topic(Pop = Pop)
 Pop
@@ -411,21 +426,27 @@ Functions to select and sets learning slots from a Population
 -   because it leads to trouble will selecting otherwise the calculated n is limited at the moment between 1 and half of the Population
 
 ```{r}
-sel_Slot_rnd <- function(Pop = Pop,
-                         psize = percentsOfPop) {   
-  sID <- "Slot_ID"
-  n <- round(nrow(Pop)*psize / 2, 0)
+sel_Pairs_rnd <- function(Pop = Pop,
+                          psize = percentsOfPop) {   
+  sID <- "tmp_ID"
+  psize <- min(psize, 1)
+  nR <- nrow(Pop)
+  n <- round(nR * psize * 0.49, 0)
   n <- max(n, 1)
-  n <- min(n, round(nrow(Pop) / 2, 0))
   
   SubPop <- sel_SubPop( Pop = Pop, n = n)   
   Slot1 <- SubPop$sel %>%     
-    mutate(!!sID := seq_len(n)) 
-  SubPop <- sel_SubPop( Pop = SubPop$rest, n = n) 
-  Slot2 <- SubPop$sel %>%     
     mutate(!!sID := seq_len(n))
-  Slot <- bind_rows(Slot1, Slot2)
-  return(Slot)  
+  if (nrow(SubPop$rest) == n) {
+    Slot2 <- SubPop$rest
+  } else {
+    SubPop <- sel_SubPop( Pop = SubPop$rest, n = n) 
+    Slot2 <- SubPop$sel
+  }
+  Slot2 <- Slot2 %>%     
+    mutate(!!sID := seq_len(n))
+  Pairs <- bind_rows(Slot1, Slot2)
+  return(Pairs)  
   }  
 ```
 
@@ -435,48 +456,13 @@ sel_Slot_rnd <- function(Pop = Pop,
 
 ```{r}
 Pop
-Slot <- sel_Slot_rnd(Pop = Pop, psize = 0.6)
-Slot
+Pairs <- sel_Pairs_rnd(Pop = Pop, psize = 0.5)
+Pairs
+Pairs <- sel_Pairs_rnd(Pop = Pairs, psize = 1)
+Pairs
 ```
 
-### Sets Slot parameter by Slot-ID's
-
-#### Needs
-
-1.  A Slot of paird Agents defined by Slot_ID's
-
-2.  A duration of the slot. could be a scalar or a vector with the same length as the number of pairs in the Slot
-
-```{r}
-set_SlotPar <- function(Slot = Slot,
-                        ST = SlotDuration) {
-  LRname <- "LearnRate"
-  sLRname <- "Slot_LearnRate"
-  STname <- "Slot_Duration"
-  Slot <- Slot %>%
-    group_by(Slot_ID) %>%
-    mutate( !!sLRname := mean(.data[[LRname]], na.rm = TRUE),
-            !!STname := ST) %>%
-    ungroup()
-  return(Slot)
-}
-
-```
-
-#### Output
-
-1.  A random Slot-Population with Slot ID's which marks the pairs, learn rate and duration of the Slot defined by pairs
-
-```{r}
-Slot <- set_SlotPar(Slot = Slot, ST = 1)
-Slot
-Slot %>%
-  group_by(Slot_ID) %>%
-  mutate( test := sum(.data[["ID"]], na.rm = TRUE) - .data[["ID"]])
-  
-```
-
-### **Learning by Slots**
+### **Learning by Pairs**
 
 Learning with a exponential learn rate defined by pairs
 
@@ -487,24 +473,29 @@ Learning with a exponential learn rate defined by pairs
 2.  optional for future implementations a name (Typ) for the specific Knowledge
 
 ```{r}
-learn_Slot <- function(Slot = Slot,
-                       Typ = FALSE) {
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
-  }
-  LRname <- "Slot_LearnRate"
-  STname <- "Slot_Duration"
-  K <- Slot[[Kname]]
-  LR <- Slot[[LRname]]
-  ST <- Slot[[STname]]
-
-  T0 <- ( 1 - K )^( 1 / -LR )   # assumed time learnd allready
-  K <- 1 - ( T0 + ST )^( -LR )  # Knowledge after time learnd
-  Slot <- set_Knowledge(Pop = Slot, Typ = Typ, K = K)
-  Slot <- update_StudyTime(Pop = Slot, dT = ST)
-  return(Slot)
+learn_Pairs <- function(Pairs = Pairs,
+                        time_meet = time_meet) {
+  Pop_long <- longer_Pop(Pop = Pairs)
+  Pop_long <- Pop_long %>%
+  group_by(tmp_ID) %>%
+    mutate(tmp_LearnRate = mean(A_LearnRate),
+           tmp_facT = ifelse(Typ == A_Topic, 1, 0)) %>%
+  group_by(tmp_ID, Typ) %>%
+    mutate(tmp_facT = mean(tmp_facT )) %>%
+  group_by(ID) %>%
+    mutate(tmp_time_learn = tmp_facT * time_meet,
+           tmp_Time0 = ( 1 - Knowledge )^( 1 / -tmp_LearnRate ),
+           Knowledge = 1 - ( tmp_Time0 + tmp_time_learn)^( -tmp_LearnRate )) %>%
+    ungroup()
+  
+  Pairs <- wider_Pop(Pop_long = Pop_long)
+  Pairs <- Pairs %>%
+    mutate(c_n_meet = c_n_meet + 1,
+           c_time_meet = c_time_meet + time_meet,
+           r_time_meet = r_time_meet - time_meet) 
+  return(Pairs)
 }
+
 ```
 
 #### Output
@@ -512,8 +503,13 @@ learn_Slot <- function(Slot = Slot,
 1.  Slot-Population with updated Knowledge
 
 ```{r}
-Slot <- learn_Slot(Slot = Slot)
-Slot
+Pairs
+Pairs <- learn_Pairs(Pairs = Pairs, time_meet = 0.75)
+Pairs
+Pop <- int_SubPop(SubPop = Pairs, Pop = Pop)
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+Pop
 ```
 
 ## L**earning by** Days
@@ -537,22 +533,41 @@ Learning by Days with a exponential learn rate defined by pairs according learni
 -   The learn rate is fixed during the Day and updated at the end of the Day
 
 ```{r}
-learn_Days <- function(Pop = Pop,                        
-                       Typ = FALSE,
-                       pM = percentsOfMeetings,
-                       dH = 8,
-                       ST = 1) { 
-  Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = Typ )
-  Pop <- update_StudyTime( Pop = Pop , dT = 0)
-  for(i in 1:dH) {
-    Slot <- sel_Slot_rnd( Pop = Pop, psize = pM )
-    Slot <- set_SlotPar(Slot = Slot, ST = ST)
-    Slot <- learn_Slot(Slot = Slot, Typ = Typ)
-    Pop <- int_SubPop( SubPop = Slot, Pop = Pop )
-  } 
-  Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = Typ )
-  return(Pop) 
-  }
+learn_Day <- function(Pop = Pop,
+                      time_day = time_day,
+                      time_meet = time_meet) { 
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+if (!any(startsWith(names(Pop), "c_"))) {
+  Pop <- prep_Counter( Pop = Pop)
+  Pop <- prep_Res( Pop = Pop, time_day = time_day, set = TRUE)
+}
+Pop <- prep_Res( Pop = Pop, time_day = time_day)
+
+nR_Pop <- nrow(Pop)
+psize <- mean(Pop[["A_pMeetDay"]])
+iD <- round(time_day / time_meet, digits = 0)
+
+for(i in 1:iD) {
+  ParBreak <- Pop %>%
+    select(r_time_meet) %>%
+    mutate(r_time_meet = ifelse(r_time_meet >= time_meet, 1, 0))
+  
+  if (sum(ParBreak$r_time_meet) < 2) { break }
+   
+  Pop_Res <- Pop[Pop$r_time_meet >= time_meet, ]
+  nR_Pop_Res <- nrow(Pop_Res)
+  
+  psize_i <- psize / nR_Pop_Res * nR_Pop
+  
+  Pairs <- sel_Pairs_rnd(Pop = Pop_Res, psize = psize_i)
+  Pairs <- learn_Pairs(Pairs = Pairs, time_meet = time_meet)
+  
+  Pop <- int_SubPop(SubPop = Pairs, Pop = Pop)
+} 
+Pop <- learn(Pop = Pop, con = TRUE)
+return(Pop) 
+}
 ```
 
 #### Output
@@ -560,10 +575,16 @@ learn_Days <- function(Pop = Pop,
 1.  Population with updated Knowledge, learn rate and study time
 
 ```{r}
-Pop <- update_LearnRate_Knowledge( Pop = Pop, Typ = FALSE )
-Pop <- set_StudyTime( Pop = Pop , ST = 0)
+Pop <- gen_Pop( nA = 5, 
+                K = list(c(0.8, 0.3, 0, 0 ,0), 
+                         c(0.0, 0.4, 0.7, 0 ,0), 
+                         c(0.0, 0.4, 0.7, 0 ,0)), 
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.5)
+
 Pop
-Pop <- learn_Days(Pop = Pop, pM = 0.8, dH = 2 ) 
+Pop <- learn_Day(Pop = Pop, time_day = 8, time_meet = 0.75)
 Pop
 ```
 
@@ -576,31 +597,43 @@ Pop
 1.  A Timeline from get_Timeline
 
 ```{r}
-plt_Timeline <- function(TL = Timeline) {
-  ggplot(data = TL, aes(x = Time)) +
-  geom_line(aes(y = Knowledge, group = ID, color = "Agents"), 
-            alpha = 0.5,
-            linetype = "solid") +
-  geom_line(aes(y = Knowledge_mean, color = "Mean"),
-            linetype = "solid")  +
-  geom_line(aes(y = Knowledge_median, color = "Median"),
-            linetype = "dashed") +
-  ggtitle("Timeline") +
-  xlab("Number of Days") +
-  ylab("Knowledge") +
-  scale_y_continuous(
-    limits = c(0, 1),
-    breaks = seq(0, 1, 0.2)
-  ) +
-  scale_color_manual(
-    values = c("Agents" = "grey", "Mean" = "black", "Median" = "black"),
-    labels = c("Agents" = "Agents", "Mean" = "Mean", "Median" = "Median")
-  ) +
-  theme_light() +
-  theme(legend.title = element_blank(),
-        legend.position = "top",
-        legend.justification = "left"
-        )
+plt_Timeline <- function(TL) {
+  Knowledges <- names(TL)[startsWith(names(TL), "Knowledge_")]
+  TL <- TL %>%
+    group_by(Time) %>%
+    mutate(mean_A_Knowledge = mean(A_Knowledge, na.rm = TRUE)) %>%
+    mutate(across(all_of(Knowledges),
+                  ~ mean(.x, na.rm = TRUE),
+                  .names = "mean_{.col}")) %>%
+    ungroup()
+
+  p <- ggplot(data = TL, aes(x = Time)) +
+    geom_line(aes(y = A_Knowledge, group = ID, color = "Agents"),
+              alpha = 0.5, linetype = "solid") +
+    geom_line(aes(y = mean_A_Knowledge, color = "Knowledge"), linetype = "solid") +
+    ggtitle("Timeline") +
+    xlab("Number of Days") +
+    ylab("Knowledge") +
+    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
+    theme_light() +
+    theme(
+      legend.title = element_blank(),
+      legend.position = "top",
+      legend.justification = "left"
+    )
+  
+  colors <- setNames(rainbow(length(Knowledges)), Knowledges)
+
+  for (var in Knowledges) {
+    mean_var <- paste0("mean_", var)
+    p <- p + geom_line(aes_string(y = mean_var, color = shQuote(var)), 
+                       linetype = "solid")
+    p <- p + scale_color_manual(
+    values = c("Agents" = "grey", "Knowledge" = "black", colors),
+    labels = c("Agents" = "Agents", "Knowledge" = "A_Knowledge", Knowledges))
+    }
+
+  return(p)
 }
 ```
 
@@ -629,33 +662,23 @@ A learning process with updated learn rate by current knowledge when Agents meet
 ```{r}
 
 sim_Days <- function(Pop = Pop,
-                     Typ = FALSE,
-                     nD = NumberOfDays,
-                     pM = precentsOfMeetings,
-                     dH = 8,
-                     ST = 1) {
-  Kname <- "Knowledge"
-  if (Typ != FALSE) {
-    Kname <- paste(Kname, Typ, sep = "_")
-  }
-  Pop <- update_LearnRate_Knowledge( Pop = Pop )
-  Pop <- set_StudyTime( Pop = Pop, ST = 0 )
-  TL <- get_Timeline( TL =TL,
-                       Time = 0,
-                       Pop = Pop,
-                       Info = Kname,
-                       Sum = 1 )
+                     nD = nubmberDay,
+                     time_day = 8,
+                     time_meet = 0.75) {
+  Pop <- update_Knowledge(Pop = Pop)
+  Pop <- update_Topic(Pop = Pop)
+  Pop <- prep_Counter( Pop = Pop)
+  Pop <- prep_Res( Pop = Pop, time_day = time_day)
+  TL <- get_Timeline(TL = TL,
+                     Time = 0,
+                     Pop = Pop)
   for(i in 1:nD) {
-    Pop <- learn_Days(Pop = Pop,
-                      Typ = Typ,
-                      pM = pM,
-                      dH = dH,
-                      ST = ST)
-    TL <- get_Timeline( TL =TL,
-                         Time = i,
-                         Pop = Pop,
-                         Info = Kname,
-                         Sum = 1 )
+    Pop <- learn_Day(Pop = Pop,
+                     time_day = time_day,
+                     time_meet = time_meet)
+    TL <- get_Timeline(TL = TL,
+                       Time = i,
+                       Pop = Pop)
   }
     
   Output <- list( Pop = Pop,
@@ -671,24 +694,19 @@ sim_Days <- function(Pop = Pop,
 ```{r}
 
 nA <- 50                          # number of Agents
-ID <- seq_len(nA)                 # ID of the Agents
-K <- (seq_len(nA)-1)/50           # Knowledge
 
-nM <- 160                         # number of meetings(mean)
-pM <- 0.80
-nD <- nM / 8 / pM
-
-Pop <- tibble( ID = ID )
-Pop <- set_Knowledge( Pop = Pop, K = K )
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.0, 0.0, 0.0),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
 Pop
 
 res <- sim_Days(Pop = Pop,
-                nD = nD,
-                pM = pM)
+                nD = 20)
 
-mean(res$Pop[["StudyTime"]])
 res$Pop
-plt_Timeline(res$TL)
+plt_Timeline(TL = res$TL)
 
 ```
 
@@ -697,16 +715,100 @@ plt_Timeline(res$TL)
 ### Only one Agent with Knowledge (0.8)
 
 ```{r}
-K <- 0           # Knowledge
-
-Pop <- tibble( ID = ID )
-Pop <- set_Knowledge( Pop = Pop, K = K )
-Pop[ID == 1, "Knowledge"] <- 0.8
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.0, 0.0, 0.0),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop[Pop$ID == 1, "Knowledge_M1"] <- 0.8
+#Pop[Pop$ID == 2, "Knowledge_M2"] <- 0.8
+#Pop[Pop$ID == 3, "Knowledge_M3"] <- 0.8
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
 Pop
 
 res <- sim_Days(Pop = Pop,
-                nD = nD,
-                pM = pM)
+                nD = 20)
+
+res$Pop
+plt_Timeline(res$TL)
+```
+
+```{r}
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.02, 0.01, 0.0),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop[Pop$ID == 1, "Knowledge_M1"] <- 0.8
+#Pop[Pop$ID == 2, "Knowledge_M2"] <- 0.8
+#Pop[Pop$ID == 3, "Knowledge_M3"] <- 0.8
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+Pop
+
+res <- sim_Days(Pop = Pop,
+                nD = 20)
+
+res$Pop
+plt_Timeline(res$TL)
+```
+
+```{r}
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.01, 0.02, 0.0),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop[Pop$ID == 1, "Knowledge_M1"] <- 0.8
+#Pop[Pop$ID == 2, "Knowledge_M2"] <- 0.8
+#Pop[Pop$ID == 3, "Knowledge_M3"] <- 0.8
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+Pop
+
+res <- sim_Days(Pop = Pop,
+                nD = 20)
+
+res$Pop
+plt_Timeline(res$TL)
+```
+
+```{r}
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.0, 0.0, 0.01),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop[Pop$ID == 1, "Knowledge_M1"] <- 0.8
+#Pop[Pop$ID == 2, "Knowledge_M2"] <- 0.8
+#Pop[Pop$ID == 3, "Knowledge_M3"] <- 0.8
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+Pop
+
+res <- sim_Days(Pop = Pop,
+                nD = 20)
+
+res$Pop
+plt_Timeline(res$TL)
+```
+
+```{r}
+Pop <- gen_Pop( nA = nA, 
+                K = list(0.0, 0.0, 0.01),
+                Typ = list("M1", "M2", "M3"), 
+                pWD = 0.8,
+                pMD = 0.8)
+#Pop[Pop$ID == 1, "Knowledge_M1"] <- 0.8
+Pop[Pop$ID == 2, "Knowledge_M2"] <- 0.8
+#Pop[Pop$ID == 3, "Knowledge_M3"] <- 0.8
+Pop <- update_Knowledge(Pop = Pop)
+Pop <- update_Topic(Pop = Pop)
+Pop
+
+res <- sim_Days(Pop = Pop,
+                nD = 20)
 
 res$Pop
 plt_Timeline(res$TL)
