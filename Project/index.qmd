@@ -28,3 +28,7 @@ A daily structure with a certain number of working hours is introduced to enable
 Now it seems to be time to add other aspects. At first it seems central that different areas of knowledge should be possible.
 
 ### [Areas of Knowledge](sketchbook05.qmd)
+
+Up to now, the topic has been defined in terms of knowledge; now it should be a question of preference.
+
+### [... with prefernces](sketchbook06.qmd)

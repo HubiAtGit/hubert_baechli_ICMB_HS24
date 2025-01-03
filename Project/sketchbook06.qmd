@@ -1,18 +1,20 @@
 ---
-title: "Areas of Knowledge"
+title: "with prefernces"
 author: "Hubert Baechli"
 
 execute: 
   cache: false
 ---
 
-# Simulating random meetings (Areas of Knowledge)
+# Simulating random meetings (Areas of Knowledge with preferences)
 
 The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
 
 If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
 
 Now it seems to be time to add other aspects. At first it seems central that different areas of knowledge should be possible.
+
+Up to now, the topic has been defined in terms of knowledge; now it should be a question of preference.
 
 # Definitions
 
@@ -95,11 +97,11 @@ sort_Pop <- function(Pop = Pop,
 ```{r}
 get_Typ <- function(Pop = Pop,
                     name = name){
-  syntax_remove <- paste0("^", name, "_")
+  del_name <- paste0("^", name, "_")
   Typ <- Pop %>%
     select(starts_with(name)) %>%
     colnames() %>%
-    str_remove(syntax_remove) 
+    str_remove(del_name) 
   return(Typ)
 }
 ```
@@ -211,13 +213,17 @@ update_Topic <- function(Pop = Pop,
                                 sort_Par = TRUE,
                                 clean_Par = FALSE,
                                 sort_Agents = NA){
+  Typs <- get_Typ(Pop = Pop, name = "Knowledge")
   Pop_long <- longer_Pop(Pop = Pop, name = "Knowledge")
   Pop_long <- Pop_long %>%
     group_by(ID) %>%
     mutate(tmp_Rank = rank(Knowledge, ties.method = "random"),
            tmp_Rank = max(tmp_Rank) - tmp_Rank + 1,
            tmp_Rank = 0.5 ^ tmp_Rank,
-           ID_Topic = Typ[which.max(tmp_Rank)]) %>%
+           ID_Topic = case_when(
+             ID_Preference %in% Typs ~ ID_Preference,
+             ID_Preference == "All" ~ Typ[which.min(tmp_Rank)],
+             TRUE ~ Typ[which.max(Knowledge)])) %>%
     ungroup() 
   Pop_long <- del_tmp(Pop = Pop_long)
   Pop <- wider_Pop(Pop_long = Pop_long, name = "Knowledge")
@@ -234,14 +240,16 @@ update_Topic <- function(Pop = Pop,
 ```{r}
 gen_Pop <- function(addToPop = NULL,
                     nA = NumberOfAgents,
-                    ID_Group = ID_Group,
+                    ID_Preference = "Max",
+                    ID_University = ID_University,
                     K = Knowledge,
                     Typ = SpezKnowledge,
                     pWD = percentsWorkingaDay,
                     pMD = percentsMeetingsaDay){
   ID <- seq_len(nA)
   Pop <- tibble(ID = ID,
-                ID_Group = ID_Group)
+                ID_Preference = ID_Preference,
+                ID_University = ID_University)
   Pop <- update_Typ(Pop = Pop, 
                     name = "Agents", 
                     Typ = list("p_WorkDay", "p_MeetDay"),
@@ -276,35 +284,39 @@ gen_Pop <- function(addToPop = NULL,
 
 ```{r}
 Pop <- gen_Pop( nA = 3, 
-                ID_Group = "Zürich",
+                ID_Preference = "Max",
+                ID_University = "Zürich",
                 K = list(0.01, 0.2), 
                 Typ = list("M1", "M2"), 
                 pWD = 0.5,
                 pMD = 0.8)
 Pop <- gen_Pop( addToPop = Pop,
                 nA = 2, 
-                ID_Group = "Bern",
+                ID_Preference = "All",
+                ID_University = "Bern",
                 K = list(0.01, 0.2), 
-                Typ = list("M3", "M1"), 
+                Typ = list("M3", "M2"), 
                 pWD = 0.2,
                 pMD = 0.5)
 Pop <- gen_Pop( addToPop = Pop,
                 nA = 1, 
-                ID_Group = "Bern",
+                ID_Preference = "M3",
+                ID_University = "Bern",
                 K = list(0.8), 
                 Typ = list("M1"), 
                 pWD = 0.2,
                 pMD = 0.5)
 Pop <- gen_Pop( addToPop = Pop,
                 nA = 1, 
-                ID_Group = "Bern",
+                ID_Preference = "M1",
+                ID_University = "Bern",
                 K = list(0.3, 0.3, 0.3), 
                 Typ = list("M1", "M2", "M3"), 
                 pWD = 0.2,
                 pMD = 0.5)
 Pop <- gen_Pop( addToPop = Pop,
-                nA = 1, 
-                ID_Group = "Bern",
+                nA = 1,
+                ID_University = "Bern",
                 K = list(0.0, 0.0, 0.0), 
                 Typ = list("M1", "M2", "M3"), 
                 pWD = 0.2,
@@ -383,12 +395,6 @@ sel_SubPop <- function(Pop = Pop,
 ```
 
 ```{r}
-SubPop <- sel_SubPop( Pop = Pop )
-SubPop$sel
-SubPop$rest
-```
-
-```{r}
 SubPop <- sel_SubPop( Pop = Pop , IDs = c(2, 1))
 SubPop$sel
 SubPop$rest
@@ -448,11 +454,8 @@ sel_Pairs_rnd <- function(Pop = Pop,
 ```
 
 ```{r}
-Pop 
 Pairs <- sel_Pairs_rnd(Pop = Pop, psize = 0.5) 
 Pairs 
-Pairs <- sel_Pairs_rnd(Pop = Pairs, psize = 0.5) 
-Pairs
 ```
 
 # **Learning**
@@ -503,10 +506,8 @@ learn_Pairs <- function(Pairs = Pairs,
 ```
 
 ```{r}
-Pairs
-PairsT <- learn_Pairs(Pairs = Pairs, time_meet = 0.75)
-PairsT
-Pop <- int_SubPop(SubPop = PairsT, Pop = Pop)
+Pairs <- learn_Pairs(Pairs = Pairs, time_meet = 0.75)
+Pop <- int_SubPop(SubPop = Pairs, Pop = Pop)
 Pop <- update_Learnrate(Pop = Pop)
 Pop <- update_Topic(Pop = Pop)
 Pop
@@ -566,9 +567,6 @@ learn <- function(Pop = Pop,
 ```
 
 ```{r}
-Pop
-Pop <- learn(Pop = Pop, con = FALSE) 
-Pop
 Pop <- learn(Pop = Pop, con = TRUE) 
 Pop
 ```
@@ -617,7 +615,6 @@ return(Pop)
 ```{r}
 
 Pop <- reset_Counter(Pop = Pop)
-Pop
 Pop <- learn_Day(Pop = Pop, time_day = 8, time_meet = 0.75)
 Pop
 ```
@@ -682,7 +679,7 @@ plt_Learnrate <- function(TL = Timeline,
     geom_line(aes(linetype = Typ), linewidth = 1) +
     scale_linetype_manual(values = c("Topic" = "solid", 
                                      "Others" = "dashed")) +
-    ggtitle("Timeline - Mean Learnrate") +     
+    ggtitle("Mean Learnrate over Days") +     
     xlab("Number of Days") +     
     scale_x_continuous(
       limits = c(0, max(Data$Counter_Day, na.rm = TRUE))) +
@@ -695,10 +692,10 @@ plt_Learnrate <- function(TL = Timeline,
           legend.justification = "left")
   
   if (Group %in% colnames(Data)) {
-    str_remove(Group,"^ID_")
+    del_prefix <- "^[^_]*_"
     plt <- plt +
       aes(color = .data[[Group]]) +
-      guides(color = guide_legend(title = str_remove(Group,"^ID_"), 
+      guides(color = guide_legend(title = str_remove(Group,del_prefix), 
                                   position = "right" ),
              override.aes = list(linewidth = 1,
                                  alpha = 1))
@@ -725,7 +722,7 @@ plt_Knowledge <- function(TL = Timeline) {
   ggplot(TL, aes(x = Counter_Day, y = Knowledge, group = Typ, color = Typ)) +
     geom_line(linewidth = 1) +
     scale_color_manual(values = unique(TL$TopicColor)) + 
-    ggtitle("Timeline - Mean Knowledge") +     
+    ggtitle("Mean Knowledge over Days") +     
     xlab("Number of Days") +     
     scale_x_continuous(
       limits = c(0, max(TL$Counter_Day, na.rm = TRUE)), 
@@ -764,7 +761,7 @@ plt_Topics <- function(TL = Timeline) {
              position = "stack",
              width = 0.8) +
     scale_fill_manual(values = unique(TL$TopicColor)) +
-    ggtitle("Timeline - Agent's Topic") +     
+    ggtitle("Agent's Topic over Days") +     
     xlab("Number of Days") +
     scale_x_discrete(
       expand = expansion(mult = c(0, 0))) +
@@ -786,23 +783,30 @@ plt_Number_meet <- function(TL = Timeline,
   if (is.na(TP)) {
     TP <- unique(TL$Counter_Day)
   } 
-  Titel <- paste("Number of Meetings - Day", TP)
+  Titel <- paste("Number of Meetings until Day", TP)
   Data <- TL %>%
     filter(Counter_Day == TP)
   
   if (Group %in% colnames(Data)) {
     Data <- Data %>%
-      mutate( !!Group := factor(.data[[Group]]))
+      mutate( !!Group := factor(.data[[Group]])) %>%
+      group_by(.data[[Group]]) %>%
+      mutate(plt_ID = seq_len(n())) %>% 
+      ungroup()
+    del_prefix <- "^[^_]*_"
+    Titel <- paste(Titel,"- grouped by", str_remove(Group,del_prefix))
   } else {
-    Group <- "without"
     Data <- Data %>%
-      mutate( !!Group := "Population")
+      mutate( plt_Typ = Typ,
+              plt_ID = ID )
   }
   
   plt <- ggplot(Data, 
-                aes(x = ID, y = Counter_Number_meet, color = .data[[Group]])) +
+                aes(x = plt_ID, y = Counter_Number_meet)) +
     geom_step(direction = "mid",linewidth = 1) +
-    scale_x_continuous(limits = c(1,max(Data$ID))) +
+    scale_x_continuous( 
+      breaks = function(limits) { scales::breaks_pretty()(limits)},
+      labels = scales::number_format(accuracy = 1)) +
     scale_y_continuous(limits = c(0,max(Data$Counter_Number_meet))) +
     ggtitle(Titel) +     
     xlab("Agents") +     
@@ -814,12 +818,16 @@ plt_Number_meet <- function(TL = Timeline,
       legend.justification = "left"
     )
   
+  if (Group %in% colnames(Data)) {
+    plt <- plt + facet_grid(. ~ .data[[Group]], scales = "free_x")
+  }
+  
   return(plt)
   }
   
 ```
 
-### Time_invested
+### Time invested
 
 ```{r}
 plt_Time_invest <- function(TL = Timeline,
@@ -838,34 +846,37 @@ plt_Time_invest <- function(TL = Timeline,
     Grouping <- c(Grouping, Group)
     Data <- Data %>%
       mutate( plt_Typ = interaction(Typ, .data[[Group]], sep = "_"),
-              !!Group := factor(.data[[Group]]))
+              !!Group := factor(.data[[Group]])) %>%
+      group_by(plt_Typ) %>%
+      mutate(plt_ID = seq_len(n())) %>% 
+      ungroup()
+    del_prefix <- "^[^_]*_"
+    Titel <- paste(Titel,"- grouped by", str_remove(Group,del_prefix))
   } else {
     Data <- Data %>%
-      mutate( plt_Typ = Typ)
+      mutate( plt_Typ = Typ,
+              plt_ID = ID )
   }
     
   Data$Typ <- factor(Data$Typ, levels = c("meet", "learnd", "total"))
 
   plt <- ggplot(Data, 
-                aes(x = ID, y = Counter_Time, 
-                    group = plt_Typ, 
-                    alpha = Typ,
+                aes(x = plt_ID, y = Counter_Time, 
+                    group = plt_Typ,
                     linewidth = Typ)) +
     
     geom_step(direction = "mid") +
-    scale_alpha_manual(values = c("total" = 0.4, 
-                                  "learnd" = 0.6, 
-                                  "meet" = 1.0)) +
     scale_linewidth_manual(values = c("total" = 1.5, 
                                       "learnd" = 0.5, 
                                       "meet" = 1.0)) +
-    scale_x_continuous(limits = c(1,max(Data$ID))) +
+    scale_x_continuous( 
+      breaks = function(limits) { scales::breaks_pretty()(limits)},
+      labels = scales::number_format(accuracy = 1)) +
     scale_y_continuous(limits = c(0,max(Data$Counter_Time))) +
     ggtitle(Titel) +     
     xlab("Agents") +     
     ylab("Hours") +
-    guides(alpha = "none",
-           linewidth = guide_legend(title = ""))+
+    guides(linewidth = guide_legend(title = ""))+
     theme_minimal() +
     theme(
       legend.title = element_blank(),       
@@ -874,14 +885,8 @@ plt_Time_invest <- function(TL = Timeline,
     )
   
   if (Group %in% colnames(Data)) {
-    str_remove(Group,"^ID_")
-    plt <- plt +
-      aes(color = .data[[Group]]) +
-      guides(color = guide_legend(title = str_remove(Group,"^ID_"), 
-                                  position = "right" ),
-             override.aes = list(linewidth = 1,
-                                 alpha = 1))
-    }
+    plt <- plt + facet_grid(. ~ .data[[Group]], scales = "free_x")
+  }
   
   return(plt)
   }
@@ -890,7 +895,7 @@ plt_Time_invest <- function(TL = Timeline,
 ### Learnrate at Timepoint
 
 ```{r}
-plt_Learnrate_Timet <- function(TL = Timeline,
+plt_Learnrate_Time <- function(TL = Timeline,
                                 TP = NA,
                                 Group = NA) {
   if (is.na(TP)) {
@@ -906,23 +911,31 @@ plt_Learnrate_Timet <- function(TL = Timeline,
     Grouping <- c(Grouping, Group)
     Data <- Data %>%
       mutate( plt_Typ = interaction(Typ, .data[[Group]], sep = "_"),
-              !!Group := factor(.data[[Group]]))
+              !!Group := factor(.data[[Group]])) %>%
+      group_by(plt_Typ) %>%
+      mutate(plt_ID = seq_len(n())) %>% 
+      ungroup()
+    del_prefix <- "^[^_]*_"
+    Titel <- paste(Titel,"- grouped by", str_remove(Group,del_prefix))
   } else {
     Data <- Data %>%
-      mutate( plt_Typ = Typ)
+      mutate( plt_Typ = Typ,
+              plt_ID = ID)
   }
   
   Data$Typ <- factor(Data$Typ, levels = c("Topic", "Others"))
   
   plt <- ggplot(data = Data, 
-                aes(x = ID, 
+                aes(x = plt_ID, 
                     y = Learnrate, 
                     group = plt_Typ,
                     linewidth = Typ)) +
     geom_step(direction = "mid") +
     scale_linewidth_manual(values = c("Topic" = 1.0, 
                                       "Others" = 0.8)) +
-    scale_x_continuous(limits = c(min(Data$ID), max(Data$ID))) +
+    scale_x_continuous( 
+      breaks = function(limits) { scales::breaks_pretty()(limits)},
+      labels = scales::number_format(accuracy = 1)) +
     scale_y_continuous(limits = c(0, 1)) +
     ggtitle(Titel) +     
     xlab("Agents") +     
@@ -936,15 +949,8 @@ plt_Learnrate_Timet <- function(TL = Timeline,
     )
   
   if (Group %in% colnames(Data)) {
-    str_remove(Group,"^ID_")
-    plt <- plt +
-      aes(color = .data[[Group]]) +
-      guides(color = guide_legend(title = str_remove(Group,"^ID_"), 
-                                  position = "right" ),
-             override.aes = list(linewidth = 1,
-                                 alpha = 1))
-    }
-
+    plt <- plt + facet_grid(. ~ .data[[Group]], scales = "free_x")
+  }
   return(plt)
 }
 ```
@@ -953,19 +959,39 @@ plt_Learnrate_Timet <- function(TL = Timeline,
 
 ```{r}
 plt_Knowledge_Time <- function(TL = Timeline, 
-                               TP = NA) {
+                               TP = NA,
+                               Group = NA) {
   if (is.na(TP)) {
     TP <- unique(TL$Counter_Day)
   }
-  
   Titel <- paste("Knowledge at Day", TP)
   Data <- longer_Pop(Pop = TL, name = "Knowledge") %>%
     filter(Counter_Day == TP)
   
+  Grouping <- c("Typ")
+  
+  if (Group %in% colnames(Data)) {
+    Grouping <- c(Grouping, Group)
+    Data <- Data %>%
+      mutate( plt_Typ = interaction(Typ, .data[[Group]], sep = "_"),
+              !!Group := factor(.data[[Group]])) %>%
+      group_by(plt_Typ) %>%
+      mutate(plt_ID = seq_len(n())) %>% 
+      ungroup()
+    del_prefix <- "^[^_]*_"
+    Titel <- paste(Titel,"- grouped by", str_remove(Group,del_prefix))
+  } else {
+    Data <- Data %>%
+      mutate( plt_Typ = Typ,
+              plt_ID = ID)
+  }
+  
   plt <- ggplot(Data, 
-                aes(x = ID, y = Knowledge, group = Typ, color = Typ)) +
+                aes(x = plt_ID, y = Knowledge, group = Typ, color = Typ)) +
     geom_step(direction = "mid", linewidth = 1) +
-    scale_x_continuous(limits = c(min(Data$ID), max(Data$ID))) +
+    scale_x_continuous( 
+      breaks = function(limits) { scales::breaks_pretty()(limits)},
+      labels = scales::number_format(accuracy = 1)) +
     scale_y_continuous(limits = c(0, 1)) +
     ggtitle(Titel) +     
     xlab("Agents") +     
@@ -977,6 +1003,9 @@ plt_Knowledge_Time <- function(TL = Timeline,
       legend.justification = "left"
     )
   
+  if (Group %in% colnames(Data)) {
+    plt <- plt + facet_grid(. ~ .data[[Group]], scales = "free_x")
+  }
   return(plt)
 }
 ```
@@ -1021,17 +1050,19 @@ sim_Days <- function(Pop = Pop,
 ```{r}
 
 Pop <- gen_Pop( nA = 30, 
-                ID_Group = "Zürich",
+                ID_Preference = "M1",
+                ID_University = "Zürich",
                 K = list(0.01), 
                 Typ = list("M1"), 
                 pWD = 0.8,
                 pMD = 0.8)
 Pop <- gen_Pop( addToPop = Pop,
-                nA = 30, 
-                ID_Group = "Bern",
+                nA = 30,
+                ID_Preference = "All",
+                ID_University = "Bern",
                 K = list(0.01), 
                 Typ = list("M2"), 
-                pWD = 0.4,
+                pWD = 0.8,
                 pMD = 0.8)
 
 Pop
@@ -1052,17 +1083,16 @@ plt_Knowledge(TL = res$TL)
 
 plt_Learnrate(TL = res$TL)
 
-plt_Learnrate(TL = res$TL, Group = "ID_Group")
-plt_Learnrate(TL = res$TL, Group = "ID_Topic")
+plt_Learnrate(TL = res$TL, Group = "ID_University")
+plt_Learnrate(TL = res$TL, Group = "ID_Preference")
 ```
 
 ```{r}
-plt_Number_meet(TL = res$TL, TP = 10, Group = "ID_Group")
-plt_Time_invest(TL = res$TL, TP = 20, Group = "ID_Group")
-plt_Time_invest(TL = res$TL, TP = 10)
-plt_Learnrate_Timet(TL = res$TL, TP = 20, Group = "ID_Group")
-plt_Learnrate_Timet(TL = res$TL, TP = 10)
-plt_Knowledge_Time(TL = res$TL, TP = 10)
+plt_Number_meet(TL = res$TL, TP = 0, Group = "ID_University")
+plt_Number_meet(TL = res$TL, TP = 20, Group = "ID_University")
+plt_Time_invest(TL = res$TL, TP = 20, Group = "ID_University")
+plt_Learnrate_Time(TL = res$TL, TP = 20, Group = "ID_University")
+plt_Knowledge_Time(TL = res$TL, TP = 20, Group = "ID_University")
 ```
 
 # Special Cases
@@ -1070,45 +1100,69 @@ plt_Knowledge_Time(TL = res$TL, TP = 10)
 ### Only one Agent with Knowledge (0.8)
 
 ```{r}
-Pop <- gen_Pop( nA = 29, 
-                ID_Group = "Zürich",
+Pop <- gen_Pop( nA = 10, 
+                ID_Preference = "M1",
+                ID_University = "Zürich",
+                K = list(0.01), 
+                Typ = list("M1"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop <- gen_Pop( addToPop = Pop,
+                nA = 10, 
+                ID_Preference = "All",
+                ID_University = "Zürich",
+                K = list(0.01), 
+                Typ = list("M1"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop <- gen_Pop( addToPop = Pop,
+                nA = 9, 
+                ID_University = "Zürich",
                 K = list(0.01), 
                 Typ = list("M1"), 
                 pWD = 0.8,
                 pMD = 0.8)
 Pop <- gen_Pop( addToPop = Pop,
                 nA = 1, 
-                ID_Group = "Zürich",
+                ID_University = "Zürich",
                 K = list(0.8), 
                 Typ = list("M1"), 
                 pWD = 0.8,
                 pMD = 0.8)
 Pop <- gen_Pop( addToPop = Pop,
-                nA = 29, 
-                ID_Group = "Bern",
+                nA = 10, 
+                ID_Preference = "M2",
+                ID_University = "Bern",
                 K = list(0.01), 
                 Typ = list("M2"), 
-                pWD = 0.4,
+                pWD = 0.8,
+                pMD = 0.8)
+Pop <- gen_Pop( addToPop = Pop,
+                nA = 10, 
+                ID_Preference = "All",
+                ID_University = "Bern",
+                K = list(0.01), 
+                Typ = list("M2"), 
+                pWD = 0.8,
+                pMD = 0.8)
+Pop <- gen_Pop( addToPop = Pop,
+                nA = 9, 
+                ID_University = "Bern",
+                K = list(0.01), 
+                Typ = list("M2"), 
+                pWD = 0.8,
                 pMD = 0.8)
 Pop <- gen_Pop( addToPop = Pop,
                 nA = 1, 
-                ID_Group = "Bern",
-                K = list(0.8), 
+                ID_University = "Bern",
+                K = list(0.4), 
                 Typ = list("M2"), 
-                pWD = 0.4,
-                pMD = 0.4)
-Pop <- gen_Pop( addToPop = Pop,
-                nA = 30, 
-                ID_Group = "Basel",
-                K = list(0.01), 
-                Typ = list("M3"), 
                 pWD = 0.8,
-                pMD = 0.4)
+                pMD = 0.8)
 
 Pop
 
-res1 <- sim_Days(Pop = Pop,
-                nD = 20)
+res1 <- sim_Days(Pop = Pop, nD = 20)
 
 res1$Pop
 ```
@@ -1122,13 +1176,17 @@ plt_Knowledge(TL = res1$TL)
 
 plt_Learnrate(TL = res1$TL)
 
-plt_Learnrate(TL = res1$TL, Group = "ID_Group")
-plt_Learnrate(TL = res1$TL, Group = "ID_Topic")
+plt_Learnrate(TL = res1$TL, Group = "ID_University")
+plt_Learnrate(TL = res1$TL, Group = "ID_Preference")
 ```
 
 ```{r}
-plt_Number_meet(TL = res1$TL, TP = 20, Group = "ID_Group")
-plt_Time_invest(TL = res1$TL, TP = 20, Group = "ID_Group")
-plt_Learnrate_Timet(TL = res1$TL, TP = 20, Group = "ID_Group")
-plt_Knowledge_Time(TL = res1$TL, TP = 20)
+plt_Number_meet(TL = res1$TL, TP = 20, Group = "ID_University")
+plt_Time_invest(TL = res1$TL, TP = 20, Group = "ID_University")
+
+plt_Learnrate_Time(TL = res1$TL, TP = 20, Group = "ID_University")
+plt_Learnrate_Time(TL = res1$TL, TP = 20, Group = "ID_Preference")
+
+plt_Knowledge_Time(TL = res1$TL, TP = 20, Group = "ID_University")
+plt_Knowledge_Time(TL = res1$TL, TP = 20, Group = "ID_Preference")
 ```
