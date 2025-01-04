@@ -57,7 +57,7 @@ gen_rbeta <- function(n = n,
 # Testing for different Parameters
 
 ```{r}
-n <- 1000
+n <- 100
 m <- 10
 
 data01 <- data.frame(ID = seq(1,n))  
