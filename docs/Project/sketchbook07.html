@@ -61,6 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../Project/sketchbook08.html" rel="next">
 <link href="../Project/sketchbook06.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -249,6 +250,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../Project/sketchbook07.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Selected Meetings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Project/sketchbook08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bounded rationality</span></a>
   </div>
 </li>
       </ul>
@@ -910,8 +917,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
      ID ID_University Agents_p_MeetDay Agents_p_WorkDay Agents_Topic Preference
   &lt;int&gt; &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;     
 1     2 Zürich                     0.8              0.5 M1           Max       
-2     4 Bern                       0.5              0.2 M1           All       
-3     7 Bern                       0.5              0.2 M1           M1        
+2     3 Zürich                     0.8              0.5 M2           Max       
+3     8 Bern                       0.5              0.2 M1           Max       
 4     5 Bern                       0.5              0.2 M1           All       
 # ℹ 14 more variables: Learnrate_Others &lt;dbl&gt;, Learnrate_Topic &lt;dbl&gt;,
 #   Knowledge_M1 &lt;dbl&gt;, Knowledge_M2 &lt;dbl&gt;, Knowledge_M3 &lt;dbl&gt;,
@@ -951,14 +958,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 8 × 4
      ID Utility_M1 Utility_M2 Utility_M3
   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-1     5    0.103     0.00879    0.00879 
-2     2    0.005     0.000357   0.000357
-3     8    0.001     0.0005     0.0005  
-4     1    0.005     0.000357   0.000357
-5     4    0.103     0.00879    0.00879 
-6     7    0.262     0.131      0.131   
-7     6    0.0286    0.0286     0.4     
-8     3    0.00879   0.103      0.00879 </code></pre>
+1     4    0.103     0.00879    0.00879 
+2     1    0.005     0.000357   0.000357
+3     7    0.262     0.131      0.131   
+4     6    0.0286    0.0286     0.4     
+5     3    0.00879   0.103      0.00879 
+6     8    0.001     0.0005     0.0005  
+7     5    0.103     0.00879    0.00879 
+8     2    0.005     0.000357   0.000357</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -998,14 +1005,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 8 × 20
      ID ID_University Agents_p_MeetDay Agents_p_WorkDay Agents_Topic Preference
   &lt;int&gt; &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;     
-1     6 Bern                       0.5              0.2 M3           M3        
-2     4 Bern                       0.5              0.2 M1           All       
-3     7 Bern                       0.5              0.2 M1           M1        
-4     8 Bern                       0.5              0.2 M1           Max       
-5     5 Bern                       0.5              0.2 M1           All       
-6     3 Zürich                     0.8              0.5 M2           Max       
-7     1 Zürich                     0.8              0.5 M1           Max       
-8     2 Zürich                     0.8              0.5 M1           Max       
+1     5 Bern                       0.5              0.2 M1           All       
+2     2 Zürich                     0.8              0.5 M1           Max       
+3     4 Bern                       0.5              0.2 M1           All       
+4     1 Zürich                     0.8              0.5 M1           Max       
+5     7 Bern                       0.5              0.2 M1           M1        
+6     6 Bern                       0.5              0.2 M3           M3        
+7     3 Zürich                     0.8              0.5 M2           Max       
+8     8 Bern                       0.5              0.2 M1           Max       
 # ℹ 14 more variables: Learnrate_Others &lt;dbl&gt;, Learnrate_Topic &lt;dbl&gt;,
 #   Knowledge_M1 &lt;dbl&gt;, Knowledge_M2 &lt;dbl&gt;, Knowledge_M3 &lt;dbl&gt;,
 #   Counter_Day &lt;dbl&gt;, Counter_Number_meet &lt;dbl&gt;, Counter_Time_learnd &lt;dbl&gt;,
@@ -1071,7 +1078,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 1     1 Zürich                     0.8              0.5 M1           Max       
 2     2 Zürich                     0.8              0.5 M1           Max       
 3     3 Zürich                     0.8              0.5 M2           Max       
-4     4 Bern                       0.5              0.2 M3           All       
+4     4 Bern                       0.5              0.2 M1           All       
 5     5 Bern                       0.5              0.2 M3           All       
 6     6 Bern                       0.5              0.2 M3           M3        
 7     7 Bern                       0.5              0.2 M1           M1        
@@ -1146,7 +1153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 1     1 Zürich                     0.8              0.5 M1           Max       
 2     2 Zürich                     0.8              0.5 M1           Max       
 3     3 Zürich                     0.8              0.5 M2           Max       
-4     4 Bern                       0.5              0.2 M1           All       
+4     4 Bern                       0.5              0.2 M3           All       
 5     5 Bern                       0.5              0.2 M1           All       
 6     6 Bern                       0.5              0.2 M3           M3        
 7     7 Bern                       0.5              0.2 M1           M1        
@@ -1207,14 +1214,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 8 × 19
      ID ID_University Agents_p_MeetDay Agents_p_WorkDay Agents_Topic Preference
   &lt;int&gt; &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;     
-1     1 Zürich                     0.8              0.5 M1           Max       
+1     1 Zürich                     0.8              0.5 M2           Max       
 2     2 Zürich                     0.8              0.5 M1           Max       
 3     3 Zürich                     0.8              0.5 M2           Max       
 4     4 Bern                       0.5              0.2 M3           All       
 5     5 Bern                       0.5              0.2 M3           All       
 6     6 Bern                       0.5              0.2 M3           M3        
 7     7 Bern                       0.5              0.2 M1           M1        
-8     8 Bern                       0.5              0.2 M3           Max       
+8     8 Bern                       0.5              0.2 M1           Max       
 # ℹ 13 more variables: Learnrate_Others &lt;dbl&gt;, Learnrate_Topic &lt;dbl&gt;,
 #   Knowledge_M1 &lt;dbl&gt;, Knowledge_M2 &lt;dbl&gt;, Knowledge_M3 &lt;dbl&gt;,
 #   Counter_Day &lt;dbl&gt;, Counter_Number_meet &lt;dbl&gt;, Counter_Time_learnd &lt;dbl&gt;,
@@ -1595,7 +1602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section></section><section id="simulation" class="level1"><h1><strong>Simulation</strong></h1>
 <section id="function" class="level2"><h2 class="anchored" data-anchor-id="function">Function</h2>
-<p>A learning process with updated learn rate by current knowledge when Agents meet randomly by Days</p>
+<p>A learning process with updated learn rate by current knowledge when Agents meet selective Agents with higher Knowledge</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_Days</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Pop</span> <span class="op">=</span> <span class="va">Pop</span>,</span>
 <span>                     <span class="va">nD</span> <span class="op">=</span> <span class="va">nubmberDay</span>,</span>
@@ -2460,6 +2467,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../Project/sketchbook08.html" class="pagination-link" aria-label="Bounded rationality">
+        <span class="nav-page-text">Bounded rationality</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb91" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -3527,7 +3537,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb91-1143"><a href="#cb91-1143" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb91-1144"><a href="#cb91-1144" aria-hidden="true" tabindex="-1"></a><span class="fu">## Function</span></span>
 <span id="cb91-1145"><a href="#cb91-1145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-1146"><a href="#cb91-1146" aria-hidden="true" tabindex="-1"></a>A learning process with updated learn rate by current knowledge when Agents meet randomly by Days</span>
+<span id="cb91-1146"><a href="#cb91-1146" aria-hidden="true" tabindex="-1"></a>A learning process with updated learn rate by current knowledge when Agents meet selective Agents with higher Knowledge</span>
 <span id="cb91-1147"><a href="#cb91-1147" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb91-1150"><a href="#cb91-1150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb91-1151"><a href="#cb91-1151" aria-hidden="true" tabindex="-1"></a>sim_Days <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">Pop =</span> Pop,</span>

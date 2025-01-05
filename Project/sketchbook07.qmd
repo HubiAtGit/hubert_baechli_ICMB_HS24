@@ -1065,7 +1065,7 @@ plt_Knowledge_Time <- function(TL = Timeline,
 
 ## Function
 
-A learning process with updated learn rate by current knowledge when Agents meet randomly by Days
+A learning process with updated learn rate by current knowledge when Agents meet selective Agents with higher Knowledge
 
 ```{r}
 

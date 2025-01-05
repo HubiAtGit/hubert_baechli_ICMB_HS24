@@ -45,6 +45,7 @@ website:
         - Project/sketchbook05.qmd
         - Project/sketchbook06.qmd
         - Project/sketchbook07.qmd
+        - Project/sketchbook08.qmd
 
 format:
   html:

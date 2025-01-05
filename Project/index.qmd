@@ -33,6 +33,10 @@ Up to now, the topic has been defined in terms of knowledge; now it should be a 
 
 ### [... with prefernces](sketchbook06.qmd)
 
-The time is ripe for the next big step! So far, the encounters have been purely random, but this is about to change. A first assumption is that the agents are pure utility maximizers of their prefered knowledge.
+The time has come for the next big step! So far, the encounters have been purely random, but this is about to change. A first assumption is that the agents are pure utility maximisers of their preferred knowledge.
 
 ## [Simulation of selected Meetings](sketchbook07.qmd)
+
+It seems utopian to believe that each agent knows exactly how much knowledge all other agents have, even if they work at different universities. For this reason, an ingroup and an outgroup are defined for the utility calculation, so that outside the university only the average knowledge of the university is known.
+
+### [Bounded rationality](sketchbook08.qmd)
