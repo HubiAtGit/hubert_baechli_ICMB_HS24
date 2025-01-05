@@ -41,6 +41,10 @@ website:
         - Project/sketchbook01.qmd
         - Project/sketchbook02.qmd
         - Project/sketchbook03.qmd
+        - Project/sketchbook04.qmd
+        - Project/sketchbook05.qmd
+        - Project/sketchbook06.qmd
+        - Project/sketchbook07.qmd
 
 format:
   html:

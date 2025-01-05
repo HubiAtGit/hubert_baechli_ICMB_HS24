@@ -1074,7 +1074,7 @@ res$Pop
 
 ```
 
-### Visualization Results 
+### Visualization Results
 
 ```{r}
 plt_Topics(TL = res$TL)
@@ -1167,7 +1167,7 @@ res1 <- sim_Days(Pop = Pop, nD = 20)
 res1$Pop
 ```
 
-### Visualization Results 
+### Visualization Results
 
 ```{r}
 plt_Topics(TL = res1$TL)

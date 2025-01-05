@@ -35,4 +35,4 @@ Up to now, the topic has been defined in terms of knowledge; now it should be a 
 
 The time is ripe for the next big step! So far, the encounters have been purely random, but this is about to change. A first assumption is that the agents are pure utility maximizers of their prefered knowledge.
 
-## [Simulating choiced Meetings](sketchbook07.qmd)
+## [Simulation of selected Meetings](sketchbook07.qmd)

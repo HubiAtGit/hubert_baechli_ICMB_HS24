@@ -1,20 +1,14 @@
 ---
-title: "with prefernces"
+title: "Selected Meetings"
 author: "Hubert Baechli"
 
 execute: 
   cache: false
 ---
 
-# Simulating random meetings (Areas of Knowledge with preferences)
+# Simulation of selected Meetings (by Knowledge)
 
-The basic idea is that when two agents meet, they learn together. Later, this should happen in a network. In the beginning, I will let the agents meet randomly in the population to see if the implementation of joint learning works.
-
-If it works as it should, it will be expanded so that a certain percentage of the population meets at the same time.
-
-Now it seems to be time to add other aspects. At first it seems central that different areas of knowledge should be possible.
-
-Up to now, the topic has been defined in terms of knowledge; now it should be a question of preference.
+The time is ripe for the next big step! So far, the encounters have been purely random, but this is about to change. A first assumption is that the agents are pure utility maximizers of their prefered knowledge.
 
 # Definitions
 
@@ -462,7 +456,7 @@ Pairs <- sel_Pairs_rnd(Pop = Pop, psize = 0.5)
 Pairs 
 ```
 
-## Select a  Slot of pairs by utility
+## Select a Slot of pairs by utility
 
 ```{r}
 calc_utility <- function(Pop = Pop) { 
@@ -1130,7 +1124,7 @@ res$Pop
 
 ```
 
-### Visualization Results 
+### Visualization Results
 
 ```{r}
 plt_Topics(TL = res$TL)
@@ -1223,7 +1217,7 @@ res1 <- sim_Days(Pop = Pop, nD = 20)
 res1$Pop
 ```
 
-### Visualization Results 
+### Visualization Results
 
 ```{r}
 plt_Topics(TL = res1$TL)
